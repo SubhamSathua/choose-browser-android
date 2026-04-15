@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Calendar;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -37,12 +38,16 @@ public class AboutActivity extends AppCompatActivity {
 
         // Version
         TextView tvVersion = findViewById(R.id.aboutVersion);
+        TextView tvFooter = findViewById(R.id.aboutFooter);
         try {
             String ver = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
             tvVersion.setText("Version " + ver);
         } catch (Exception e) {
             tvVersion.setText("Version 1.0");
         }
+
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        tvFooter.setText(getString(R.string.cfg_about_footer_format, year));
 
         // Email
         findViewById(R.id.aboutEmailRow).setOnClickListener(v -> openEmailApps());

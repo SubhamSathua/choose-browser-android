@@ -377,12 +377,13 @@
 
         <!-- Footer -->
         <TextView
+            android:id="@+id/aboutFooter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="32dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="@string/cfg_about_footer"
+            android:text=""
             android:textColor="@color/textSubSecondary"
             android:textSize="11sp" />
 
