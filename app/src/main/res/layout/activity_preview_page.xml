@@ -65,6 +65,10 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:cursorVisible="true"
+                    android:textCursorDrawable="@drawable/cursor_dynamic"
+                    android:textSelectHandle="@drawable/text_select_handle_dynamic"
+                    android:textSelectHandleLeft="@drawable/text_select_handle_dynamic"
+                    android:textSelectHandleRight="@drawable/text_select_handle_dynamic"
                     android:ellipsize="end"
                     android:fontFamily="@font/poppins"
                     android:imeOptions="actionGo"
@@ -205,6 +209,10 @@
                 android:layout_height="36dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_preview_url_box"
+                android:textCursorDrawable="@drawable/cursor_dynamic"
+                android:textSelectHandle="@drawable/text_select_handle_dynamic"
+                android:textSelectHandleLeft="@drawable/text_select_handle_dynamic"
+                android:textSelectHandleRight="@drawable/text_select_handle_dynamic"
                 android:fontFamily="@font/poppins"
                 android:hint="Find in page…"
                 android:imeOptions="actionSearch"
@@ -258,11 +266,30 @@
         </LinearLayout>
 
         <!-- WebView -->
-        <WebView
-            android:id="@+id/webView"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_marginBottom="1dp"
+            app:cardCornerRadius="21dp"
+            android:background="@android:color/transparent"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            android:layout_marginHorizontal="2dp">
+            <WebView
+                android:id="@+id/webView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </androidx.cardview.widget.CardView>
+
+<!--        <WebView-->
+<!--            android:id="@+id/webView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1" />-->
+
 
         <!-- Bottom Navigation Bar -->
         <LinearLayout

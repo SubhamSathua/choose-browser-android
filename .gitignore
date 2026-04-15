@@ -17,3 +17,5 @@ local.properties
 
 # Others
 /docs
+app/src/main/java/com/hyper/choosebrowsernew/AppConstantsDetails.java
+app/src/main/res/values/AppConstantsDetailsString.xml

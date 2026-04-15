@@ -91,7 +91,7 @@ public class SettingsActivity extends AppCompatActivity {
 
 
         demoButton.setOnClickListener(v ->
-                openLink("https://example.com"));
+        openLink(AppConstantsDetails.TEST_POPUP_URL));
 
         aboutButton.setOnClickListener(v ->
                 startActivity(new Intent(this, AboutActivity.class)));

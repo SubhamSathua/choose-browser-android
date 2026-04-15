@@ -35,7 +35,7 @@ import java.util.concurrent.Executors;
 public class UpdateChecker {
 
     private static final String UPDATE_URL =
-            "https://raw.githubusercontent.com/Subham-x/Choose-Browser-Android/refs/heads/main/updates/update.json";
+            AppConstantsDetails.UPDATE_JSON_URL;
 
     private static final String PREFS_NAME   = "update_checker_prefs";
     private static final String KEY_JSON     = "cached_json";

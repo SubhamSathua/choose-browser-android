@@ -46,7 +46,7 @@ public class WebViewActivity extends AppCompatActivity {
     }
 
     public static void openFeedback(AppCompatActivity ctx) {
-        start(ctx, "https://tally.so/r/VLlZpM", "Feedback");
+        start(ctx, AppConstantsDetails.FEEDBACK_URL, "Feedback");
     }
 
     public static void openGitHub(AppCompatActivity ctx, String url) {

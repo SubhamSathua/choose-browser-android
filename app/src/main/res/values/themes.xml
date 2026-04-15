@@ -9,6 +9,10 @@
         <item name="android:statusBarColor">@color/backgroundPrimary</item>
         <item name="android:navigationBarColor">@color/backgroundPrimary</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="colorControlActivated">@color/text</item>
+        <item name="android:colorControlActivated">@color/text</item>
+        <item name="colorAccent">@color/text</item>
+        <item name="android:colorAccent">@color/text</item>
 
     </style>
 
