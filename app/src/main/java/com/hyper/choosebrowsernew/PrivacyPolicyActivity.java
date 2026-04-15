@@ -1,16 +1,23 @@
 package com.hyper.choosebrowsernew;
 
 import android.annotation.SuppressLint;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 public class PrivacyPolicyActivity extends AppCompatActivity {
+
+    private ProgressBar privacyProgress;
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
@@ -23,6 +30,8 @@ public class PrivacyPolicyActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_privacy_policy);
+
+        privacyProgress = findViewById(R.id.privacyProgress);
 
         WebView webView = findViewById(R.id.privacyWebView);
         webView.setWebViewClient(new WebViewClient());
@@ -47,10 +56,30 @@ public class PrivacyPolicyActivity extends AppCompatActivity {
             isDark = uiMode == android.content.res.Configuration.UI_MODE_NIGHT_YES;
         }
 
+        applyProgressTheme(isDark);
+
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                if (privacyProgress == null) return;
+                privacyProgress.setProgress(newProgress);
+                privacyProgress.setVisibility(newProgress >= 100 ? View.GONE : View.VISIBLE);
+            }
+        });
+
         String url = "file:///android_asset/privacy_policy.html?theme=" + (isDark ? "dark" : "light");
         webView.loadUrl(url);
 
         // Back button
         findViewById(R.id.privacyBackBtn).setOnClickListener(v -> finish());
+    }
+
+    private void applyProgressTheme(boolean isDark) {
+        if (privacyProgress == null) return;
+        int progressColor = isDark ? Color.WHITE : Color.BLACK;
+        ColorStateList tint = ColorStateList.valueOf(progressColor);
+        privacyProgress.setProgressTintList(tint);
+        privacyProgress.setSecondaryProgressTintList(tint);
+        privacyProgress.setIndeterminateTintList(tint);
     }
 }

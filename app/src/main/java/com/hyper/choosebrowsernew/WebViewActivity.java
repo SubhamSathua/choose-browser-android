@@ -1,14 +1,17 @@
 package com.hyper.choosebrowsernew;
 
 import android.annotation.SuppressLint;
+import android.content.res.ColorStateList;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -16,6 +19,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -28,13 +32,17 @@ public class WebViewActivity extends AppCompatActivity {
 
     private WebView webView;
     private String currentUrl;
+    private ProgressBar webProgress;
 
     // ── Static helpers ───────────────────────────────────────────────
 
     public static void openPrivacyPolicy(AppCompatActivity ctx) {
         String theme = isDark(ctx) ? "dark" : "light";
         String url = "file:///android_asset/privacy_policy.html?theme=" + theme + "&app=1";
-        start(ctx, url, "Privacy Policy");
+        Intent i = new Intent(ctx, WebViewActivity.class);
+        i.putExtra(EXTRA_URL, url);
+        i.putExtra(EXTRA_TITLE, "Privacy Policy");
+        ctx.startActivity(i);
     }
 
     public static void openFeedback(AppCompatActivity ctx) {
@@ -70,6 +78,9 @@ public class WebViewActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_webview);
 
+        webProgress = findViewById(R.id.webviewProgress);
+        applyProgressTheme();
+
         currentUrl = getIntent().getStringExtra(EXTRA_URL);
         String title = getIntent().getStringExtra(EXTRA_TITLE);
         boolean showOpenWith = getIntent().getBooleanExtra(EXTRA_SHOW_OPEN_WITH, false);
@@ -90,6 +101,15 @@ public class WebViewActivity extends AppCompatActivity {
         }
 
         webView = findViewById(R.id.webViewContent);
+
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                if (webProgress == null) return;
+                webProgress.setProgress(newProgress);
+                webProgress.setVisibility(newProgress >= 100 ? View.GONE : View.VISIBLE);
+            }
+        });
 
         // JS interface for retry from error page
         webView.addJavascriptInterface(new Object() {
@@ -140,5 +160,19 @@ public class WebViewActivity extends AppCompatActivity {
         int uiMode = ctx.getResources().getConfiguration().uiMode
                 & Configuration.UI_MODE_NIGHT_MASK;
         return uiMode == Configuration.UI_MODE_NIGHT_YES;
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    private void applyProgressTheme() {
+        if (webProgress == null) return;
+        int progressColor = isDark(this) ? Color.WHITE : Color.BLACK;
+        ColorStateList tint = ColorStateList.valueOf(progressColor);
+        webProgress.setProgressTintList(tint);
+        webProgress.setSecondaryProgressTintList(tint);
+        webProgress.setIndeterminateTintList(tint);
     }
 }

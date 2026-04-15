@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.transition.Transition;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -14,14 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
 
-import com.google.android.material.transition.platform.MaterialSharedAxis;
-
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 
 public class SettingsActivity extends AppCompatActivity {
-    private static final long TRANSITION_DURATION_MS = 300L;
-
     CardView demoButton, aboutButton, feedbackButton, privacyPolicyButton;
     private CardView settingsUpdateCard;
     private LinearLayout settingsUpdateCardInner;
@@ -39,7 +34,6 @@ public class SettingsActivity extends AppCompatActivity {
         // ThemeHelper.applySavedTheme(this);
 
         super.onCreate(savedInstanceState);
-        setupWindowTransitions();
         setContentView(R.layout.activity_settings); // your settings layout
 
         // Now everything is inside onCreate:
@@ -48,7 +42,18 @@ public class SettingsActivity extends AppCompatActivity {
         aboutButton = findViewById(R.id.aboutButton);
         feedbackButton = findViewById(R.id.feedbackButton);
         privacyPolicyButton = findViewById(R.id.privacyPolicyButton);
+        CardView versionCard = findViewById(R.id.versionCard);
+        CardView debugCard = findViewById(R.id.debugCard);
+        View backBtn = findViewById(R.id.backBtn);
         TextView versionText = findViewById(R.id.versionText);
+
+        MotionUiHelper.applyTapScale(demoButton);
+        MotionUiHelper.applyTapScale(aboutButton);
+        MotionUiHelper.applyTapScale(feedbackButton);
+        MotionUiHelper.applyTapScale(privacyPolicyButton);
+        MotionUiHelper.applyTapScale(versionCard);
+        MotionUiHelper.applyTapScale(debugCard);
+        MotionUiHelper.applyTapScale(backBtn);
 
         // Set current checked button based on saved mode
         int savedMode = ThemeHelper.getSavedThemeMode(this);
@@ -95,9 +100,9 @@ public class SettingsActivity extends AppCompatActivity {
                 WebViewActivity.openFeedback(this));
 
         privacyPolicyButton.setOnClickListener(v ->
-                WebViewActivity.openPrivacyPolicy(this));
+            WebViewActivity.openPrivacyPolicy(this));
 
-        findViewById(R.id.backBtn).setOnClickListener(v -> finishAfterTransition());
+        findViewById(R.id.backBtn).setOnClickListener(v -> finish());
 
         // Update card
         settingsUpdateCard = findViewById(R.id.settingsUpdateCard);
@@ -113,7 +118,6 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         // Debug card (only visible when DEBUG_SCREEN flag is true)
-        CardView debugCard = findViewById(R.id.debugCard);
         if (DebugConfig.DEBUG_SCREEN) {
             debugCard.setVisibility(View.VISIBLE);
             debugCard.setOnClickListener(v ->
@@ -177,24 +181,6 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finishAfterTransition();
-    }
-
-    private void setupWindowTransitions() {
-        Transition enter = new MaterialSharedAxis(MaterialSharedAxis.X, true);
-        enter.setDuration(TRANSITION_DURATION_MS);
-        getWindow().setEnterTransition(enter);
-
-        Transition ret = new MaterialSharedAxis(MaterialSharedAxis.X, false);
-        ret.setDuration(TRANSITION_DURATION_MS);
-        getWindow().setReturnTransition(ret);
-
-        Transition exit = new MaterialSharedAxis(MaterialSharedAxis.X, false);
-        exit.setDuration(TRANSITION_DURATION_MS);
-        getWindow().setExitTransition(exit);
-
-        Transition reenter = new MaterialSharedAxis(MaterialSharedAxis.X, true);
-        reenter.setDuration(TRANSITION_DURATION_MS);
-        getWindow().setReenterTransition(reenter);
+        finish();
     }
 }

@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.transition.Transition;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,12 +18,9 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import com.google.android.material.transition.platform.MaterialSharedAxis;
-
 public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_OVERLAY_PERMISSION = 1001;
-    private static final long TRANSITION_DURATION_MS = 300L;
 
     LinearLayout defBrowserBtn, overlayPermBtn;
     Button settingsBtn;
@@ -48,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
 //        ThemeHelper.applySavedTheme(this);
         super.onCreate(savedInstanceState);
-    setupWindowTransitions();
         setContentView(R.layout.activity_main);
 
         handleIncomingIntent(getIntent());
@@ -69,6 +64,14 @@ public class MainActivity extends AppCompatActivity {
         settingsBtn = findViewById(R.id.settingsBtn); // ✅ now declared
         perm1Check = findViewById(R.id.perm1_check);
         perm2Check = findViewById(R.id.perm2_check);
+        CardView permissionCard1 = findViewById(R.id.cardView2);
+        CardView permissionCard2 = findViewById(R.id.cardView3);
+        CardView chooseBrowserCard = findViewById(R.id.BrandContainer);
+
+        MotionUiHelper.applyTapScale(permissionCard1);
+        MotionUiHelper.applyTapScale(permissionCard2);
+        MotionUiHelper.applyTapScale(chooseBrowserCard);
+        MotionUiHelper.applyTapScale(settingsBtn);
 
         defBrowserBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,9 +102,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-                startActivity(intent, androidx.core.app.ActivityOptionsCompat
-                        .makeSceneTransitionAnimation(MainActivity.this)
-                        .toBundle());
+                startActivity(intent);
             }
         });
 
@@ -236,23 +237,5 @@ public class MainActivity extends AppCompatActivity {
     private void openStoreUrl(String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(intent);
-    }
-
-    private void setupWindowTransitions() {
-        Transition exit = new MaterialSharedAxis(MaterialSharedAxis.X, true);
-        exit.setDuration(TRANSITION_DURATION_MS);
-        getWindow().setExitTransition(exit);
-
-        Transition enter = new MaterialSharedAxis(MaterialSharedAxis.X, false);
-        enter.setDuration(TRANSITION_DURATION_MS);
-        getWindow().setEnterTransition(enter);
-
-        Transition reenter = new MaterialSharedAxis(MaterialSharedAxis.X, false);
-        reenter.setDuration(TRANSITION_DURATION_MS);
-        getWindow().setReenterTransition(reenter);
-
-        Transition ret = new MaterialSharedAxis(MaterialSharedAxis.X, true);
-        ret.setDuration(TRANSITION_DURATION_MS);
-        getWindow().setReturnTransition(ret);
     }
 }

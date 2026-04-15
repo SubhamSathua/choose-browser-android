@@ -9,7 +9,6 @@
         <item name="android:statusBarColor">@color/backgroundPrimary</item>
         <item name="android:navigationBarColor">@color/backgroundPrimary</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:windowContentTransitions">true</item>
 
     </style>
 

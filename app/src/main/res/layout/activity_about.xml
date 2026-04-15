@@ -11,6 +11,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
         <!-- ════ HERO ════ -->
         <RelativeLayout
             android:layout_width="match_parent"
@@ -332,6 +337,8 @@
             android:text="© 2026 Choose Browser · All rights reserved."
             android:textColor="@color/textSubSecondary"
             android:textSize="11sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
