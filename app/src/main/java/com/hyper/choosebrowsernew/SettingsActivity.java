@@ -42,6 +42,7 @@ public class SettingsActivity extends AppCompatActivity {
         aboutButton = findViewById(R.id.aboutButton);
         feedbackButton = findViewById(R.id.feedbackButton);
         privacyPolicyButton = findViewById(R.id.privacyPolicyButton);
+        CardView excludeBrowserCard = findViewById(R.id.excludeBrowserCard);
         CardView versionCard = findViewById(R.id.versionCard);
         CardView debugCard = findViewById(R.id.debugCard);
         View backBtn = findViewById(R.id.backBtn);
@@ -51,6 +52,7 @@ public class SettingsActivity extends AppCompatActivity {
         MotionUiHelper.applyTapScale(aboutButton);
         MotionUiHelper.applyTapScale(feedbackButton);
         MotionUiHelper.applyTapScale(privacyPolicyButton);
+        MotionUiHelper.applyTapScale(excludeBrowserCard);
         MotionUiHelper.applyTapScale(versionCard);
         MotionUiHelper.applyTapScale(debugCard);
         MotionUiHelper.applyTapScale(backBtn);
@@ -101,6 +103,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         privacyPolicyButton.setOnClickListener(v ->
             WebViewActivity.openPrivacyPolicy(this));
+
+        excludeBrowserCard.setOnClickListener(v ->
+            startActivity(new Intent(this, ExcludedBrowsersActivity.class)));
 
         findViewById(R.id.backBtn).setOnClickListener(v -> finish());
 

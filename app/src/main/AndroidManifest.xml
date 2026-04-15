@@ -65,6 +65,11 @@
             android:exported="true"
             android:label="Browser List" />
 
+        <activity
+            android:name=".ExcludedBrowsersActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ChooseBrowserNEW" />
+
         <activity android:name=".BrowserChooserActivity"
             android:exported="true"
             android:theme="@style/Theme.Transparent"
