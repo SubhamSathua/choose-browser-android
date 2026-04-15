@@ -72,8 +72,6 @@
     <string name="exclude_browser_sub">Hide selected browsers from the popup list.</string>
     <string name="exclude_browser_screen_title">Exclude Browsers</string>
     <string name="exclude_browser_screen_sub">Turn off browsers you do not want in the popup.</string>
-    <string name="show_default_apps_for_link">Show Default Apps for Link</string>
-    <string name="show_default_apps_for_link_sub">Implementation will be added in next update.</string>
 
 
     <string name="help">Help</string>
@@ -96,6 +94,9 @@
     <string name="demoLink">"https://www.bing.com/images/search?view=detailV2ccid=Uv2TE8asid=935E869F612FBA7F2C5C9D492F6F74C3A7BED3DDthid=OIP.Uv2TE8asQ9y5YaRmdGYuBwAAAAmediaurl=https%3a%2f%2fsuperstarsbio.com%2fwp-content%2fuploads%2f2018%2f09%2f915j5CL39bL._SL1000_.jpg</string>
     <string name="preview">Preview Page</string>
     <string name="showLink">Show Link</string>
+    <string name="select_link">Select a link</string>
+    <string name="select_link_sub">Multiple links found in shared text</string>
+    <string name="cancel">Cancel</string>
 
     <!--    Temporary -->
     <string name="Perm1Btn">Make default browser</string>

@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SwitchCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,13 +33,8 @@ public class ExcludedBrowsersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_excluded_browsers);
 
         ListView listView = findViewById(R.id.listViewBrowsers);
-        SwitchCompat showDefaultAppsSwitch = findViewById(R.id.switchShowDefaultApps);
         ImageView backBtn = findViewById(R.id.backBtn);
         backBtn.setOnClickListener(v -> finish());
-
-        showDefaultAppsSwitch.setChecked(BrowserExclusionManager.shouldShowDefaultAppsForLink(this));
-        showDefaultAppsSwitch.setOnCheckedChangeListener((buttonView, isChecked) ->
-            BrowserExclusionManager.setShowDefaultAppsForLink(this, isChecked));
 
         excludedPackages = BrowserExclusionManager.getExcludedPackages(this);
         loadInstalledBrowsers();

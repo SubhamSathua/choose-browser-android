@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:foregroundGravity="center"
+        app:cardBackgroundColor="@color/backgroundSecondary"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="14dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/linkPickerTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/select_link"
+                    android:textColor="@color/text"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/linkPickerClose"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Close"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_close_24"
+                    android:tint="@color/text" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/select_link_sub"
+                android:textColor="@color/textSubSecondary"
+                android:textSize="12sp" />
+
+            <ListView
+                android:id="@+id/linkPickerList"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="10dp"
+                android:clipToPadding="false"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="6dp"
+                android:paddingBottom="6dp"
+                android:scrollbarThumbVertical="@drawable/scrollbar_thumb_show_link"
+                android:scrollbarTrackVertical="@drawable/scrollbar_track_show_link"
+                android:scrollbars="vertical" />
+
+            <TextView
+                android:id="@+id/linkPickerCancel"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_show_link_share_btn"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center"
+                android:text="@string/cancel"
+                android:textColor="@color/showLinkDialog_textSecondary"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

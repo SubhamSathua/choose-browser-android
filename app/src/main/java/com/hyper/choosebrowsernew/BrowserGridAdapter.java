@@ -3,6 +3,7 @@ package com.hyper.choosebrowsernew;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,13 @@ public class BrowserGridAdapter extends BaseAdapter {
 
         convertView.setOnClickListener(v -> {
             try {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                String launchUrl = url;
+                if (!TextUtils.isEmpty(launchUrl)
+                        && !launchUrl.startsWith("http://")
+                        && !launchUrl.startsWith("https://")) {
+                    launchUrl = "https://" + launchUrl;
+                }
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(launchUrl));
                 intent.setPackage(app.packageName);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
