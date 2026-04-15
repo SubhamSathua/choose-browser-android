@@ -11,6 +11,7 @@ public final class BrowserExclusionManager {
 
     private static final String PREFS_NAME = "browser_exclusion_prefs";
     private static final String KEY_EXCLUDED_PACKAGES = "excluded_packages";
+    private static final String KEY_SHOW_DEFAULT_APPS = "show_default_apps_for_link";
 
     private BrowserExclusionManager() {
         // Utility class
@@ -38,6 +39,18 @@ public final class BrowserExclusionManager {
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
                 .edit()
                 .putStringSet(KEY_EXCLUDED_PACKAGES, set)
+                .apply();
+    }
+
+    public static boolean shouldShowDefaultAppsForLink(Context context) {
+        return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                .getBoolean(KEY_SHOW_DEFAULT_APPS, true);
+    }
+
+    public static void setShowDefaultAppsForLink(Context context, boolean show) {
+        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                .edit()
+                .putBoolean(KEY_SHOW_DEFAULT_APPS, show)
                 .apply();
     }
 }

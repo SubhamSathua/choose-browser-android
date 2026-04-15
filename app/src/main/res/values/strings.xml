@@ -72,6 +72,8 @@
     <string name="exclude_browser_sub">Hide selected browsers from the popup list.</string>
     <string name="exclude_browser_screen_title">Exclude Browsers</string>
     <string name="exclude_browser_screen_sub">Turn off browsers you do not want in the popup.</string>
+    <string name="show_default_apps_for_link">Show Default Apps for Link</string>
+    <string name="show_default_apps_for_link_sub">Implementation will be added in next update.</string>
 
 
     <string name="help">Help</string>
