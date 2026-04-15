@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <!-- ════ HERO ════ -->
+        <!-- ════ HERO ════ --> 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -335,7 +335,7 @@
                     <ImageView
                         android:layout_width="22dp"
                         android:layout_height="22dp"
-                        android:src="@drawable/ix_info"
+                        android:src="@drawable/email"
                         android:contentDescription="Email" />
 
                     <LinearLayout

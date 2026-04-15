@@ -223,7 +223,7 @@ public class PreviewPageActivity extends AppCompatActivity {
         // ── Address bar: EditText focus behaviour ──
         etUrl.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
-                etUrl.selectAll();
+                etUrl.post(etUrl::selectAll);
                 btnClearUrl.setVisibility(View.VISIBLE);
                 focusActionsBar.setVisibility(View.VISIBLE);
             } else {
@@ -296,7 +296,7 @@ public class PreviewPageActivity extends AppCompatActivity {
         // Search → focus address bar
         btnSearch.setOnClickListener(v -> {
             etUrl.requestFocus();
-            etUrl.selectAll();
+            etUrl.post(etUrl::selectAll);
             showKeyboard(etUrl);
         });
 

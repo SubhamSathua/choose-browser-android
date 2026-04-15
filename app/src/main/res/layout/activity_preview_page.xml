@@ -266,7 +266,7 @@
         </LinearLayout>
 
         <!-- WebView -->
-        <androidx.cardview.widget.CardView
+        <!-- <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -282,13 +282,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
-        </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView> -->
 
-<!--        <WebView-->
-<!--            android:id="@+id/webView"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:layout_weight="1" />-->
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
 
         <!-- Bottom Navigation Bar -->
