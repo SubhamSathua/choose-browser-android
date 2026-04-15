@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.transition.Transition;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -13,10 +14,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
 
+import com.google.android.material.transition.platform.MaterialSharedAxis;
+
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 
 public class SettingsActivity extends AppCompatActivity {
+    private static final long TRANSITION_DURATION_MS = 300L;
+
     CardView demoButton, aboutButton, feedbackButton, privacyPolicyButton;
     private CardView settingsUpdateCard;
     private LinearLayout settingsUpdateCardInner;
@@ -34,6 +39,7 @@ public class SettingsActivity extends AppCompatActivity {
         // ThemeHelper.applySavedTheme(this);
 
         super.onCreate(savedInstanceState);
+        setupWindowTransitions();
         setContentView(R.layout.activity_settings); // your settings layout
 
         // Now everything is inside onCreate:
@@ -91,7 +97,7 @@ public class SettingsActivity extends AppCompatActivity {
         privacyPolicyButton.setOnClickListener(v ->
                 WebViewActivity.openPrivacyPolicy(this));
 
-        findViewById(R.id.backBtn).setOnClickListener(v -> finish());
+        findViewById(R.id.backBtn).setOnClickListener(v -> finishAfterTransition());
 
         // Update card
         settingsUpdateCard = findViewById(R.id.settingsUpdateCard);
@@ -167,5 +173,28 @@ public class SettingsActivity extends AppCompatActivity {
     private void openLink(String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        finishAfterTransition();
+    }
+
+    private void setupWindowTransitions() {
+        Transition enter = new MaterialSharedAxis(MaterialSharedAxis.X, true);
+        enter.setDuration(TRANSITION_DURATION_MS);
+        getWindow().setEnterTransition(enter);
+
+        Transition ret = new MaterialSharedAxis(MaterialSharedAxis.X, false);
+        ret.setDuration(TRANSITION_DURATION_MS);
+        getWindow().setReturnTransition(ret);
+
+        Transition exit = new MaterialSharedAxis(MaterialSharedAxis.X, false);
+        exit.setDuration(TRANSITION_DURATION_MS);
+        getWindow().setExitTransition(exit);
+
+        Transition reenter = new MaterialSharedAxis(MaterialSharedAxis.X, true);
+        reenter.setDuration(TRANSITION_DURATION_MS);
+        getWindow().setReenterTransition(reenter);
     }
 }
