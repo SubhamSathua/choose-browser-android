@@ -11,10 +11,9 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.provider.Settings;
-import android.graphics.Typeface;
+import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.Editable;
 import android.text.TextWatcher;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -51,7 +50,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.text.style.StyleSpan;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
@@ -66,6 +64,8 @@ import java.io.InputStream;
 import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.List;
+import android.graphics.Typeface;
+import android.text.style.StyleSpan;
 
 /**
  * Incognito / Sandbox WebView preview.
@@ -582,10 +582,15 @@ public class PreviewPageActivity extends AppCompatActivity {
         builder.setCancelable(true);
 
         TextView msg = dlg.findViewById(R.id.permMessage);
-        String permissionMessage = host + " wants to use your " + perms;
-        SpannableString styled = new SpannableString(permissionMessage);
-        styled.setSpan(new StyleSpan(Typeface.BOLD), 0, host.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        msg.setText(styled);
+        String fullMessage = host + " wants to use your " + perms;
+        SpannableString styledMessage = new SpannableString(fullMessage);
+        styledMessage.setSpan(
+            new StyleSpan(Typeface.BOLD),
+            0,
+            host.length(),
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        );
+        msg.setText(styledMessage);
 
         AlertDialog dialog = builder.create();
         if (dialog.getWindow() != null) {
