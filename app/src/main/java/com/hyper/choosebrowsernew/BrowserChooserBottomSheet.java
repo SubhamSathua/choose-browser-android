@@ -32,6 +32,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
 
@@ -167,12 +168,16 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
         browserIntent.addCategory(Intent.CATEGORY_BROWSABLE);
 
         List<ResolveInfo> resolveInfos = pm.queryIntentActivities(browserIntent, PackageManager.MATCH_ALL);
+        Set<String> excludedPackages = BrowserExclusionManager.getExcludedPackages(requireContext());
 
 
 
 
         Log.d("BrowserChooser", "Found browsers count: " + resolveInfos.size());
         for (ResolveInfo info : resolveInfos) {
+            if (info == null || info.activityInfo == null || info.activityInfo.packageName == null) {
+                continue;
+            }
             Log.d("BrowserChooser", "Browser: " + info.loadLabel(pm) + " pkg: " + info.activityInfo.packageName);
         }
 
@@ -183,8 +188,12 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
 //        String chooseBrowserOld = "com.hyper.choosebrowser";
 
         for (ResolveInfo info : resolveInfos) {
+            if (info == null || info.activityInfo == null || info.activityInfo.packageName == null) {
+                continue;
+            }
             String pkgName = info.activityInfo.packageName;
             if (pkgName.equals(myPackage)) continue; // exclude self
+            if (excludedPackages.contains(pkgName)) continue; // exclude user-hidden browsers
             String label = info.loadLabel(pm).toString();
             Drawable icon = info.loadIcon(pm);
             browsers.add(new AppInfo(label, pkgName, icon));
