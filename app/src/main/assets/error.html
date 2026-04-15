@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page Not Available</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box;
+            -webkit-tap-highlight-color: rgba(0,0,0,0); }
+
+        :root {
+            --bg: #f1f1f3; --card: #ffffff; --text: #000000;
+            --sub: #575757; --accent: #377aff;
+        }
+        html.dark {
+            --bg: #1e1e20; --card: #252527; --text: #e4e6eb;
+            --sub: #b0b3b8;
+        }
+        @font-face { font-family: 'poppins'; src: url('src/poppins_regular.ttf'); }
+        body {
+            font-family: 'poppins', sans-serif; background: var(--bg);
+            color: var(--text); display: flex; justify-content: center;
+            align-items: center; min-height: 100vh;
+        }
+        .container {
+            background: var(--card); border-radius: 20px; padding: 32px 24px;
+            margin: 20px; max-width: 380px; width: 90%; text-align: center;
+        }
+        .icon { font-size: 48px; margin-bottom: 16px; }
+        h1 { font-size: 20px; margin-bottom: 8px; font-weight: 600; }
+        .error-code {
+            font-size: 12px; color: var(--sub);
+            background: rgba(128,128,128,0.1); display: inline-block;
+            padding: 4px 12px; border-radius: 8px; margin-bottom: 16px;
+            font-family: monospace;
+        }
+        p { font-size: 14px; color: var(--sub); line-height: 1.6; margin-bottom: 20px; }
+        .retry-btn {
+            background: var(--accent); color: #fff; border: none;
+            padding: 12px 32px; border-radius: 12px;
+            font-family: 'poppins', sans-serif; font-size: 14px; cursor: pointer;
+        }
+        .retry-btn:active { opacity: 0.7; }
+    </style>
+    <script>
+        var params = new URLSearchParams(window.location.search);
+        if (params.get('theme') === 'dark') document.documentElement.classList.add('dark');
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">🔌</div>
+        <h1>Can't reach this page</h1>
+        <div class="error-code" id="errorCode">NET_ERROR</div>
+        <p id="errorDesc">The page failed to load. Check your connection and try again.</p>
+        <button class="retry-btn" onclick="Android.retry()">Retry</button>
+    </div>
+    <script>
+        var code = params.get('code');
+        var desc = params.get('desc');
+        if (code) document.getElementById('errorCode').textContent = code;
+        if (desc) document.getElementById('errorDesc').textContent = desc;
+    </script>
+</body>
+</html>

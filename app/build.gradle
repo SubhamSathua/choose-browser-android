@@ -1,0 +1,92 @@
+plugins {
+    alias(libs.plugins.android.application)
+}
+
+// ── Auto-incrementing version ─────────────────────────────────────────────
+// Format: <MAJOR>.<XX>.<SUB>  e.g.  4.01.7
+// SUB counts 1→14, then resets to 1 and XX increments.
+// versionCode = MAJOR*10000 + XX*100 + SUB  (always a unique integer).
+// Edit VERSION_MAJOR manually in version.properties to bump the major number.
+def versionPropsFile = rootProject.file("version.properties")
+def versionProps = new Properties()
+if (versionPropsFile.exists()) {
+    versionPropsFile.withInputStream { versionProps.load(it) }
+}
+def vMajor = (versionProps['VERSION_MAJOR'] ?: '4').toInteger()
+def vX     = (versionProps['VERSION_X']     ?: '1').toInteger()
+def vSub   = (versionProps['VERSION_SUB']   ?: '1').toInteger()
+
+def computedVersionName = "${vMajor}.${String.format('%02d', vX)}.${vSub}"
+// Base offset ensures this is always higher than old date-based codes (max was ~26030823)
+def computedVersionCode = 26031000 + vMajor * 10000 + vX * 100 + vSub
+
+// Only increment when actually assembling (not on IDE sync / Gradle sync)
+def assembling = gradle.startParameter.taskNames.any { name ->
+    name.toLowerCase().contains('assemble')
+}
+if (assembling) {
+    def nextSub = vSub + 1
+    def nextX   = vX
+    if (nextSub > 14) { nextSub = 1; nextX = vX + 1 }
+    versionProps['VERSION_MAJOR'] = vMajor.toString()
+    versionProps['VERSION_X']     = nextX.toString()
+    versionProps['VERSION_SUB']   = nextSub.toString()
+    versionPropsFile.withWriter { versionProps.store(it, null) }
+}
+// ─────────────────────────────────────────────────────────────────────────
+
+android {
+    namespace 'com.hyper.choosebrowsernew'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.hyper.choosebrowsernew"
+        minSdk 27
+        targetSdk 34
+        versionCode computedVersionCode
+        versionName computedVersionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    // Add flavor dimension
+    flavorDimensions "version"
+
+    // Define product flavors
+    productFlavors {
+        normal {
+            dimension "version"
+            applicationId "com.hyper.choosebrowsernew"
+        }
+        demoVersion {
+            dimension "version"
+            applicationId "com.hyper.choosebrowsernew.test"  // new package for test APK
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.constraintlayout
+    implementation libs.navigation.fragment
+    implementation libs.navigation.ui
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+    implementation 'com.google.android.material:material:1.9.0'  // or latest version
+
+}

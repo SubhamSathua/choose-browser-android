@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy</title>
+  <style>
+    :root {
+      --bg: #f1f1f3;
+      --card: #ffffff;
+      --text: #000000;
+      --sub: #575757;
+      --heading: #000000;
+      --tag-bg: #1d1d1f;
+      --tag-fg: #ffffff;
+      --border: transparent;
+      --radius: 15px;
+    }
+    html.dark body {
+      --bg: #1c1c1e;
+      --card: #2c2c2e;
+      --text: #f2f2f7;
+      --sub: #aeaeb2;
+      --heading: #f2f2f7;
+      --tag-bg: #3a3a3c;
+      --tag-fg: #f2f2f7;
+      --border: transparent;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      padding: 20px 16px 40px;
+    }
+    .page-header { margin-bottom: 24px; }
+    .page-header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .page-header .subtitle {
+      font-size: 13px;
+      color: var(--sub);
+    }
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      margin-bottom: 12px;
+    }
+    .card h2 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--heading);
+      margin-bottom: 6px;
+    }
+    .card p, .card li {
+      font-size: 14px;
+      color: var(--sub);
+    }
+    ul { padding-left: 18px; }
+    li { margin-bottom: 4px; }
+    .tag {
+      display: inline-block;
+      background: var(--tag-bg);
+      color: var(--tag-fg);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+    hr {
+      border: none;
+      height: 1px;
+      background: var(--card);
+      margin: 16px 0;
+    }
+    .footer {
+      font-size: 12px;
+      color: var(--sub);
+      text-align: center;
+      margin-top: 24px;
+    }
+  </style>
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      // Apply dark class to <html> immediately (before DOM) so CSS vars cascade
+      if (params.get('theme') === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+      document.addEventListener('DOMContentLoaded', function () {
+        // Hide inline page header when loaded inside the app toolbar (app=1)
+        if (params.get('app') === '1') {
+          var h = document.getElementById('pageHeader');
+          if (h) h.style.display = 'none';
+        }
+      });
+    })();
+  </script>
+</head>
+<body>
+
+  <div id="pageHeader" class="page-header">
+    <h1>Privacy Policy</h1>
+    <p class="subtitle">Effective date: March 2026 &nbsp;·&nbsp; Choose Browser</p>
+  </div>
+
+  <!-- ── Main App ── -->
+  <span class="tag">Main Application</span>
+
+  <div class="card">
+    <h2>No Data Collection</h2>
+    <p>Choose Browser does not collect, transmit, or store any personal data, usage data, analytics, or identifiers.</p>
+  </div>
+
+  <div class="card">
+    <h2>Local Storage Only</h2>
+    <p>The only information stored on your device is your selected preferences:</p>
+    <ul>
+      <li>Application theme (Light / Dark / System default)</li>
+      <li>Preview Page settings (JavaScript toggle state, Ad-Blocker mode)</li>
+    </ul>
+    <p>This data never leaves your device.</p>
+  </div>
+
+  <div class="card">
+    <h2>No Data Sharing</h2>
+    <p>We do not share, sell, license, or disclose any data to third parties, advertisers, or analytics providers.</p>
+  </div>
+
+  <div class="card">
+    <h2>No Network Requests by the App</h2>
+    <p>Choose Browser itself makes no network requests. All internet activity is initiated by you when launching a browser or using the Preview Page.</p>
+  </div>
+
+  <div class="card">
+    <h2>Permissions</h2>
+    <p>The following Android permissions may be requested solely to enable functionality within the Preview Page WebView:</p>
+    <ul>
+      <li><strong>Camera</strong> — only if a website explicitly requests camera access.</li>
+      <li><strong>Microphone</strong> — only if a website explicitly requests audio capture.</li>
+      <li><strong>Location</strong> — only if a website explicitly requests geolocation.</li>
+      <li><strong>Storage / Media</strong> — only if a website requests file access.</li>
+    </ul>
+    <p>These permissions are never used by the application itself.</p>
+  </div>
+
+  <hr />
+
+  <!-- ── Preview Page ── -->
+  <span class="tag">Preview Page (Private WebView)</span>
+
+  <div class="card">
+    <h2>Sandboxed Browsing</h2>
+    <p>The Preview Page is an isolated, incognito-style WebView. Cookies, cache, history, and all site data are cleared automatically when the session ends.</p>
+  </div>
+
+  <div class="card">
+    <h2>No Data Collected by Us</h2>
+    <p>Choose Browser does not monitor, log, or record any URLs visited, content viewed, or interactions made within the Preview Page.</p>
+  </div>
+
+  <div class="card">
+    <h2>Third-Party Websites</h2>
+    <p>Websites you visit inside the Preview Page may collect data independently, subject to their own privacy policies. We have no control over and bear no responsibility for the data practices of third-party websites.</p>
+    <ul>
+      <li>Third-party cookies are blocked by default.</li>
+      <li>The Ad-Blocker feature filters known tracking and advertising domains.</li>
+      <li>JavaScript is disabled by default.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>No Persistent Data</h2>
+    <p>The Preview Page disables all persistent storage mechanisms including DOM storage, databases, form autofill, and password saving.</p>
+  </div>
+
+  <div class="card">
+    <h2>SSL / Security</h2>
+    <p>SSL errors result in the page being blocked. Mixed content (HTTP within HTTPS) is not permitted.</p>
+  </div>
+
+  <hr />
+
+  <div class="card">
+    <h2>Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. Any changes will be reflected in the application update notes.</p>
+  </div>
+
+  <div class="card">
+    <h2>Contact</h2>
+    <p>If you have questions regarding this policy, please contact us through the feedback option in Settings.</p>
+  </div>
+
+  <p class="footer">© 2026 Choose Browser · All rights reserved.</p>
+
+</body>
+</html>

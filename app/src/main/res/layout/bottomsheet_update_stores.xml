@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_preview_more_sheet"
+    android:orientation="vertical"
+    android:paddingBottom="32dp">
+
+    <!-- Drag handle -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_preview_drag_handle" />
+
+    <!-- Title -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:paddingHorizontal="20dp"
+        android:paddingBottom="4dp"
+        android:text="Download Update"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/storeSheetSubtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_light"
+        android:paddingHorizontal="20dp"
+        android:paddingBottom="16dp"
+        android:text="Choose a source to download"
+        android:textColor="#B0B3B8"
+        android:textSize="13sp" />
+
+    <!-- Store rows -->
+
+    <!-- 1. GitHub Releases -->
+    <LinearLayout
+        android:id="@+id/storeGithubReleases"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="20dp">
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:padding="2dp"
+            app:srcCompat="@drawable/github" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_regular"
+            android:text="GitHub Releases"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            app:srcCompat="@drawable/ix_open_in_new"
+            app:tint="#B0B3B8" />
+    </LinearLayout>
+
+    <!-- 2. GitHub -->
+    <LinearLayout
+        android:id="@+id/storeGithub"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="20dp">
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:padding="2dp"
+            app:srcCompat="@drawable/github" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_regular"
+            android:text="GitHub"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            app:srcCompat="@drawable/ix_open_in_new"
+            app:tint="#B0B3B8" />
+    </LinearLayout>
+
+    <!-- 3. Play Store (disabled by default) -->
+    <LinearLayout
+        android:id="@+id/storePlayStore"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:alpha="0.4"
+        android:clickable="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="20dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:padding="2dp"
+            app:srcCompat="@drawable/icon" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Play Store"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_light"
+            android:text="Coming Soon"
+            android:textColor="#B0B3B8"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <!-- 4. F-Droid (disabled by default) -->
+    <LinearLayout
+        android:id="@+id/storeFDroid"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:alpha="0.4"
+        android:clickable="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="20dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:padding="2dp"
+            app:srcCompat="@drawable/icon" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_regular"
+            android:text="F-Droid"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_light"
+            android:text="Coming Soon"
+            android:textColor="#B0B3B8"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <!-- 5. APK Mirror (disabled by default) -->
+    <LinearLayout
+        android:id="@+id/storeApkMirror"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:alpha="0.4"
+        android:clickable="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="20dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:padding="2dp"
+            app:srcCompat="@drawable/icon" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_regular"
+            android:text="APK Mirror"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_light"
+            android:text="Coming Soon"
+            android:textColor="#B0B3B8"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <!-- 6. MyStore (disabled by default) -->
+    <LinearLayout
+        android:id="@+id/storeMyStore"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:alpha="0.4"
+        android:clickable="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="20dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:padding="2dp"
+            app:srcCompat="@drawable/icon" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_regular"
+            android:text="MyStore"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_light"
+            android:text="Coming Soon"
+            android:textColor="#B0B3B8"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</LinearLayout>

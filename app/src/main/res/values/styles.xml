@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base app theme -->
+<!--    <style name="Theme.ChooseBrowserNEW" parent="Theme.MaterialComponents.DayNight.NoActionBar">-->
+<!--        &lt;!&ndash; Customize your theme colors here &ndash;&gt;-->
+<!--        <item name="colorPrimary">@color/PrimaryCol</item>-->
+
+<!--        <item name="colorPrimaryVariant">@color/PrimaryColDark</item>-->
+<!--        <item name="colorOnPrimary">@color/white</item>-->
+
+<!--        &lt;!&ndash; System bars &ndash;&gt;-->
+<!--        -->
+<!--    </style>-->
+
+    <!-- Preview More menu grid item style (inside big card, no individual bg) -->
+    <style name="PreviewMoreGridItem">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_preview_grid_item_hover</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingHorizontal">8dp</item>
+        <item name="android:paddingVertical">12dp</item>
+    </style>
+
+    <style name="PreviewMoreGridText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/previewPage_textSecondary</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+</resources>

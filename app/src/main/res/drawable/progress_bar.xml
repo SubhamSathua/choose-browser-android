@@ -1,0 +1,19 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background/Track -->
+    <item android:id="@android:id/background">
+        <shape>
+            <corners android:radius="20dp"/>
+            <solid android:color="@color/ib_progressTrack"/>
+        </shape>
+    </item>
+
+    <!-- Progress (filled) -->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape>
+                <corners android:radius="20dp"/>
+                <solid android:color="@color/ib_progressSeek"/>
+            </shape>
+        </clip>
+    </item>
+</layer-list>

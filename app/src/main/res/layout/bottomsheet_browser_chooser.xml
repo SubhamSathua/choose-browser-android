@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottomsheet"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingTop="8dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ix_drag_handle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="fill_parent"
+            android:layout_marginRight="4dp"
+            android:src="@drawable/ix_open_in_new" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/open_wt"
+                android:textColor="@color/text"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+
+
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            />
+
+        <!-- Update indicator: separate blank card, click → MainActivity -->
+        <FrameLayout
+            android:id="@+id/updateDotCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="2dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:padding="10dp"
+            android:visibility="gone">
+
+            <View
+                android:id="@+id/popupUpdateDot"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center"
+                android:background="@drawable/dot_blue" />
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/privacyBtn"
+            style="?attr/materialIconButtonFilledStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/PopUpCardDockBg"
+            app:icon="@drawable/shield_lock_24px"
+            app:iconTint="@color/text" />
+
+
+
+
+    </LinearLayout>
+
+    <!-- Dock with URL + buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/PopUpCardDockBg"
+            app:cardCornerRadius="48dp"
+            app:cardElevation="0dp"
+            app:contentPadding="3dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/urlTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="7dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:paddingLeft="8dp"
+                    android:textColor="?attr/colorOnSurface"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="11sp"
+                    android:letterSpacing="-0.02"
+                    tools:text="@string/demoLink" />
+
+                <Button
+                    android:id="@+id/copyBtn"
+                    style="?attr/materialIconButtonFilledStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/PopUpCardDockBtn"
+                    app:icon="@drawable/content_copy_24px"
+                    app:iconTint="@color/PopUpCardDockText" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+<!--Action Buttons -->
+<!-- SHOW LINK -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="4dp">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/previewLinkBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:background="@android:color/transparent"
+                    app:cardElevation="0dp"
+                    app:cardUseCompatPadding="false"
+                    app:cardCornerRadius="17dp"
+                    app:cardBackgroundColor="@color/PopUpCard_ActionBtnBg">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="20dp"
+                            android:paddingVertical="5dp"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:paddingHorizontal="4dp"
+                                android:background="@android:color/transparent"
+                                android:src="@drawable/link"/>
+
+                            <TextView
+                                android:layout_width="70dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:lines="1"
+                                android:maxLines="2"
+                                android:textSize="12sp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/poppins_regular"
+                                android:text="Show Link"/>
+                        </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/shareBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:background="@android:color/transparent"
+                app:cardElevation="0dp"
+                app:cardUseCompatPadding="false"
+                app:cardCornerRadius="17dp"
+                app:cardBackgroundColor="@color/PopUpCard_ActionBtnBg">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="5dp"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:paddingHorizontal="4dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/share_ico"/>
+
+                    <TextView
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center"
+                        android:lines="1"
+                        android:textSize="12sp"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        android:text="Share"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/previewPage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:background="@android:color/transparent"
+                app:cardElevation="0dp"
+                app:cardUseCompatPadding="false"
+                app:cardCornerRadius="17dp"
+                app:cardBackgroundColor="@color/PopUpCard_ActionBtnBg">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="5dp"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:paddingHorizontal="4dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/preview_page"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:lines="1"
+                        android:maxLines="2"
+                        android:textSize="12sp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Preview Page"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@drawable/dashed_line"
+            android:layout_marginVertical="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingTop="5dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="0dp"
+        android:layout_marginBottom="0dp">
+
+        <!-- GridView for browsers -->
+        <GridView
+            android:id="@+id/browserGridView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:horizontalSpacing="7dp"
+            android:numColumns="4"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="5dp"
+            android:paddingBottom="16dp"
+            android:clipToPadding="false"
+            android:nestedScrollingEnabled="true"
+            android:overScrollMode="always"
+            android:scrollbars="vertical"
+            android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
+            android:scrollbarSize="6dp"
+            />
+
+    </LinearLayout>
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="1dp"-->
+<!--        android:layout_marginTop="2dp"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:padding="4dp">-->
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/linkPreviewBtn"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:paddingStart="16dp"-->
+<!--            android:paddingEnd="16dp"-->
+<!--            android:text="@string/showLink"-->
+<!--            android:textColor="@color/SecBtn_TxtCol"-->
+<!--            android:fontFamily="@font/poppins_medium"-->
+<!--            app:backgroundTint="@color/SecBtn_BgCol"-->
+<!--            app:icon="@drawable/link"-->
+<!--            app:iconSize="18sp"-->
+<!--            app:iconTint="@color/SecBtn_TxtCol" />-->
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/previewBtn"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:paddingStart="16dp"-->
+<!--            android:paddingEnd="16dp"-->
+<!--            android:text="@string/preview"-->
+<!--            android:fontFamily="@font/poppins_medium"-->
+<!--            android:textColor="@color/white"-->
+<!--            app:backgroundTint="@color/PriBtn_BgCol"-->
+<!--            app:icon="@drawable/preview"-->
+<!--            app:iconSize="18sp"-->
+<!--            app:iconTint="@color/PriBtn_TxtCol" />-->
+<!--    </LinearLayout>-->
+
+</LinearLayout>

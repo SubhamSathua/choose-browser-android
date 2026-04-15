@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!--======== APP CUSTOM COLs ========-->
+    <!--Permission Screen-->
+    <color name="PrimaryCol">#377aff</color>
+    <color name="PrimaryTextCol">#ffffff</color>
+
+    <color name="PriBtn_BgCol">#1e1a24</color>
+    <color name="PriBtn_TxtCol">#ffffff</color>
+    <color name="SecBtn_BgCol">#e6e6e6</color>
+    <color name="SecBtn_TxtCol">#000000</color>
+
+    <color name="backgroundPrimary">#f1f1f3</color>
+    <color name="backgroundSecondary">#ffffff</color>
+    <color name="text">#000000</color>
+    <color name="textSub">#575757</color>
+    <color name="SettingsBtnText">#ffffff</color>
+
+    <!--    Setting Screen -->
+    <color name="textSubSecondary">#4a4a4a</color>
+
+    <!-- ======= For Permission Screen ===========-->
+    <color name="icon_Color">#377aff</color>
+    <color name="permBtn_Bg">#377aff</color>
+    <color name="permBtn_Txt">#ffffff</color>
+    <color name="radio_unchecked">#757575</color>
+
+
+    <!-- =========  Pop-Up Screen ========= -->
+    <color name="popUp_BgCol">#f3f3f3</color>
+    <color name="popupActionBox_bgCol">#f3f3f3</color>
+    <!--  Link Pop Up  card-->
+    <color name="popLink_bgCol">#f3f3f3</color>
+    <color name="popLinkPreview_bgCol">#e1e5ff</color>
+    <color name="transparent_black">#99000000</color>
+    <!--    Popup card-->
+    <color name="PopUpCardBg">#fcfcfe</color>
+    <color name="PopUpCardDockBg">#e1e1e3</color>
+    <color name="PopUpCardDockBtn">#000000</color>
+    <color name="PopUpCardDockText">#ffffff</color>
+    <color name="PopUpCard_ActionBtnBg">#e1e1e3</color>
+    <color name="PopUpCard_ActionBtnSec_Bg">#b2b2b2</color>
+
+    <color name="solidBtn_BgCol">#1a39d0</color> <!-- Buttons, scroll thumb, radio-->
+    <color name="solidBtn_txtCol">#ffffff</color>
+    <color name="tonalBtn_BgColor">#bbc3ff</color>
+    <color name="tonalBtn_txtColor">#31344D</color>
+
+    <!-- ======== Show Link Dialog ======== -->
+    <color name="showLinkDialog_primary">#252527</color>
+    <color name="showLinkDialog_secondary">#3b3b3d</color>
+
+    <color name="showLinkDialog_btnPrimary">#ffffff</color>
+    <color name="showLinkDialog_btnSecondary">#3b3b3d</color>
+    <color name="showLinkDialog_textPrimary">#000000</color>
+    <color name="showLinkDialog_textSecondary">#ffffff</color>
+
+    <color name="showLinkDialog_scrollTrack">#3b3b3d</color>
+    <color name="showLinkDialog_scrollThumb">#ffffff</color>
+
+
+    <!-- ==== Preview Page ==== -->
+    <color name="previewPage_primary">#252527</color>
+    <color name="previewPage_secondary">#3b3b3d</color>
+
+    <color name="previewPage_btnPrimary">#ffffff</color>
+    <color name="previewPage_btnSecondary">#3b3b3d</color>
+    <color name="previewPage_textPrimary">#000000</color>
+    <color name="previewPage_textSecondary">#ffffff</color>
+
+    <color name="previewPage_scrollTrack">#3b3b3d</color>
+    <color name="previewPage_scrollThumb">#ffffff</color>
+
+    <!-- ======== TEST =======   -->
+    <color name="TestRed">#F20649</color>
+    <color name="TestGreen">#06F241</color>
+    <color name="TestBlue">#0025FF</color>
+    <color name="TestOrange">#FF4000</color>
+
+    <!-- ======== In-app Browser (missing refs) ======== -->
+    <color name="ib_menuBg">#3b3b3d</color>
+    <color name="ib_progressTrack">#3b3b3d</color>
+    <color name="ib_progressSeek">#377aff</color>
+
+
+    <!-- ==== ABOUT ==== -->
+    <color name="aboutPage_mainCard">#fcfcfe</color>
+    <color name="aboutPage_textPrimary">#000000</color>
+    <color name="aboutPage_textSecondary">#494949</color>
+
+    <!-- ==== UPDATE CARD ==== -->
+    <color name="updateLatest">#494949</color>
+    <color name="updateCritical">#494949</color>
+    <color name="updateWarning">#494949</color>
+    <color name="update_textPrimary">#000000</color>
+    <color name="update_textSecondary">#3C3C3C</color>
+
+
+
+
+</resources>

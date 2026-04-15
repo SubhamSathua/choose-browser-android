@@ -1,0 +1,9 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/ib_menuBg" /> <!-- dark/incognito bg -->
+    <corners
+        android:topLeftRadius="37dp"
+        android:topRightRadius="37dp"
+        android:bottomLeftRadius="0dp"
+        android:bottomRightRadius="0dp" />
+</shape>

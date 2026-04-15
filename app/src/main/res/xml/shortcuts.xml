@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <shortcut
+        android:shortcutId="browser_list"
+        android:enabled="true"
+        android:icon="@drawable/ix_list_icon"
+        android:shortcutShortLabel="@string/shortcut_browserShortLabel"
+        android:shortcutLongLabel="@string/shortcut_browserLongLabel"
+        android:shortcutDisabledMessage="@string/shortcut_browserDisabledLabel">
+
+    <intent
+        android:action="android.intent.action.VIEW"
+        android:targetPackage="com.hyper.choosebrowsernew"
+        android:targetClass="com.hyper.choosebrowsernew.BrowserListActivity" />
+</shortcut>
+
+    </shortcuts>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!--======== APP CUSTOM COLs ========-->
+    <!--Permission Screen-->
+    <color name="PriBtn_BgCol">#ffffff</color>
+    <color name="PriBtn_TxtCol">#000000</color>
+    <color name="SecBtn_BgCol">#3c3c3d</color>
+    <color name="SecBtn_TxtCol">#ffffff</color>
+
+    <color name="backgroundPrimary">#010101</color>
+    <color name="backgroundSecondary">#171719</color>
+    <color name="text">#ffffff</color>
+    <color name="textSub">#b7b7b7</color>
+    <color name="SettingsBtnText">#334bb1</color>
+    <!--    <color name="PrimaryCol">#bbc3ff</color>-->
+    <!--    <color name="PrimaryTextCol">#334bb1</color>-->
+
+    <!-- ========== Setting Screen ======== -->
+    <color name="textSubSecondary">#a3a3a5</color>
+
+    <!--  ======== For Permission Screen ======== -->
+    <color name="icon_Color">#bbc3ff</color>
+    <color name="permBtn_Bg">#bbc3ff</color>
+    <color name="permBtn_Txt">#334BB1</color>
+    <color name="radio_unchecked">#49454f</color>
+    <!--<color name="dark_button_text">#FFFFFF</color>-->
+
+
+    <!-- ======== Pop-Up Screen ======== -->
+    <color name="popUp_BgCol">#2d2d2d</color>
+    <color name="popupActionBox_bgCol">#1e1f28</color>
+    <!--  Link Pop Up  -->
+    <color name="popLink_bgCol">#1e1f28</color>
+
+    <!--    Popup card-->
+    <color name="PopUpCardBg">#252527</color>
+    <color name="PopUpCardDockBg">#3b3b3d</color>
+    <color name="PopUpCardDockBtn">#ffffff</color>
+    <color name="PopUpCardDockText">#000000</color>
+    <color name="PopUpCard_ActionBtnBg">#3b3b3d</color>
+    <color name="PopUpCard_ActionBtnSec_Bg">#4d4d4d</color>
+
+    <color name="popLinkPreview_bgCol">#3b426a</color> <!-- Thumb, linkBg-->
+
+    <!-- ======== Show Link Dialog ======== -->
+    <color name="showLinkDialog_primary">#252527</color>
+    <color name="showLinkDialog_secondary">#3b3b3d</color>
+
+    <color name="showLinkDialog_btnPrimary">#ffffff</color>
+    <color name="showLinkDialog_btnSecondary">#3b3b3d</color>
+    <color name="showLinkDialog_textPrimary">#000000</color>
+    <color name="showLinkDialog_textSecondary">#ffffff</color>
+
+    <color name="showLinkDialog_scrollTrack">#3b3b3d</color>
+    <color name="showLinkDialog_scrollThumb">#ffffff</color>
+
+    <!-- ==== ABOUT ==== -->
+    <color name="aboutPage_mainCard">#252527</color>
+    <color name="aboutPage_textPrimary">#FFFFFF</color>
+    <color name="aboutPage_textSecondary">#A8A8A8</color>
+
+    <!-- ==== UPDATE CARD ==== -->
+    <color name="updateLatest">#494949</color>
+    <color name="updateCritical">#494949</color>
+    <color name="updateWarning">#494949</color>
+    <color name="update_textPrimary">#FFFFFF</color>
+    <color name="update_textSecondary">#D1D1D1</color>
+</resources>

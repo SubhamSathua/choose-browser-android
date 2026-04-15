@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_preview_more_sheet"
+    android:orientation="vertical"
+    android:paddingTop="12dp"
+    android:paddingBottom="16dp">
+
+    <!-- Drag Handle -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="14dp"
+        android:background="@drawable/bg_preview_drag_handle" />
+
+    <!-- ===== Title Capsule Card (90% width, centred) ===== -->
+    <LinearLayout
+        android:id="@+id/siteInfoCard"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="14dp"
+        android:background="@drawable/bg_preview_site_card"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="8dp">
+
+        <!-- Green status dot / Site icon -->
+        <ImageView
+            android:id="@+id/siteIcon"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/site_icon_demo" />
+
+        <!-- Site title (centred in remaining space) -->
+        <TextView
+            android:id="@+id/siteTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins"
+            android:gravity="start"
+            android:maxLines="1"
+            android:text="Site Title"
+            android:textColor="@color/previewPage_textSecondary"
+            android:textSize="14sp" />
+
+        <!-- Copy link (circular ripple bg) -->
+        <ImageButton
+            android:id="@+id/moreCopyLinkBtn"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/bg_preview_copy_btn_hover"
+            android:contentDescription="Copy link"
+            android:padding="7dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ix_copy" />
+
+        <!-- Reload -->
+        <ImageButton
+            android:id="@+id/moreReloadBtn"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/bg_preview_copy_btn_hover"
+            android:contentDescription="Reload"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/reload" />
+    </LinearLayout>
+
+    <!-- ===== 4cX2r Big Card (same margin as title capsule) ===== -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_preview_grid_card"
+        android:orientation="vertical"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="4dp">
+
+        <!-- Row 1: Open In, Home, Print, Find -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/moreOpenIn"
+                style="@style/PreviewMoreGridItem"
+                android:layout_width="0dp"
+                android:layout_weight="1">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/open" />
+                <TextView
+                    style="@style/PreviewMoreGridText"
+                    android:text="Open in" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/moreHome"
+                style="@style/PreviewMoreGridItem"
+                android:layout_width="0dp"
+                android:layout_weight="1">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/home" />
+                <TextView
+                    style="@style/PreviewMoreGridText"
+                    android:text="Home" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/morePrint"
+                style="@style/PreviewMoreGridItem"
+                android:layout_width="0dp"
+                android:layout_weight="1">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/print" />
+                <TextView
+                    style="@style/PreviewMoreGridText"
+                    android:text="Print" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/moreFind"
+                style="@style/PreviewMoreGridItem"
+                android:layout_width="0dp"
+                android:layout_weight="1">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/find" />
+                <TextView
+                    style="@style/PreviewMoreGridText"
+                    android:text="Find" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Row 2: Share, Ad Block, Permissions, Fire -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/moreShare"
+                style="@style/PreviewMoreGridItem"
+                android:layout_width="0dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ix_share" />
+                <TextView
+                    style="@style/PreviewMoreGridText"
+                    android:text="Share" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/moreAdBlock"
+                style="@style/PreviewMoreGridItem"
+                android:layout_width="0dp"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/adBlockIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ad_close" />
+                <TextView
+                    android:id="@+id/adBlockText"
+                    style="@style/PreviewMoreGridText"
+                    android:text="Ad Blocker" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/morePermissions"
+                style="@style/PreviewMoreGridItem"
+                android:layout_width="0dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ix_permissions" />
+                <TextView
+                    style="@style/PreviewMoreGridText"
+                    android:text="Permissions" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/moreDarkMode"
+                style="@style/PreviewMoreGridItem"
+                android:layout_width="0dp"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/darkModeIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/darkmode_off" />
+                <TextView
+                    android:id="@+id/darkModeText"
+                    style="@style/PreviewMoreGridText"
+                    android:text="Dark Mode" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- ===== Toggles section ===== -->
+
+    <!-- Desktop Site toggle -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="8dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/desktop" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins"
+            android:text="Desktop Site"
+            android:textColor="@color/previewPage_textSecondary"
+            android:textSize="14sp" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switchDesktopSite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <!-- Screenshot toggle -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="8dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/screenshot" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins"
+            android:text="Allow Screenshot"
+            android:textColor="@color/previewPage_textSecondary"
+            android:textSize="14sp" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switchScreenshot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <!-- Allow JS toggle -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="8dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/js_on" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins"
+            android:text="Allow JavaScript"
+            android:textColor="@color/previewPage_textSecondary"
+            android:textSize="14sp" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switchAllowJs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <!-- Ad-Blocker Mode row -->
+    <LinearLayout
+        android:id="@+id/moreAdBlockMode"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/bg_preview_grid_item_hover"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="8dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/ad_close" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins"
+            android:text="Ad-Blocker Mode"
+            android:textColor="@color/previewPage_textSecondary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvAdBlockMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:text="Domain Filter"
+            android:textColor="#99ffffff"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="6dp"
+            android:src="@drawable/forward"
+            android:alpha="0.5" />
+    </LinearLayout>
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="6dp"
+        android:background="@color/previewPage_secondary" />
+
+    <!-- Privacy Policy -->
+    <TextView
+        android:id="@+id/morePrivacyPolicy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:fontFamily="@font/poppins"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="10dp"
+        android:text="Privacy Policy"
+        android:textColor="@color/previewPage_textSecondary"
+        android:textSize="14sp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground" />
+
+</LinearLayout>

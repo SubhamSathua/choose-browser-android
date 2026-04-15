@@ -1,0 +1,33 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.ChooseBrowserNEW" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <style name="Theme.ChooseBrowserNEW" parent="Base.Theme.ChooseBrowserNEW">
+        <item name="android:statusBarColor">@color/backgroundPrimary</item>
+        <item name="android:navigationBarColor">@color/backgroundPrimary</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+
+    </style>
+
+    <!-- Preview More bottom sheet: transparent bg so our drawable shows -->
+    <style name="PreviewMoreBottomSheet" parent="Theme.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/PreviewMoreBottomSheetStyle</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:navigationBarColor">@color/previewPage_primary</item>
+    </style>
+
+    <style name="PreviewMoreBottomSheetStyle" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="shapeAppearanceOverlay">@style/PreviewMoreShapeOverlay</item>
+    </style>
+
+    <style name="PreviewMoreShapeOverlay">
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerSizeTopRight">20dp</item>
+    </style>
+
+
+</resources>
