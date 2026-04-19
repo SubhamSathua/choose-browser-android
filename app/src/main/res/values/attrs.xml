@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorPopupSurface" format="color" />
+    <attr name="colorPopupDock" format="color" />
+    <attr name="colorPopupDockButton" format="color" />
+    <attr name="colorPopupDockButtonText" format="color" />
+    <attr name="colorPopupAction" format="color" />
+    <attr name="colorPopupText" format="color" />
+</resources>

@@ -97,30 +97,48 @@
                 android:textColor="@color/text" />
 
             <RadioButton
-                android:id="@+id/colorThemeRadioDracula"
+                android:id="@+id/colorThemeRadioEclipse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/PriBtn_BgCol"
                 android:fontFamily="@font/poppins_regular"
-                android:text="@string/color_theme_dracula"
+                android:text="@string/color_theme_eclipse"
                 android:textColor="@color/text" />
 
             <RadioButton
-                android:id="@+id/colorThemeRadioCopilot"
+                android:id="@+id/colorThemeRadioNeuroNight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/PriBtn_BgCol"
                 android:fontFamily="@font/poppins_regular"
-                android:text="@string/color_theme_copilot"
+                android:text="@string/color_theme_neuronight"
                 android:textColor="@color/text" />
 
             <RadioButton
-                android:id="@+id/colorThemeRadioTheme4"
+                android:id="@+id/colorThemeRadioNeuralBlue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/PriBtn_BgCol"
                 android:fontFamily="@font/poppins_regular"
-                android:text="@string/color_theme_theme4"
+                android:text="@string/color_theme_neural_blue"
+                android:textColor="@color/text" />
+
+            <RadioButton
+                android:id="@+id/colorThemeRadioCosmic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/PriBtn_BgCol"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/color_theme_cosmic"
+                android:textColor="@color/text" />
+
+            <RadioButton
+                android:id="@+id/colorThemeRadioObsidianPulse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/PriBtn_BgCol"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/color_theme_obsidian_pulse"
                 android:textColor="@color/text" />
         </RadioGroup>
     </androidx.cardview.widget.CardView>

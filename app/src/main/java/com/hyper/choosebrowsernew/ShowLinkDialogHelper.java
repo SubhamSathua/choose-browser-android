@@ -39,14 +39,15 @@ public class ShowLinkDialogHelper {
      * @param url      The original full URL to display
      */
     public static void show(Context context, String url) {
-        Dialog dialog = new Dialog(context);
+        Context themedContext = ThemeHelper.wrapWithColorThemeOverlay(context);
+        Dialog dialog = new Dialog(themedContext);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
 
-        View view = LayoutInflater.from(context).inflate(R.layout.dialog_show_link, null);
+        View view = LayoutInflater.from(themedContext).inflate(R.layout.dialog_show_link, null);
         dialog.setContentView(view);
 
-        applyPopupTheme(context, view);
+        applyPopupTheme(themedContext, view);
 
         // Transparent background so our rounded-corner drawable shows correctly
         if (dialog.getWindow() != null) {
@@ -92,12 +93,12 @@ public class ShowLinkDialogHelper {
     }
 
     private static void applyPopupTheme(Context context, View root) {
-        int surface = ContextCompat.getColor(context, ThemeHelper.getPopupSurfaceColorRes(context));
-        int dock = ContextCompat.getColor(context, ThemeHelper.getPopupDockColorRes(context));
-        int dockBtn = ContextCompat.getColor(context, ThemeHelper.getPopupDockButtonColorRes(context));
-        int dockBtnText = ContextCompat.getColor(context, ThemeHelper.getPopupDockButtonTextColorRes(context));
-        int action = ContextCompat.getColor(context, ThemeHelper.getPopupActionColorRes(context));
-        int text = ContextCompat.getColor(context, ThemeHelper.getPopupTextColorRes(context));
+        int surface = ThemeHelper.resolveThemeColor(context, R.attr.colorPopupSurface, R.color.PopUpCardBg);
+        int dock = ThemeHelper.resolveThemeColor(context, R.attr.colorPopupDock, R.color.PopUpCardDockBg);
+        int dockBtn = ThemeHelper.resolveThemeColor(context, R.attr.colorPopupDockButton, R.color.PopUpCardDockBtn);
+        int dockBtnText = ThemeHelper.resolveThemeColor(context, R.attr.colorPopupDockButtonText, R.color.PopUpCardDockText);
+        int action = ThemeHelper.resolveThemeColor(context, R.attr.colorPopupAction, R.color.PopUpCard_ActionBtnBg);
+        int text = ThemeHelper.resolveThemeColor(context, R.attr.colorPopupText, R.color.text);
 
         if (root.getBackground() != null) {
             Drawable bg = DrawableCompat.wrap(root.getBackground().mutate());

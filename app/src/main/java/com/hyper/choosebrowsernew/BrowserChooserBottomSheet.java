@@ -156,14 +156,14 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void applyPopupTheme(View root) {
-        Context context = requireContext();
+        Context themedContext = ThemeHelper.wrapWithColorThemeOverlay(requireContext());
 
-        int surface = ContextCompat.getColor(context, ThemeHelper.getPopupSurfaceColorRes(context));
-        int dock = ContextCompat.getColor(context, ThemeHelper.getPopupDockColorRes(context));
-        int dockBtn = ContextCompat.getColor(context, ThemeHelper.getPopupDockButtonColorRes(context));
-        int dockBtnText = ContextCompat.getColor(context, ThemeHelper.getPopupDockButtonTextColorRes(context));
-        int action = ContextCompat.getColor(context, ThemeHelper.getPopupActionColorRes(context));
-        int text = ContextCompat.getColor(context, ThemeHelper.getPopupTextColorRes(context));
+        int surface = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupSurface, R.color.PopUpCardBg);
+        int dock = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupDock, R.color.PopUpCardDockBg);
+        int dockBtn = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupDockButton, R.color.PopUpCardDockBtn);
+        int dockBtnText = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupDockButtonText, R.color.PopUpCardDockText);
+        int action = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupAction, R.color.PopUpCard_ActionBtnBg);
+        int text = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupText, R.color.text);
 
         View sheetRoot = root.findViewById(R.id.card);
         if (sheetRoot != null && sheetRoot.getBackground() != null) {

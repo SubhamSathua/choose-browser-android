@@ -201,12 +201,16 @@ public class SettingsActivity extends AppCompatActivity {
         RadioGroup radioGroup = sheetView.findViewById(R.id.colorThemesRadioGroup);
 
         String savedThemeId = ThemeHelper.getSavedColorThemeId(this);
-        if (ThemeHelper.COLOR_THEME_DRACULA.equals(savedThemeId)) {
-            radioGroup.check(R.id.colorThemeRadioDracula);
-        } else if (ThemeHelper.COLOR_THEME_COPILOT.equals(savedThemeId)) {
-            radioGroup.check(R.id.colorThemeRadioCopilot);
-        } else if (ThemeHelper.COLOR_THEME_THEME4.equals(savedThemeId)) {
-            radioGroup.check(R.id.colorThemeRadioTheme4);
+        if (ThemeHelper.COLOR_THEME_ECLIPSE.equals(savedThemeId)) {
+            radioGroup.check(R.id.colorThemeRadioEclipse);
+        } else if (ThemeHelper.COLOR_THEME_NEURONIGHT.equals(savedThemeId)) {
+            radioGroup.check(R.id.colorThemeRadioNeuroNight);
+        } else if (ThemeHelper.COLOR_THEME_NEURAL_BLUE.equals(savedThemeId)) {
+            radioGroup.check(R.id.colorThemeRadioNeuralBlue);
+        } else if (ThemeHelper.COLOR_THEME_COSMIC.equals(savedThemeId)) {
+            radioGroup.check(R.id.colorThemeRadioCosmic);
+        } else if (ThemeHelper.COLOR_THEME_OBSIDIAN_PULSE.equals(savedThemeId)) {
+            radioGroup.check(R.id.colorThemeRadioObsidianPulse);
         } else {
             radioGroup.check(R.id.colorThemeRadioDefault);
         }
@@ -215,12 +219,16 @@ public class SettingsActivity extends AppCompatActivity {
 
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             String themeId = ThemeHelper.COLOR_THEME_DEFAULT;
-            if (checkedId == R.id.colorThemeRadioDracula) {
-                themeId = ThemeHelper.COLOR_THEME_DRACULA;
-            } else if (checkedId == R.id.colorThemeRadioCopilot) {
-                themeId = ThemeHelper.COLOR_THEME_COPILOT;
-            } else if (checkedId == R.id.colorThemeRadioTheme4) {
-                themeId = ThemeHelper.COLOR_THEME_THEME4;
+            if (checkedId == R.id.colorThemeRadioEclipse) {
+                themeId = ThemeHelper.COLOR_THEME_ECLIPSE;
+            } else if (checkedId == R.id.colorThemeRadioNeuroNight) {
+                themeId = ThemeHelper.COLOR_THEME_NEURONIGHT;
+            } else if (checkedId == R.id.colorThemeRadioNeuralBlue) {
+                themeId = ThemeHelper.COLOR_THEME_NEURAL_BLUE;
+            } else if (checkedId == R.id.colorThemeRadioCosmic) {
+                themeId = ThemeHelper.COLOR_THEME_COSMIC;
+            } else if (checkedId == R.id.colorThemeRadioObsidianPulse) {
+                themeId = ThemeHelper.COLOR_THEME_OBSIDIAN_PULSE;
             }
 
             ThemeHelper.saveColorThemeId(this, themeId);
@@ -235,14 +243,20 @@ public class SettingsActivity extends AppCompatActivity {
         String savedThemeId = ThemeHelper.getSavedColorThemeId(this);
         int labelRes;
         switch (savedThemeId) {
-            case ThemeHelper.COLOR_THEME_DRACULA:
-                labelRes = R.string.color_theme_dracula;
+            case ThemeHelper.COLOR_THEME_ECLIPSE:
+                labelRes = R.string.color_theme_eclipse;
                 break;
-            case ThemeHelper.COLOR_THEME_COPILOT:
-                labelRes = R.string.color_theme_copilot;
+            case ThemeHelper.COLOR_THEME_NEURONIGHT:
+                labelRes = R.string.color_theme_neuronight;
                 break;
-            case ThemeHelper.COLOR_THEME_THEME4:
-                labelRes = R.string.color_theme_theme4;
+            case ThemeHelper.COLOR_THEME_NEURAL_BLUE:
+                labelRes = R.string.color_theme_neural_blue;
+                break;
+            case ThemeHelper.COLOR_THEME_COSMIC:
+                labelRes = R.string.color_theme_cosmic;
+                break;
+            case ThemeHelper.COLOR_THEME_OBSIDIAN_PULSE:
+                labelRes = R.string.color_theme_obsidian_pulse;
                 break;
             case ThemeHelper.COLOR_THEME_DEFAULT:
             default:
