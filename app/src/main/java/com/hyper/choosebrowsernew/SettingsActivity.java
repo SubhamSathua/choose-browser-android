@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
@@ -43,9 +44,11 @@ public class SettingsActivity extends AppCompatActivity {
         feedbackButton = findViewById(R.id.feedbackButton);
         privacyPolicyButton = findViewById(R.id.privacyPolicyButton);
         CardView excludeBrowserCard = findViewById(R.id.excludeBrowserCard);
+        CardView colorThemesCard = findViewById(R.id.colorThemesCard);
         CardView versionCard = findViewById(R.id.versionCard);
         CardView debugCard = findViewById(R.id.debugCard);
         View backBtn = findViewById(R.id.backBtn);
+        TextView colorThemesValue = findViewById(R.id.colorThemesValue);
         TextView versionText = findViewById(R.id.versionText);
 
         MotionUiHelper.applyTapScale(demoButton);
@@ -53,9 +56,12 @@ public class SettingsActivity extends AppCompatActivity {
         MotionUiHelper.applyTapScale(feedbackButton);
         MotionUiHelper.applyTapScale(privacyPolicyButton);
         MotionUiHelper.applyTapScale(excludeBrowserCard);
+        MotionUiHelper.applyTapScale(colorThemesCard);
         MotionUiHelper.applyTapScale(versionCard);
         MotionUiHelper.applyTapScale(debugCard);
         MotionUiHelper.applyTapScale(backBtn);
+
+        updateColorThemeLabel(colorThemesValue);
 
         // Set current checked button based on saved mode
         int savedMode = ThemeHelper.getSavedThemeMode(this);
@@ -106,6 +112,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         excludeBrowserCard.setOnClickListener(v ->
             startActivity(new Intent(this, ExcludedBrowsersActivity.class)));
+
+        colorThemesCard.setOnClickListener(v -> showColorThemePicker(colorThemesValue));
 
         findViewById(R.id.backBtn).setOnClickListener(v -> finish());
 
@@ -182,6 +190,62 @@ public class SettingsActivity extends AppCompatActivity {
     private void openLink(String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(intent);
+    }
+
+    private void showColorThemePicker(TextView selectedThemeValueText) {
+        final String[] themeIds = {
+                ThemeHelper.COLOR_THEME_DEFAULT,
+                ThemeHelper.COLOR_THEME_DRACULA,
+                ThemeHelper.COLOR_THEME_COPILOT,
+                ThemeHelper.COLOR_THEME_THEME4
+        };
+
+        final String[] themeLabels = {
+                getString(R.string.color_theme_default),
+                getString(R.string.color_theme_dracula),
+                getString(R.string.color_theme_copilot),
+                getString(R.string.color_theme_theme4)
+        };
+
+        String savedThemeId = ThemeHelper.getSavedColorThemeId(this);
+        int selectedIndex = 0;
+        for (int i = 0; i < themeIds.length; i++) {
+            if (themeIds[i].equals(savedThemeId)) {
+                selectedIndex = i;
+                break;
+            }
+        }
+
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.color_themes)
+                .setSingleChoiceItems(themeLabels, selectedIndex, (dialog, which) -> {
+                    ThemeHelper.saveColorThemeId(this, themeIds[which]);
+                    updateColorThemeLabel(selectedThemeValueText);
+                    dialog.dismiss();
+                })
+                .setNegativeButton(R.string.cancel, null)
+                .show();
+    }
+
+    private void updateColorThemeLabel(TextView selectedThemeValueText) {
+        String savedThemeId = ThemeHelper.getSavedColorThemeId(this);
+        int labelRes;
+        switch (savedThemeId) {
+            case ThemeHelper.COLOR_THEME_DRACULA:
+                labelRes = R.string.color_theme_dracula;
+                break;
+            case ThemeHelper.COLOR_THEME_COPILOT:
+                labelRes = R.string.color_theme_copilot;
+                break;
+            case ThemeHelper.COLOR_THEME_THEME4:
+                labelRes = R.string.color_theme_theme4;
+                break;
+            case ThemeHelper.COLOR_THEME_DEFAULT:
+            default:
+                labelRes = R.string.color_theme_default;
+                break;
+        }
+        selectedThemeValueText.setText(labelRes);
     }
 
     @Override

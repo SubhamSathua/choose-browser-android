@@ -30,6 +30,7 @@
                 android:src="@drawable/link" />
 
             <TextView
+                android:id="@+id/showLinkTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"
@@ -53,6 +54,7 @@
 
     <!-- Scrollable link area -->
     <ScrollView
+        android:id="@+id/showLinkScrollArea"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -106,6 +108,7 @@
                 android:src="@drawable/share_ico" />
 
             <TextView
+                android:id="@+id/showLinkShareText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"
@@ -133,6 +136,7 @@
                 android:src="@drawable/copy_invert"/>
 
             <TextView
+                android:id="@+id/showLinkCopyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"

@@ -65,6 +65,12 @@
     <!--    Settings Screen-->
     <string name="theme">Theme</string>
     <string name="ThemeSub">Enable dark mode to<b> minimize eye strain </b> in low-light environments.</string>
+    <string name="color_themes">Color Themes</string>
+    <string name="color_themes_sub">Choose an app color style. Each style supports light and dark mode.</string>
+    <string name="color_theme_default">Default</string>
+    <string name="color_theme_dracula">Dracula</string>
+    <string name="color_theme_copilot">Copilot</string>
+    <string name="color_theme_theme4">Theme 4</string>
     <string name="SystemDef">System Default.</string>
     <string name="LtTheme">Light Theme</string>
     <string name="dkTheme">Dark Theme</string>

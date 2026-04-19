@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,6 +27,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -82,6 +85,8 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
         previewLinkBtn = view.findViewById(R.id.previewLinkBtn);
         previewPageBtn = view.findViewById(R.id.previewPage);
         ViewCompat.setNestedScrollingEnabled(gridView, true);
+
+        applyPopupTheme(view);
 
         // Set URL (limit to 2 lines)
         urlTextView.setText(url);
@@ -148,6 +153,67 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
         loadBrowsers();
 
         return view;
+    }
+
+    private void applyPopupTheme(View root) {
+        Context context = requireContext();
+
+        int surface = ContextCompat.getColor(context, ThemeHelper.getPopupSurfaceColorRes(context));
+        int dock = ContextCompat.getColor(context, ThemeHelper.getPopupDockColorRes(context));
+        int dockBtn = ContextCompat.getColor(context, ThemeHelper.getPopupDockButtonColorRes(context));
+        int dockBtnText = ContextCompat.getColor(context, ThemeHelper.getPopupDockButtonTextColorRes(context));
+        int action = ContextCompat.getColor(context, ThemeHelper.getPopupActionColorRes(context));
+        int text = ContextCompat.getColor(context, ThemeHelper.getPopupTextColorRes(context));
+
+        View sheetRoot = root.findViewById(R.id.card);
+        if (sheetRoot != null && sheetRoot.getBackground() != null) {
+            Drawable bg = DrawableCompat.wrap(sheetRoot.getBackground().mutate());
+            DrawableCompat.setTint(bg, surface);
+            sheetRoot.setBackground(bg);
+        }
+
+        urlTextView.setTextColor(text);
+
+        View privacyBtn = root.findViewById(R.id.privacyBtn);
+        if (privacyBtn instanceof Button) {
+            Button btn = (Button) privacyBtn;
+            btn.setBackgroundTintList(ColorStateList.valueOf(dock));
+            btn.setTextColor(text);
+            btn.setCompoundDrawableTintList(ColorStateList.valueOf(text));
+        }
+
+        if (copyBtn != null) {
+            copyBtn.setBackgroundTintList(ColorStateList.valueOf(dockBtn));
+            copyBtn.setTextColor(dockBtnText);
+            copyBtn.setCompoundDrawableTintList(ColorStateList.valueOf(dockBtnText));
+        }
+
+        tintCard(previewLinkBtn, action);
+        tintCard(shareBtn, action);
+        tintCard(previewPageBtn, action);
+
+        tintNestedText(previewLinkBtn, text);
+        tintNestedText(shareBtn, text);
+        tintNestedText(previewPageBtn, text);
+    }
+
+    private void tintCard(CardView card, int color) {
+        if (card != null) {
+            card.setCardBackgroundColor(color);
+        }
+    }
+
+    private void tintNestedText(View root, int color) {
+        if (!(root instanceof ViewGroup)) return;
+        ViewGroup group = (ViewGroup) root;
+        for (int i = 0; i < group.getChildCount(); i++) {
+            View child = group.getChildAt(i);
+            if (child instanceof TextView) {
+                ((TextView) child).setTextColor(color);
+            } else if (child instanceof ViewGroup) {
+                tintNestedText(child, color);
+            }
+        }
     }
 
     /** Redirects to MainActivity (forces update flow). Safe to call even before fragment attaches. */

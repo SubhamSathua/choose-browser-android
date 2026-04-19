@@ -44,6 +44,21 @@
     <color name="PopUpCard_ActionBtnBg">#3b3b3d</color>
     <color name="PopUpCard_ActionBtnSec_Bg">#4d4d4d</color>
 
+    <!-- ======== Popup Theme Variants (Dark) ======== -->
+    <color name="dracula_popup_surface">#282A36</color>
+    <color name="dracula_popup_dock">#343746</color>
+    <color name="dracula_popup_dock_button">#BD93F9</color>
+    <color name="dracula_popup_dock_button_text">#1F1733</color>
+    <color name="dracula_popup_action">#3B3F54</color>
+    <color name="dracula_popup_text">#F8F8F2</color>
+
+    <color name="copilot_popup_surface">#0D1117</color>
+    <color name="copilot_popup_dock">#161B22</color>
+    <color name="copilot_popup_dock_button">#2F81F7</color>
+    <color name="copilot_popup_dock_button_text">#FFFFFF</color>
+    <color name="copilot_popup_action">#21262D</color>
+    <color name="copilot_popup_text">#E6EDF3</color>
+
     <color name="popLinkPreview_bgCol">#3b426a</color> <!-- Thumb, linkBg-->
 
     <!-- ======== Show Link Dialog ======== -->
