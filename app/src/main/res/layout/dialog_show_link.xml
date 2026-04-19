@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/bg_show_link_dialog"
     android:orientation="vertical"
     android:layout_marginHorizontal="15dp"
@@ -33,7 +34,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Full Link"
-                android:textColor="@color/showLinkDialog_textSecondary"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -72,7 +72,7 @@
             android:breakStrategy="simple"
             android:fontFamily="@font/poppins"
             android:lineSpacingExtra="3dp"
-            android:textColor="@color/showLinkDialog_textSecondary"
+            tools:text="Hello"
             android:textIsSelectable="true"
             android:textSize="13sp" />
     </ScrollView>
@@ -110,7 +110,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Share"
-                android:textColor="@color/showLinkDialog_textSecondary"
                 android:textSize="14sp" />
         </LinearLayout>
 
@@ -138,7 +137,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Copy Clean Link"
-                android:textColor="@color/showLinkDialog_textPrimary"
+                android:textColor="@color/PopUpCardDockText"
                 android:textSize="14sp" />
         </LinearLayout>
 

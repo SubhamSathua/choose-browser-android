@@ -2,5 +2,5 @@
     android:shape="rectangle">
     <size android:width="5dp" />
     <corners android:radius="10dp" />
-    <solid android:color="@color/showLinkDialog_scrollThumb" />
+    <solid android:color="@color/PopUpCardDockBtn" />
 </shape>

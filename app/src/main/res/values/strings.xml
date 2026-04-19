@@ -49,6 +49,7 @@
 
     <!--    Global-->
     <string name="AppBranding">Choose Browser</string>
+    <string name="AppBrandingWrap">Choose\nBrowser</string>
 
     <!--    Permission Screen-->
     <string name="perm_lvl">Permissions</string>

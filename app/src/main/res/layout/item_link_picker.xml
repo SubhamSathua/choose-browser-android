@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:foreground="?attr/selectableItemBackground"
-    app:cardBackgroundColor="@color/popLinkPreview_bgCol"
-    app:cardCornerRadius="14dp"
+    app:cardBackgroundColor="@color/PopUpCardDockBg"
+    app:cardCornerRadius="8dp"
     app:cardElevation="0dp">
 
     <TextView

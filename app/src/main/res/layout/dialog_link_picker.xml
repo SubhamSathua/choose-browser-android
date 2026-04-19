@@ -77,8 +77,9 @@
                 android:background="@drawable/bg_show_link_share_btn"
                 android:fontFamily="@font/poppins_medium"
                 android:gravity="center"
+                android:focusable="true"
+                android:clickable="true"
                 android:text="@string/cancel"
-                android:textColor="@color/showLinkDialog_textSecondary"
                 android:textSize="14sp" />
 
         </LinearLayout>
