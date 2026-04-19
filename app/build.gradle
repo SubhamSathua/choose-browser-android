@@ -53,13 +53,14 @@ android {
 
     // Define product flavors
     productFlavors {
-        normal {
+        production {
             dimension "version"
             applicationId "com.hyper.choosebrowsernew"
         }
-        demoVersion {
+        dev {
             dimension "version"
-            applicationId "com.hyper.choosebrowsernew.test"  // new package for test APK
+            applicationId "com.hyper.choosebrowsernew.dev"
+            resValue "string", "app_name", "Choose Browser (Dev)"// new package for test APK
         }
     }
     buildTypes {

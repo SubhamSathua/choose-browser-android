@@ -1,0 +1,45 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+        "label": "Start Emulator",
+        "type": "shell",
+        "command": "emulator -avd Pixel_4a",
+        "problemMatcher": []
+    },
+    {
+        "label": "Build APK",
+        "type": "shell",
+        "command": "./gradlew assembleDebug",
+        "problemMatcher": []
+    },
+    {
+        "label": "Install APK",
+        "type": "shell",
+        "command": "adb install -r app/build/outputs/apk/debug/app-debug.apk",
+        "problemMatcher": []
+    },
+    {
+      "label": "Launch APK",
+      "type": "shell",
+      "command": "adb wait-for-device && adb install -r app/build/outputs/apk/debug/app-debug.apk && adb shell monkey -p your.package.name -c android.intent.category.LAUNCHER 1",
+      "problemMatcher": []
+    },
+    {
+      "label": "Build & Launch APK",
+      "type": "shell",
+      "command": "./gradlew assembleDebug && adb wait-for-device && adb install -r app/build/outputs/apk/debug/app-debug.apk && adb shell monkey -p your.package.name -c android.intent.category.LAUNCHER 1",
+      "problemMatcher": []
+    },
+    {
+        "label": "Run App (Full)",
+        "dependsOrder": "sequence",
+        "dependsOn": [
+            "Start Emulator",
+            "Build APK",
+            "Install APK"
+        ],
+        "problemMatcher": []
+    }
+]
+}

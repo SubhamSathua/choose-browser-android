@@ -200,7 +200,6 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
         }
 
         BrowserGridAdapter adapter = new BrowserGridAdapter(requireContext(), browsers, url, this);
-        gridView.setNumColumns(4);
         gridView.setAdapter(adapter);
     }
 

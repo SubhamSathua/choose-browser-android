@@ -267,7 +267,6 @@
                         android:fontFamily="@font/poppins_regular"
                         android:gravity="center"
                         android:lines="1"
-                        android:maxLines="2"
                         android:text="Preview Page"
                         android:textSize="12sp" />
                 </LinearLayout>
