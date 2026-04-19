@@ -45,7 +45,7 @@
     <color name="PopUpCard_ActionBtnBg">#e1e1e3</color>
     <color name="PopUpCard_ActionBtnSec_Bg">#b2b2b2</color>
 
-    <!-- ======== Popup Theme Variants (Light) ======== -->
+    <!-- ........ Popup Screen Variants (Light) ........ -->
     <color name="dracula_popup_surface">#F3EEFF</color>
     <color name="dracula_popup_dock">#E7DFFF</color>
     <color name="dracula_popup_dock_button">#6A4BBE</color>
@@ -64,6 +64,7 @@
     <color name="solidBtn_txtCol">#ffffff</color>
     <color name="tonalBtn_BgColor">#bbc3ff</color>
     <color name="tonalBtn_txtColor">#31344D</color>
+    <!-- .... -->
 
     <!-- ======== Show Link Dialog ======== -->
     <color name="showLinkDialog_primary">#252527</color>

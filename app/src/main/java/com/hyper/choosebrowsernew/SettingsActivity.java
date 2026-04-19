@@ -4,12 +4,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
@@ -193,38 +193,42 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void showColorThemePicker(TextView selectedThemeValueText) {
-        final String[] themeIds = {
-                ThemeHelper.COLOR_THEME_DEFAULT,
-                ThemeHelper.COLOR_THEME_DRACULA,
-                ThemeHelper.COLOR_THEME_COPILOT,
-                ThemeHelper.COLOR_THEME_THEME4
-        };
+        BottomSheetDialog bottomSheet = new BottomSheetDialog(this, R.style.PreviewMoreBottomSheet);
+        View sheetView = LayoutInflater.from(this).inflate(R.layout.bottomsheet_color_themes, null);
+        bottomSheet.setContentView(sheetView);
 
-        final String[] themeLabels = {
-                getString(R.string.color_theme_default),
-                getString(R.string.color_theme_dracula),
-                getString(R.string.color_theme_copilot),
-                getString(R.string.color_theme_theme4)
-        };
+        View closeBtn = sheetView.findViewById(R.id.colorThemesCloseBtn);
+        RadioGroup radioGroup = sheetView.findViewById(R.id.colorThemesRadioGroup);
 
         String savedThemeId = ThemeHelper.getSavedColorThemeId(this);
-        int selectedIndex = 0;
-        for (int i = 0; i < themeIds.length; i++) {
-            if (themeIds[i].equals(savedThemeId)) {
-                selectedIndex = i;
-                break;
-            }
+        if (ThemeHelper.COLOR_THEME_DRACULA.equals(savedThemeId)) {
+            radioGroup.check(R.id.colorThemeRadioDracula);
+        } else if (ThemeHelper.COLOR_THEME_COPILOT.equals(savedThemeId)) {
+            radioGroup.check(R.id.colorThemeRadioCopilot);
+        } else if (ThemeHelper.COLOR_THEME_THEME4.equals(savedThemeId)) {
+            radioGroup.check(R.id.colorThemeRadioTheme4);
+        } else {
+            radioGroup.check(R.id.colorThemeRadioDefault);
         }
 
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.color_themes)
-                .setSingleChoiceItems(themeLabels, selectedIndex, (dialog, which) -> {
-                    ThemeHelper.saveColorThemeId(this, themeIds[which]);
-                    updateColorThemeLabel(selectedThemeValueText);
-                    dialog.dismiss();
-                })
-                .setNegativeButton(R.string.cancel, null)
-                .show();
+        closeBtn.setOnClickListener(v -> bottomSheet.dismiss());
+
+        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            String themeId = ThemeHelper.COLOR_THEME_DEFAULT;
+            if (checkedId == R.id.colorThemeRadioDracula) {
+                themeId = ThemeHelper.COLOR_THEME_DRACULA;
+            } else if (checkedId == R.id.colorThemeRadioCopilot) {
+                themeId = ThemeHelper.COLOR_THEME_COPILOT;
+            } else if (checkedId == R.id.colorThemeRadioTheme4) {
+                themeId = ThemeHelper.COLOR_THEME_THEME4;
+            }
+
+            ThemeHelper.saveColorThemeId(this, themeId);
+            updateColorThemeLabel(selectedThemeValueText);
+            bottomSheet.dismiss();
+        });
+
+        bottomSheet.show();
     }
 
     private void updateColorThemeLabel(TextView selectedThemeValueText) {
