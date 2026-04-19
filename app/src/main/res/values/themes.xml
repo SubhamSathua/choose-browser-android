@@ -4,7 +4,7 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
-
+    <!--======== Default Colors ========-->
     <style name="Theme.ChooseBrowserNEW" parent="Base.Theme.ChooseBrowserNEW">
         <item name="android:statusBarColor">@color/backgroundPrimary</item>
         <item name="android:navigationBarColor">@color/backgroundPrimary</item>
@@ -34,4 +34,7 @@
     </style>
 
 
+
 </resources>
+
+
