@@ -121,7 +121,7 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
             startActivity(previewIntent);
             Activity activity = getActivity();
             if (activity != null) {
-                activity.overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.fade_out);
+                activity.overridePendingTransition(R.anim.slide_up, R.anim.stay);
             }
         });
 

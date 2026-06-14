@@ -1074,6 +1074,12 @@ public class PreviewPageActivity extends AppCompatActivity {
     }
 
     @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.stay, R.anim.slide_down);
+    }
+
+    @Override
     public void onBackPressed() {
         // Close find bar first
         if (findBar != null && findBar.getVisibility() == View.VISIBLE) {
@@ -1089,7 +1095,7 @@ public class PreviewPageActivity extends AppCompatActivity {
             webView.goBack();
         } else {
             clearAllData();
-            super.onBackPressed();
+            finish();
         }
     }
 }
