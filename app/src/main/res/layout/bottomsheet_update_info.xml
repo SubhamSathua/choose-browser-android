@@ -29,18 +29,19 @@
         android:textSize="17sp"
         android:textStyle="bold" />
 
-    <!-- "What's New >" link/button -->
+    <!-- "What's New >" capsule button -->
     <TextView
         android:id="@+id/updateInfoMdFile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="24dp"
-        android:background="?attr/selectableItemBackground"
+        android:background="@drawable/bg_whats_new_capsule"
         android:clickable="true"
         android:focusable="true"
         android:fontFamily="@font/poppins_medium"
-        android:paddingVertical="4dp"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="6dp"
         android:text="What's New &gt;"
         android:textColor="#377aff"
         android:textSize="13sp"
