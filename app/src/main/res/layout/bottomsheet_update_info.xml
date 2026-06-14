@@ -43,7 +43,7 @@
         android:paddingHorizontal="14dp"
         android:paddingVertical="6dp"
         android:text="What's New &gt;"
-        android:textColor="#377aff"
+        android:textColor="@color/text"
         android:textSize="13sp"
         android:visibility="gone" />
 

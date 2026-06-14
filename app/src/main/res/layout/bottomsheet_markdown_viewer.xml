@@ -28,7 +28,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/poppins_medium"
             android:text="What's New"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text"
             android:textSize="18sp" />
 
         <ImageView
@@ -40,7 +40,7 @@
             android:focusable="true"
             android:padding="6dp"
             android:src="@drawable/ic_close_24"
-            app:tint="#B0B3B8" />
+            app:tint="@color/text" />
     </LinearLayout>
 
     <FrameLayout

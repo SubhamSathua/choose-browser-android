@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 /**
@@ -33,7 +34,11 @@ public class UpdateUiHelper {
         dialog.setContentView(sheet);
 
         View bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
-        if (bottomSheet != null) bottomSheet.setBackgroundResource(android.R.color.transparent);
+        if (bottomSheet != null) {
+            bottomSheet.setBackgroundResource(android.R.color.transparent);
+            BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(bottomSheet);
+            behavior.setDraggable(false); // Disable swipe to dismiss
+        }
 
         TextView tvTitle  = sheet.findViewById(R.id.updateInfoTitle);
         TextView tvMdFile = sheet.findViewById(R.id.updateInfoMdFile);
@@ -41,6 +46,7 @@ public class UpdateUiHelper {
         Button btnClose   = sheet.findViewById(R.id.updateInfoCloseBtn);
 
         tvTitle.setText(result.shortMsg != null ? result.shortMsg : "Update Available");
+        tvTitle.setTextColor(activity.getResources().getColor(R.color.text));
 
         if (result.mdFileUrl != null && !result.mdFileUrl.isEmpty()) {
             tvMdFile.setVisibility(View.VISIBLE);
@@ -84,6 +90,8 @@ public class UpdateUiHelper {
         if (bottomSheet != null) {
             bottomSheet.setBackgroundResource(android.R.color.transparent);
             bottomSheet.getLayoutParams().height = (int) (activity.getResources().getDisplayMetrics().heightPixels * 0.85);
+            BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(bottomSheet);
+            behavior.setDraggable(false); // Disable swipe to dismiss
         }
 
         View closeBtn = sheet.findViewById(R.id.markdownClose);
@@ -96,6 +104,14 @@ public class UpdateUiHelper {
         webView.getSettings().setDomStorageEnabled(true);
         webView.setBackgroundColor(Color.TRANSPARENT);
 
+        // Determine colors based on current theme
+        boolean isDark = (activity.getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK) 
+                          == android.content.res.Configuration.UI_MODE_NIGHT_YES;
+        String bodyTextCol = isDark ? "#E0E0E0" : "#212121";
+        String h1TextCol = isDark ? "#FFFFFF" : "#000000";
+        String codeBg = isDark ? "#2A2D35" : "#F0F0F0";
+        String codeText = isDark ? "#FFD700" : "#D32F2F";
+
         // "Top Notch" Markdown Renderer Template
         String htmlTemplate = 
             "<!DOCTYPE html><html><head>" +
@@ -105,23 +121,23 @@ public class UpdateUiHelper {
             "  @font-face { font-family: 'Lora'; src: url('file:///android_res/font/lora_regular.ttf'); }" +
             "  @font-face { font-family: 'Poppins'; src: url('file:///android_res/font/poppins_medium.ttf'); }" +
             "  body { " +
-            "    background-color: transparent; color: #E0E0E0; " +
+            "    background-color: transparent; color: " + bodyTextCol + "; " +
             "    font-family: 'Lora', serif; line-height: 1.6; " +
             "    padding: 10px 24px 60px 24px; margin: 0; " +
-            "    font-size: 18px; /* Increased readability */" +
+            "    font-size: 18px; " +
             "    animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1); " +
             "  }" +
             "  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }" +
-            "  h1, h2, h3 { font-family: 'Poppins', sans-serif; color: #FFFFFF; margin-top: 1.4em; font-weight: 600; }" +
+            "  h1, h2, h3 { font-family: 'Poppins', sans-serif; color: " + h1TextCol + "; margin-top: 1.4em; font-weight: 600; }" +
             "  h1 { border-bottom: 2px solid #377aff; padding-bottom: 0.4em; font-size: 24px; letter-spacing: -0.02em; }" +
             "  h2 { font-size: 20px; color: #377aff; border-left: 4px solid #377aff; padding-left: 12px; }" +
-            "  code { background: #2A2D35; padding: 3px 6px; border-radius: 6px; font-family: monospace; font-size: 0.85em; color: #FFD700; }" +
-            "  pre { background: #1A1B1F; padding: 18px; border-radius: 16px; overflow-x: auto; border: 1px solid #333; margin: 20px 0; }" +
-            "  pre code { background: transparent; padding: 0; color: #E0E0E0; }" +
-            "  blockquote { border-left: 4px solid #377aff; padding: 2px 0 2px 20px; color: #B0B3B8; font-style: italic; margin: 24px 0; background: #1A1B1F; border-radius: 0 12px 12px 0; }" +
+            "  code { background: " + codeBg + "; padding: 3px 6px; border-radius: 6px; font-family: monospace; font-size: 0.85em; color: " + codeText + "; }" +
+            "  pre { background: " + (isDark ? "#1A1B1F" : "#F5F5F5") + "; padding: 18px; border-radius: 16px; overflow-x: auto; border: 1px solid " + (isDark ? "#333" : "#DDD") + "; margin: 20px 0; }" +
+            "  pre code { background: transparent; padding: 0; color: " + bodyTextCol + "; }" +
+            "  blockquote { border-left: 4px solid #377aff; padding: 2px 0 2px 20px; color: #B0B3B8; font-style: italic; margin: 24px 0; background: " + (isDark ? "#1A1B1F" : "#F9F9F9") + "; border-radius: 0 12px 12px 0; }" +
             "  ul, ol { padding-left: 24px; }" +
             "  li { margin-bottom: 12px; }" +
-            "  hr { border: 0; border-top: 1px solid #333; margin: 30px 0; }" +
+            "  hr { border: 0; border-top: 1px solid " + (isDark ? "#333" : "#EEE") + "; margin: 30px 0; }" +
             "  a { color: #377aff; text-decoration: none; font-weight: 600; }" +
             "  img { max-width: 100%; border-radius: 12px; margin: 10px 0; }" +
             "  ::selection { background: #377aff; color: white; }" +
