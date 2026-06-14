@@ -3,7 +3,12 @@ package com.hyper.choosebrowsernew;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,7 +43,13 @@ public class UpdateUiHelper {
 
         if (result.mdFileUrl != null && !result.mdFileUrl.isEmpty()) {
             tvMdFile.setVisibility(View.VISIBLE);
-            tvMdFile.setText(result.mdFileUrl);
+            tvMdFile.setText("What's New >");
+            tvMdFile.setOnClickListener(v -> {
+                // Construct MD URL: replace update.json with the md_file name
+                String baseUrl = AppConstantsDetails.UPDATE_JSON_URL;
+                String mdUrl = baseUrl.replace("update.json", result.mdFileUrl);
+                showMarkdownPopup(activity, mdUrl);
+            });
         } else {
             tvMdFile.setVisibility(View.GONE);
         }
@@ -57,6 +68,49 @@ public class UpdateUiHelper {
             dialog.dismiss();
         });
 
+        dialog.show();
+    }
+
+    /**
+     * Renders the markdown (or text) file in a bottom sheet viewer.
+     */
+    private static void showMarkdownPopup(AppCompatActivity activity, String url) {
+        BottomSheetDialog dialog = new BottomSheetDialog(activity, R.style.PreviewMoreBottomSheet);
+        View sheet = activity.getLayoutInflater().inflate(R.layout.bottomsheet_markdown_viewer, null);
+        dialog.setContentView(sheet);
+
+        View bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+        if (bottomSheet != null) {
+            bottomSheet.setBackgroundResource(android.R.color.transparent);
+            // Allow the sheet to be full screen if content is long
+            bottomSheet.getLayoutParams().height = android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+        }
+
+        WebView webView = sheet.findViewById(R.id.markdownWebView);
+        ProgressBar loader = sheet.findViewById(R.id.markdownLoader);
+
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                loader.setVisibility(View.GONE);
+                // Inject basic styling for raw text files to look decent in dark mode
+                view.evaluateJavascript(
+                    "document.body.style.backgroundColor = '#1c1c1e';" +
+                    "document.body.style.color = '#ffffff';" +
+                    "document.body.style.fontFamily = 'sans-serif';" +
+                    "document.body.style.padding = '20px';" +
+                    "document.body.style.lineHeight = '1.6';", null);
+            }
+
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                loader.setVisibility(View.GONE);
+            }
+        });
+
+        webView.loadUrl(url);
         dialog.show();
     }
 
