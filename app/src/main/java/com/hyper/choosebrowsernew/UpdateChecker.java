@@ -183,6 +183,17 @@ public class UpdateChecker {
     static Result evaluate(String json, String appVersion) {
         try {
             JSONObject root = new JSONObject(json);
+            
+            // Extract 'latest' info as global defaults for the result
+            JSONObject latest = root.optJSONObject("latest");
+            String latestMsg = null;
+            String latestMd = null;
+            String latestVer = null;
+            if (latest != null) {
+                latestMsg = latest.optString("short_msg", null);
+                latestMd = latest.optString("md_file", null);
+                latestVer = latest.optString("latest_version", null);
+            }
 
             // --- CRITICAL ---
             JSONObject critical = root.optJSONObject("critical");
@@ -191,8 +202,8 @@ public class UpdateChecker {
                 if (below != null && compareVersions(appVersion, below) < 0) {
                     return new Result(Priority.CRITICAL,
                             critical.optString("short_msg", "Critical update required"),
-                            critical.optString("md_file", null),
-                            null);
+                            critical.optString("md_file", latestMd),
+                            latestVer);
                 }
             }
 
@@ -203,27 +214,24 @@ public class UpdateChecker {
                 if (below != null && compareVersions(appVersion, below) < 0) {
                     return new Result(Priority.WARNING,
                             warning.optString("short_msg", "Update recommended"),
-                            warning.optString("md_file", null),
-                            null);
-                }
-            }
-
-            // --- LATEST ---
-            JSONObject latest = root.optJSONObject("latest");
-            if (latest != null) {
-                String latestVer = latest.optString("latest_version", null);
-                int cmp = compareVersions(appVersion, latestVer);
-                // Tiny bug: app version 4.02.12 is > latest 4.01.7, so it returns UP_TO_DATE.
-                // For development, we allow equal versions to show the card if cache is disabled.
-                if (latestVer != null && (cmp < 0 || (!DebugConfig.CACHE_UPDATE_JSON && cmp == 0))) {
-                    return new Result(Priority.LATEST,
-                            latest.optString("short_msg", "New version available"),
-                            latest.optString("md_file", null),
+                            warning.optString("md_file", latestMd),
                             latestVer);
                 }
             }
 
-            return new Result(Priority.UP_TO_DATE, null, null, null);
+            // --- LATEST ---
+            if (latestVer != null) {
+                int cmp = compareVersions(appVersion, latestVer);
+                if (cmp < 0 || (!DebugConfig.CACHE_UPDATE_JSON && cmp == 0)) {
+                    return new Result(Priority.LATEST,
+                            latestMsg != null ? latestMsg : "New version available",
+                            latestMd,
+                            latestVer);
+                }
+            }
+
+            // Even if up to date, return the latest info so "What's New" can work if forced visible
+            return new Result(Priority.UP_TO_DATE, latestMsg, latestMd, latestVer);
 
         } catch (Exception e) {
             return new Result(Priority.ERROR, null, null, null);
