@@ -1,0 +1,19 @@
+{
+  "latest": {
+    "latest_version": "4.01.7",
+    "short_msg": "New version 4.01.2 released!",
+    "md_file": "latest_update.md"
+  },
+
+  "warning": {
+    "below": "4.01.4",
+    "short_msg": "A new update is available. Update for major bug fixes.",
+    "md_file": "warning_update.md"
+  },
+
+  "critical": {
+    "below": "4.01.1",
+    "short_msg": "Your app version is too old. Please update to continue.",
+    "md_file": "critical_update.md"
+  }
+}

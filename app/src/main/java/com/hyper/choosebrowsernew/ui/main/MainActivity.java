@@ -68,8 +68,14 @@ public class MainActivity extends AppCompatActivity {
         CardView permissionCard2 = findViewById(R.id.cardView3);
         CardView chooseBrowserCard = findViewById(R.id.BrandContainer);
 
+        // Update card
+        updateCard = findViewById(R.id.updateCard);
+        updateCardInner = findViewById(R.id.updateCardInner);
+        updateDot = findViewById(R.id.updateDot);
+        updateTitle = findViewById(R.id.updateTitle);
+        updateMsg = findViewById(R.id.updateMsg);
+
         setupMotion(permissionCard1, permissionCard2, chooseBrowserCard);
-        setupObservers();
 
         defBrowserBtn.setOnClickListener(view -> openDefaultAppSettings());
 
@@ -85,13 +91,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
         });
-
-        // Update card
-        updateCard = findViewById(R.id.updateCard);
-        updateCardInner = findViewById(R.id.updateCardInner);
-        updateDot = findViewById(R.id.updateDot);
-        updateTitle = findViewById(R.id.updateTitle);
-        updateMsg = findViewById(R.id.updateMsg);
         
         View.OnClickListener updateClick = v -> {
             UpdateResult res = viewModel.updateResult.getValue();
@@ -100,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         updateCard.setOnClickListener(updateClick);
         updateCardInner.setOnClickListener(updateClick);
 
+        setupObservers(); // Moved here
         updatePermissionIcons();
         viewModel.checkUpdate();
     }
@@ -200,11 +200,7 @@ public class MainActivity extends AppCompatActivity {
         UpdateUiHelper.applyUpdateCardStyle(this, updateCardInner, updateDot, updateTitle, updateMsg, convertPriority(result.priority));
 
         switch (result.priority) {
-            case CRITICAL: 
-                updateTitle.setText("Critical Update Required"); 
-                // Block app usage immediately if critical
-                UpdateUiHelper.showInfoSheet(this, convertToOldResult(result));
-                break;
+            case CRITICAL: updateTitle.setText("Critical Update Required"); break;
             case WARNING: updateTitle.setText("Update Recommended"); break;
             case LATEST: updateTitle.setText("Update Available"); break;
         }

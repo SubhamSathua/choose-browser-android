@@ -7,6 +7,7 @@ import android.net.Network;
 import android.net.NetworkCapabilities;
 
 import com.hyper.choosebrowsernew.AppConstantsDetails;
+import com.hyper.choosebrowsernew.UpdateChecker;
 import com.hyper.choosebrowsernew.data.model.UpdateResult;
 import com.hyper.choosebrowsernew.ui.debug.DebugConfig;
 
@@ -30,8 +31,6 @@ public class UpdateRepository {
     private final Context context;
     private final Executor executor = Executors.newSingleThreadExecutor();
 
-    public static volatile String tempJsonOverride = null;
-
     public UpdateRepository(Context context) {
         this.context = context.getApplicationContext();
     }
@@ -41,7 +40,7 @@ public class UpdateRepository {
     }
 
     public UpdateResult getCachedResult() {
-        if (tempJsonOverride != null) return evaluate(tempJsonOverride);
+        if (UpdateChecker.tempJson != null) return evaluate(UpdateChecker.tempJson);
         SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         String json = prefs.getString(KEY_JSON, null);
         if (json == null) return UpdateResult.upToDate();
@@ -52,8 +51,8 @@ public class UpdateRepository {
         executor.execute(() -> {
             UpdateResult result;
             try {
-                if (tempJsonOverride != null) {
-                    result = evaluate(tempJsonOverride);
+                if (UpdateChecker.tempJson != null) {
+                    result = evaluate(UpdateChecker.tempJson);
                 } else {
                     SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
                     String cachedJson = prefs.getString(KEY_JSON, null);
@@ -116,6 +115,7 @@ public class UpdateRepository {
 
     private UpdateResult evaluate(String json) {
         String appVersion = getAppVersion();
+        android.util.Log.d("UpdateRepo", "Evaluating update. App version: " + appVersion);
         try {
             JSONObject root = new JSONObject(json);
 
@@ -124,6 +124,7 @@ public class UpdateRepository {
             if (critical != null) {
                 String below = critical.optString("below", null);
                 if (below != null && compareVersions(appVersion, below) < 0) {
+                    android.util.Log.d("UpdateRepo", "Critical update found. below: " + below);
                     return new UpdateResult(UpdateResult.Priority.CRITICAL,
                             critical.optString("short_msg", "Critical update required"),
                             critical.optString("md_file", null), null);
@@ -135,6 +136,7 @@ public class UpdateRepository {
             if (warning != null) {
                 String below = warning.optString("below", null);
                 if (below != null && compareVersions(appVersion, below) < 0) {
+                    android.util.Log.d("UpdateRepo", "Warning update found. below: " + below);
                     return new UpdateResult(UpdateResult.Priority.WARNING,
                             warning.optString("short_msg", "Update recommended"),
                             warning.optString("md_file", null), null);
@@ -145,15 +147,19 @@ public class UpdateRepository {
             JSONObject latest = root.optJSONObject("latest");
             if (latest != null) {
                 String latestVer = latest.optString("latest_version", null);
+                android.util.Log.d("UpdateRepo", "Latest version in JSON: " + latestVer);
                 if (latestVer != null && compareVersions(appVersion, latestVer) < 0) {
+                    android.util.Log.d("UpdateRepo", "Update available!");
                     return new UpdateResult(UpdateResult.Priority.LATEST,
                             latest.optString("short_msg", "New version available"),
                             latest.optString("md_file", null), latestVer);
                 }
             }
 
+            android.util.Log.d("UpdateRepo", "App is up to date.");
             return UpdateResult.upToDate();
         } catch (Exception e) {
+            android.util.Log.e("UpdateRepo", "Evaluation failed", e);
             return UpdateResult.error();
         }
     }
