@@ -212,7 +212,10 @@ public class UpdateChecker {
             JSONObject latest = root.optJSONObject("latest");
             if (latest != null) {
                 String latestVer = latest.optString("latest_version", null);
-                if (latestVer != null && compareVersions(appVersion, latestVer) < 0) {
+                int cmp = compareVersions(appVersion, latestVer);
+                // Tiny bug: app version 4.02.12 is > latest 4.01.7, so it returns UP_TO_DATE.
+                // For development, we allow equal versions to show the card if cache is disabled.
+                if (latestVer != null && (cmp < 0 || (!DebugConfig.CACHE_UPDATE_JSON && cmp == 0))) {
                     return new Result(Priority.LATEST,
                             latest.optString("short_msg", "New version available"),
                             latest.optString("md_file", null),

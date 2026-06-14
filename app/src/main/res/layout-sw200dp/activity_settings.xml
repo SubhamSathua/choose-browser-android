@@ -253,6 +253,68 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <!-- Update Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/settingsUpdateCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="27dp"
+            app:cardElevation="0dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+
+            <LinearLayout
+                android:id="@+id/settingsUpdateCardInner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_update_card_latest"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <View
+                    android:id="@+id/settingsUpdateDot"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:background="@drawable/dot_blue" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/settingsUpdateTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Update Available"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/settingsUpdateMsg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_light"
+                        android:text="Hello"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/forward" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/excludeBrowserCard"
             android:layout_width="match_parent"
@@ -373,67 +435,6 @@
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
-
-        <!-- Update Card -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/settingsUpdateCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="24dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="0dp"
-            android:visibility="gone">
-
-
-            <LinearLayout
-                android:id="@+id/settingsUpdateCardInner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_update_card_latest"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="16dp">
-
-                <View
-                    android:id="@+id/settingsUpdateDot"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:background="@drawable/dot_blue" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/settingsUpdateTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_medium"
-                        android:text="Update Available"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/settingsUpdateMsg"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_light"
-                        android:text="Hello"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/forward" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/versionCard"

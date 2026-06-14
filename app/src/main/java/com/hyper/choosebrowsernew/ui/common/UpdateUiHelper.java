@@ -134,7 +134,7 @@ public class UpdateUiHelper {
     /**
      * Renders the markdown file in a bottom sheet viewer with premium styling.
      */
-    private static void showMarkdownPopup(AppCompatActivity activity, String mdUrl) {
+    public static void showMarkdownPopup(AppCompatActivity activity, String url) {
         BottomSheetDialog dialog = new BottomSheetDialog(activity, R.style.PreviewMoreBottomSheet);
         View sheet = activity.getLayoutInflater().inflate(R.layout.bottomsheet_markdown_viewer, null);
         dialog.setContentView(sheet);
@@ -197,7 +197,7 @@ public class UpdateUiHelper {
             "</style></head><body>" +
             "<div id='content'><div style='text-align:center; padding-top:100px;'><div style='color:#377aff; font-size:20px; font-family:Poppins;'>Loading...</div></div></div>" +
             "<script>" +
-            "  fetch('" + mdUrl + "')" +
+            "  fetch('" + url + "')" +
             "    .then(response => response.text())" +
             "    .then(text => {" +
             "      document.getElementById('content').innerHTML = marked.parse(text);" +

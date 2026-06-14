@@ -124,7 +124,6 @@ public class UpdateRepository {
             if (critical != null) {
                 String below = critical.optString("below", null);
                 if (below != null && compareVersions(appVersion, below) < 0) {
-                    android.util.Log.d("UpdateRepo", "Critical update found. below: " + below);
                     return new UpdateResult(UpdateResult.Priority.CRITICAL,
                             critical.optString("short_msg", "Critical update required"),
                             critical.optString("md_file", null), null);
@@ -136,7 +135,6 @@ public class UpdateRepository {
             if (warning != null) {
                 String below = warning.optString("below", null);
                 if (below != null && compareVersions(appVersion, below) < 0) {
-                    android.util.Log.d("UpdateRepo", "Warning update found. below: " + below);
                     return new UpdateResult(UpdateResult.Priority.WARNING,
                             warning.optString("short_msg", "Update recommended"),
                             warning.optString("md_file", null), null);
@@ -147,16 +145,16 @@ public class UpdateRepository {
             JSONObject latest = root.optJSONObject("latest");
             if (latest != null) {
                 String latestVer = latest.optString("latest_version", null);
-                android.util.Log.d("UpdateRepo", "Latest version in JSON: " + latestVer);
-                if (latestVer != null && compareVersions(appVersion, latestVer) < 0) {
-                    android.util.Log.d("UpdateRepo", "Update available!");
+                int cmp = compareVersions(appVersion, latestVer);
+                // Tiny bug: app version 4.02.12 is > latest 4.01.7, so it returns UP_TO_DATE.
+                // For development, we allow equal versions to show the card if cache is disabled.
+                if (latestVer != null && (cmp < 0 || (!DebugConfig.CACHE_UPDATE_JSON && cmp == 0))) {
                     return new UpdateResult(UpdateResult.Priority.LATEST,
                             latest.optString("short_msg", "New version available"),
                             latest.optString("md_file", null), latestVer);
                 }
             }
 
-            android.util.Log.d("UpdateRepo", "App is up to date.");
             return UpdateResult.upToDate();
         } catch (Exception e) {
             android.util.Log.e("UpdateRepo", "Evaluation failed", e);

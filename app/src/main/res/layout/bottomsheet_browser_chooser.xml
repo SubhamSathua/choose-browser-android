@@ -58,25 +58,45 @@
             />
 
         <!-- Update indicator: separate blank card, click → MainActivity -->
-        <FrameLayout
-            android:id="@+id/updateDotCard"
+        <LinearLayout
+            android:id="@+id/updateIndicatorLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginEnd="2dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?attr/selectableItemBackgroundBorderless"
-            android:padding="10dp"
-            android:visibility="gone">
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            tools:visibility="visible">
 
-            <View
-                android:id="@+id/popupUpdateDot"
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:layout_gravity="center"
-                android:background="@drawable/dot_blue" />
-        </FrameLayout>
+            <TextView
+                android:id="@+id/tvWhatsNew"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="What's New"
+                android:textColor="@color/text"
+                android:textSize="12sp"
+                android:paddingEnd="8dp"
+                android:clickable="true"
+                android:focusable="true"/>
+
+            <FrameLayout
+                android:id="@+id/updateDotCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:padding="10dp">
+
+                <View
+                    android:id="@+id/popupUpdateDot"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/dot_blue" />
+            </FrameLayout>
+        </LinearLayout>
 
         <Button
             android:id="@+id/privacyBtn"

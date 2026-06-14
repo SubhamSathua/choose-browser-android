@@ -261,7 +261,8 @@
             android:layout_marginBottom="24dp"
             app:cardCornerRadius="27dp"
             app:cardElevation="0dp"
-            android:visibility="gone">
+            android:visibility="gone"
+            tools:visibility="visible">
 
 
             <LinearLayout

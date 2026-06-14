@@ -36,6 +36,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.hyper.choosebrowsernew.R;
 import com.hyper.choosebrowsernew.UpdateChecker;
 import com.hyper.choosebrowsernew.data.model.UpdateResult;
+import com.hyper.choosebrowsernew.ui.common.UpdateUiHelper;
 import com.hyper.choosebrowsernew.ui.common.ViewModelFactory;
 import com.hyper.choosebrowsernew.ui.main.MainActivity;
 import com.hyper.choosebrowsernew.ui.webview.WebViewActivity;
@@ -150,19 +151,38 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
         });
 
         // Update dot card – separate blank card next to privacy button, click → MainActivity
+        View updateIndicatorLayout = view.findViewById(R.id.updateIndicatorLayout);
         View updateDotCard = view.findViewById(R.id.updateDotCard);
         View popupUpdateDot = view.findViewById(R.id.popupUpdateDot);
+        TextView tvWhatsNew = view.findViewById(R.id.tvWhatsNew);
+
         updateDotCard.setOnClickListener(v -> redirectToMainForUpdate());
+
         UpdateChecker.check(requireContext(), result -> {
             if (result.priority == UpdateChecker.Priority.CRITICAL) {
                 // Also enforce critical block if freshly detected
                 redirectToMainForUpdate();
-            } else if (result.priority == UpdateChecker.Priority.WARNING) {
-                popupUpdateDot.setBackgroundResource(R.drawable.dot_warning);
-                updateDotCard.setVisibility(View.VISIBLE);
-            } else if (result.priority == UpdateChecker.Priority.LATEST) {
-                popupUpdateDot.setBackgroundResource(R.drawable.dot_blue);
-                updateDotCard.setVisibility(View.VISIBLE);
+            } else if (result.priority == UpdateChecker.Priority.WARNING || result.priority == UpdateChecker.Priority.LATEST) {
+                if (result.priority == UpdateChecker.Priority.WARNING) {
+                    popupUpdateDot.setBackgroundResource(R.drawable.dot_warning);
+                } else {
+                    popupUpdateDot.setBackgroundResource(R.drawable.dot_blue);
+                }
+                updateIndicatorLayout.setVisibility(View.VISIBLE);
+                
+                // Show "What's New" text next to the dot if we have info
+                if (result.mdFileUrl != null && !result.mdFileUrl.isEmpty()) {
+                    tvWhatsNew.setVisibility(View.VISIBLE);
+                    tvWhatsNew.setOnClickListener(v -> {
+                        String baseUrl = com.hyper.choosebrowsernew.AppConstantsDetails.UPDATE_JSON_URL;
+                        String mdUrl = baseUrl.replace("update.json", result.mdFileUrl);
+                        UpdateUiHelper.showMarkdownPopup((AppCompatActivity) getActivity(), mdUrl);
+                    });
+                } else {
+                    tvWhatsNew.setVisibility(View.GONE);
+                }
+            } else {
+                updateIndicatorLayout.setVisibility(View.GONE);
             }
         });
 
