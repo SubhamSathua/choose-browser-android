@@ -1,6 +1,7 @@
 package com.hyper.choosebrowsernew;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -38,11 +39,6 @@ public class BrowserChooserActivity extends AppCompatActivity {
             + "localhost(?::\\d{2,5})?(?:[/?#][^\\s<>()\\[\\]{}]*)?)",
         Pattern.CASE_INSENSITIVE
     );
-
-    private static final Set<String> COMMON_TLDS = new LinkedHashSet<>(Arrays.asList(
-        "com", "org", "net", "io", "app", "dev", "ai", "co", "edu", "gov",
-        "me", "in", "uk", "us", "biz", "info"
-    ));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,12 +107,36 @@ public class BrowserChooserActivity extends AppCompatActivity {
     }
 
     private void showLinkPicker(List<String> links) {
-        final Dialog dialog = new Dialog(this);
+        Context themedContext = ThemeHelper.wrapWithColorThemeOverlay(this);
+        final Dialog dialog = new Dialog(themedContext);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
 
-        View view = LayoutInflater.from(this).inflate(R.layout.dialog_link_picker, null);
+        View view = LayoutInflater.from(themedContext).inflate(R.layout.dialog_link_picker, null);
         dialog.setContentView(view);
+
+        // Resolve all relevant theme colors
+        int surface = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupSurface, R.color.backgroundSecondary);
+        int dockBg = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupDock, R.color.PopUpCardDockBg);
+        int textCol = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupText, R.color.text);
+        int actionBg = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupAction, R.color.PopUpCard_ActionBtnBg);
+
+        View card = view.findViewById(R.id.linkPickerCard);
+        if (card instanceof androidx.cardview.widget.CardView) {
+            ((androidx.cardview.widget.CardView) card).setCardBackgroundColor(surface);
+        }
+
+        TextView title = view.findViewById(R.id.linkPickerTitle);
+        if (title != null) title.setTextColor(textCol);
+
+        // Tint sub-title as well (it's the second child in the layout)
+        if (view instanceof android.view.ViewGroup) {
+            android.view.ViewGroup vg = (android.view.ViewGroup) ((android.view.ViewGroup) view).getChildAt(0);
+            if (vg != null && vg.getChildAt(1) instanceof TextView) {
+                ((TextView) vg.getChildAt(1)).setTextColor(textCol);
+                ((TextView) vg.getChildAt(1)).setAlpha(0.7f); // Slightly transparent for sub-text
+            }
+        }
 
         if (dialog.getWindow() != null) {
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -128,15 +148,36 @@ public class BrowserChooserActivity extends AppCompatActivity {
         }
 
         ImageView closeBtn = view.findViewById(R.id.linkPickerClose);
+        if (closeBtn != null) closeBtn.setColorFilter(textCol);
+
         TextView cancelBtn = view.findViewById(R.id.linkPickerCancel);
+        if (cancelBtn != null) {
+            cancelBtn.setTextColor(textCol);
+            // Apply the dockBg color to the cancel button background to match the privacy button style
+            if (cancelBtn.getBackground() != null) {
+                cancelBtn.getBackground().setTint(dockBg);
+            }
+        }
+
         ListView listView = view.findViewById(R.id.linkPickerList);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this,
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                themedContext,
                 R.layout.item_link_picker,
                 android.R.id.text1,
                 links
-        );
+        ) {
+            @Override
+            public View getView(int position, View convertView, android.view.ViewGroup parent) {
+                View v = super.getView(position, convertView, parent);
+                if (v instanceof androidx.cardview.widget.CardView) {
+                    ((androidx.cardview.widget.CardView) v).setCardBackgroundColor(dockBg);
+                }
+                TextView tv = v.findViewById(android.R.id.text1);
+                if (tv != null) tv.setTextColor(textCol);
+                return v;
+            }
+        };
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener((parent, itemView, position, id) -> {
@@ -149,8 +190,8 @@ public class BrowserChooserActivity extends AppCompatActivity {
             finish();
         };
 
-        closeBtn.setOnClickListener(dismissAndFinish);
-        cancelBtn.setOnClickListener(dismissAndFinish);
+        if (closeBtn != null) closeBtn.setOnClickListener(dismissAndFinish);
+        if (cancelBtn != null) cancelBtn.setOnClickListener(dismissAndFinish);
         dialog.setOnCancelListener(d -> finish());
         dialog.show();
     }
@@ -160,11 +201,11 @@ public class BrowserChooserActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(text)) return result;
 
         LinkedHashSet<String> unique = new LinkedHashSet<>();
-        Matcher matcher = URL_PATTERN.matcher(text.trim());
+        Matcher matcher = URL_PATTERN.matcher(text);
         while (matcher.find()) {
             String found = matcher.group(1);
             String cleaned = cleanMatchedUrl(found);
-            if (!TextUtils.isEmpty(cleaned) && isAllowedDomain(cleaned)) {
+            if (!TextUtils.isEmpty(cleaned) && isProbablyAUrl(cleaned)) {
                 unique.add(cleaned);
             }
         }
@@ -176,35 +217,44 @@ public class BrowserChooserActivity extends AppCompatActivity {
     private String cleanMatchedUrl(String found) {
         if (TextUtils.isEmpty(found)) return "";
         String cleaned = found.trim();
+        // Remove surrounding brackets or quotes
         cleaned = cleaned.replaceAll("^[\\(\\[\\{<\"']+", "");
         cleaned = cleaned.replaceAll("[\\)\\]\\}>,!;:\"']+$", "");
-        cleaned = cleaned.replaceAll("\\.+$", "");
-        cleaned = cleaned.replaceAll("\\?$", "");
+        // Remove trailing punctuation often captured by loose regex
+        cleaned = cleaned.replaceAll("[\\.\\?\\!]+$", "");
         return cleaned;
     }
 
-    private boolean isAllowedDomain(String candidate) {
+    private boolean isProbablyAUrl(String candidate) {
         if (TextUtils.isEmpty(candidate)) return false;
 
-        String test = candidate;
-        if (!test.startsWith("http://") && !test.startsWith("https://")) {
-            test = "https://" + test;
+        // If it starts with protocol or www, it's almost certainly a URL
+        String lower = candidate.toLowerCase(Locale.US);
+        if (lower.startsWith("http://") || lower.startsWith("https://") || lower.startsWith("www.")) {
+            return true;
         }
 
-        Uri uri = Uri.parse(test);
-        String host = uri.getHost();
-        if (TextUtils.isEmpty(host)) return false;
+        // Otherwise, check for a valid-ish domain structure
+        try {
+            String test = candidate;
+            if (!test.contains("://")) test = "https://" + test;
+            Uri uri = Uri.parse(test);
+            String host = uri.getHost();
+            if (TextUtils.isEmpty(host)) return false;
 
-        host = host.toLowerCase(Locale.US);
-        if ("localhost".equals(host)) return true;
-        if (host.matches("^\\d{1,3}(\\.\\d{1,3}){3}$")) return true;
+            host = host.toLowerCase(Locale.US);
+            if ("localhost".equals(host)) return true;
+            if (host.matches("^\\d{1,3}(\\.\\d{1,3}){3}$")) return true; // IP address
 
-        int lastDot = host.lastIndexOf('.');
-        if (lastDot < 0 || lastDot == host.length() - 1) return false;
+            int lastDot = host.lastIndexOf('.');
+            if (lastDot < 0 || lastDot == host.length() - 1) return false;
 
-        String tld = host.substring(lastDot + 1);
-        if (tld.length() == 2) return true;
-        return COMMON_TLDS.contains(tld);
+            String tld = host.substring(lastDot + 1);
+            // Allow any TLD that is at least 2 letters long (covers all country codes and gTLDs)
+            return tld.length() >= 2 && tld.matches("[a-z0-9]+");
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     private String normalizeForIntent(String candidate) {

@@ -5,6 +5,7 @@
     android:padding="16dp">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/linkPickerCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -74,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/bg_show_link_share_btn"
+                android:background="@drawable/bg_link_picker_cancel"
                 android:fontFamily="@font/poppins_medium"
                 android:gravity="center"
                 android:focusable="true"

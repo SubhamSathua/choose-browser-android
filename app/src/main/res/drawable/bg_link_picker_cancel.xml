@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?attr/colorControlHighlight">
+    <item>
+        <selector>
+            <!-- Hover/Focus state -->
+            <item android:state_hovered="true">
+                <shape android:shape="rectangle">
+                    <solid android:color="#20808080" />
+                    <corners android:radius="50dp" />
+                    <stroke android:width="1dp" android:color="#40808080" />
+                </shape>
+            </item>
+            <item android:state_focused="true">
+                <shape android:shape="rectangle">
+                    <solid android:color="#20808080" />
+                    <corners android:radius="50dp" />
+                    <stroke android:width="2dp" android:color="?attr/colorControlActivated" />
+                </shape>
+            </item>
+            <!-- Normal state -->
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/PopUpCardDockBg" />
+                    <corners android:radius="50dp" />
+                </shape>
+            </item>
+        </selector>
+    </item>
+</ripple>
