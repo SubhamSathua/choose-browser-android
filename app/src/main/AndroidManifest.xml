@@ -33,7 +33,7 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.ChooseBrowserNEW">
 
@@ -56,20 +56,20 @@
         </activity>
 
         <activity
-            android:name=".SettingsActivity"
+            android:name=".ui.settings.SettingsActivity"
             android:exported="false" />
 
         <activity
-            android:name=".BrowserListActivity"
+            android:name=".ui.settings.BrowserListActivity"
             android:exported="true"
             android:label="Browser List" />
 
         <activity
-            android:name=".ExcludedBrowsersActivity"
+            android:name=".ui.settings.ExcludedBrowsersActivity"
             android:exported="false"
             android:theme="@style/Theme.ChooseBrowserNEW" />
 
-        <activity android:name=".BrowserChooserActivity"
+        <activity android:name=".ui.chooser.BrowserChooserActivity"
             android:exported="true"
             android:theme="@style/Theme.Transparent"
             android:excludeFromRecents="true"
@@ -90,27 +90,27 @@
         </activity>
 
         <activity
-            android:name=".PreviewPageActivity"
+            android:name=".ui.preview.PreviewPageActivity"
             android:exported="false"
             android:theme="@style/Theme.ChooseBrowserNEW" />
 
         <activity
-            android:name=".PrivacyPolicyActivity"
+            android:name=".ui.webview.PrivacyPolicyActivity"
             android:exported="false"
             android:theme="@style/Theme.ChooseBrowserNEW" />
 
         <activity
-            android:name=".WebViewActivity"
+            android:name=".ui.webview.WebViewActivity"
             android:exported="false"
             android:theme="@style/Theme.ChooseBrowserNEW" />
 
         <activity
-            android:name=".AboutActivity"
+            android:name=".ui.settings.AboutActivity"
             android:exported="false"
             android:theme="@style/Theme.ChooseBrowserNEW" />
 
         <activity
-            android:name=".DebugActivity"
+            android:name=".ui.debug.DebugActivity"
             android:exported="false"
             android:theme="@style/Theme.ChooseBrowserNEW" />
 

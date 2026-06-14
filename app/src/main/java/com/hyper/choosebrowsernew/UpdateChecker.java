@@ -8,6 +8,7 @@ import android.net.NetworkCapabilities;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.hyper.choosebrowsernew.ui.debug.DebugConfig;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -51,7 +52,7 @@ public class UpdateChecker {
         public final String mdFileUrl;
         public final String latestVersion;
 
-        Result(Priority priority, String shortMsg, String mdFileUrl, String latestVersion) {
+        public Result(Priority priority, String shortMsg, String mdFileUrl, String latestVersion) {
             this.priority = priority;
             this.shortMsg = shortMsg;
             this.mdFileUrl = mdFileUrl;
