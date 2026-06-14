@@ -55,6 +55,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.core.view.ViewCompat;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -170,6 +172,11 @@ public class PreviewPageActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(getResources().getColor(R.color.previewPage_primary));
             getWindow().setNavigationBarColor(getResources().getColor(R.color.previewPage_primary));
         }
+        
+        // Ensure white status bar icons
+        WindowInsetsControllerCompat controller = WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView());
+        controller.setAppearanceLightStatusBars(false);
+
         setContentView(R.layout.activity_preview_page);
 
         // Block access if critical update is required
