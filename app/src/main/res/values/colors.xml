@@ -7,7 +7,6 @@
     <!--Permission Screen-->
     <color name="PrimaryCol">#377aff</color>
     <color name="PrimaryTextCol">#ffffff</color>
-
     <color name="PriBtn_BgCol">#1e1a24</color>
     <color name="PriBtn_TxtCol">#ffffff</color>
     <color name="SecBtn_BgCol">#e6e6e6</color>
@@ -60,7 +59,7 @@
     <color name="copilot_popup_action">#D7E3F2</color>
     <color name="copilot_popup_text">#0F172A</color>
 
-    <color name="solidBtn_BgCol">#1a39d0</color> <!-- Buttons, scroll thumb, radio-->
+    <color name="solidBtn_BgCol">#1a39d0</color> <!-- Buttons, scroll thumb, radio-->  
     <color name="solidBtn_txtCol">#ffffff</color>
     <color name="tonalBtn_BgColor">#bbc3ff</color>
     <color name="tonalBtn_txtColor">#31344D</color>
@@ -123,8 +122,5 @@
     <color name="updateCritical_title">#8c0044</color>
     <color name="updateCritical_msg">#b30358</color>
     <color name="updateCritical_dot">#e2006d</color>
-
-
-
 
 </resources>

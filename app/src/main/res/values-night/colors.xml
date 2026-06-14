@@ -8,8 +8,6 @@
     <color name="PriBtn_BgCol">#ffffff</color>
     <color name="PriBtn_TxtCol">#000000</color>
     <color name="SecBtn_BgCol">#3c3c3d</color>
-    <color name="SecBtn_TxtCol">#ffffff</color>
-
     <color name="backgroundPrimary">#010101</color>
     <color name="backgroundSecondary">#171719</color>
     <color name="text">#ffffff</color>

@@ -644,25 +644,9 @@ public class PreviewPageActivity extends AppCompatActivity {
             bottomSheet.setBackgroundColor(Color.TRANSPARENT);
         }
 
-        // ── Resolve theme-aware colors ──
-        Context themedContext = ThemeHelper.wrapWithColorThemeOverlay(this);
-        int surface = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupSurface, R.color.previewPage_primary);
-        int dock    = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupDock, R.color.previewPage_secondary);
-        int text    = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupText, R.color.previewPage_textSecondary);
-
-        // Apply background drawable tint
-        if (view.getBackground() != null) {
-            view.getBackground().mutate().setTint(surface);
-        }
-
-        // ── Site title capsule ──
+        // ── Site title capsule: favicon + page <title> ──
         TextView siteTitle = view.findViewById(R.id.siteTitle);
         ImageView siteIcon  = view.findViewById(R.id.siteIcon);
-        View siteInfoCard = view.findViewById(R.id.siteInfoCard);
-        if (siteInfoCard != null && siteInfoCard.getBackground() != null) {
-            siteInfoCard.getBackground().mutate().setTint(dock);
-        }
-        siteTitle.setTextColor(text);
 
         // Prefer page <title>, fall back to host
         if (!TextUtils.isEmpty(sitePageTitle)) {
@@ -681,13 +665,8 @@ public class PreviewPageActivity extends AppCompatActivity {
             siteIcon.setImageBitmap(siteFavicon);
         }
 
-        // Copy/Reload buttons
-        ImageButton copyBtn = view.findViewById(R.id.moreCopyLinkBtn);
-        ImageButton reloadBtn = view.findViewById(R.id.moreReloadBtn);
-        copyBtn.setColorFilter(text);
-        reloadBtn.setColorFilter(text);
-
-        copyBtn.setOnClickListener(v -> {
+        // Copy link
+        view.findViewById(R.id.moreCopyLinkBtn).setOnClickListener(v -> {
             ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
             if (clipboard != null) {
                 clipboard.setPrimaryClip(ClipData.newPlainText("URL", currentUrl));
@@ -695,35 +674,13 @@ public class PreviewPageActivity extends AppCompatActivity {
             }
         });
 
-        reloadBtn.setOnClickListener(v -> {
+        // Reload
+        view.findViewById(R.id.moreReloadBtn).setOnClickListener(v -> {
             webView.reload();
             dialog.dismiss();
         });
 
-        // ── Grid Row 1 ──
-        View gridCard = view.findViewById(R.id.bg_grid_card);
-        if (gridCard != null && gridCard.getBackground() != null) {
-            gridCard.getBackground().mutate().setTint(dock);
-        }
-
-        // ── Grid row items ──
-        int[] itemIds = {R.id.moreOpenIn, R.id.moreHome, R.id.morePrint, R.id.moreFind, 
-                         R.id.moreShare, R.id.moreAdBlock, R.id.morePermissions, R.id.moreDarkMode};
-        
-        for (int id : itemIds) {
-            View item = view.findViewById(id);
-            if (item instanceof ViewGroup) {
-                ViewGroup vg = (ViewGroup) item;
-                for (int i = 0; i < vg.getChildCount(); i++) {
-                    View child = vg.getChildAt(i);
-                    if (child instanceof ImageView) {
-                        ((ImageView) child).setColorFilter(text);
-                    } else if (child instanceof TextView) {
-                        ((TextView) child).setTextColor(text);
-                    }
-                }
-            }
-        }
+        // ── Grid Row 1: Open In, Home, Print, Find ──
 
         view.findViewById(R.id.moreOpenIn).setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(currentUrl));
@@ -755,6 +712,8 @@ public class PreviewPageActivity extends AppCompatActivity {
             showKeyboard(etFind);
         });
 
+        // ── Grid Row 2: Share, Ad Block, Permissions, Dark Mode ──
+
         view.findViewById(R.id.moreShare).setOnClickListener(v -> {
             Intent share = new Intent(Intent.ACTION_SEND);
             share.setType("text/plain");
@@ -772,6 +731,8 @@ public class PreviewPageActivity extends AppCompatActivity {
             adBlockEnabled = !adBlockEnabled;
             adBlockIcon.setImageResource(adBlockEnabled ? R.drawable.ad_close : R.drawable.ad);
             adBlockText.setText(adBlockEnabled ? "Ad Blocker" : "Ads On");
+            Toast.makeText(this, adBlockEnabled ? "Ad Blocker enabled" : "Ad Blocker disabled",
+                    Toast.LENGTH_SHORT).show();
             webView.reload();
         });
 
@@ -792,8 +753,7 @@ public class PreviewPageActivity extends AppCompatActivity {
             dialog.dismiss();
         });
 
-        // ── Toggles section ──
-        // ... (remaining toggle logic)
+        // ── Toggles ──
 
         // Desktop site
         SwitchCompat switchDesktop = view.findViewById(R.id.switchDesktopSite);
@@ -852,9 +812,6 @@ public class PreviewPageActivity extends AppCompatActivity {
         TextView tvAdBlockMode = view.findViewById(R.id.tvAdBlockMode);
         String currentMode = viewModel.adBlockMode.getValue();
         tvAdBlockMode.setText("dns".equals(currentMode) ? "AdGuard DNS" : "Domain Filter List");
-        tvAdBlockMode.setTextColor(text);
-        tvAdBlockMode.setAlpha(0.7f); // Slightly subtle
-
         view.findViewById(R.id.moreAdBlockMode).setOnClickListener(v -> {
             dialog.dismiss();
             showAdBlockModeDialog();
