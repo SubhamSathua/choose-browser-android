@@ -23,7 +23,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.hyper.choosebrowsernew.R;
+import com.hyper.choosebrowsernew.UpdateChecker;
 import com.hyper.choosebrowsernew.ui.common.ViewModelFactory;
+import com.hyper.choosebrowsernew.ui.main.MainActivity;
 import com.hyper.choosebrowsernew.util.ThemeHelper;
 
 import java.util.ArrayList;
@@ -63,6 +65,15 @@ public class BrowserChooserActivity extends AppCompatActivity {
 
     private void handleIncomingIntent(Intent intent) {
         if (intent == null) {
+            finish();
+            return;
+        }
+
+        // Block access if critical update is required
+        if (UpdateChecker.getCachedResult(this).priority == UpdateChecker.Priority.CRITICAL) {
+            Intent i = new Intent(this, MainActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
             finish();
             return;
         }

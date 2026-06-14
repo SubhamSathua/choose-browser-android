@@ -48,6 +48,14 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        // Block access if critical update is required
+        if (UpdateChecker.getCachedResult(this).priority == UpdateChecker.Priority.CRITICAL) {
+            startActivity(new Intent(this, MainActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
+            finish();
+            return;
+        }
+
         viewModel = new ViewModelProvider(this, new ViewModelFactory(this)).get(SettingsViewModel.class);
 
         RadioGroup themeRadioGroup = findViewById(R.id.themeRadioGroup);

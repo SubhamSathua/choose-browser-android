@@ -200,7 +200,11 @@ public class MainActivity extends AppCompatActivity {
         UpdateUiHelper.applyUpdateCardStyle(this, updateCardInner, updateDot, updateTitle, updateMsg, convertPriority(result.priority));
 
         switch (result.priority) {
-            case CRITICAL: updateTitle.setText("Critical Update Required"); break;
+            case CRITICAL: 
+                updateTitle.setText("Critical Update Required"); 
+                // Block app usage immediately if critical
+                UpdateUiHelper.showInfoSheet(this, convertToOldResult(result));
+                break;
             case WARNING: updateTitle.setText("Update Recommended"); break;
             case LATEST: updateTitle.setText("Update Available"); break;
         }
