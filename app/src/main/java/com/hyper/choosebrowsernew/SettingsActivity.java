@@ -172,16 +172,17 @@ public class SettingsActivity extends AppCompatActivity {
             settingsUpdateCard.setVisibility(View.VISIBLE);
             settingsUpdateMsg.setText(result.shortMsg != null ? result.shortMsg : "");
 
+            UpdateUiHelper.applyUpdateCardStyle(this, settingsUpdateCardInner, settingsUpdateDot, settingsUpdateTitle, settingsUpdateMsg, result.priority);
+
             switch (result.priority) {
+                case CRITICAL:
+                    settingsUpdateTitle.setText("Critical Update Required");
+                    break;
                 case WARNING:
                     settingsUpdateTitle.setText("Update Recommended");
-                    settingsUpdateCardInner.setBackgroundResource(R.drawable.bg_update_card_warning);
-                    settingsUpdateDot.setBackgroundResource(R.drawable.dot_warning);
                     break;
                 case LATEST:
                     settingsUpdateTitle.setText("Update Available");
-                    settingsUpdateCardInner.setBackgroundResource(R.drawable.bg_update_card_latest);
-                    settingsUpdateDot.setBackgroundResource(R.drawable.dot_blue);
                     break;
             }
         });

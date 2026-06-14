@@ -416,7 +416,6 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
                         android:text="Update Available"
-                        android:textColor="@color/update_textPrimary"
                         android:textSize="15sp" />
 
                     <TextView
@@ -425,15 +424,13 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_light"
                         android:text="Hello"
-                        android:textColor="@color/update_textSecondary"
                         android:textSize="12sp" />
                 </LinearLayout>
 
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/forward"
-                    app:tint="@color/update_textPrimary" />
+                    android:src="@drawable/forward" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

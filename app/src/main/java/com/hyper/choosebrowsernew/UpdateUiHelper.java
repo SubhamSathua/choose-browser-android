@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -21,6 +23,53 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
  * Shared UI helpers for showing update-related bottom sheets.
  */
 public class UpdateUiHelper {
+
+    /**
+     * Applies standard styling to the update card based on priority.
+     */
+    public static void applyUpdateCardStyle(AppCompatActivity activity, View innerLayout, 
+                                            View dotView, TextView titleTv, TextView msgTv, 
+                                            UpdateChecker.Priority priority) {
+        int bgRes, dotRes, titleCol, msgCol;
+
+        switch (priority) {
+            case CRITICAL:
+                bgRes = R.drawable.bg_update_card_critical;
+                dotRes = R.drawable.dot_critical;
+                titleCol = activity.getResources().getColor(R.color.updateCritical_title);
+                msgCol = activity.getResources().getColor(R.color.updateCritical_msg);
+                break;
+            case WARNING:
+                bgRes = R.drawable.bg_update_card_warning;
+                dotRes = R.drawable.dot_warning;
+                titleCol = activity.getResources().getColor(R.color.updateWarning_title);
+                msgCol = activity.getResources().getColor(R.color.updateWarning_msg);
+                break;
+            case LATEST:
+            default:
+                bgRes = R.drawable.bg_update_card_latest;
+                dotRes = R.drawable.dot_blue;
+                titleCol = activity.getResources().getColor(R.color.updateLatest_title);
+                msgCol = activity.getResources().getColor(R.color.updateLatest_msg);
+                break;
+        }
+
+        innerLayout.setBackgroundResource(bgRes);
+        dotView.setBackgroundResource(dotRes);
+        titleTv.setTextColor(titleCol);
+        msgTv.setTextColor(msgCol);
+
+        // Tint any icon (like forward arrow) in the card to title color
+        if (innerLayout instanceof ViewGroup) {
+            ViewGroup vg = (ViewGroup) innerLayout;
+            for (int i = 0; i < vg.getChildCount(); i++) {
+                View v = vg.getChildAt(i);
+                if (v instanceof ImageView) {
+                    ((ImageView) v).setColorFilter(titleCol);
+                }
+            }
+        }
+    }
 
     /**
      * Shows the update info sheet with short_msg, md_file note, and conditional close button.

@@ -215,21 +215,17 @@ public class MainActivity extends AppCompatActivity {
         updateCard.setVisibility(View.VISIBLE);
         updateMsg.setText(result.shortMsg != null ? result.shortMsg : "");
 
+        UpdateUiHelper.applyUpdateCardStyle(this, updateCardInner, updateDot, updateTitle, updateMsg, result.priority);
+
         switch (result.priority) {
             case CRITICAL:
                 updateTitle.setText("Critical Update Required");
-                updateCardInner.setBackgroundResource(R.drawable.bg_update_card_critical);
-                updateDot.setBackgroundResource(R.drawable.dot_critical);
                 break;
             case WARNING:
                 updateTitle.setText("Update Recommended");
-                updateCardInner.setBackgroundResource(R.drawable.bg_update_card_warning);
-                updateDot.setBackgroundResource(R.drawable.dot_warning);
                 break;
             case LATEST:
                 updateTitle.setText("Update Available");
-                updateCardInner.setBackgroundResource(R.drawable.bg_update_card_latest);
-                updateDot.setBackgroundResource(R.drawable.dot_blue);
                 break;
         }
     }

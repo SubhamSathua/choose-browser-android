@@ -283,7 +283,6 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
                         android:text="Update Available"
-                        android:textColor="#FFFFFF"
                         android:textSize="15sp" />
 
                     <TextView
@@ -292,15 +291,13 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_light"
                         android:text=""
-                        android:textColor="#E0E0E0"
                         android:textSize="12sp" />
                 </LinearLayout>
 
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/forward"
-                    android:tint="#FFFFFF" />
+                    android:src="@drawable/forward" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

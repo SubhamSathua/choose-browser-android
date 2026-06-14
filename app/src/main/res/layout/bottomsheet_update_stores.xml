@@ -24,7 +24,7 @@
         android:paddingHorizontal="20dp"
         android:paddingBottom="4dp"
         android:text="Download Update"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -36,7 +36,7 @@
         android:paddingHorizontal="20dp"
         android:paddingBottom="16dp"
         android:text="Choose a source to download"
-        android:textColor="#B0B3B8"
+        android:textColor="@color/textSub"
         android:textSize="13sp" />
 
     <!-- Store rows -->
@@ -57,7 +57,8 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:padding="2dp"
-            app:srcCompat="@drawable/github" />
+            app:srcCompat="@drawable/github"
+            app:tint="@color/text" />
 
         <TextView
             android:layout_width="0dp"
@@ -66,14 +67,14 @@
             android:layout_weight="1"
             android:fontFamily="@font/poppins_regular"
             android:text="GitHub Releases"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text"
             android:textSize="15sp" />
 
         <ImageView
             android:layout_width="18dp"
             android:layout_height="18dp"
             app:srcCompat="@drawable/ix_open_in_new"
-            app:tint="#B0B3B8" />
+            app:tint="@color/textSub" />
     </LinearLayout>
 
     <!-- 2. GitHub -->
@@ -92,7 +93,8 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:padding="2dp"
-            app:srcCompat="@drawable/github" />
+            app:srcCompat="@drawable/github"
+            app:tint="@color/text" />
 
         <TextView
             android:layout_width="0dp"
@@ -101,14 +103,14 @@
             android:layout_weight="1"
             android:fontFamily="@font/poppins_regular"
             android:text="GitHub"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text"
             android:textSize="15sp" />
 
         <ImageView
             android:layout_width="18dp"
             android:layout_height="18dp"
             app:srcCompat="@drawable/ix_open_in_new"
-            app:tint="#B0B3B8" />
+            app:tint="@color/textSub" />
     </LinearLayout>
 
     <!-- 3. Play Store (disabled by default) -->
@@ -127,7 +129,8 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:padding="2dp"
-            app:srcCompat="@drawable/icon" />
+            app:srcCompat="@drawable/icon"
+            app:tint="@color/text" />
 
         <TextView
             android:layout_width="0dp"
@@ -136,7 +139,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/poppins_regular"
             android:text="Play Store"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text"
             android:textSize="15sp" />
 
         <TextView
@@ -144,7 +147,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_light"
             android:text="Coming Soon"
-            android:textColor="#B0B3B8"
+            android:textColor="@color/textSub"
             android:textSize="12sp" />
     </LinearLayout>
 
@@ -164,7 +167,8 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:padding="2dp"
-            app:srcCompat="@drawable/icon" />
+            app:srcCompat="@drawable/icon"
+            app:tint="@color/text" />
 
         <TextView
             android:layout_width="0dp"
@@ -173,7 +177,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/poppins_regular"
             android:text="F-Droid"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text"
             android:textSize="15sp" />
 
         <TextView
@@ -181,7 +185,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_light"
             android:text="Coming Soon"
-            android:textColor="#B0B3B8"
+            android:textColor="@color/textSub"
             android:textSize="12sp" />
     </LinearLayout>
 
@@ -201,7 +205,8 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:padding="2dp"
-            app:srcCompat="@drawable/icon" />
+            app:srcCompat="@drawable/icon"
+            app:tint="@color/text" />
 
         <TextView
             android:layout_width="0dp"
@@ -210,7 +215,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/poppins_regular"
             android:text="APK Mirror"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text"
             android:textSize="15sp" />
 
         <TextView
@@ -218,7 +223,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_light"
             android:text="Coming Soon"
-            android:textColor="#B0B3B8"
+            android:textColor="@color/textSub"
             android:textSize="12sp" />
     </LinearLayout>
 
@@ -238,7 +243,8 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:padding="2dp"
-            app:srcCompat="@drawable/icon" />
+            app:srcCompat="@drawable/icon"
+            app:tint="@color/text" />
 
         <TextView
             android:layout_width="0dp"
@@ -247,7 +253,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/poppins_regular"
             android:text="MyStore"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text"
             android:textSize="15sp" />
 
         <TextView
@@ -255,7 +261,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_light"
             android:text="Coming Soon"
-            android:textColor="#B0B3B8"
+            android:textColor="@color/textSub"
             android:textSize="12sp" />
     </LinearLayout>
 

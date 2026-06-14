@@ -79,9 +79,18 @@
     <color name="aboutPage_textSecondary">#A8A8A8</color>
 
     <!-- ==== UPDATE CARD ==== -->
-    <color name="updateLatest">#494949</color>
-    <color name="updateCritical">#494949</color>
-    <color name="updateWarning">#494949</color>
-    <color name="update_textPrimary">#FFFFFF</color>
-    <color name="update_textSecondary">#D1D1D1</color>
+    <color name="updateLatest_bg">#7fb8ff</color>
+    <color name="updateLatest_title">#003270</color>
+    <color name="updateLatest_msg">#105bb7</color>
+    <color name="updateLatest_dot">#0073ff</color>
+
+    <color name="updateWarning_bg">#ffcb7f</color>
+    <color name="updateWarning_title">#7e4b00</color>
+    <color name="updateWarning_msg">#ad6700</color>
+    <color name="updateWarning_dot">#d98100</color>
+
+    <color name="updateCritical_bg">#ffa4d0</color>
+    <color name="updateCritical_title">#8c0044</color>
+    <color name="updateCritical_msg">#b30358</color>
+    <color name="updateCritical_dot">#e2006d</color>
 </resources>
