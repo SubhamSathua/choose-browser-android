@@ -23,4 +23,5 @@ local.properties
 /docs
 app/src/main/java/com/hyper/choosebrowsernew/AppConstantsDetails.java
 app/src/main/res/values/AppConstantsDetailsString.xml
-AGENT.md
+AGENTS.md
+GEMINI.md
