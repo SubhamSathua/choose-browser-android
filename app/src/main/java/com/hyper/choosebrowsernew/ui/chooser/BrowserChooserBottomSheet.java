@@ -154,7 +154,6 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
         View updateIndicatorLayout = view.findViewById(R.id.updateIndicatorLayout);
         View updateDotCard = view.findViewById(R.id.updateDotCard);
         View popupUpdateDot = view.findViewById(R.id.popupUpdateDot);
-        TextView tvWhatsNew = view.findViewById(R.id.tvWhatsNew);
 
         updateDotCard.setOnClickListener(v -> redirectToMainForUpdate());
 
@@ -175,23 +174,6 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
                     updateIndicatorLayout.setVisibility(View.VISIBLE);
                 } else if (updateDotCard != null) {
                     updateDotCard.setVisibility(View.VISIBLE);
-                }
-                
-                // Show "What's New" text next to the dot if we have info
-                if (tvWhatsNew != null) {
-                    if (result.mdFileUrl != null && !result.mdFileUrl.isEmpty()) {
-                        tvWhatsNew.setVisibility(View.VISIBLE);
-                        tvWhatsNew.setOnClickListener(v -> {
-                            String baseUrl = com.hyper.choosebrowsernew.AppConstantsDetails.UPDATE_JSON_URL;
-                            String mdUrl = baseUrl.replace("update.json", result.mdFileUrl);
-                            Activity activity = getActivity();
-                            if (activity instanceof AppCompatActivity) {
-                                UpdateUiHelper.showMarkdownPopup((AppCompatActivity) activity, mdUrl);
-                            }
-                        });
-                    } else {
-                        tvWhatsNew.setVisibility(View.GONE);
-                    }
                 }
             } else {
                 if (updateIndicatorLayout != null) {

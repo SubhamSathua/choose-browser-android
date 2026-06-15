@@ -68,18 +68,6 @@
             android:visibility="gone"
             tools:visibility="visible">
 
-            <TextView
-                android:id="@+id/tvWhatsNew"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
-                android:text="What's New"
-                android:textColor="@color/text"
-                android:textSize="12sp"
-                android:paddingEnd="8dp"
-                android:clickable="true"
-                android:focusable="true"/>
-
             <FrameLayout
                 android:id="@+id/updateDotCard"
                 android:layout_width="wrap_content"
