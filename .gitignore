@@ -13,13 +13,14 @@
 .externalNativeBuild
 .cxx
 local.properties
+*.log
+.DS_Store
+*.swp
+*~
 
 
 # Others
 /docs
 app/src/main/java/com/hyper/choosebrowsernew/AppConstantsDetails.java
 app/src/main/res/values/AppConstantsDetailsString.xml
-*.log
-.DS_Store
-*.swp
-*~
+AGENT.md
