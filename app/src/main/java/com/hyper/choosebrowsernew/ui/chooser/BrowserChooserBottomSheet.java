@@ -159,30 +159,46 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
         updateDotCard.setOnClickListener(v -> redirectToMainForUpdate());
 
         UpdateChecker.check(requireContext(), result -> {
+            if (!isAdded() || getView() == null) return;
+
             if (result.priority == UpdateChecker.Priority.CRITICAL) {
                 // Also enforce critical block if freshly detected
                 redirectToMainForUpdate();
             } else if (result.priority == UpdateChecker.Priority.WARNING || result.priority == UpdateChecker.Priority.LATEST) {
-                if (result.priority == UpdateChecker.Priority.WARNING) {
-                    popupUpdateDot.setBackgroundResource(R.drawable.dot_warning);
-                } else {
-                    popupUpdateDot.setBackgroundResource(R.drawable.dot_blue);
+                if (popupUpdateDot != null) {
+                    popupUpdateDot.setBackgroundResource(
+                            result.priority == UpdateChecker.Priority.WARNING ? R.drawable.dot_warning : R.drawable.dot_blue
+                    );
                 }
-                updateIndicatorLayout.setVisibility(View.VISIBLE);
+
+                if (updateIndicatorLayout != null) {
+                    updateIndicatorLayout.setVisibility(View.VISIBLE);
+                } else if (updateDotCard != null) {
+                    updateDotCard.setVisibility(View.VISIBLE);
+                }
                 
                 // Show "What's New" text next to the dot if we have info
-                if (result.mdFileUrl != null && !result.mdFileUrl.isEmpty()) {
-                    tvWhatsNew.setVisibility(View.VISIBLE);
-                    tvWhatsNew.setOnClickListener(v -> {
-                        String baseUrl = com.hyper.choosebrowsernew.AppConstantsDetails.UPDATE_JSON_URL;
-                        String mdUrl = baseUrl.replace("update.json", result.mdFileUrl);
-                        UpdateUiHelper.showMarkdownPopup((AppCompatActivity) getActivity(), mdUrl);
-                    });
-                } else {
-                    tvWhatsNew.setVisibility(View.GONE);
+                if (tvWhatsNew != null) {
+                    if (result.mdFileUrl != null && !result.mdFileUrl.isEmpty()) {
+                        tvWhatsNew.setVisibility(View.VISIBLE);
+                        tvWhatsNew.setOnClickListener(v -> {
+                            String baseUrl = com.hyper.choosebrowsernew.AppConstantsDetails.UPDATE_JSON_URL;
+                            String mdUrl = baseUrl.replace("update.json", result.mdFileUrl);
+                            Activity activity = getActivity();
+                            if (activity instanceof AppCompatActivity) {
+                                UpdateUiHelper.showMarkdownPopup((AppCompatActivity) activity, mdUrl);
+                            }
+                        });
+                    } else {
+                        tvWhatsNew.setVisibility(View.GONE);
+                    }
                 }
             } else {
-                updateIndicatorLayout.setVisibility(View.GONE);
+                if (updateIndicatorLayout != null) {
+                    updateIndicatorLayout.setVisibility(View.GONE);
+                } else if (updateDotCard != null) {
+                    updateDotCard.setVisibility(View.GONE);
+                }
             }
         });
 
