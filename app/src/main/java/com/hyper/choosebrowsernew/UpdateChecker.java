@@ -180,7 +180,7 @@ public class UpdateChecker {
         }
     }
 
-    static Result evaluate(String json, String appVersion) {
+    public static Result evaluate(String json, String appVersion) {
         android.util.Log.d("UpdateChecker", "Evaluating update. App version: " + appVersion);
         try {
             JSONObject root = new JSONObject(json);

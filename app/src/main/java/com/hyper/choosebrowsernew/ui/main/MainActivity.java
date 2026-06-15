@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private View updateDot;
     private TextView updateTitle, updateMsg;
     private MainViewModel viewModel;
+    private UpdateResult currentUpdateResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,8 +94,7 @@ public class MainActivity extends AppCompatActivity {
         });
         
         View.OnClickListener updateClick = v -> {
-            UpdateResult res = viewModel.updateResult.getValue();
-            if (res != null) UpdateUiHelper.showInfoSheet(this, convertToOldResult(res));
+            if (currentUpdateResult != null) UpdateUiHelper.showInfoSheet(this, convertToOldResult(currentUpdateResult));
         };
         updateCard.setOnClickListener(updateClick);
         updateCardInner.setOnClickListener(updateClick);
@@ -112,7 +112,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupObservers() {
-        viewModel.updateResult.observe(this, this::applyUpdateCard);
+        viewModel.updateResult.observe(this, result -> {
+            currentUpdateResult = result;
+            applyUpdateCard(result);
+        });
     }
 
     @Override
@@ -194,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        currentUpdateResult = result;
         updateCard.setVisibility(View.VISIBLE);
         updateMsg.setText(result.shortMsg != null ? result.shortMsg : "");
 
