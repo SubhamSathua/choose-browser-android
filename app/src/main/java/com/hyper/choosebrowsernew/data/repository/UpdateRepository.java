@@ -128,17 +128,19 @@ public class UpdateRepository {
                 latestMsg = latest.optString("short_msg", null);
                 latestMd = latest.optString("md_file", null);
                 latestVer = latest.optString("latest_version", null);
+                android.util.Log.d("UpdateRepo", "Latest section: ver=" + latestVer + ", msg=" + latestMsg + ", md=" + latestMd);
             }
 
             // CRITICAL
             JSONObject critical = root.optJSONObject("critical");
             if (critical != null) {
                 String below = critical.optString("below", null);
+                android.util.Log.d("UpdateRepo", "Checking CRITICAL: below=" + below);
                 if (below != null && compareVersions(appVersion, below) < 0) {
-                    return new UpdateResult(UpdateResult.Priority.CRITICAL,
-                            critical.optString("short_msg", "Critical update required"),
-                            critical.optString("md_file", latestMd),
-                            latestVer);
+                    String msg = critical.optString("short_msg", latestMsg);
+                    String md = critical.optString("md_file", latestMd);
+                    android.util.Log.d("UpdateRepo", "Matched CRITICAL: msg=" + msg + ", md=" + md);
+                    return new UpdateResult(UpdateResult.Priority.CRITICAL, msg, md, latestVer);
                 }
             }
 
@@ -146,18 +148,21 @@ public class UpdateRepository {
             JSONObject warning = root.optJSONObject("warning");
             if (warning != null) {
                 String below = warning.optString("below", null);
+                android.util.Log.d("UpdateRepo", "Checking WARNING: below=" + below);
                 if (below != null && compareVersions(appVersion, below) < 0) {
-                    return new UpdateResult(UpdateResult.Priority.WARNING,
-                            warning.optString("short_msg", "Update recommended"),
-                            warning.optString("md_file", latestMd),
-                            latestVer);
+                    String msg = warning.optString("short_msg", latestMsg);
+                    String md = warning.optString("md_file", latestMd);
+                    android.util.Log.d("UpdateRepo", "Matched WARNING: msg=" + msg + ", md=" + md);
+                    return new UpdateResult(UpdateResult.Priority.WARNING, msg, md, latestVer);
                 }
             }
 
             // LATEST
             if (latestVer != null) {
                 int cmp = compareVersions(appVersion, latestVer);
+                android.util.Log.d("UpdateRepo", "Checking LATEST: latestVer=" + latestVer + ", cmp=" + cmp);
                 if (cmp < 0 || (!DebugConfig.CACHE_UPDATE_JSON && cmp == 0)) {
+                    android.util.Log.d("UpdateRepo", "Matched LATEST: msg=" + latestMsg + ", md=" + latestMd);
                     return new UpdateResult(UpdateResult.Priority.LATEST,
                             latestMsg != null ? latestMsg : "New version available",
                             latestMd,
@@ -165,6 +170,7 @@ public class UpdateRepository {
                 }
             }
 
+            android.util.Log.d("UpdateRepo", "App is UP_TO_DATE");
             return new UpdateResult(UpdateResult.Priority.UP_TO_DATE, latestMsg, latestMd, latestVer);
         } catch (Exception e) {
             android.util.Log.e("UpdateRepo", "Evaluation failed", e);
