@@ -40,7 +40,7 @@ android {
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.hyper.choosebrowsernew"
+        applicationId "org.prism.choosebrowser"
         minSdk 27
         targetSdk 34
         versionCode computedVersionCode
@@ -48,25 +48,17 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    // Add flavor dimension
-    flavorDimensions "version"
-
-    // Define product flavors
-    productFlavors {
-        production {
-            dimension "version"
-            applicationId "com.hyper.choosebrowsernew"
-        }
-        dev {
-            dimension "version"
-            applicationId "com.hyper.choosebrowsernew.dev"
-            resValue "string", "app_name", "Choose Browser (Dev)"// new package for test APK
-        }
-    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        alpha {
+            initWith release
+            applicationIdSuffix ".alpha"
+            resValue "string", "app_name", "Choose Browser (Alpha)"
+            signingConfig signingConfigs.debug
         }
     }
     compileOptions {
@@ -75,6 +67,7 @@ android {
     }
     buildFeatures {
         viewBinding true
+        buildConfig true
     }
 }
 

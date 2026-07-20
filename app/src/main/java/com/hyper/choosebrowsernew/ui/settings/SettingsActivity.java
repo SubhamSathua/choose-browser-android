@@ -19,11 +19,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.hyper.choosebrowsernew.AppConstantsDetails;
 import com.hyper.choosebrowsernew.ui.common.ViewModelFactory;
 import com.hyper.choosebrowsernew.ui.main.MainActivity;
+import com.hyper.choosebrowsernew.BuildConfig;
 import com.hyper.choosebrowsernew.R;
 import com.hyper.choosebrowsernew.UpdateChecker;
 import com.hyper.choosebrowsernew.ui.common.UpdateUiHelper;
 import com.hyper.choosebrowsernew.ui.debug.DebugActivity;
-import com.hyper.choosebrowsernew.ui.debug.DebugConfig;
 import com.hyper.choosebrowsernew.ui.webview.WebViewActivity;
 import com.hyper.choosebrowsernew.util.MotionUiHelper;
 import com.hyper.choosebrowsernew.util.ThemeHelper;
@@ -118,7 +118,9 @@ public class SettingsActivity extends AppCompatActivity {
         settingsUpdateCard.setOnClickListener(updateClick);
         settingsUpdateCardInner.setOnClickListener(updateClick);
 
-        if (DebugConfig.DEBUG_SCREEN) {
+        // Alpha: show debug card always
+        // Release: future — add 7-tap on version text to unlock
+        if ("alpha".equals(BuildConfig.BUILD_TYPE)) {
             debugCard.setVisibility(View.VISIBLE);
             debugCard.setOnClickListener(v -> startActivity(new Intent(this, DebugActivity.class)));
         }
