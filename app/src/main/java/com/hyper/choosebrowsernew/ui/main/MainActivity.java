@@ -24,7 +24,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.hyper.choosebrowsernew.R;
 import com.hyper.choosebrowsernew.UpdateChecker;
 import com.hyper.choosebrowsernew.data.model.UpdateResult;
-import com.hyper.choosebrowsernew.ui.chooser.BrowserChooserBottomSheet;
 import com.hyper.choosebrowsernew.ui.common.UpdateUiHelper;
 import com.hyper.choosebrowsernew.ui.common.ViewModelFactory;
 import com.hyper.choosebrowsernew.ui.settings.BrowserListActivity;
@@ -65,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         viewModel = new ViewModelProvider(this, new ViewModelFactory(this)).get(MainViewModel.class);
-
-        handleIncomingIntent(getIntent());
 
         overlayPermBtn = findViewById(R.id.overlayPerm_btn);
         settingsBtn = findViewById(R.id.settingsBtn);
@@ -133,18 +130,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        setIntent(intent);
-        handleIncomingIntent(intent);
-    }
-
-    private void handleIncomingIntent(Intent intent) {
-        Uri data = intent.getData();
-        if (data != null) {
-            String url = data.toString();
-            if (viewModel.getCachedUpdateResult().priority == UpdateResult.Priority.CRITICAL) return;
-            BrowserChooserBottomSheet chooser = BrowserChooserBottomSheet.newInstance(url);
-            chooser.show(getSupportFragmentManager(), "browser_chooser");
-        }
     }
 
     private void openDefaultAppSettings() {

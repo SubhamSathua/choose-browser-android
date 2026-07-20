@@ -43,15 +43,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <!-- Optional: Intent filter to allow setting app as a browser -->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-            </intent-filter>
-
             <!--For Adding app long press Shortcut-->
             <meta-data
                 android:name="android.app.shortcuts"
@@ -74,9 +65,16 @@
 
         <activity android:name=".ui.chooser.BrowserChooserActivity"
             android:exported="true"
-            android:theme="@style/Theme.ChooseBrowserNEW"
+            android:theme="@style/Theme.Transparent"
             android:excludeFromRecents="true"
             android:taskAffinity="" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />

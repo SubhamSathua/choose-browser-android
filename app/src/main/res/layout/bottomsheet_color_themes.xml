@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/colorThemesSheetRoot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -91,10 +92,13 @@
                 android:id="@+id/colorThemeRadioDefault"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/PriBtn_BgCol"
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/color_theme_default"
-                android:textColor="@color/text" />
+                tools:checked="true"
+                android:textColor="@color/text"
+                android:buttonTint="@color/PriBtn_BgCol"
+                android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+
 
             <RadioButton
                 android:id="@+id/colorThemeRadioEclipse"
@@ -103,6 +107,7 @@
                 android:buttonTint="@color/PriBtn_BgCol"
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/color_theme_eclipse"
+                android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
                 android:textColor="@color/text" />
 
             <RadioButton
@@ -112,6 +117,7 @@
                 android:buttonTint="@color/PriBtn_BgCol"
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/color_theme_neuronight"
+                android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
                 android:textColor="@color/text" />
 
             <RadioButton
@@ -121,6 +127,7 @@
                 android:buttonTint="@color/PriBtn_BgCol"
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/color_theme_neural_blue"
+                android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
                 android:textColor="@color/text" />
 
             <RadioButton
@@ -130,6 +137,7 @@
                 android:buttonTint="@color/PriBtn_BgCol"
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/color_theme_cosmic"
+                android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
                 android:textColor="@color/text" />
 
             <RadioButton
@@ -139,6 +147,7 @@
                 android:buttonTint="@color/PriBtn_BgCol"
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/color_theme_obsidian_pulse"
+                android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
                 android:textColor="@color/text" />
         </RadioGroup>
     </androidx.cardview.widget.CardView>

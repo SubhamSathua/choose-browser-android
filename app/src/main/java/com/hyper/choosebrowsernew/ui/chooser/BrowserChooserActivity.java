@@ -6,11 +6,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.hyper.choosebrowsernew.R;
@@ -28,14 +29,7 @@ import com.hyper.choosebrowsernew.ui.common.ViewModelFactory;
 import com.hyper.choosebrowsernew.ui.main.MainActivity;
 import com.hyper.choosebrowsernew.util.ThemeHelper;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class BrowserChooserActivity extends AppCompatActivity {
 
@@ -44,10 +38,7 @@ public class BrowserChooserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         viewModel = new ViewModelProvider(this, new ViewModelFactory(this)).get(BrowserChooserViewModel.class);
-
-        // Handle initial intent
         handleIncomingIntent(getIntent());
     }
 
@@ -63,7 +54,6 @@ public class BrowserChooserActivity extends AppCompatActivity {
             return;
         }
 
-        // Block access if critical update is required
         if (UpdateChecker.getCachedResult(this).priority == UpdateChecker.Priority.CRITICAL) {
             Intent i = new Intent(this, MainActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -87,7 +77,6 @@ public class BrowserChooserActivity extends AppCompatActivity {
                 finish();
                 return;
             }
-
             if (foundLinks.size() == 1) {
                 openChooserForUrl(foundLinks.get(0));
             } else {
@@ -108,9 +97,17 @@ public class BrowserChooserActivity extends AppCompatActivity {
             return;
         }
 
+        showDialogChooser(url);
+    }
+
+    // ── BottomSheetDialogFragment chooser ─────────────────────────────
+
+    private void showDialogChooser(String url) {
         BrowserChooserBottomSheet chooser = BrowserChooserBottomSheet.newInstance(url);
         chooser.show(getSupportFragmentManager(), "browser_chooser");
     }
+
+    // ── Link picker for multiple links from shared text ──────────────
 
     private void showLinkPicker(List<String> links) {
         Context themedContext = ThemeHelper.wrapWithColorThemeOverlay(this);
@@ -121,35 +118,23 @@ public class BrowserChooserActivity extends AppCompatActivity {
         View view = LayoutInflater.from(themedContext).inflate(R.layout.dialog_link_picker, null);
         dialog.setContentView(view);
 
-        // Resolve all relevant theme colors
         int surface = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupSurface, R.color.backgroundSecondary);
         int dockBg = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupDock, R.color.PopUpCardDockBg);
         int textCol = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupText, R.color.text);
-        int actionBg = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupAction, R.color.PopUpCard_ActionBtnBg);
 
         View card = view.findViewById(R.id.linkPickerCard);
-        if (card instanceof androidx.cardview.widget.CardView) {
-            ((androidx.cardview.widget.CardView) card).setCardBackgroundColor(surface);
+        if (card instanceof CardView) {
+            ((CardView) card).setCardBackgroundColor(surface);
         }
 
         TextView title = view.findViewById(R.id.linkPickerTitle);
         if (title != null) title.setTextColor(textCol);
 
-        // Tint sub-title as well (it's the second child in the layout)
-        if (view instanceof android.view.ViewGroup) {
-            android.view.ViewGroup vg = (android.view.ViewGroup) ((android.view.ViewGroup) view).getChildAt(0);
-            if (vg != null && vg.getChildAt(1) instanceof TextView) {
-                ((TextView) vg.getChildAt(1)).setTextColor(textCol);
-                ((TextView) vg.getChildAt(1)).setAlpha(0.7f); // Slightly transparent for sub-text
-            }
-        }
-
         if (dialog.getWindow() != null) {
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.getWindow().setLayout(
                     WindowManager.LayoutParams.MATCH_PARENT,
-                    WindowManager.LayoutParams.WRAP_CONTENT
-            );
+                    WindowManager.LayoutParams.WRAP_CONTENT);
             dialog.getWindow().setDimAmount(0.55f);
         }
 
@@ -159,25 +144,19 @@ public class BrowserChooserActivity extends AppCompatActivity {
         TextView cancelBtn = view.findViewById(R.id.linkPickerCancel);
         if (cancelBtn != null) {
             cancelBtn.setTextColor(textCol);
-            // Apply the dockBg color to the cancel button background to match the privacy button style
             if (cancelBtn.getBackground() != null) {
                 cancelBtn.getBackground().setTint(dockBg);
             }
         }
 
         ListView listView = view.findViewById(R.id.linkPickerList);
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                themedContext,
-                R.layout.item_link_picker,
-                android.R.id.text1,
-                links
-        ) {
+                themedContext, R.layout.item_link_picker, android.R.id.text1, links) {
             @Override
-            public View getView(int position, View convertView, android.view.ViewGroup parent) {
+            public View getView(int position, View convertView, ViewGroup parent) {
                 View v = super.getView(position, convertView, parent);
-                if (v instanceof androidx.cardview.widget.CardView) {
-                    ((androidx.cardview.widget.CardView) v).setCardBackgroundColor(dockBg);
+                if (v instanceof CardView) {
+                    ((CardView) v).setCardBackgroundColor(dockBg);
                 }
                 TextView tv = v.findViewById(android.R.id.text1);
                 if (tv != null) tv.setTextColor(textCol);

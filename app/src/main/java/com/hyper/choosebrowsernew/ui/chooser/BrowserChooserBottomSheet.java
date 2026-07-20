@@ -191,7 +191,10 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
 
     private void setupObservers() {
         viewModel.browsers.observe(getViewLifecycleOwner(), browsers -> {
-            BrowserGridAdapter adapter = new BrowserGridAdapter(requireContext(), browsers, url, this);
+            BrowserGridAdapter adapter = new BrowserGridAdapter(requireContext(), browsers, url, () -> {
+                dismiss();
+                if (getActivity() != null) getActivity().finish();
+            });
             gridView.setAdapter(adapter);
         });
     }

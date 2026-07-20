@@ -22,11 +22,13 @@ public class BrowserGridAdapter extends BaseAdapter {
     Context context;
     List<AppInfo> apps;
     String url;
+    Runnable onDismiss;
 
-    public BrowserGridAdapter(Context context, List<AppInfo> apps, String url, BrowserChooserBottomSheet fragment) {
+    public BrowserGridAdapter(Context context, List<AppInfo> apps, String url, Runnable onDismiss) {
         this.context = context;
         this.apps = apps;
         this.url = url;
+        this.onDismiss = onDismiss;
     }
 
     @Override
@@ -64,6 +66,7 @@ public class BrowserGridAdapter extends BaseAdapter {
                 intent.setPackage(app.packageName);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
+                if (onDismiss != null) onDismiss.run();
             } catch (Exception e) {
                 Toast.makeText(context, "Failed to open browser", Toast.LENGTH_SHORT).show();
             }

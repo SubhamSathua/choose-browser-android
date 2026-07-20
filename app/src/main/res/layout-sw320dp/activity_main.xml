@@ -68,25 +68,25 @@
                         android:id="@+id/overlayPerm_btn"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:minHeight="60dp"
                         android:background="@color/backgroundSecondary"
                         android:clickable="true"
                         android:focusable="true"
                         android:foreground="?attr/selectableItemBackground"
                         android:gravity="center_vertical"
+                        android:minHeight="60dp"
                         android:orientation="horizontal"
                         android:paddingLeft="10dp"
-                        android:paddingRight="5dp"
                         android:paddingTop="2dp"
+                        android:paddingRight="5dp"
                         android:paddingBottom="2dp"
                         tools:context=".MainActivity">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginVertical="10dp"
                             android:gravity="top"
                             android:orientation="vertical"
-                            android:layout_marginVertical="10dp"
                             android:paddingRight="10dp">
 
                             <ImageView
@@ -103,11 +103,11 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
                             android:layout_marginVertical="5dp"
+                            android:gravity="center_vertical"
                             android:orientation="vertical">
 
-                        <LinearLayout
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center_vertical"
@@ -116,11 +116,11 @@
                                 <TextView
                                     android:id="@+id/perm22"
                                     android:layout_width="0dp"
-                                    android:layout_weight="1"
-                                    android:maxLines="1"
-                                    android:ellipsize="end"
                                     android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:ellipsize="end"
                                     android:fontFamily="@font/poppins_medium"
+                                    android:maxLines="1"
                                     android:text="@string/perm2"
                                     android:textColor="@color/text"
                                     android:textSize="18dp" />
@@ -140,10 +140,10 @@
                                 android:id="@+id/perm2Sub"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/perm2_sub"
-                                android:textColor="@color/textSub"
+                                android:ellipsize="end"
                                 android:maxLines="2"
-                                android:ellipsize="end"/>
+                                android:text="@string/perm2_sub"
+                                android:textColor="@color/textSub" />
 
                         </LinearLayout>
 
@@ -164,25 +164,25 @@
                         android:id="@+id/defaultBrowserBtn"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:minHeight="60dp"
                         android:background="@color/backgroundSecondary"
                         android:clickable="true"
                         android:focusable="true"
                         android:foreground="?attr/selectableItemBackground"
                         android:gravity="center_vertical"
+                        android:minHeight="60dp"
                         android:orientation="horizontal"
                         android:paddingLeft="10dp"
-                        android:paddingRight="5dp"
                         android:paddingTop="2dp"
+                        android:paddingRight="5dp"
                         android:paddingBottom="2dp"
                         tools:context=".MainActivity">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginVertical="10dp"
                             android:gravity="top"
                             android:orientation="vertical"
-                            android:layout_marginVertical="10dp"
                             android:paddingRight="10dp">
 
                             <ImageView
@@ -199,8 +199,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
                             android:layout_marginVertical="5dp"
+                            android:gravity="center_vertical"
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -212,11 +212,11 @@
                                 <TextView
                                     android:id="@+id/defaultBrowserTitle"
                                     android:layout_width="0dp"
-                                    android:layout_weight="1"
-                                    android:maxLines="1"
-                                    android:ellipsize="end"
                                     android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:ellipsize="end"
                                     android:fontFamily="@font/poppins_medium"
+                                    android:maxLines="1"
                                     android:text="@string/perm1"
                                     android:textColor="@color/text"
                                     android:textSize="18dp" />
@@ -236,10 +236,10 @@
                                 android:id="@+id/defaultBrowserSub"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Opens system default browser settings"
-                                android:textColor="@color/textSub"
+                                android:ellipsize="end"
                                 android:maxLines="2"
-                                android:ellipsize="end"/>
+                                android:text="Opens system default browser settings"
+                                android:textColor="@color/textSub" />
 
                         </LinearLayout>
 
@@ -252,15 +252,15 @@
                 android:id="@+id/updateCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="16dp"
                 android:visibility="gone"
-                tools:visibility="visible"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                tools:visibility="visible">
 
                 <LinearLayout
                     android:id="@+id/updateCardInner"
@@ -311,14 +311,14 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-<!--=============== Brand Container =============-->
+            <!--=============== Brand Container =============-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/bottomBrandingContainer"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="32dp"
-                android:gravity="fill_horizontal"
+                android:gravity="center"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -329,31 +329,33 @@
                 <!--=============== Brand Btn =============-->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/BrandContainer"
-                    app:layout_constraintEnd_toStartOf="@id/settingsBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:backgroundTint="#008C2424"
                     app:cardCornerRadius="40dp"
                     app:cardElevation="0dp"
+                    app:layout_constraintBottom_toBottomOf="@id/settingsBtn"
+                    app:layout_constraintEnd_toStartOf="@id/settingsBtn"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="@id/settingsBtn">
 
                     <LinearLayout
                         android:id="@+id/listBrowsers"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="5dp"
                         android:backgroundTint="#C8C8C8"
+
                         android:clickable="true"
                         android:focusable="true"
                         android:foreground="?attr/selectableItemBackground"
-                        android:gravity="center_horizontal|center_vertical">
+                        android:gravity="center_horizontal|center_vertical"
+                        android:paddingLeft="5dp">
 
                         <ImageView
-                            android:layout_width="55dp"
-                            android:layout_height="55dp"
-                            app:srcCompat="@drawable/logo"/>
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            app:srcCompat="@drawable/logo" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -362,7 +364,7 @@
                             android:paddingRight="15dp"
                             android:text="@string/AppBranding"
                             android:textColor="@color/text"
-                            android:textSize="14dp"/>
+                            android:textSize="14dp" />
 
                     </LinearLayout>
 
