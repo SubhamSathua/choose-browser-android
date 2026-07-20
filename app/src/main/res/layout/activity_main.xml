@@ -336,8 +336,9 @@
                     android:backgroundTint="#008C2424"
                     app:cardCornerRadius="40dp"
                     app:cardElevation="0dp"
+                    app:layout_constraintBottom_toBottomOf="@id/settingsBtn"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="@id/settingsBtn">
 
                     <LinearLayout
                         android:id="@+id/listBrowsers"
@@ -351,9 +352,9 @@
                         android:gravity="center_horizontal|center_vertical">
 
                         <ImageView
-                            android:layout_width="55dp"
-                            android:layout_height="55dp"
-                            app:srcCompat="@drawable/logo"></ImageView>
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            app:srcCompat="@drawable/logo" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -362,7 +363,7 @@
                             android:paddingRight="15dp"
                             android:text="@string/AppBranding"
                             android:textColor="@color/text"
-                            android:textSize="18dp"></TextView>
+                            android:textSize="14dp" />
 
                     </LinearLayout>
 

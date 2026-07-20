@@ -64,10 +64,12 @@
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     app:srcCompat="@drawable/logo" />
-
+                <Space
+                    android:layout_width="5dp"
+                    android:layout_height="wrap_content" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -86,7 +88,7 @@
             android:id="@+id/themeCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="16dp"
             app:cardBackgroundColor="@color/backgroundSecondary"
             app:cardCornerRadius="27dp"
             app:cardElevation="0dp"
@@ -198,7 +200,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="16dp"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
@@ -258,7 +260,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="16dp"
             app:cardCornerRadius="27dp"
             app:cardElevation="0dp"
             android:visibility="gone"
@@ -319,7 +321,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="16dp"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
