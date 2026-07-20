@@ -12,8 +12,13 @@ public final class BrowserExclusionManager {
     private static final String PREFS_NAME = "browser_exclusion_prefs";
     private static final String KEY_EXCLUDED_PACKAGES = "excluded_packages";
 
+    private static volatile Runnable onCacheInvalidationListener;
+
     private BrowserExclusionManager() {
-        // Utility class
+    }
+
+    public static void setCacheInvalidationListener(Runnable listener) {
+        onCacheInvalidationListener = listener;
     }
 
     public static Set<String> getExcludedPackages(Context context) {
@@ -39,5 +44,8 @@ public final class BrowserExclusionManager {
                 .edit()
                 .putStringSet(KEY_EXCLUDED_PACKAGES, set)
                 .apply();
+        if (onCacheInvalidationListener != null) {
+            onCacheInvalidationListener.run();
+        }
     }
 }

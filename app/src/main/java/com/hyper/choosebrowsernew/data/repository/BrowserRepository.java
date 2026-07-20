@@ -30,11 +30,21 @@ public class BrowserRepository {
             Pattern.CASE_INSENSITIVE
     );
 
+    private static final long BROWSER_CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+    private List<AppInfo> cachedBrowsers;
+    private long cacheTimestamp;
+
     public BrowserRepository(Context context) {
         this.context = context.getApplicationContext();
+        BrowserExclusionManager.setCacheInvalidationListener(this::invalidateBrowserCache);
     }
 
     public List<AppInfo> getInstalledBrowsers() {
+        long now = System.currentTimeMillis();
+        if (cachedBrowsers != null && (now - cacheTimestamp) < BROWSER_CACHE_TTL) {
+            return cachedBrowsers;
+        }
+
         PackageManager pm = context.getPackageManager();
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://"));
         browserIntent.addCategory(Intent.CATEGORY_BROWSABLE);
@@ -50,12 +60,20 @@ public class BrowserRepository {
             String pkgName = info.activityInfo.packageName;
             if (pkgName.equals(myPackage)) continue;
             if (excludedPackages.contains(pkgName)) continue;
-            
+
             String label = info.loadLabel(pm).toString();
             Drawable icon = info.loadIcon(pm);
             browsers.add(new AppInfo(label, pkgName, icon));
         }
+
+        cachedBrowsers = browsers;
+        cacheTimestamp = now;
         return browsers;
+    }
+
+    public void invalidateBrowserCache() {
+        cachedBrowsers = null;
+        cacheTimestamp = 0;
     }
 
     public List<String> extractUrls(String text) {
@@ -79,7 +97,7 @@ public class BrowserRepository {
         if (TextUtils.isEmpty(found)) return "";
         String cleaned = found.trim();
         cleaned = cleaned.replaceAll("^[\\(\\[\\{<\"']+", "");
-        cleaned = cleaned.replaceAll("[\\)\\]\\}>,!;:\"']+$", "");
+        cleaned = cleaned.replaceAll("[\\)\\]\\}>!,;:\"']+$", "");
         cleaned = cleaned.replaceAll("[\\.\\?\\!]+$", "");
         return cleaned;
     }

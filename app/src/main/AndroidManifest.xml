@@ -47,6 +47,9 @@
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" />
+                <data android:scheme="https" />
             </intent-filter>
 
             <!--For Adding app long press Shortcut-->
@@ -71,17 +74,9 @@
 
         <activity android:name=".ui.chooser.BrowserChooserActivity"
             android:exported="true"
-            android:theme="@style/Theme.Transparent"
+            android:theme="@style/Theme.ChooseBrowserNEW"
             android:excludeFromRecents="true"
             android:taskAffinity="" >
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-            </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />

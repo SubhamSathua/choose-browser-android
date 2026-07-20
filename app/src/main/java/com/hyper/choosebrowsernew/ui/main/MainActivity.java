@@ -1,7 +1,9 @@
 package com.hyper.choosebrowsernew.ui.main;
 
+import android.app.role.RoleManager;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -32,10 +34,16 @@ import com.hyper.choosebrowsernew.util.MotionUiHelper;
 public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_OVERLAY_PERMISSION = 1001;
+    private static final int REQUEST_DEFAULT_BROWSER = 1002;
 
-    LinearLayout defBrowserBtn, overlayPermBtn;
+    LinearLayout overlayPermBtn;
     Button settingsBtn;
-    ImageView perm1Check, perm2Check;
+    ImageView perm2Check;
+
+    // Default Browser card views
+    LinearLayout defaultBrowserBtn;
+    ImageView defaultBrowserIcon, defaultBrowserCheck;
+    TextView defaultBrowserTitle, defaultBrowserSub;
 
     // Update UI
     private CardView updateCard;
@@ -60,14 +68,18 @@ public class MainActivity extends AppCompatActivity {
 
         handleIncomingIntent(getIntent());
 
-        defBrowserBtn = findViewById(R.id.defBrowser_btn);
         overlayPermBtn = findViewById(R.id.overlayPerm_btn);
         settingsBtn = findViewById(R.id.settingsBtn);
-        perm1Check = findViewById(R.id.perm1_check);
         perm2Check = findViewById(R.id.perm2_check);
-        CardView permissionCard1 = findViewById(R.id.cardView2);
         CardView permissionCard2 = findViewById(R.id.cardView3);
         CardView chooseBrowserCard = findViewById(R.id.BrandContainer);
+
+        // Default Browser card views
+        defaultBrowserBtn = findViewById(R.id.defaultBrowserBtn);
+        defaultBrowserIcon = findViewById(R.id.defaultBrowserIcon);
+        defaultBrowserCheck = findViewById(R.id.defaultBrowserCheck);
+        defaultBrowserTitle = findViewById(R.id.defaultBrowserTitle);
+        defaultBrowserSub = findViewById(R.id.defaultBrowserSub);
 
         // Update card
         updateCard = findViewById(R.id.updateCard);
@@ -76,9 +88,10 @@ public class MainActivity extends AppCompatActivity {
         updateTitle = findViewById(R.id.updateTitle);
         updateMsg = findViewById(R.id.updateMsg);
 
-        setupMotion(permissionCard1, permissionCard2, chooseBrowserCard);
+        setupMotion(permissionCard2, chooseBrowserCard);
 
-        defBrowserBtn.setOnClickListener(view -> openDefaultAppSettings());
+        // Default browser button click
+        defaultBrowserBtn.setOnClickListener(view -> setAsDefaultBrowser());
 
         LinearLayout listBrowsers = findViewById(R.id.listBrowsers);
         listBrowsers.setOnClickListener(v -> {
@@ -104,8 +117,7 @@ public class MainActivity extends AppCompatActivity {
         viewModel.checkUpdate();
     }
 
-    private void setupMotion(View p1, View p2, View cb) {
-        MotionUiHelper.applyTapScale(p1);
+    private void setupMotion(View p2, View cb) {
         MotionUiHelper.applyTapScale(p2);
         MotionUiHelper.applyTapScale(cb);
         MotionUiHelper.applyTapScale(settingsBtn);
@@ -168,8 +180,14 @@ public class MainActivity extends AppCompatActivity {
             isDefaultBrowser = true;
         }
 
-        perm1Check.setImageResource(isDefaultBrowser ? R.drawable.ix_permitted : R.drawable.ix_not_permitted);
         perm2Check.setImageResource(Settings.canDrawOverlays(this) ? R.drawable.ix_permitted : R.drawable.ix_not_permitted);
+        
+        if (defaultBrowserCheck != null) {
+            defaultBrowserCheck.setImageResource(isDefaultBrowser ? R.drawable.ix_permitted : R.drawable.ix_not_permitted);
+        }
+        if (defaultBrowserSub != null) {
+            defaultBrowserSub.setText(isDefaultBrowser ? "Already default browser" : "Tap to set as default browser");
+        }
     }
 
     @Override
@@ -181,7 +199,25 @@ public class MainActivity extends AppCompatActivity {
                     Settings.canDrawOverlays(this) ? "Overlay permission granted" : "Overlay permission NOT granted",
                     Toast.LENGTH_SHORT).show();
             updatePermissionIcons();
+        } else if (requestCode == REQUEST_DEFAULT_BROWSER) {
+            updatePermissionIcons();
         }
+    }
+
+    private void setAsDefaultBrowser() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            RoleManager roleManager = (RoleManager) getSystemService(Context.ROLE_SERVICE);
+            if (roleManager != null && roleManager.isRoleAvailable(RoleManager.ROLE_BROWSER)) {
+                if (roleManager.isRoleHeld(RoleManager.ROLE_BROWSER)) {
+                    Toast.makeText(this, "Already set as default browser", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Intent intent = roleManager.createRequestRoleIntent(RoleManager.ROLE_BROWSER);
+                startActivityForResult(intent, REQUEST_DEFAULT_BROWSER);
+                return;
+            }
+        }
+        openDefaultAppSettings();
     }
 
     @Override

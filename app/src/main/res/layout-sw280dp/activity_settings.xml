@@ -66,7 +66,7 @@
                     android:id="@+id/imageView"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    app:srcCompat="@drawable/ix_appicon" />
+                    app:srcCompat="@drawable/logo" />
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -45,12 +45,6 @@ public class BrowserChooserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Transparent activity, no layout required
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
-            getWindow().setNavigationBarColor(getResources().getColor(android.R.color.transparent));
-        }
-
         viewModel = new ViewModelProvider(this, new ViewModelFactory(this)).get(BrowserChooserViewModel.class);
 
         // Handle initial intent
