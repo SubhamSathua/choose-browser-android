@@ -20,6 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -81,6 +83,69 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!-- Update Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/settingsUpdateCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="27dp"
+            app:cardElevation="0dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+
+            <LinearLayout
+                android:id="@+id/settingsUpdateCardInner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_update_card_latest"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <View
+                    android:id="@+id/settingsUpdateDot"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:background="@drawable/dot_blue" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/settingsUpdateTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/heading"
+                        android:text="Update Available"
+                        android:textSize="@dimen/font_15" />
+
+                    <TextView
+                        android:id="@+id/settingsUpdateMsg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/label"
+                        android:text="Hello"
+                        android:textSize="@dimen/font_12" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/forward" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
 
         <!-- ======== Theme ========= -->
@@ -254,67 +319,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Update Card -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/settingsUpdateCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="27dp"
-            app:cardElevation="0dp"
-            android:visibility="gone"
-            tools:visibility="visible">
 
-
-            <LinearLayout
-                android:id="@+id/settingsUpdateCardInner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_update_card_latest"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="16dp">
-
-                <View
-                    android:id="@+id/settingsUpdateDot"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:background="@drawable/dot_blue" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/settingsUpdateTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/heading"
-                        android:text="Update Available"
-                        android:textSize="@dimen/font_15" />
-
-                    <TextView
-                        android:id="@+id/settingsUpdateMsg"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/label"
-                        android:text="Hello"
-                        android:textSize="@dimen/font_12" />
-                </LinearLayout>
-
-<ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:src="@drawable/ix_theme" />
-                </LinearLayout>
-        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/excludeBrowserCard"
@@ -415,7 +420,7 @@
                         android:fontFamily="@font/heading"
                         android:text="@string/help"
                         android:textColor="@color/text"
-                        android:textSize="@dimen/font_20"
+                        android:textSize="@dimen/font_24"
                         android:textStyle="bold" />
                 </LinearLayout>
 
