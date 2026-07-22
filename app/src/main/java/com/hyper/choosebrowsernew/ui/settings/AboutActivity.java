@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import com.hyper.choosebrowsernew.AppConstantsDetails;
 import com.hyper.choosebrowsernew.R;
+import com.hyper.choosebrowsernew.ui.licenses.LicenseListActivity;
 import com.hyper.choosebrowsernew.ui.webview.WebViewActivity;
 import com.hyper.choosebrowsernew.util.ThemeHelper;
 
@@ -62,6 +63,10 @@ public class AboutActivity extends AppCompatActivity {
         // Privacy Policy
         findViewById(R.id.aboutPrivacyRow).setOnClickListener(v ->
                 WebViewActivity.openPrivacyPolicy(this));
+
+        // Open Source Licenses
+        findViewById(R.id.aboutLicensesRow).setOnClickListener(v ->
+                startActivity(new Intent(this, LicenseListActivity.class)));
     }
 
     private void openEmailApps() {

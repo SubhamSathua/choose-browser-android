@@ -107,6 +107,11 @@
     <color name="aboutPage_textPrimary">#000000</color>
     <color name="aboutPage_textSecondary">#494949</color>
 
+
+<!--    License-->
+    <color name="divider">#DCDCDC</color>
+
+
     <!-- ==== UPDATE CARD ==== -->
     <color name="updateLatest_bg">#7fb8ff</color>
     <color name="updateLatest_title">#003270</color>

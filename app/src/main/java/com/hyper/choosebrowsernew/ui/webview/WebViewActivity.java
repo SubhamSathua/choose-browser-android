@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.JavascriptInterface;
@@ -30,9 +31,12 @@ import com.hyper.choosebrowsernew.util.ThemeHelper;
 
 public class WebViewActivity extends AppCompatActivity {
 
+    private static final String TAG = "WebViewActivity";
+
     public static final String EXTRA_URL   = "extra_url";
     public static final String EXTRA_TITLE = "extra_title";
     public static final String EXTRA_SHOW_OPEN_WITH = "extra_show_open_with";
+    public static final String EXTRA_HTML_CONTENT = "extra_html_content";
 
     private WebView webView;
     private String currentUrl;
@@ -87,9 +91,13 @@ public class WebViewActivity extends AppCompatActivity {
 
         currentUrl = getIntent().getStringExtra(EXTRA_URL);
         String title = getIntent().getStringExtra(EXTRA_TITLE);
+        String htmlContent = getIntent().getStringExtra(EXTRA_HTML_CONTENT);
         boolean showOpenWith = getIntent().getBooleanExtra(EXTRA_SHOW_OPEN_WITH, false);
         if (currentUrl == null) currentUrl = "";
         if (title == null) title = "";
+
+        Log.d(TAG, "onCreate title=" + title + " hasHtml=" + (htmlContent != null)
+                + " url=" + currentUrl);
 
         android.widget.TextView tvTitle = findViewById(R.id.webviewTitle);
         tvTitle.setText(title);
@@ -130,16 +138,14 @@ public class WebViewActivity extends AppCompatActivity {
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                // Only handle main frame errors
                 if (request.isForMainFrame()) {
+                    int code = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? error.getErrorCode() : -1;
+                    String errDesc = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? error.getDescription().toString() : "";
+                    Log.e(TAG, "WebView error code=" + code + " desc=" + errDesc);
                     String theme = isDark(WebViewActivity.this) ? "dark" : "light";
-                    String desc = "";
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && error.getDescription() != null) {
-                        desc = error.getDescription().toString();
-                    }
                     view.loadUrl("file:///android_asset/error.html?theme=" + theme
                             + "&code=" + (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? error.getErrorCode() : "")
-                            + "&desc=" + Uri.encode(desc));
+                            + "&desc=" + Uri.encode(errDesc));
                 }
             }
         });
@@ -150,7 +156,14 @@ public class WebViewActivity extends AppCompatActivity {
         settings.setDomStorageEnabled(false);
         settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
 
-        webView.loadUrl(currentUrl);
+        if (htmlContent != null && !htmlContent.isEmpty()) {
+            Log.d(TAG, "loading inline HTML, length=" + htmlContent.length());
+            settings.setJavaScriptEnabled(false);
+            webView.loadDataWithBaseURL("file:///android_asset/", htmlContent, "text/html", "UTF-8", null);
+        } else {
+            Log.d(TAG, "loading URL: " + currentUrl);
+            webView.loadUrl(currentUrl);
+        }
 
         findViewById(R.id.webviewBackBtn).setOnClickListener(v -> finish());
     }

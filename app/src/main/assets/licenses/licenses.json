@@ -1,0 +1,44 @@
+[
+  {
+    "fileName": "inter.txt",
+    "name": "Inter Font",
+    "author": "Rasmus Andersson",
+    "type": "SIL Open Font License 1.1"
+  },
+  {
+    "fileName": "jetbrainsmono.txt",
+    "name": "JetBrains Mono",
+    "author": "JetBrains",
+    "type": "SIL Open Font License 1.1"
+  },
+  {
+    "fileName": "LICENSE-material-symbols.txt",
+    "name": "Material Symbols",
+    "author": "Google",
+    "type": "Apache License 2.0"
+  },
+  {
+    "fileName": "lora.txt",
+    "name": "Lora",
+    "author": "Cyreal",
+    "type": "SIL Open Font License 1.1"
+  },
+  {
+    "fileName": "OFL.txt",
+    "name": "SIL Open Font License",
+    "author": "SIL International",
+    "type": "SIL Open Font License 1.1"
+  },
+  {
+    "fileName": "poppins.txt",
+    "name": "Poppins",
+    "author": "Indian Type Foundry",
+    "type": "SIL Open Font License 1.1"
+  },
+  {
+    "fileName": "syne.txt",
+    "name": "Syne",
+    "author": "Greta Diserens, Lucas François, Zuzana Licko",
+    "type": "SIL Open Font License 1.1"
+  }
+]

@@ -103,6 +103,11 @@
             android:theme="@style/Theme.ChooseBrowserNEW" />
 
         <activity
+            android:name=".ui.licenses.LicenseListActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ChooseBrowserNEW" />
+
+        <activity
             android:name=".ui.debug.DebugActivity"
             android:exported="false"
             android:theme="@style/Theme.ChooseBrowserNEW" />
