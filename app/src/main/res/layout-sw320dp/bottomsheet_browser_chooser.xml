@@ -47,7 +47,7 @@
                 android:fontFamily="@font/poppins_medium"
                 android:text="@string/open_wt"
                 android:textColor="@color/text"
-                android:textSize="20sp" />
+                android:textSize="@dimen/font_20" />
 
         </LinearLayout>
 
@@ -132,7 +132,7 @@
                     android:paddingLeft="8dp"
                     android:textColor="?attr/colorOnSurface"
                     android:fontFamily="@font/poppins"
-                    android:textSize="11sp"
+                    android:textSize="@dimen/font_11"
                     android:letterSpacing="-0.02"
                     tools:text="@string/demoLink" />
 
@@ -188,7 +188,7 @@
                                 android:gravity="center"
                                 android:lines="1"
                                 android:maxLines="2"
-                                android:textSize="12sp"
+                                android:textSize="@dimen/font_12"
                                 android:ellipsize="end"
                                 android:fontFamily="@font/poppins_regular"
                                 android:text="Show Link"/>
@@ -231,7 +231,7 @@
                         android:fontFamily="@font/poppins_regular"
                         android:gravity="center"
                         android:lines="1"
-                        android:textSize="12sp"
+                        android:textSize="@dimen/font_12"
                         android:maxLines="2"
                         android:ellipsize="end"
                         android:text="Share"/>
@@ -276,7 +276,7 @@
                         android:gravity="center"
                         android:lines="1"
                         android:text="Preview Page"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/font_12" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>

@@ -31,7 +31,7 @@
             android:fontFamily="@font/poppins_medium"
             android:text="Privacy Policy"
             android:textColor="@color/text"
-            android:textSize="18sp" />
+            android:textSize="@dimen/font_18" />
 
     </LinearLayout>
 

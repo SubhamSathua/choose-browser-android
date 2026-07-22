@@ -35,7 +35,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="@string/select_link"
                     android:textColor="@color/text"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/font_18" />
 
                 <ImageView
                     android:id="@+id/linkPickerClose"
@@ -55,7 +55,7 @@
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/select_link_sub"
                 android:textColor="@color/textSubSecondary"
-                android:textSize="12sp" />
+                android:textSize="@dimen/font_12" />
 
             <ListView
                 android:id="@+id/linkPickerList"
@@ -81,7 +81,7 @@
                 android:focusable="true"
                 android:clickable="true"
                 android:text="@string/cancel"
-                android:textSize="14sp" />
+                android:textSize="@dimen/font_14" />
 
         </LinearLayout>
 

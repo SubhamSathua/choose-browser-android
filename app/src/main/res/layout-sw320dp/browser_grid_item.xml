@@ -41,7 +41,7 @@
                 android:lines="2"
                 android:ellipsize="end"
                 android:scrollHorizontally="false"
-                android:textSize="10sp"
+                android:textSize="@dimen/font_10"
                 tools:text="This is a Browser" />
 
         </LinearLayout>

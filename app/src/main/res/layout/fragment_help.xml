@@ -58,7 +58,7 @@
                     android:textColor="@color/text"
                     android:fontFamily="@font/poppins_regular"
                     android:text="@string/test_pop"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/font_18" />
             </LinearLayout>
 
             <LinearLayout
@@ -79,7 +79,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="@string/test_pop_sub"
                     android:textColor="@color/textSubSecondary"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/font_12" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -134,7 +134,7 @@
                     android:textColor="@color/text"
                     android:fontFamily="@font/poppins_regular"
                     android:text="@string/about"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/font_18" />
             </LinearLayout>
 
             <LinearLayout
@@ -154,7 +154,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="@string/about_sub"
                     android:textColor="@color/textSubSecondary"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/font_12" />
             </LinearLayout>
 
         </LinearLayout>
@@ -212,7 +212,7 @@
                     android:textColor="@color/text"
                     android:fontFamily="@font/poppins_regular"
                     android:text="@string/feedback"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/font_18" />
             </LinearLayout>
 
             <LinearLayout
@@ -233,7 +233,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="@string/feedback_sub"
                     android:textColor="@color/textSubSecondary"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/font_12" />
             </LinearLayout>
         </LinearLayout>
 
@@ -284,7 +284,7 @@
                     android:textColor="@color/text"
                     android:fontFamily="@font/poppins_regular"
                     android:text="Privacy Policy"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/font_18" />
             </LinearLayout>
 
             <LinearLayout
@@ -304,7 +304,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="How we handle your data."
                     android:textColor="@color/textSubSecondary"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/font_12" />
             </LinearLayout>
         </LinearLayout>
 

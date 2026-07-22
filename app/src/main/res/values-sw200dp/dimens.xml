@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="fab_margin">200dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
     <dimen name="resize_ui_header">@dimen/font_20</dimen>
     <dimen name="resize_ui_body">@dimen/font_15</dimen>
     <dimen name="resize_ui_caption">@dimen/font_12</dimen>

@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:text="Installed Browsers"
-            android:textSize="20sp"
+            android:textSize="@dimen/font_20"
             android:textStyle="bold"
             android:textColor="@color/text"/>
     </LinearLayout>

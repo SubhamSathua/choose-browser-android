@@ -29,7 +29,7 @@
             android:fontFamily="@font/poppins_medium"
             android:text="What's New"
             android:textColor="@color/text"
-            android:textSize="18sp" />
+            android:textSize="@dimen/font_18" />
 
         <ImageView
             android:id="@+id/markdownClose"

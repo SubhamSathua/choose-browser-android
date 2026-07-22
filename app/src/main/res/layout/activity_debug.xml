@@ -45,7 +45,7 @@
             android:fontFamily="@font/poppins_medium"
             android:text="Debug"
             android:textColor="@color/text"
-            android:textSize="18sp" />
+            android:textSize="@dimen/font_18" />
     </LinearLayout>
 
     <!-- Divider -->
@@ -95,7 +95,7 @@
                             android:fontFamily="@font/poppins_medium"
                             android:text="Update JSON Cache"
                             android:textColor="@color/text"
-                            android:textSize="16sp"
+                            android:textSize="@dimen/font_16"
                             android:textStyle="bold" />
 
                         <Button
@@ -107,7 +107,7 @@
                             android:fontFamily="@font/poppins_regular"
                             android:text="Re-fetch"
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/font_12" />
 
                         <Button
                             android:id="@+id/debugClearCacheBtn"
@@ -117,7 +117,7 @@
                             android:fontFamily="@font/poppins_regular"
                             android:text="Clear"
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/font_12" />
                     </LinearLayout>
 
                     <!-- Last fetch time -->
@@ -128,7 +128,7 @@
                         android:fontFamily="@font/poppins_light"
                         android:text="Last fetched:"
                         android:textColor="@color/textSub"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/font_12" />
 
                     <TextView
                         android:id="@+id/debugLastFetchTime"
@@ -138,7 +138,7 @@
                         android:fontFamily="@font/poppins_regular"
                         android:text="—"
                         android:textColor="@color/text"
-                        android:textSize="13sp" />
+                        android:textSize="@dimen/font_13" />
 
                     <!-- Divider -->
                     <View
@@ -161,14 +161,14 @@
                             android:fontFamily="@font/poppins_light"
                             android:text="CACHE_UPDATE_JSON"
                             android:textColor="@color/textSub"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/font_12" />
 
                         <TextView
                             android:id="@+id/debugCacheFlag"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/font_12" />
                     </LinearLayout>
 
                     <!-- Divider -->
@@ -185,7 +185,7 @@
                         android:fontFamily="@font/poppins_light"
                         android:text="Cached JSON:"
                         android:textColor="@color/textSub"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/font_12" />
 
                     <!-- Raw JSON value -->
                     <TextView
@@ -199,7 +199,7 @@
                         android:text="No cached JSON"
                         android:textColor="#E0E0E0"
                         android:textIsSelectable="true"
-                        android:textSize="11sp" />
+                        android:textSize="@dimen/font_11" />
 
                     <!-- Divider -->
                     <View
@@ -215,7 +215,7 @@
                         android:fontFamily="@font/poppins_light"
                         android:text="Fetch Log:"
                         android:textColor="@color/textSub"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/font_12" />
 
                     <!-- Fetch Log value -->
                     <TextView
@@ -229,7 +229,7 @@
                         android:text="Press Re-fetch to diagnose"
                         android:textColor="@color/textSub"
                         android:textIsSelectable="true"
-                        android:textSize="11sp" />
+                        android:textSize="@dimen/font_11" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -268,7 +268,7 @@
                                 android:fontFamily="@font/poppins_medium"
                                 android:text="Temp JSON Override"
                                 android:textColor="@color/text"
-                                android:textSize="16sp"
+                                android:textSize="@dimen/font_16"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -278,7 +278,7 @@
                                 android:fontFamily="@font/poppins_light"
                                 android:text="In-memory only. Cleared when app closes."
                                 android:textColor="@color/textSub"
-                                android:textSize="11sp" />
+                                android:textSize="@dimen/font_11" />
                         </LinearLayout>
 
                         <Button
@@ -289,7 +289,7 @@
                             android:fontFamily="@font/poppins_regular"
                             android:text="Edit"
                             android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/font_12" />
                     </LinearLayout>
 
                     <!-- Status row -->
@@ -307,7 +307,7 @@
                             android:fontFamily="@font/poppins_light"
                             android:text="Status:"
                             android:textColor="@color/textSub"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/font_12" />
 
                         <TextView
                             android:id="@+id/debugTempStatus"
@@ -315,7 +315,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
                             android:text="Inactive"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/font_12" />
 
                         <Button
                             android:id="@+id/debugClearTempBtn"
@@ -326,7 +326,7 @@
                             android:fontFamily="@font/poppins_regular"
                             android:text="Clear"
                             android:textColor="#FFFFFF"
-                            android:textSize="11sp"
+                            android:textSize="@dimen/font_11"
                             android:visibility="gone" />
                     </LinearLayout>
 

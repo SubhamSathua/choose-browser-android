@@ -1,3 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="fab_margin">48dp</dimen>
+    <dimen name="resize_ui_header">@dimen/font_20</dimen>
+    <dimen name="resize_ui_body">@dimen/font_15</dimen>
+    <dimen name="resize_ui_caption">@dimen/font_12</dimen>
+    <dimen name="resize_ui_small">@dimen/font_11</dimen>
+    <dimen name="resize_ui_xsmall">@dimen/font_10</dimen>
 </resources>

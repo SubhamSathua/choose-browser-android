@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Full Link"
-                android:textSize="20sp" />
+                android:textSize="@dimen/font_20" />
         </LinearLayout>
 
         <ImageView
@@ -76,7 +76,7 @@
             android:lineSpacingExtra="3dp"
             tools:text="Hello"
             android:textIsSelectable="true"
-            android:textSize="13sp" />
+            android:textSize="@dimen/font_13" />
     </ScrollView>
 
     <!-- Action buttons row -->
@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Share"
-                android:textSize="14sp" />
+                android:textSize="@dimen/font_14" />
         </LinearLayout>
 
         <!-- Copy Clean Link button -->
@@ -142,7 +142,7 @@
                 android:fontFamily="@font/poppins_medium"
                 android:text="Copy Clean Link"
                 android:textColor="@color/PopUpCardDockText"
-                android:textSize="14sp" />
+                android:textSize="@dimen/font_14" />
         </LinearLayout>
 
     </LinearLayout>

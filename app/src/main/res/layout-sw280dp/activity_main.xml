@@ -35,7 +35,7 @@
                 android:fontFamily="@font/poppins_medium"
                 android:text="@string/perm_lvl"
                 android:textColor="@color/text"
-                android:textSize="20dp"
+                android:textSize="@dimen/font_20dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.055"
@@ -124,7 +124,7 @@
                                     android:maxLines="1"
                                     android:text="@string/perm2"
                                     android:textColor="@color/text"
-                                    android:textSize="18dp" />
+                                    android:textSize="@dimen/font_18dp" />
 
                                 <ImageView
                                     android:id="@+id/perm2_check"
@@ -220,7 +220,7 @@
                                     android:fontFamily="@font/poppins_medium"
                                     android:text="@string/perm1"
                                     android:textColor="@color/text"
-                                    android:textSize="18dp" />
+                                    android:textSize="@dimen/font_18dp" />
 
                                 <ImageView
                                     android:id="@+id/defaultBrowserCheck"
@@ -294,7 +294,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
                             android:text="Update Available"
-                            android:textSize="15sp" />
+                            android:textSize="@dimen/font_15" />
 
                         <TextView
                             android:id="@+id/updateMsg"
@@ -302,7 +302,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_light"
                             android:text=""
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/font_12" />
                     </LinearLayout>
 
                     <ImageView
@@ -364,7 +364,7 @@
                             android:paddingRight="15dp"
                             android:text="@string/AppBranding"
                             android:textColor="@color/text"
-                            android:textSize="14dp" />
+                            android:textSize="@dimen/font_14dp" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

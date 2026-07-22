@@ -78,7 +78,7 @@
                     android:textColor="@color/previewPage_textSecondary"
                     android:textColorHint="#88ffffff"
                     android:hint="Search or type URL"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/font_12" />
 
                 <!-- Clear text (X) button, shown only when focused -->
                 <ImageButton
@@ -161,7 +161,7 @@
                     android:fontFamily="@font/poppins"
                     android:text="Copy"
                     android:textColor="@color/previewPage_textSecondary"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/font_12" />
 
             </LinearLayout>
 
@@ -187,7 +187,7 @@
                     android:fontFamily="@font/poppins"
                     android:text="Share"
                     android:textColor="@color/previewPage_textSecondary"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/font_12" />
 
             </LinearLayout>
         </LinearLayout>
@@ -220,7 +220,7 @@
                 android:paddingHorizontal="12dp"
                 android:textColor="@color/previewPage_textSecondary"
                 android:textColorHint="#88ffffff"
-                android:textSize="13sp" />
+                android:textSize="@dimen/font_13" />
 
             <TextView
                 android:id="@+id/tvFindCount"
@@ -230,7 +230,7 @@
                 android:fontFamily="@font/poppins"
                 android:text="0/0"
                 android:textColor="#99ffffff"
-                android:textSize="12sp" />
+                android:textSize="@dimen/font_12" />
 
             <ImageButton
                 android:id="@+id/btnFindPrev"

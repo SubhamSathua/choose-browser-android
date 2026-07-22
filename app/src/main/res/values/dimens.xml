@@ -1,3 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+
+    <!-- =============================================
+         Common Base Font Sizes (raw values)
+         All layout textSize should reference these
+         ============================================= -->
+    <dimen name="font_10">10sp</dimen>
+    <dimen name="font_11">11sp</dimen>
+    <dimen name="font_12">12sp</dimen>
+    <dimen name="font_13">13sp</dimen>
+    <dimen name="font_14">14sp</dimen>
+    <dimen name="font_14dp">14dp</dimen>
+    <dimen name="font_15">15sp</dimen>
+    <dimen name="font_16">16sp</dimen>
+    <dimen name="font_17">17sp</dimen>
+    <dimen name="font_18">18sp</dimen>
+    <dimen name="font_18dp">18dp</dimen>
+    <dimen name="font_20">20sp</dimen>
+    <dimen name="font_20dp">20dp</dimen>
+    <dimen name="font_22">22sp</dimen>
+    <dimen name="font_24">24sp</dimen>
+
+    <!-- =============================================
+         Branding Area
+         App logo, app name, tagline, brand container
+         ============================================= -->
+    <dimen name="branding_title">@dimen/font_20</dimen>
+    <dimen name="branding_subtitle">@dimen/font_18dp</dimen>
+    <dimen name="branding_tagline">@dimen/font_14dp</dimen>
+
+    <!-- =============================================
+         App UI (All general screens, dialogs, bottom sheets)
+         ============================================= -->
+    <!-- Screen / Sheet headers -->
+    <dimen name="ui_header_large">@dimen/font_24</dimen>
+    <dimen name="ui_header">@dimen/font_20</dimen>
+    <dimen name="ui_header_medium">@dimen/font_18</dimen>
+    <dimen name="ui_header_small">@dimen/font_16</dimen>
+    <dimen name="ui_header_title">@dimen/font_17</dimen>
+
+    <!-- Card / Section body -->
+    <dimen name="ui_body_large">@dimen/font_16</dimen>
+    <dimen name="ui_body">@dimen/font_15</dimen>
+    <dimen name="ui_body_small">@dimen/font_14</dimen>
+
+    <!-- Labels, buttons, captions -->
+    <dimen name="ui_label">@dimen/font_13</dimen>
+    <dimen name="ui_caption">@dimen/font_12</dimen>
+    <dimen name="ui_small">@dimen/font_11</dimen>
+    <dimen name="ui_xsmall">@dimen/font_10</dimen>
+
+    <!-- =============================================
+         About Screen
+         Hero section, cards, footer
+         ============================================= -->
+    <dimen name="about_hero_title">@dimen/font_22</dimen>
+    <dimen name="about_hero_subtitle">@dimen/font_13</dimen>
+    <dimen name="about_hero_tagline">@dimen/font_12</dimen>
+    <dimen name="about_card_title">@dimen/font_16</dimen>
+    <dimen name="about_card_desc">@dimen/font_12</dimen>
+    <dimen name="about_footer">@dimen/font_11</dimen>
+
+    <!-- =============================================
+         Layout Resize Variants
+         Font sizes that may differ per screen width.
+         Override these in sw* / land / w* dimens files.
+         ============================================= -->
+    <dimen name="resize_ui_header">@dimen/ui_header</dimen>
+    <dimen name="resize_ui_body">@dimen/ui_body</dimen>
+    <dimen name="resize_ui_caption">@dimen/ui_caption</dimen>
+    <dimen name="resize_ui_small">@dimen/ui_small</dimen>
+    <dimen name="resize_ui_xsmall">@dimen/ui_xsmall</dimen>
 </resources>

@@ -30,7 +30,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:fontFamily">@font/poppins</item>
         <item name="android:textColor">@color/previewPage_textSecondary</item>
-        <item name="android:textSize">11sp</item>
+        <item name="android:textSize">@dimen/font_11</item>
         <item name="android:layout_marginTop">4dp</item>
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>

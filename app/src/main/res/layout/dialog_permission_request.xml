@@ -34,7 +34,7 @@
             android:fontFamily="@font/poppins"
             android:text="site.com wants to use your camera/file/audio/..."
             android:textColor="#ffffff"
-            android:textSize="14sp"
+            android:textSize="@dimen/font_14"
             android:lineSpacingExtra="2dp" />
     </LinearLayout>
 
@@ -51,7 +51,7 @@
         android:gravity="center"
         android:text="Allow ONLY this time"
         android:textColor="#ffffff"
-        android:textSize="15sp" />
+        android:textSize="@dimen/font_15" />
 
     <!-- Don't Allow -->
     <TextView
@@ -65,6 +65,6 @@
         android:gravity="center"
         android:text="Don&apos;t Allow"
         android:textColor="#000000"
-        android:textSize="15sp" />
+        android:textSize="@dimen/font_15" />
 
 </LinearLayout>

@@ -25,7 +25,7 @@
         android:paddingBottom="4dp"
         android:text="Download Update"
         android:textColor="@color/text"
-        android:textSize="18sp"
+        android:textSize="@dimen/font_18"
         android:textStyle="bold" />
 
     <TextView
@@ -37,7 +37,7 @@
         android:paddingBottom="16dp"
         android:text="Choose a source to download"
         android:textColor="@color/textSub"
-        android:textSize="13sp" />
+        android:textSize="@dimen/font_13" />
 
     <!-- Store rows -->
 
@@ -68,7 +68,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="GitHub Releases"
             android:textColor="@color/text"
-            android:textSize="15sp" />
+            android:textSize="@dimen/font_15" />
 
         <ImageView
             android:layout_width="18dp"
@@ -104,7 +104,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="GitHub"
             android:textColor="@color/text"
-            android:textSize="15sp" />
+            android:textSize="@dimen/font_15" />
 
         <ImageView
             android:layout_width="18dp"
@@ -140,7 +140,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="Play Store"
             android:textColor="@color/text"
-            android:textSize="15sp" />
+            android:textSize="@dimen/font_15" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -148,7 +148,7 @@
             android:fontFamily="@font/poppins_light"
             android:text="Coming Soon"
             android:textColor="@color/textSub"
-            android:textSize="12sp" />
+            android:textSize="@dimen/font_12" />
     </LinearLayout>
 
     <!-- 4. F-Droid (disabled by default) -->
@@ -178,7 +178,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="F-Droid"
             android:textColor="@color/text"
-            android:textSize="15sp" />
+            android:textSize="@dimen/font_15" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -186,7 +186,7 @@
             android:fontFamily="@font/poppins_light"
             android:text="Coming Soon"
             android:textColor="@color/textSub"
-            android:textSize="12sp" />
+            android:textSize="@dimen/font_12" />
     </LinearLayout>
 
     <!-- 5. APK Mirror (disabled by default) -->
@@ -216,7 +216,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="APK Mirror"
             android:textColor="@color/text"
-            android:textSize="15sp" />
+            android:textSize="@dimen/font_15" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -224,7 +224,7 @@
             android:fontFamily="@font/poppins_light"
             android:text="Coming Soon"
             android:textColor="@color/textSub"
-            android:textSize="12sp" />
+            android:textSize="@dimen/font_12" />
     </LinearLayout>
 
     <!-- 6. MyStore (disabled by default) -->
@@ -254,7 +254,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="MyStore"
             android:textColor="@color/text"
-            android:textSize="15sp" />
+            android:textSize="@dimen/font_15" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -262,7 +262,7 @@
             android:fontFamily="@font/poppins_light"
             android:text="Coming Soon"
             android:textColor="@color/textSub"
-            android:textSize="12sp" />
+            android:textSize="@dimen/font_12" />
     </LinearLayout>
 
 </LinearLayout>

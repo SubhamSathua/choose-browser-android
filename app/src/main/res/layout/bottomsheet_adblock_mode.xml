@@ -25,7 +25,7 @@
         android:fontFamily="@font/poppins"
         android:text="Ad-Blocker Mode"
         android:textColor="@color/previewPage_textSecondary"
-        android:textSize="16sp"
+        android:textSize="@dimen/font_16"
         android:textStyle="bold" />
 
     <TextView
@@ -36,7 +36,7 @@
         android:fontFamily="@font/poppins"
         android:text="Choose blocking strategy for ads and trackers."
         android:textColor="#99ffffff"
-        android:textSize="12sp" />
+        android:textSize="@dimen/font_12" />
 
     <!-- ─── Domain Filter List ─── -->
     <LinearLayout
@@ -70,7 +70,7 @@
                 android:fontFamily="@font/poppins"
                 android:text="Domain Filter List"
                 android:textColor="@color/previewPage_textSecondary"
-                android:textSize="14sp" />
+                android:textSize="@dimen/font_14" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -78,7 +78,7 @@
                 android:fontFamily="@font/poppins"
                 android:text="Block known ad &amp; tracker domains"
                 android:textColor="#99ffffff"
-                android:textSize="11sp" />
+                android:textSize="@dimen/font_11" />
         </LinearLayout>
 
         <ImageView
@@ -121,7 +121,7 @@
                 android:fontFamily="@font/poppins"
                 android:text="AdGuard DNS"
                 android:textColor="@color/previewPage_textSecondary"
-                android:textSize="14sp" />
+                android:textSize="@dimen/font_14" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -129,7 +129,7 @@
                 android:fontFamily="@font/poppins"
                 android:text="Extended blocking with DNS-level filtering"
                 android:textColor="#99ffffff"
-                android:textSize="11sp" />
+                android:textSize="@dimen/font_11" />
         </LinearLayout>
 
         <ImageView
