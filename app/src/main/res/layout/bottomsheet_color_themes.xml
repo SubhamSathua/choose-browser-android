@@ -46,7 +46,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_medium"
+                android:fontFamily="@font/heading"
                 android:text="@string/color_themes"
                 android:textColor="@color/text"
                 android:textSize="@dimen/font_20" />
@@ -68,7 +68,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_regular"
+        android:fontFamily="@font/body"
         android:paddingHorizontal="8dp"
         android:paddingBottom="10dp"
         android:text="@string/color_themes_sub"
@@ -92,7 +92,7 @@
                 android:id="@+id/colorThemeRadioDefault"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
+                android:fontFamily="@font/body"
                 android:text="@string/color_theme_default"
                 tools:checked="true"
                 android:textColor="@color/text"
@@ -105,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/PriBtn_BgCol"
-                android:fontFamily="@font/poppins_regular"
+                android:fontFamily="@font/body"
                 android:text="@string/color_theme_eclipse"
                 android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
                 android:textColor="@color/text" />
@@ -115,7 +115,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/PriBtn_BgCol"
-                android:fontFamily="@font/poppins_regular"
+                android:fontFamily="@font/body"
                 android:text="@string/color_theme_neuronight"
                 android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
                 android:textColor="@color/text" />
@@ -125,7 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/PriBtn_BgCol"
-                android:fontFamily="@font/poppins_regular"
+                android:fontFamily="@font/body"
                 android:text="@string/color_theme_neural_blue"
                 android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
                 android:textColor="@color/text" />
@@ -135,7 +135,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/PriBtn_BgCol"
-                android:fontFamily="@font/poppins_regular"
+                android:fontFamily="@font/body"
                 android:text="@string/color_theme_cosmic"
                 android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
                 android:textColor="@color/text" />
@@ -145,7 +145,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/PriBtn_BgCol"
-                android:fontFamily="@font/poppins_regular"
+                android:fontFamily="@font/body"
                 android:text="@string/color_theme_obsidian_pulse"
                 android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
                 android:textColor="@color/text" />

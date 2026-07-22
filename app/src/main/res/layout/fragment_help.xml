@@ -56,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:textColor="@color/text"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/body"
                     android:text="@string/test_pop"
                     android:textSize="@dimen/font_18" />
             </LinearLayout>
@@ -76,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/body"
                     android:text="@string/test_pop_sub"
                     android:textColor="@color/textSubSecondary"
                     android:textSize="@dimen/font_12" />
@@ -132,7 +132,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:textColor="@color/text"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/body"
                     android:text="@string/about"
                     android:textSize="@dimen/font_18" />
             </LinearLayout>
@@ -151,7 +151,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/body"
                     android:text="@string/about_sub"
                     android:textColor="@color/textSubSecondary"
                     android:textSize="@dimen/font_12" />
@@ -210,7 +210,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:textColor="@color/text"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/body"
                     android:text="@string/feedback"
                     android:textSize="@dimen/font_18" />
             </LinearLayout>
@@ -230,7 +230,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/body"
                     android:text="@string/feedback_sub"
                     android:textColor="@color/textSubSecondary"
                     android:textSize="@dimen/font_12" />
@@ -282,7 +282,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:textColor="@color/text"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/body"
                     android:text="Privacy Policy"
                     android:textSize="@dimen/font_18" />
             </LinearLayout>
@@ -301,7 +301,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/body"
                     android:text="How we handle your data."
                     android:textColor="@color/textSubSecondary"
                     android:textSize="@dimen/font_12" />

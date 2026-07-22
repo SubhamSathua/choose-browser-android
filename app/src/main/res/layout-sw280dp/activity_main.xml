@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
-                android:fontFamily="@font/poppins_medium"
+                android:fontFamily="@font/heading"
                 android:text="@string/perm_lvl"
                 android:textColor="@color/text"
                 android:textSize="@dimen/font_20dp"
@@ -69,16 +69,17 @@
                         android:id="@+id/overlayPerm_btn"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
+                        android:paddingVertical="10dp"
+                        android:minHeight="60dp"
                         android:background="@color/backgroundSecondary"
                         android:clickable="true"
                         android:focusable="true"
                         android:foreground="?attr/selectableItemBackground"
                         android:gravity="center_vertical"
-                        android:minHeight="60dp"
                         android:orientation="horizontal"
                         android:paddingLeft="10dp"
-                        android:paddingTop="2dp"
                         android:paddingRight="5dp"
+                        android:paddingTop="2dp"
                         android:paddingBottom="2dp"
                         tools:context=".MainActivity">
 
@@ -120,7 +121,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:ellipsize="end"
-                                    android:fontFamily="@font/poppins_medium"
+                                    android:fontFamily="@font/heading"
                                     android:maxLines="1"
                                     android:text="@string/perm2"
                                     android:textColor="@color/text"
@@ -165,6 +166,7 @@
                         android:id="@+id/defaultBrowserBtn"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
+                        android:paddingVertical="10dp"
                         android:minHeight="60dp"
                         android:background="@color/backgroundSecondary"
                         android:clickable="true"
@@ -217,7 +219,7 @@
                                     android:maxLines="1"
                                     android:ellipsize="end"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/poppins_medium"
+                                    android:fontFamily="@font/heading"
                                     android:text="@string/perm1"
                                     android:textColor="@color/text"
                                     android:textSize="@dimen/font_18dp" />
@@ -292,7 +294,7 @@
                             android:id="@+id/updateTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_medium"
+                            android:fontFamily="@font/heading"
                             android:text="Update Available"
                             android:textSize="@dimen/font_15" />
 
@@ -300,7 +302,7 @@
                             android:id="@+id/updateMsg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_semibold"
+                            android:fontFamily="@font/label"
                             android:text=""
                             android:textSize="@dimen/font_12" />
                     </LinearLayout>
@@ -356,11 +358,11 @@
                             android:layout_width="45dp"
                             android:layout_height="45dp"
                             app:srcCompat="@drawable/logo" />
-
+                        <Space android:layout_width="10dp" android:layout_height="45dp" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/syne_bold"
+                            android:fontFamily="@font/brand"
                             android:paddingRight="15dp"
                             android:text="@string/AppBranding"
                             android:textColor="@color/text"
@@ -378,7 +380,7 @@
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="16dp"
                     android:backgroundTint="@color/PriBtn_BgCol"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/body"
                     android:includeFontPadding="false"
                     android:paddingLeft="14dp"
                     android:paddingTop="10dp"

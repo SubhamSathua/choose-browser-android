@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:fontFamily="@font/poppins_medium"
+            android:fontFamily="@font/heading"
             android:text="Debug"
             android:textColor="@color/text"
             android:textSize="@dimen/font_18" />
@@ -92,7 +92,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/poppins_medium"
+                            android:fontFamily="@font/heading"
                             android:text="Update JSON Cache"
                             android:textColor="@color/text"
                             android:textSize="@dimen/font_16"
@@ -104,7 +104,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="6dp"
                             android:backgroundTint="#377aff"
-                            android:fontFamily="@font/poppins_regular"
+                            android:fontFamily="@font/body"
                             android:text="Re-fetch"
                             android:textColor="#FFFFFF"
                             android:textSize="@dimen/font_12" />
@@ -114,7 +114,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:backgroundTint="#F44336"
-                            android:fontFamily="@font/poppins_regular"
+                            android:fontFamily="@font/body"
                             android:text="Clear"
                             android:textColor="#FFFFFF"
                             android:textSize="@dimen/font_12" />
@@ -125,7 +125,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:fontFamily="@font/poppins_semibold"
+                        android:fontFamily="@font/label"
                         android:text="Last fetched:"
                         android:textColor="@color/textSub"
                         android:textSize="@dimen/font_12" />
@@ -135,7 +135,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:fontFamily="@font/poppins_regular"
+                        android:fontFamily="@font/body"
                         android:text="—"
                         android:textColor="@color/text"
                         android:textSize="@dimen/font_13" />
@@ -158,7 +158,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/poppins_semibold"
+                            android:fontFamily="@font/label"
                             android:text="CACHE_UPDATE_JSON"
                             android:textColor="@color/textSub"
                             android:textSize="@dimen/font_12" />
@@ -167,7 +167,7 @@
                             android:id="@+id/debugCacheFlag"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_medium"
+                            android:fontFamily="@font/heading"
                             android:textSize="@dimen/font_12" />
                     </LinearLayout>
 
@@ -182,7 +182,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/jetbrainsmono_variablefont_wght"
+                        android:fontFamily="@font/mono"
                         android:text="Cached JSON:"
                         android:textColor="@color/textSub"
                         android:textSize="@dimen/font_12" />
@@ -194,7 +194,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:background="#1A1A2E"
-                        android:fontFamily="@font/jetbrainsmono_variablefont_wght"
+                        android:fontFamily="@font/mono"
                         android:padding="10dp"
                         android:text="No cached JSON"
                         android:textColor="#E0E0E0"
@@ -212,7 +212,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/jetbrainsmono_variablefont_wght"
+                        android:fontFamily="@font/mono"
                         android:text="Fetch Log:"
                         android:textColor="@color/textSub"
                         android:textSize="@dimen/font_12" />
@@ -224,7 +224,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:background="#11000000"
-                        android:fontFamily="@font/jetbrainsmono_variablefont_wght"
+                        android:fontFamily="@font/mono"
                         android:padding="10dp"
                         android:text="Press Re-fetch to diagnose"
                         android:textColor="@color/textSub"
@@ -265,7 +265,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/poppins_medium"
+                                android:fontFamily="@font/heading"
                                 android:text="Temp JSON Override"
                                 android:textColor="@color/text"
                                 android:textSize="@dimen/font_16"
@@ -275,7 +275,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
-                                android:fontFamily="@font/poppins_semibold"
+                                android:fontFamily="@font/label"
                                 android:text="In-memory only. Cleared when app closes."
                                 android:textColor="@color/textSub"
                                 android:textSize="@dimen/font_11" />
@@ -286,7 +286,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:backgroundTint="#377aff"
-                            android:fontFamily="@font/poppins_regular"
+                            android:fontFamily="@font/body"
                             android:text="Edit"
                             android:textColor="#FFFFFF"
                             android:textSize="@dimen/font_12" />
@@ -304,7 +304,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/poppins_semibold"
+                            android:fontFamily="@font/label"
                             android:text="Status:"
                             android:textColor="@color/textSub"
                             android:textSize="@dimen/font_12" />
@@ -313,7 +313,7 @@
                             android:id="@+id/debugTempStatus"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_medium"
+                            android:fontFamily="@font/heading"
                             android:text="Inactive"
                             android:textSize="@dimen/font_12" />
 
@@ -323,7 +323,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:backgroundTint="#F44336"
-                            android:fontFamily="@font/poppins_regular"
+                            android:fontFamily="@font/body"
                             android:text="Clear"
                             android:textColor="#FFFFFF"
                             android:textSize="@dimen/font_11"

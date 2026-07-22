@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="4dp"
-        android:fontFamily="@font/poppins_regular"
+        android:fontFamily="@font/body"
         android:text="App Permissions"
         android:textColor="@color/previewPage_textSecondary"
         android:textSize="@dimen/font_16"
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="14dp"
-        android:fontFamily="@font/poppins_regular"
+        android:fontFamily="@font/body"
         android:text="Tap to allow, or tap a granted permission to manage it in system settings."
         android:textColor="#99ffffff"
         android:textSize="@dimen/font_12" />
@@ -66,7 +66,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
+                android:fontFamily="@font/body"
                 android:text="Camera"
                 android:textColor="@color/previewPage_textSecondary"
                 android:textSize="@dimen/font_14" />
@@ -75,7 +75,7 @@
                 android:id="@+id/permStatusCamera"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
+                android:fontFamily="@font/body"
                 android:text="Not granted"
                 android:textColor="#FF5252"
                 android:textSize="@dimen/font_11" />
@@ -86,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_preview_addr_action_btn"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/body"
             android:paddingHorizontal="14dp"
             android:paddingVertical="6dp"
             android:text="Allow"
@@ -123,7 +123,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
+                android:fontFamily="@font/body"
                 android:text="Microphone"
                 android:textColor="@color/previewPage_textSecondary"
                 android:textSize="@dimen/font_14" />
@@ -132,7 +132,7 @@
                 android:id="@+id/permStatusMic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
+                android:fontFamily="@font/body"
                 android:text="Not granted"
                 android:textColor="#FF5252"
                 android:textSize="@dimen/font_11" />
@@ -143,7 +143,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_preview_addr_action_btn"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/body"
             android:paddingHorizontal="14dp"
             android:paddingVertical="6dp"
             android:text="Allow"
@@ -180,7 +180,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
+                android:fontFamily="@font/body"
                 android:text="Location"
                 android:textColor="@color/previewPage_textSecondary"
                 android:textSize="@dimen/font_14" />
@@ -189,7 +189,7 @@
                 android:id="@+id/permStatusLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
+                android:fontFamily="@font/body"
                 android:text="Not granted"
                 android:textColor="#FF5252"
                 android:textSize="@dimen/font_11" />
@@ -200,7 +200,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_preview_addr_action_btn"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/body"
             android:paddingHorizontal="14dp"
             android:paddingVertical="6dp"
             android:text="Allow"
@@ -237,7 +237,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
+                android:fontFamily="@font/body"
                 android:text="Storage"
                 android:textColor="@color/previewPage_textSecondary"
                 android:textSize="@dimen/font_14" />
@@ -246,7 +246,7 @@
                 android:id="@+id/permStatusStorage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
+                android:fontFamily="@font/body"
                 android:text="Not granted"
                 android:textColor="#FF5252"
                 android:textSize="@dimen/font_11" />
@@ -257,7 +257,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_preview_addr_action_btn"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/body"
             android:paddingHorizontal="14dp"
             android:paddingVertical="6dp"
             android:text="Allow"

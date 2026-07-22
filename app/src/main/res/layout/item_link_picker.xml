@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
-        android:fontFamily="@font/poppins_regular"
+        android:fontFamily="@font/body"
         android:maxLines="2"
         android:paddingHorizontal="12dp"
         android:paddingVertical="10dp"

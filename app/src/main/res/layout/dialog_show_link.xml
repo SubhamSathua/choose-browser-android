@@ -33,7 +33,7 @@
                 android:id="@+id/showLinkTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_medium"
+                android:fontFamily="@font/heading"
                 android:text="Full Link"
                 android:textSize="@dimen/font_20" />
         </LinearLayout>
@@ -72,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:breakStrategy="simple"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/body"
             android:lineSpacingExtra="3dp"
             tools:text="Hello"
             android:textIsSelectable="true"
@@ -111,7 +111,7 @@
                 android:id="@+id/showLinkShareText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_medium"
+                android:fontFamily="@font/heading"
                 android:text="Share"
                 android:textSize="@dimen/font_14" />
         </LinearLayout>
@@ -139,7 +139,7 @@
                 android:id="@+id/showLinkCopyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_medium"
+                android:fontFamily="@font/heading"
                 android:text="Copy Clean Link"
                 android:textColor="@color/PopUpCardDockText"
                 android:textSize="@dimen/font_14" />

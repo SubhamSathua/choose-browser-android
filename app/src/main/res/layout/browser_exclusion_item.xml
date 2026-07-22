@@ -24,7 +24,7 @@
             android:id="@+id/appName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_medium"
+            android:fontFamily="@font/heading"
             android:textColor="@color/text"
             android:textSize="@dimen/font_15" />
 
@@ -32,7 +32,7 @@
             android:id="@+id/packageName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/body"
             android:textColor="@color/textSubSecondary"
             android:textSize="@dimen/font_11" />
     </LinearLayout>

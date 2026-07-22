@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_weight="1"
-            android:fontFamily="@font/poppins_medium"
+            android:fontFamily="@font/heading"
             android:text="@string/exclude_browser_screen_title"
             android:textColor="@color/text"
             android:textSize="@dimen/font_18" />
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="14dp"
         android:layout_marginBottom="8dp"
-        android:fontFamily="@font/poppins_regular"
+        android:fontFamily="@font/body"
         android:text="@string/exclude_browser_screen_sub"
         android:textColor="@color/textSubSecondary"
         android:textSize="@dimen/font_12" />

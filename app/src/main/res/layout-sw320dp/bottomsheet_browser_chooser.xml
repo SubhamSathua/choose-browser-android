@@ -44,7 +44,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_medium"
+                android:fontFamily="@font/heading"
                 android:text="@string/open_wt"
                 android:textColor="@color/text"
                 android:textSize="@dimen/font_20" />
@@ -128,7 +128,7 @@
                     android:ellipsize="end"
                     android:paddingLeft="8dp"
                     android:textColor="?attr/colorOnSurface"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/body"
                     android:textSize="@dimen/font_11"
                     android:letterSpacing="-0.02"
                     tools:text="@string/demoLink" />
@@ -187,7 +187,7 @@
                                 android:maxLines="2"
                                 android:textSize="@dimen/font_12"
                                 android:ellipsize="end"
-                                android:fontFamily="@font/poppins_regular"
+                                android:fontFamily="@font/body"
                                 android:text="Show Link"/>
                         </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -225,7 +225,7 @@
                         android:layout_width="wrap_content"
                         android:minWidth="60dp"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
+                        android:fontFamily="@font/body"
                         android:gravity="center"
                         android:lines="1"
                         android:textSize="@dimen/font_12"
@@ -269,7 +269,7 @@
                         android:minWidth="60dp"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
-                        android:fontFamily="@font/poppins_regular"
+                        android:fontFamily="@font/body"
                         android:gravity="center"
                         android:lines="1"
                         android:text="Preview Page"
@@ -337,7 +337,7 @@
 <!--            android:paddingEnd="16dp"-->
 <!--            android:text="@string/showLink"-->
 <!--            android:textColor="@color/SecBtn_TxtCol"-->
-<!--            android:fontFamily="@font/poppins_medium"-->
+<!--            android:fontFamily="@font/heading"-->
 <!--            app:backgroundTint="@color/SecBtn_BgCol"-->
 <!--            app:icon="@drawable/link"-->
 <!--            app:iconSize="18sp"-->
@@ -351,7 +351,7 @@
 <!--            android:paddingStart="16dp"-->
 <!--            android:paddingEnd="16dp"-->
 <!--            android:text="@string/preview"-->
-<!--            android:fontFamily="@font/poppins_medium"-->
+<!--            android:fontFamily="@font/heading"-->
 <!--            android:textColor="@color/white"-->
 <!--            app:backgroundTint="@color/PriBtn_BgCol"-->
 <!--            app:icon="@drawable/preview"-->

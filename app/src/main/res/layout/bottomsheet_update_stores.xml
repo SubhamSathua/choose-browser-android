@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_medium"
+        android:fontFamily="@font/heading"
         android:paddingHorizontal="20dp"
         android:paddingBottom="4dp"
         android:text="Download Update"
@@ -32,7 +32,7 @@
         android:id="@+id/storeSheetSubtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_semibold"
+        android:fontFamily="@font/label"
         android:paddingHorizontal="20dp"
         android:paddingBottom="16dp"
         android:text="Choose a source to download"
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:layout_weight="1"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/body"
             android:text="GitHub Releases"
             android:textColor="@color/text"
             android:textSize="@dimen/font_15" />
@@ -101,7 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:layout_weight="1"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/body"
             android:text="GitHub"
             android:textColor="@color/text"
             android:textSize="@dimen/font_15" />
@@ -137,7 +137,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:layout_weight="1"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/body"
             android:text="Play Store"
             android:textColor="@color/text"
             android:textSize="@dimen/font_15" />
@@ -145,7 +145,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_semibold"
+            android:fontFamily="@font/label"
             android:text="Coming Soon"
             android:textColor="@color/textSub"
             android:textSize="@dimen/font_12" />
@@ -175,7 +175,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:layout_weight="1"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/body"
             android:text="F-Droid"
             android:textColor="@color/text"
             android:textSize="@dimen/font_15" />
@@ -183,7 +183,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_semibold"
+            android:fontFamily="@font/label"
             android:text="Coming Soon"
             android:textColor="@color/textSub"
             android:textSize="@dimen/font_12" />
@@ -213,7 +213,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:layout_weight="1"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/body"
             android:text="APK Mirror"
             android:textColor="@color/text"
             android:textSize="@dimen/font_15" />
@@ -221,7 +221,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_semibold"
+            android:fontFamily="@font/label"
             android:text="Coming Soon"
             android:textColor="@color/textSub"
             android:textSize="@dimen/font_12" />
@@ -251,7 +251,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:layout_weight="1"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/body"
             android:text="MyStore"
             android:textColor="@color/text"
             android:textSize="@dimen/font_15" />
@@ -259,7 +259,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_semibold"
+            android:fontFamily="@font/label"
             android:text="Coming Soon"
             android:textColor="@color/textSub"
             android:textSize="@dimen/font_12" />

@@ -72,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:fontFamily="@font/syne_bold"
+                    android:fontFamily="@font/brand"
                     android:text="@string/cfg_app_brand_name"
                     android:textColor="#FFFFFF"
                     android:textSize="@dimen/font_22" />
@@ -83,7 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/body"
                     android:text="Version 1.0"
                     android:textColor="@color/aboutPage_textSecondary"
                     android:textSize="@dimen/font_13" />
@@ -100,7 +100,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/body"
                     android:text="@string/cfg_made_by"
                     android:textColor="@color/aboutPage_textPrimary"
                     android:textSize="@dimen/font_13" />
@@ -110,7 +110,7 @@
                     android:layout_width="280dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/body"
                     android:gravity="center"
                     android:text="@string/about_appTag"
                     android:textColor="@color/aboutPage_textPrimary"
@@ -165,7 +165,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
+                            android:fontFamily="@font/body"
                             android:text="GitHub"
                             android:textColor="@color/text"
                             android:textSize="@dimen/font_16" />
@@ -173,7 +173,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
+                            android:fontFamily="@font/body"
                             android:text="Source code &amp; releases"
                             android:textColor="@color/textSubSecondary"
                             android:textSize="@dimen/font_12" />
@@ -226,7 +226,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
+                            android:fontFamily="@font/body"
                             android:text="Feedback"
                             android:textColor="@color/text"
                             android:textSize="@dimen/font_16" />
@@ -234,7 +234,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
+                            android:fontFamily="@font/body"
                             android:text="Share your thoughts"
                             android:textColor="@color/textSubSecondary"
                             android:textSize="@dimen/font_12" />
@@ -287,7 +287,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
+                            android:fontFamily="@font/body"
                             android:text="Privacy Policy"
                             android:textColor="@color/text"
                             android:textSize="@dimen/font_16" />
@@ -295,7 +295,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
+                            android:fontFamily="@font/body"
                             android:text="How we handle your data"
                             android:textColor="@color/textSubSecondary"
                             android:textSize="@dimen/font_12" />
@@ -348,7 +348,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
+                            android:fontFamily="@font/body"
                             android:text="@string/cfg_email_card_title"
                             android:textColor="@color/text"
                             android:textSize="@dimen/font_16" />
@@ -356,7 +356,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
+                            android:fontFamily="@font/body"
                             android:text="@string/cfg_contact_email"
                             android:textColor="@color/textSubSecondary"
                             android:textSize="@dimen/font_12" />
@@ -382,7 +382,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="32dp"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/body"
             android:text=""
             android:textColor="@color/textSubSecondary"
             android:textSize="@dimen/font_11" />
