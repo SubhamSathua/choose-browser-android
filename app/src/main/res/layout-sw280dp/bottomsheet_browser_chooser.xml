@@ -95,7 +95,6 @@
             app:icon="@drawable/shield_lock_24px"
             app:iconTint="@color/text" />
 
-
     </LinearLayout>
 
     <!-- Dock with URL + buttons -->
@@ -306,14 +305,14 @@
         <GridView
             android:id="@+id/browserGridView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="1dp"
             android:clipToPadding="false"
             android:columnWidth="72dp"
             android:horizontalSpacing="7dp"
-            android:nestedScrollingEnabled="true"
+            
             android:numColumns="auto_fit"
-            android:overScrollMode="always"
+            android:overScrollMode="ifContentScrolls"
             android:paddingBottom="16dp"
             android:scrollbarSize="6dp"
             android:scrollbarThumbVertical="@drawable/scrollbar_thumb_show_link"

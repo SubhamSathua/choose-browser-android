@@ -29,7 +29,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.core.view.ViewCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -100,8 +99,6 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
         gridView = view.findViewById(R.id.browserGridView);
         previewLinkBtn = view.findViewById(R.id.previewLinkBtn);
         previewPageBtn = view.findViewById(R.id.previewPage);
-        ViewCompat.setNestedScrollingEnabled(gridView, true);
-
         applyPopupTheme(view);
         setupObservers();
 

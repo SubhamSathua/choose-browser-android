@@ -10,7 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.util.Log;
 
 import com.hyper.choosebrowsernew.R;
 import com.hyper.choosebrowsernew.data.model.AppInfo;
@@ -19,10 +18,10 @@ import java.util.List;
 
 public class BrowserGridAdapter extends BaseAdapter {
 
-    Context context;
-    List<AppInfo> apps;
-    String url;
-    Runnable onDismiss;
+    private final Context context;
+    private final List<AppInfo> apps;
+    private final String url;
+    private final Runnable onDismiss;
 
     public BrowserGridAdapter(Context context, List<AppInfo> apps, String url, Runnable onDismiss) {
         this.context = context;
@@ -33,7 +32,6 @@ public class BrowserGridAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        Log.d("BrowserGridAdapter", "Count = " + apps.size());
         return apps.size();
     }
 
@@ -49,16 +47,20 @@ public class BrowserGridAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View convertView, ViewGroup parent) {
+        ViewHolder holder;
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.browser_grid_item, parent, false);
+            holder = new ViewHolder();
+            holder.icon = convertView.findViewById(R.id.browserIcon);
+            holder.name = convertView.findViewById(R.id.appName);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
 
-        ImageView icon = convertView.findViewById(R.id.browserIcon);
-        TextView name = convertView.findViewById(R.id.appName);
-
-        AppInfo app = apps.get(i);
-        icon.setImageDrawable(app.icon);
-        name.setText(app.name);
+        final AppInfo app = apps.get(i);
+        holder.icon.setImageDrawable(app.icon);
+        holder.name.setText(app.name);
 
         convertView.setOnClickListener(v -> {
             try {
@@ -73,5 +75,10 @@ public class BrowserGridAdapter extends BaseAdapter {
         });
 
         return convertView;
+    }
+
+    private static class ViewHolder {
+        ImageView icon;
+        TextView name;
     }
 }
