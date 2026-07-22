@@ -73,7 +73,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_light"
+                    android:fontFamily="@font/syne_bold"
                     android:text="@string/AppBranding"
                     android:textColor="@color/text"
                     android:textSize="@dimen/font_18dp" />
@@ -144,7 +144,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="5dp"
-                        android:fontFamily="@font/poppins_light"
+                        android:fontFamily="@font/poppins_semibold"
                         android:text="@string/ThemeSub"
                         android:textColor="@color/textSubSecondary"
                         android:textSize="@dimen/font_12" />
@@ -304,7 +304,7 @@
                         android:id="@+id/settingsUpdateMsg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_light"
+                        android:fontFamily="@font/poppins_semibold"
                         android:text="Hello"
                         android:textSize="@dimen/font_12" />
                 </LinearLayout>

@@ -128,7 +128,7 @@
                     android:ellipsize="end"
                     android:paddingLeft="8dp"
                     android:textColor="?attr/colorOnSurface"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_regular"
                     android:textSize="@dimen/font_11"
                     android:letterSpacing="-0.02"
                     tools:text="@string/demoLink" />

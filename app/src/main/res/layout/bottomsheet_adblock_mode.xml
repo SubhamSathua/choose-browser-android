@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="4dp"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/poppins_regular"
         android:text="Ad-Blocker Mode"
         android:textColor="@color/previewPage_textSecondary"
         android:textSize="@dimen/font_16"
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="14dp"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/poppins_regular"
         android:text="Choose blocking strategy for ads and trackers."
         android:textColor="#99ffffff"
         android:textSize="@dimen/font_12" />
@@ -67,7 +67,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:text="Domain Filter List"
                 android:textColor="@color/previewPage_textSecondary"
                 android:textSize="@dimen/font_14" />
@@ -75,7 +75,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:text="Block known ad &amp; tracker domains"
                 android:textColor="#99ffffff"
                 android:textSize="@dimen/font_11" />
@@ -118,7 +118,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:text="AdGuard DNS"
                 android:textColor="@color/previewPage_textSecondary"
                 android:textSize="@dimen/font_14" />
@@ -126,7 +126,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:text="Extended blocking with DNS-level filtering"
                 android:textColor="#99ffffff"
                 android:textSize="@dimen/font_11" />

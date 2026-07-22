@@ -69,6 +69,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:minHeight="60dp"
+                        android:paddingVertical="10dp"
                         android:background="@color/backgroundSecondary"
                         android:clickable="true"
                         android:focusable="true"
@@ -164,6 +165,7 @@
                         android:id="@+id/defaultBrowserBtn"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
+                        android:paddingVertical="10dp"
                         android:minHeight="60dp"
                         android:background="@color/backgroundSecondary"
                         android:clickable="true"
@@ -299,7 +301,7 @@
                             android:id="@+id/updateMsg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_light"
+                            android:fontFamily="@font/poppins_semibold"
                             android:text=""
                             android:textSize="@dimen/font_12" />
                     </LinearLayout>
@@ -359,7 +361,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
+                            android:fontFamily="@font/syne_bold"
                             android:paddingRight="15dp"
             android:text="@string/AppBranding"
             android:textColor="@color/text"

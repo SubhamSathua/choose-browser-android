@@ -70,7 +70,7 @@
                     android:textSelectHandleLeft="@drawable/text_select_handle_dynamic"
                     android:textSelectHandleRight="@drawable/text_select_handle_dynamic"
                     android:ellipsize="end"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_regular"
                     android:imeOptions="actionGo"
                     android:inputType="textUri"
                     android:maxLines="1"
@@ -158,7 +158,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_regular"
                     android:text="Copy"
                     android:textColor="@color/previewPage_textSecondary"
                     android:textSize="@dimen/font_12" />
@@ -184,7 +184,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/poppins_regular"
                     android:text="Share"
                     android:textColor="@color/previewPage_textSecondary"
                     android:textSize="@dimen/font_12" />
@@ -213,7 +213,7 @@
                 android:textSelectHandle="@drawable/text_select_handle_dynamic"
                 android:textSelectHandleLeft="@drawable/text_select_handle_dynamic"
                 android:textSelectHandleRight="@drawable/text_select_handle_dynamic"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:hint="Find in page…"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
@@ -227,7 +227,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="6dp"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_regular"
                 android:text="0/0"
                 android:textColor="#99ffffff"
                 android:textSize="@dimen/font_12" />

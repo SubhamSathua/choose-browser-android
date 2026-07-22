@@ -171,7 +171,7 @@ public class UpdateUiHelper {
             "<meta name='viewport' content='width=device-width, initial-scale=1.0'>" +
             "<script src='https://cdn.jsdelivr.net/npm/marked/marked.min.js'></script>" +
             "<style>" +
-            "  @font-face { font-family: 'Lora'; src: url('file:///android_res/font/lora_regular.ttf'); }" +
+            "  @font-face { font-family: 'Lora'; src: url('file:///android_res/font/lora_variablefont_wght.ttf'); }" +
             "  @font-face { font-family: 'Poppins'; src: url('file:///android_res/font/poppins_medium.ttf'); }" +
             "  body { " +
             "    background-color: transparent; color: " + bodyTextCol + "; " +
