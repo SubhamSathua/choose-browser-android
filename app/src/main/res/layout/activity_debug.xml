@@ -167,7 +167,7 @@
                             android:id="@+id/debugCacheFlag"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/heading"
+                            android:fontFamily="@font/mono"
                             android:textSize="@dimen/font_12" />
                     </LinearLayout>
 
