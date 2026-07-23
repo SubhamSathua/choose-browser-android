@@ -77,9 +77,7 @@ public class LicenseListActivity extends AppCompatActivity {
         boolean isDark = isDarkMode();
         Log.d(TAG, "buildLicenseHtml isDark=" + isDark);
         String bg = isDark ? "#1c1c1e" : "#f1f1f3";
-        String card = isDark ? "#2c2c2e" : "#ffffff";
         String text = isDark ? "#f2f2f7" : "#000000";
-        String sub = isDark ? "#aeaeb2" : "#575757";
 
         String content = readLicenseFile(item.fileName);
         Log.d(TAG, "readLicenseFile returned " + (content != null ? content.length() + " chars" : "null"));
@@ -90,15 +88,8 @@ public class LicenseListActivity extends AppCompatActivity {
                 "@font-face{font-family:'Inter';src:url('src/inter_regular.ttf');}" +
                 "*{box-sizing:border-box;margin:0;padding:0;}" +
                 "body{background:" + bg + ";color:" + text + ";font-family:'Inter',sans-serif;" +
-                "font-size:15px;line-height:1.7;padding:20px 16px 40px;}" +
-                "h1{font-size:22px;font-weight:600;color:" + text + ";margin-bottom:8px;}" +
-                ".sub{color:" + sub + ";font-size:13px;margin-bottom:24px;}" +
-                ".content{background:" + card + ";border-radius:15px;padding:20px;" +
-                "white-space:pre-wrap;word-wrap:break-word;font-size:14px;line-height:1.6;}" +
-                "</style></head><body>" +
-                "<h1>" + escapeHtml(item.name) + "</h1>" +
-                "<p class=\"sub\">License</p>" +
-                "<div class=\"content\">" + escapeHtml(content) + "</div>" +
+                "font-size:15px;line-height:1.7;padding:12px;white-space:pre-wrap;word-wrap:break-word;}" +
+                "</style></head><body>" + escapeHtml(content) +
                 "</body></html>";
     }
 

@@ -45,7 +45,8 @@
         android:text="What's New &gt;"
         android:textColor="@color/text"
         android:textSize="@dimen/font_13"
-        android:visibility="gone" />
+         />
+    android:visibility="gone"
 
     <!-- Action buttons -->
     <LinearLayout

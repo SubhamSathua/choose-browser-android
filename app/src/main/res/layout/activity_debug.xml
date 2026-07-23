@@ -313,7 +313,7 @@
                             android:id="@+id/debugTempStatus"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/heading"
+                            android:fontFamily="@font/mono"
                             android:text="Inactive"
                             android:textSize="@dimen/font_12" />
 

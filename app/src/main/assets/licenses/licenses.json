@@ -1,5 +1,17 @@
 [
   {
+    "fileName": "`MSFT_FluentUI_Icons_License.txt",
+    "name": "Microsoft Fluent UI Icons",
+    "author": "Microsoft Corporation",
+    "type": "MIT"
+  },
+  {
+    "fileName": "LICENSE-material-symbols.txt",
+    "name": "Material Symbols",
+    "author": "Google",
+    "type": "Apache License 2.0"
+  },
+  {
     "fileName": "inter.txt",
     "name": "Inter Font",
     "author": "Rasmus Andersson",
@@ -12,21 +24,9 @@
     "type": "SIL Open Font License 1.1"
   },
   {
-    "fileName": "LICENSE-material-symbols.txt",
-    "name": "Material Symbols",
-    "author": "Google",
-    "type": "Apache License 2.0"
-  },
-  {
     "fileName": "lora.txt",
     "name": "Lora",
     "author": "Cyreal",
-    "type": "SIL Open Font License 1.1"
-  },
-  {
-    "fileName": "OFL.txt",
-    "name": "SIL Open Font License",
-    "author": "SIL International",
     "type": "SIL Open Font License 1.1"
   },
   {
