@@ -133,9 +133,9 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
             Intent previewIntent = new Intent(requireContext(), PreviewPageActivity.class);
             previewIntent.putExtra("url", url);
             startActivity(previewIntent);
-            Activity activity = getActivity();
-            if (activity != null) {
-                activity.overridePendingTransition(R.anim.slide_up, R.anim.stay);
+            dismiss();
+            if (getActivity() != null) {
+                getActivity().finish();
             }
         });
 
