@@ -16,6 +16,9 @@
     <!--    <color name="PrimaryCol">#bbc3ff</color>-->
     <!--    <color name="PrimaryTextCol">#334bb1</color>-->
 
+    <!--Update Card-->
+    <color name="whatsNew_textCol">#8AB4F8</color>
+
     <!-- ========== Setting Screen ======== -->
     <color name="textSubSecondary">#a3a3a5</color>
 

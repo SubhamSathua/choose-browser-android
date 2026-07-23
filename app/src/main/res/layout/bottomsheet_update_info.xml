@@ -43,10 +43,10 @@
         android:paddingHorizontal="14dp"
         android:paddingVertical="6dp"
         android:text="What's New &gt;"
-        android:textColor="@color/text"
+        android:textColor="@color/whatsNew_textCol"
         android:textSize="@dimen/font_13"
+        android:visibility="gone"
          />
-    android:visibility="gone"
 
     <!-- Action buttons -->
     <LinearLayout
@@ -73,10 +73,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:backgroundTint="#377aff"
+            android:backgroundTint="@color/PriBtn_BgCol"
             android:fontFamily="@font/body"
             android:text="Update"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/PriBtn_TxtCol" />
 
     </LinearLayout>
 
