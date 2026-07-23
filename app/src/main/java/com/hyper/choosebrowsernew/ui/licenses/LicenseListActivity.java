@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -42,12 +44,21 @@ public class LicenseListActivity extends AppCompatActivity {
         findViewById(R.id.licenseListBackBtn).setOnClickListener(v -> finish());
 
         licenseList = loadLicenses();
-        Log.d(TAG, "loaded " + licenseList.size() + " licenses");
 
         ListView listView = findViewById(R.id.licenseListView);
-        LicenseListAdapter adapter = new LicenseListAdapter(this, licenseList);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener((parent, view, position, id) -> {
+        TextView emptyView = findViewById(R.id.licenseEmptyView);
+
+        if (licenseList == null || licenseList.isEmpty()) {
+            Log.e(TAG, "loaded 0 licenses — showing empty state");
+            listView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            Log.d(TAG, "loaded " + licenseList.size() + " licenses");
+            listView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+            LicenseListAdapter adapter = new LicenseListAdapter(this, licenseList);
+            listView.setAdapter(adapter);
+            listView.setOnItemClickListener((parent, view, position, id) -> {
             Log.d(TAG, "item clicked position=" + position);
             LicenseItem item = licenseList.get(position);
             Log.d(TAG, "opening license: " + item.name + " file=" + item.fileName);
@@ -59,6 +70,7 @@ public class LicenseListActivity extends AppCompatActivity {
             startActivity(intent);
             Log.d(TAG, "WebViewActivity started");
         });
+        }
     }
 
     private String buildLicenseHtml(LicenseItem item) {
@@ -151,7 +163,7 @@ public class LicenseListActivity extends AppCompatActivity {
                 list.add(item);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(TAG, "failed to load licenses", e);
         }
         return list;
     }

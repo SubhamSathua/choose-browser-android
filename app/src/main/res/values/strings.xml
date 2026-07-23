@@ -129,6 +129,7 @@
     <string name="about_contactEmail">hyper.devstudio@protonmail.com 📧</string>
     <string name="open_source_licenses">Open Source Licenses</string>
     <string name="open_source_licenses_sub">View licenses for libraries and fonts used</string>
+    <string name="licenses_not_found">Unable to load licenses.\nPlease try again later.</string>
 
 
     <style name="Theme.Transparent" parent="Theme.Material3.DayNight.NoActionBar">
