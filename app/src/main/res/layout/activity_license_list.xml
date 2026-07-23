@@ -61,6 +61,7 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:padding="12dp"
+            android:divider="@null"
             android:paddingTop="8dp" />
 
     </androidx.cardview.widget.CardView>

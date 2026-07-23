@@ -35,6 +35,13 @@ if (assembling) {
 }
 // ─────────────────────────────────────────────────────────────────────────
 
+// Load keystore credentials from key.properties or environment variables (CI/CD)
+def keystorePropsFile = rootProject.file("key.properties")
+def keystoreProps = new Properties()
+if (keystorePropsFile.exists()) {
+    keystorePropsFile.withInputStream { keystoreProps.load(it) }
+}
+
 android {
     namespace 'com.hyper.choosebrowsernew'
     compileSdk 34
@@ -48,8 +55,33 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        release {
+            if (keystorePropsFile.exists()) {
+                println "========================================"
+                println "FOUND KEY PROPERTIES! Loading keys..."
+                println "Keystore File: " + (keystoreProps['storeFile'] ?: 'release.jks')
+                println "Key Alias: " + keystoreProps['keyAlias']
+                println "========================================"
+
+                storeFile rootProject.file(keystoreProps['storeFile'] ?: 'release.jks')
+                storePassword keystoreProps['storePassword']
+                keyAlias keystoreProps['keyAlias']
+                keyPassword keystoreProps['keyPassword']
+            } else {
+                println "========================================"
+                println "WARNING: key.properties NOT FOUND!"
+                println "========================================"
+            }
+        }
+    }
+
     buildTypes {
         release {
+            // MUST be present so Gradle signs the release APK
+            signingConfig signingConfigs.release
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -61,10 +93,12 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     buildFeatures {
         viewBinding true
         buildConfig true
