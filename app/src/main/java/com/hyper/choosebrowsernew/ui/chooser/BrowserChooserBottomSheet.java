@@ -230,6 +230,8 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
             copyBtn.setCompoundDrawableTintList(ColorStateList.valueOf(dockBtnIcon));
         }
 
+        tintCard(root.findViewById(R.id.dockCard), dock);
+
         tintCard(previewLinkBtn, action);
         tintCard(shareBtn, action);
         tintCard(previewPageBtn, action);
