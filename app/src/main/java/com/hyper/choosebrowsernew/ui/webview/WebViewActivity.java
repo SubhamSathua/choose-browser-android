@@ -46,7 +46,7 @@ public class WebViewActivity extends AppCompatActivity {
 
     public static void openPrivacyPolicy(AppCompatActivity ctx) {
         String theme = isDark(ctx) ? "dark" : "light";
-        String url = "file:///android_asset/privacy_policy.html?theme=" + theme + "&app=1";
+        String url = "file:///android_asset/app_pages/privacy_policy.html?theme=" + theme + "&app=1";
         Intent i = new Intent(ctx, WebViewActivity.class);
         i.putExtra(EXTRA_URL, url);
         i.putExtra(EXTRA_TITLE, "Privacy Policy");
@@ -143,7 +143,7 @@ public class WebViewActivity extends AppCompatActivity {
                     String errDesc = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? error.getDescription().toString() : "";
                     Log.e(TAG, "WebView error code=" + code + " desc=" + errDesc);
                     String theme = isDark(WebViewActivity.this) ? "dark" : "light";
-                    view.loadUrl("file:///android_asset/error.html?theme=" + theme
+                    view.loadUrl("file:///android_asset/private_browser/error.html?theme=" + theme
                             + "&code=" + (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? error.getErrorCode() : "")
                             + "&desc=" + Uri.encode(errDesc));
                 }

@@ -70,7 +70,7 @@ public class PrivacyPolicyActivity extends AppCompatActivity {
             }
         });
 
-        String url = "file:///android_asset/privacy_policy.html?theme=" + (isDark ? "dark" : "light");
+        String url = "file:///android_asset/app_pages/privacy_policy.html?theme=" + (isDark ? "dark" : "light");
         webView.loadUrl(url);
 
         // Back button

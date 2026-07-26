@@ -601,7 +601,7 @@ public class PreviewPageActivity extends AppCompatActivity {
      * ════════════════════════════════════════════ */
     private void loadErrorPage(String failedUrl, String errorCode, String errorDesc) {
         try {
-            InputStream is = getAssets().open("preview_error.html");
+            InputStream is = getAssets().open("private_browser/preview_error.html");
             byte[] buffer = new byte[is.available()];
             is.read(buffer);
             is.close();
@@ -692,7 +692,7 @@ public class PreviewPageActivity extends AppCompatActivity {
         });
 
         view.findViewById(R.id.moreHome).setOnClickListener(v -> {
-            webView.loadUrl("file:///android_asset/home.html");
+            webView.loadUrl("file:///android_asset/private_browser/index.html");
             dialog.dismiss();
         });
 
