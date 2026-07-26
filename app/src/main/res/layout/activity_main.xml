@@ -313,6 +313,42 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <!-- Private Search Capsule -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/privateSearchCapsule"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="21dp"
+                app:cardElevation="0dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:layout_constraintTop_toBottomOf="@id/updateCard"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:background="@color/backgroundSecondary"
+                    android:paddingHorizontal="18dp">
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/private_launcher_icon" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Private Search"
+                        android:textColor="@color/text"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/label" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
             <!--=============== Brand Container =============-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/bottomBrandingContainer"
@@ -324,7 +360,7 @@
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/updateCard"
+                app:layout_constraintTop_toBottomOf="@id/privateSearchCapsule"
                 app:layout_constraintVertical_bias="1.0"
                 tools:background="@color/backgroundSecondary">
 

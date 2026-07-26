@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/previewPage_primary">
@@ -42,7 +43,32 @@
                 android:background="@drawable/bg_preview_url_box"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingHorizontal="10dp">
+                android:paddingHorizontal="8dp">
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="0dp"
+                    app:cardBackgroundColor="#141414">
+
+                    <ImageView
+                        android:id="@+id/urlIncognitoIcon"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_margin="4dp"
+                        android:src="@drawable/ix_incognito" />
+
+                </androidx.cardview.widget.CardView>
+
+
+                <Space
+                    android:layout_width="12dp"
+                    android:layout_height="wrap_content" />
 
                 <ImageView
                     android:id="@+id/urlSiteIcon"
@@ -51,12 +77,6 @@
                     android:layout_marginEnd="4dp"
                     android:src="@drawable/site_icon_demo" />
 
-                <ImageView
-                    android:id="@+id/urlIncognitoIcon"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/ix_incognito" />
 
                 <EditText
                     android:id="@+id/etUrl"
@@ -65,19 +85,19 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:cursorVisible="true"
-                    android:textCursorDrawable="@drawable/cursor_dynamic"
-                    android:textSelectHandle="@drawable/text_select_handle_dynamic"
-                    android:textSelectHandleLeft="@drawable/text_select_handle_dynamic"
-                    android:textSelectHandleRight="@drawable/text_select_handle_dynamic"
                     android:ellipsize="end"
                     android:fontFamily="@font/body"
+                    android:hint="Search or type URL"
                     android:imeOptions="actionGo"
                     android:inputType="textUri"
                     android:maxLines="1"
                     android:singleLine="true"
                     android:textColor="@color/previewPage_textSecondary"
                     android:textColorHint="#88ffffff"
-                    android:hint="Search or type URL"
+                    android:textCursorDrawable="@drawable/cursor_dynamic"
+                    android:textSelectHandle="@drawable/text_select_handle_dynamic"
+                    android:textSelectHandleLeft="@drawable/text_select_handle_dynamic"
+                    android:textSelectHandleRight="@drawable/text_select_handle_dynamic"
                     android:textSize="@dimen/font_12" />
 
                 <!-- Clear text (X) button, shown only when focused -->
@@ -209,10 +229,6 @@
                 android:layout_height="36dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_preview_url_box"
-                android:textCursorDrawable="@drawable/cursor_dynamic"
-                android:textSelectHandle="@drawable/text_select_handle_dynamic"
-                android:textSelectHandleLeft="@drawable/text_select_handle_dynamic"
-                android:textSelectHandleRight="@drawable/text_select_handle_dynamic"
                 android:fontFamily="@font/body"
                 android:hint="Find in page…"
                 android:imeOptions="actionSearch"
@@ -220,6 +236,10 @@
                 android:paddingHorizontal="12dp"
                 android:textColor="@color/previewPage_textSecondary"
                 android:textColorHint="#88ffffff"
+                android:textCursorDrawable="@drawable/cursor_dynamic"
+                android:textSelectHandle="@drawable/text_select_handle_dynamic"
+                android:textSelectHandleLeft="@drawable/text_select_handle_dynamic"
+                android:textSelectHandleRight="@drawable/text_select_handle_dynamic"
                 android:textSize="@dimen/font_13" />
 
             <TextView
@@ -307,12 +327,12 @@
                 android:layout_width="0dp"
                 android:layout_height="36dp"
                 android:layout_weight="1"
+                android:alpha="0.4"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Back"
                 android:padding="6dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/back"
-                android:alpha="0.4" />
+                android:src="@drawable/back" />
 
             <!-- Forward -->
             <ImageButton
@@ -320,12 +340,12 @@
                 android:layout_width="0dp"
                 android:layout_height="36dp"
                 android:layout_weight="1"
+                android:alpha="0.4"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Forward"
                 android:padding="6dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/forward"
-                android:alpha="0.4" />
+                android:src="@drawable/forward" />
 
             <!-- Search / URL -->
             <ImageButton

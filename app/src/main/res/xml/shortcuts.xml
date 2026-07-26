@@ -9,10 +9,24 @@
         android:shortcutLongLabel="@string/shortcut_browserLongLabel"
         android:shortcutDisabledMessage="@string/shortcut_browserDisabledLabel">
 
-    <intent
-        android:action="android.intent.action.VIEW"
-        android:targetPackage="com.hyper.choosebrowsernew"
-        android:targetClass="com.hyper.choosebrowsernew.BrowserListActivity" />
-</shortcut>
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.hyper.choosebrowsernew"
+            android:targetClass="com.hyper.choosebrowsernew.ui.settings.BrowserListActivity" />
+    </shortcut>
 
-    </shortcuts>
+    <shortcut
+        android:shortcutId="private_search"
+        android:enabled="true"
+        android:icon="@drawable/ic_preview_page"
+        android:shortcutShortLabel="@string/shortcut_privateSearchShortLabel"
+        android:shortcutLongLabel="@string/shortcut_privateSearchLongLabel">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.hyper.choosebrowsernew"
+            android:targetClass="com.hyper.choosebrowsernew.ui.preview.PreviewPageActivity"
+            android:data="file:///android_asset/private_browser/index.html" />
+    </shortcut>
+
+</shortcuts>

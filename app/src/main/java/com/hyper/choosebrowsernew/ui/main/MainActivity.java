@@ -6,6 +6,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
+import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +29,7 @@ import com.hyper.choosebrowsernew.UpdateChecker;
 import com.hyper.choosebrowsernew.data.model.UpdateResult;
 import com.hyper.choosebrowsernew.ui.common.UpdateUiHelper;
 import com.hyper.choosebrowsernew.ui.common.ViewModelFactory;
+import com.hyper.choosebrowsernew.ui.preview.PreviewPageActivity;
 import com.hyper.choosebrowsernew.ui.settings.BrowserListActivity;
 import com.hyper.choosebrowsernew.ui.settings.SettingsActivity;
 import com.hyper.choosebrowsernew.util.MotionUiHelper;
@@ -51,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView updateTitle, updateMsg;
     private MainViewModel viewModel;
     private UpdateResult currentUpdateResult;
+
+    // Private Search capsule
+    private CardView privateSearchCapsule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +92,9 @@ public class MainActivity extends AppCompatActivity {
         updateTitle = findViewById(R.id.updateTitle);
         updateMsg = findViewById(R.id.updateMsg);
 
+        // Private Search capsule
+        privateSearchCapsule = findViewById(R.id.privateSearchCapsule);
+
         setupMotion(permissionCard2, chooseBrowserCard);
 
         // Default browser button click
@@ -108,6 +118,19 @@ public class MainActivity extends AppCompatActivity {
         };
         updateCard.setOnClickListener(updateClick);
         updateCardInner.setOnClickListener(updateClick);
+
+        // Private Search capsule click → open PreviewPage with index.html
+        privateSearchCapsule.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this, PreviewPageActivity.class);
+            i.putExtra("url", "file:///android_asset/private_browser/index.html");
+            startActivity(i);
+        });
+        // Private Search capsule long-click → create home screen shortcut
+        privateSearchCapsule.setOnLongClickListener(v -> {
+            requestPinPrivateSearchShortcut();
+            return true;
+        });
+        MotionUiHelper.applyTapScale(privateSearchCapsule);
 
         setupObservers(); // Moved here
         updatePermissionIcons();
@@ -237,5 +260,25 @@ public class MainActivity extends AppCompatActivity {
 
     private UpdateChecker.Result convertToOldResult(UpdateResult r) {
         return new UpdateChecker.Result(convertPriority(r.priority), r.shortMsg, r.mdFileUrl, r.latestVersion);
+    }
+
+    private void requestPinPrivateSearchShortcut() {
+        Intent intent = new Intent(MainActivity.this, PreviewPageActivity.class);
+        intent.putExtra("url", "file:///android_asset/private_browser/index.html");
+        intent.setAction(Intent.ACTION_VIEW);
+
+        ShortcutInfo shortcut = new ShortcutInfo.Builder(this, "pinned_private_search")
+                .setShortLabel("Private Search")
+                .setLongLabel("Open Private Search Browser")
+                .setIcon(Icon.createWithResource(this, R.drawable.ic_preview_page))
+                .setIntent(intent)
+                .build();
+
+        ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
+        if (shortcutManager != null && shortcutManager.isRequestPinShortcutSupported()) {
+            shortcutManager.requestPinShortcut(shortcut, null);
+        } else {
+            Toast.makeText(this, "Pinning shortcuts is not supported on this device", Toast.LENGTH_SHORT).show();
+        }
     }
 }

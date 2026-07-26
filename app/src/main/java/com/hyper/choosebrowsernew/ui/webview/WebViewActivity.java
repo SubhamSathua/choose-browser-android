@@ -123,7 +123,7 @@ public class WebViewActivity extends AppCompatActivity {
             }
         });
 
-        // JS interface for retry from error page
+        // JS interface for retry / goBack from error page
         webView.addJavascriptInterface(new Object() {
             @JavascriptInterface
             public void retry() {
@@ -132,6 +132,10 @@ public class WebViewActivity extends AppCompatActivity {
                         webView.loadUrl(currentUrl);
                     }
                 });
+            }
+            @JavascriptInterface
+            public void goBack() {
+                runOnUiThread(() -> finish());
             }
         }, "Android");
 

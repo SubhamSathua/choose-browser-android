@@ -71,7 +71,6 @@ import com.hyper.choosebrowsernew.ui.webview.WebViewActivity;
 import com.hyper.choosebrowsernew.util.ThemeHelper;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.List;
@@ -123,6 +122,7 @@ public class PreviewPageActivity extends AppCompatActivity {
     private boolean desktopSiteEnabled = false;
     private boolean screenshotAllowed = false;
     private String currentUrl = "";
+    private String failedUrl = "";
     private Bitmap siteFavicon = null;
     private String sitePageTitle = "";
 
@@ -346,6 +346,28 @@ public class PreviewPageActivity extends AppCompatActivity {
         applyPressScale(btnFindPrev);
         applyPressScale(btnFindNext);
 
+        // JS interface for error page retry / goBack
+        webView.addJavascriptInterface(new Object() {
+            @android.webkit.JavascriptInterface
+            public void goBack() {
+                runOnUiThread(() -> {
+                    if (webView.canGoBack() && !currentUrl.contains("private_browser/error.html")) {
+                        webView.goBack();
+                    } else {
+                        webView.loadUrl("file:///android_asset/private_browser/index.html");
+                    }
+                });
+            }
+            @android.webkit.JavascriptInterface
+            public void retry() {
+                runOnUiThread(() -> {
+                    if (failedUrl != null && !failedUrl.isEmpty()) {
+                        webView.loadUrl(failedUrl);
+                    }
+                });
+            }
+        }, "Android");
+
         // Load page
         webView.loadUrl(url);
     }
@@ -458,7 +480,11 @@ public class PreviewPageActivity extends AppCompatActivity {
                 super.onPageStarted(view, url, favicon);
                 currentUrl = url;
                 if (!etUrl.hasFocus()) {
-                    etUrl.setText(url);
+                    if (url.contains("private_browser/index.html")) {
+                        etUrl.setText("Search or type URL");
+                    } else {
+                        etUrl.setText(url);
+                    }
                 }
                 updateNavButtons();
                 viewModel.resetBlockedCount();
@@ -469,7 +495,11 @@ public class PreviewPageActivity extends AppCompatActivity {
                 super.onPageFinished(view, url);
                 currentUrl = url;
                 if (!etUrl.hasFocus()) {
-                    etUrl.setText(url);
+                    if (url.contains("private_browser/index.html")) {
+                        etUrl.setText("Search or type URL");
+                    } else {
+                        etUrl.setText(url);
+                    }
                 }
                 updateNavButtons();
                 if (darkModeEnabled) applyDarkMode(true);
@@ -599,29 +629,12 @@ public class PreviewPageActivity extends AppCompatActivity {
     /* ════════════════════════════════════════════
      *  Load custom error page from assets
      * ════════════════════════════════════════════ */
-    private void loadErrorPage(String failedUrl, String errorCode, String errorDesc) {
-        try {
-            InputStream is = getAssets().open("private_browser/preview_error.html");
-            byte[] buffer = new byte[is.available()];
-            is.read(buffer);
-            is.close();
-            String html = new String(buffer, "UTF-8");
-            String injection = "<script>"
-                    + "document.getElementById('errorCode').textContent='" + escapeJs(errorCode) + "';"
-                    + "document.getElementById('errorDesc').textContent='" + escapeJs(errorDesc) + "';"
-                    + "</script>";
-            html = html.replace("</body>", injection + "</body>");
-            webView.loadDataWithBaseURL("file:///android_asset/", html, "text/html", "UTF-8", failedUrl);
-        } catch (Exception e) {
-            webView.loadData("<h2 style='color:#fff;font-family:sans-serif;text-align:center;margin-top:40vh'>"
-                    + errorCode + "<br><small>" + errorDesc + "</small></h2>",
-                    "text/html", "UTF-8");
-        }
-    }
-
-    private String escapeJs(String s) {
-        if (s == null) return "";
-        return s.replace("\\", "\\\\").replace("'", "\\'").replace("\n", "\\n");
+    private void loadErrorPage(String url, String errorCode, String errorDesc) {
+        failedUrl = url;
+        String errorUrl = "file:///android_asset/private_browser/error.html"
+                + "?code=" + Uri.encode(errorCode)
+                + "&desc=" + Uri.encode(errorDesc);
+        webView.loadUrl(errorUrl);
     }
 
     /* ── Update back/forward button alpha ── */
@@ -968,18 +981,30 @@ public class PreviewPageActivity extends AppCompatActivity {
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN && etUrl.hasFocus()) {
-            View urlBox = findViewById(R.id.urlBox);
-            if (urlBox != null) {
-                int[] loc = new int[2];
-                urlBox.getLocationOnScreen(loc);
-                float x = ev.getRawX(), y = ev.getRawY();
-                if (x < loc[0] || x > loc[0] + urlBox.getWidth()
-                        || y < loc[1] || y > loc[1] + urlBox.getHeight()) {
-                    etUrl.clearFocus();
+            float x = ev.getRawX(), y = ev.getRawY();
+            if (isTouchInside(focusActionsBar, x, y)) {
+                // Let taps on copy/share buttons through without losing focus
+            } else {
+                View urlBox = findViewById(R.id.urlBox);
+                if (urlBox != null) {
+                    int[] loc = new int[2];
+                    urlBox.getLocationOnScreen(loc);
+                    if (x < loc[0] || x > loc[0] + urlBox.getWidth()
+                            || y < loc[1] || y > loc[1] + urlBox.getHeight()) {
+                        etUrl.clearFocus();
+                    }
                 }
             }
         }
         return super.dispatchTouchEvent(ev);
+    }
+
+    private boolean isTouchInside(View view, float x, float y) {
+        if (view == null || view.getVisibility() != View.VISIBLE) return false;
+        int[] loc = new int[2];
+        view.getLocationOnScreen(loc);
+        return x >= loc[0] && x <= loc[0] + view.getWidth()
+                && y >= loc[1] && y <= loc[1] + view.getHeight();
     }
 
     /* ── Scale-down on press, scale-up on release ── */

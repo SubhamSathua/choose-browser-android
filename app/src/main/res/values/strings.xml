@@ -115,6 +115,8 @@
     <string name="shortcut_browserShortLabel">Browser List</string>
     <string name="shortcut_browserLongLabel">Open Browser List</string>
     <string name="shortcut_browserDisabledLabel">Shortcut unavailable</string>
+    <string name="shortcut_privateSearchShortLabel">Private Search</string>
+    <string name="shortcut_privateSearchLongLabel">Open Private Search Browser</string>
 
 <!--    DEMO-->
     <string name="iconLabel">Duck duck go</string>
