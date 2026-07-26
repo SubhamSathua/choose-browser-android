@@ -4,7 +4,7 @@
     <shortcut
         android:shortcutId="browser_list"
         android:enabled="true"
-        android:icon="@drawable/ix_list_icon"
+        android:icon="@drawable/ic_list_browser"
         android:shortcutShortLabel="@string/shortcut_browserShortLabel"
         android:shortcutLongLabel="@string/shortcut_browserLongLabel"
         android:shortcutDisabledMessage="@string/shortcut_browserDisabledLabel">

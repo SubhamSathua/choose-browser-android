@@ -11,6 +11,7 @@
         <item name="colorPopupDock">@color/PopUpCardDockBg</item>
         <item name="colorPopupDockButton">@color/PopUpCardDockBtn</item>
         <item name="colorPopupDockButtonText">@color/PopUpCardDockText</item>
+        <item name="colorPopupDockButtonIcon">@color/PopUpCardDockBtnIcon</item>
         <item name="colorPopupAction">@color/PopUpCard_ActionBtnBg</item>
         <item name="colorPopupText">@color/text</item>
     </style>
@@ -20,6 +21,7 @@
         <item name="colorPopupDock">@color/copilot_popup_dock</item>
         <item name="colorPopupDockButton">@color/copilot_popup_dock_button</item>
         <item name="colorPopupDockButtonText">@color/copilot_popup_dock_button_text</item>
+        <item name="colorPopupDockButtonIcon">@color/copilot_popup_dock_button_text</item>
         <item name="colorPopupAction">@color/copilot_popup_action</item>
         <item name="colorPopupText">@color/copilot_popup_text</item>
     </style>
@@ -29,6 +31,7 @@
         <item name="colorPopupDock">@color/dracula_popup_dock</item>
         <item name="colorPopupDockButton">@color/dracula_popup_dock_button</item>
         <item name="colorPopupDockButtonText">@color/dracula_popup_dock_button_text</item>
+        <item name="colorPopupDockButtonIcon">@color/dracula_popup_dock_button_text</item>
         <item name="colorPopupAction">@color/dracula_popup_action</item>
         <item name="colorPopupText">@color/dracula_popup_text</item>
     </style>
@@ -38,6 +41,7 @@
         <item name="colorPopupDock">@color/PopUpCardDockBg</item>
         <item name="colorPopupDockButton">@color/PopUpCardDockBtn</item>
         <item name="colorPopupDockButtonText">@color/PopUpCardDockText</item>
+        <item name="colorPopupDockButtonIcon">@color/PopUpCardDockBtnIcon</item>
         <item name="colorPopupAction">@color/PopUpCard_ActionBtnBg</item>
         <item name="colorPopupText">@color/text</item>
     </style>
@@ -47,6 +51,7 @@
         <item name="colorPopupDock">@color/PopUpCardDockBg</item>
         <item name="colorPopupDockButton">@color/PopUpCardDockBtn</item>
         <item name="colorPopupDockButtonText">@color/PopUpCardDockText</item>
+        <item name="colorPopupDockButtonIcon">@color/PopUpCardDockBtnIcon</item>
         <item name="colorPopupAction">@color/PopUpCard_ActionBtnBg</item>
         <item name="colorPopupText">@color/text</item>
     </style>
@@ -56,6 +61,7 @@
         <item name="colorPopupDock">@color/PopUpCardDockBg</item>
         <item name="colorPopupDockButton">@color/PopUpCardDockBtn</item>
         <item name="colorPopupDockButtonText">@color/PopUpCardDockText</item>
+        <item name="colorPopupDockButtonIcon">@color/PopUpCardDockBtnIcon</item>
         <item name="colorPopupAction">@color/PopUpCard_ActionBtnBg</item>
         <item name="colorPopupText">@color/text</item>
     </style>

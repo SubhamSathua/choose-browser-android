@@ -42,6 +42,7 @@
     <color name="PopUpCardDockBtn">#ffffff</color>
     <color name="PopUpCardDockText">#000000</color>
     <color name="PopUpCardDockTextNatural">#ffffff</color>
+    <color name="PopUpCardDockBtnIcon">#000000</color>
     <color name="PopUpCard_ActionBtnBg">#3b3b3d</color>
     <color name="PopUpCard_ActionBtnSec_Bg">#4d4d4d</color>
 

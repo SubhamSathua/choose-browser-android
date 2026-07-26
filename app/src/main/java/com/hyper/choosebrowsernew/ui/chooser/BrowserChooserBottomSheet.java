@@ -203,6 +203,7 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
         int dock = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupDock, R.color.PopUpCardDockBg);
         int dockBtn = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupDockButton, R.color.PopUpCardDockBtn);
         int dockBtnText = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupDockButtonText, R.color.PopUpCardDockText);
+        int dockBtnIcon = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupDockButtonIcon, R.color.PopUpCardDockBtnIcon);
         int action = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupAction, R.color.PopUpCard_ActionBtnBg);
         int text = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupText, R.color.text);
 
@@ -226,7 +227,7 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
         if (copyBtn != null) {
             copyBtn.setBackgroundTintList(ColorStateList.valueOf(dockBtn));
             copyBtn.setTextColor(dockBtnText);
-            copyBtn.setCompoundDrawableTintList(ColorStateList.valueOf(dockBtnText));
+            copyBtn.setCompoundDrawableTintList(ColorStateList.valueOf(dockBtnIcon));
         }
 
         tintCard(previewLinkBtn, action);

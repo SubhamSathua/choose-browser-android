@@ -134,7 +134,7 @@
                 android:layout_height="18dp"
                 android:layout_marginEnd="6dp"
                 android:src="@drawable/copy"
-                android:tint="?attr/colorPopupDockButtonText" />
+                android:tint="?attr/colorPopupDockButtonIcon" />
 
             <TextView
                 android:id="@+id/showLinkCopyText"

@@ -143,7 +143,7 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/PopUpCardDockBtn"
                     app:icon="@drawable/copy"
-                    app:iconTint="@color/PopUpCardDockText" />
+                    app:iconTint="@color/PopUpCardDockBtnIcon" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

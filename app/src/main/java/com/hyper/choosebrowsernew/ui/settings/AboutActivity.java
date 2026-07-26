@@ -1,6 +1,9 @@
 package com.hyper.choosebrowsernew.ui.settings;
 
 import android.content.ActivityNotFoundException;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -51,6 +54,7 @@ public class AboutActivity extends AppCompatActivity {
 
         // Email
         findViewById(R.id.aboutEmailRow).setOnClickListener(v -> openEmailApps());
+        findViewById(R.id.aboutCopyEmail).setOnClickListener(v -> copyEmail());
 
         // GitHub
         findViewById(R.id.aboutGithubRow).setOnClickListener(v ->
@@ -80,6 +84,13 @@ public class AboutActivity extends AppCompatActivity {
         } catch (ActivityNotFoundException e) {
             Toast.makeText(this, "No mail app found", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void copyEmail() {
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("Email", AppConstantsDetails.CONTACT_EMAIL);
+        clipboard.setPrimaryClip(clip);
+        Toast.makeText(this, "Email copied", Toast.LENGTH_SHORT).show();
     }
 
     private boolean isDarkModeEnabled() {
