@@ -27,54 +27,44 @@
         <item name="colorPopupText">@color/text</item>
     </style>
 
-    <style name="ThemeOverlay.ChooseBrowserNEW.Color.eclipse" parent="">
-        <item name="colorPopupSurface">@color/copilot_popup_surface</item>
-        <item name="colorPopupDock">@color/copilot_popup_dock</item>
-        <item name="colorPopupDockButton">@color/copilot_popup_dock_button</item>
-        <item name="colorPopupDockButtonText">@color/copilot_popup_dock_button_text</item>
-        <item name="colorPopupDockButtonIcon">@color/copilot_popup_dock_button_text</item>
-        <item name="colorPopupAction">@color/copilot_popup_action</item>
-        <item name="colorPopupText">@color/copilot_popup_text</item>
+    <style name="ThemeOverlay.ChooseBrowserNEW.Color.amoled" parent="">
+        <item name="colorPopupSurface">@color/amoled_popup_surface</item>
+        <item name="colorPopupDock">@color/amoled_popup_dock</item>
+        <item name="colorPopupDockButton">@color/amoled_popup_dock_button</item>
+        <item name="colorPopupDockButtonText">@color/amoled_popup_dock_button_text</item>
+        <item name="colorPopupDockButtonIcon">@color/amoled_popup_dock_button_icon</item>
+        <item name="colorPopupAction">@color/amoled_popup_action</item>
+        <item name="colorPopupText">@color/amoled_popup_text</item>
     </style>
 
-    <style name="ThemeOverlay.ChooseBrowserNEW.Color.neuronight" parent="">
+    <style name="ThemeOverlay.ChooseBrowserNEW.Color.dracula" parent="">
         <item name="colorPopupSurface">@color/dracula_popup_surface</item>
         <item name="colorPopupDock">@color/dracula_popup_dock</item>
         <item name="colorPopupDockButton">@color/dracula_popup_dock_button</item>
         <item name="colorPopupDockButtonText">@color/dracula_popup_dock_button_text</item>
-        <item name="colorPopupDockButtonIcon">@color/dracula_popup_dock_button_text</item>
+        <item name="colorPopupDockButtonIcon">@color/dracula_popup_dock_button_icon</item>
         <item name="colorPopupAction">@color/dracula_popup_action</item>
         <item name="colorPopupText">@color/dracula_popup_text</item>
     </style>
 
-    <style name="ThemeOverlay.ChooseBrowserNEW.Color.neural_blue" parent="">
-        <item name="colorPopupSurface">@color/PopUpCardBg</item>
-        <item name="colorPopupDock">@color/PopUpCardDockBg</item>
-        <item name="colorPopupDockButton">@color/PopUpCardDockBtn</item>
-        <item name="colorPopupDockButtonText">@color/PopUpCardDockText</item>
-        <item name="colorPopupDockButtonIcon">@color/PopUpCardDockBtnIcon</item>
-        <item name="colorPopupAction">@color/PopUpCard_ActionBtnBg</item>
-        <item name="colorPopupText">@color/text</item>
+    <style name="ThemeOverlay.ChooseBrowserNEW.Color.monokai" parent="">
+        <item name="colorPopupSurface">@color/monokai_popup_surface</item>
+        <item name="colorPopupDock">@color/monokai_popup_dock</item>
+        <item name="colorPopupDockButton">@color/monokai_popup_dock_button</item>
+        <item name="colorPopupDockButtonText">@color/monokai_popup_dock_button_text</item>
+        <item name="colorPopupDockButtonIcon">@color/monokai_popup_dock_button_icon</item>
+        <item name="colorPopupAction">@color/monokai_popup_action</item>
+        <item name="colorPopupText">@color/monokai_popup_text</item>
     </style>
 
-    <style name="ThemeOverlay.ChooseBrowserNEW.Color.cosmic" parent="">
-        <item name="colorPopupSurface">@color/PopUpCardBg</item>
-        <item name="colorPopupDock">@color/PopUpCardDockBg</item>
-        <item name="colorPopupDockButton">@color/PopUpCardDockBtn</item>
-        <item name="colorPopupDockButtonText">@color/PopUpCardDockText</item>
-        <item name="colorPopupDockButtonIcon">@color/PopUpCardDockBtnIcon</item>
-        <item name="colorPopupAction">@color/PopUpCard_ActionBtnBg</item>
-        <item name="colorPopupText">@color/text</item>
-    </style>
-
-    <style name="ThemeOverlay.ChooseBrowserNEW.Color.obsidian_pulse" parent="">
-        <item name="colorPopupSurface">@color/PopUpCardBg</item>
-        <item name="colorPopupDock">@color/PopUpCardDockBg</item>
-        <item name="colorPopupDockButton">@color/PopUpCardDockBtn</item>
-        <item name="colorPopupDockButtonText">@color/PopUpCardDockText</item>
-        <item name="colorPopupDockButtonIcon">@color/PopUpCardDockBtnIcon</item>
-        <item name="colorPopupAction">@color/PopUpCard_ActionBtnBg</item>
-        <item name="colorPopupText">@color/text</item>
+    <style name="ThemeOverlay.ChooseBrowserNEW.Color.catppuccin" parent="">
+        <item name="colorPopupSurface">@color/catppuccin_popup_surface</item>
+        <item name="colorPopupDock">@color/catppuccin_popup_dock</item>
+        <item name="colorPopupDockButton">@color/catppuccin_popup_dock_button</item>
+        <item name="colorPopupDockButtonText">@color/catppuccin_popup_dock_button_text</item>
+        <item name="colorPopupDockButtonIcon">@color/catppuccin_popup_dock_button_icon</item>
+        <item name="colorPopupAction">@color/catppuccin_popup_action</item>
+        <item name="colorPopupText">@color/catppuccin_popup_text</item>
     </style>
 
     <!-- Preview More bottom sheet: transparent bg so our drawable shows -->

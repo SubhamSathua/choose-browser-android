@@ -179,22 +179,20 @@ public class SettingsActivity extends AppCompatActivity {
         RadioGroup radioGroup = sheetView.findViewById(R.id.colorThemesRadioGroup);
         String saved = viewModel.colorThemeId.getValue();
         
-        if (ThemeHelper.COLOR_THEME_ECLIPSE.equals(saved)) radioGroup.check(R.id.colorThemeRadioEclipse);
-        else if (ThemeHelper.COLOR_THEME_NEURONIGHT.equals(saved)) radioGroup.check(R.id.colorThemeRadioNeuroNight);
-        else if (ThemeHelper.COLOR_THEME_NEURAL_BLUE.equals(saved)) radioGroup.check(R.id.colorThemeRadioNeuralBlue);
-        else if (ThemeHelper.COLOR_THEME_COSMIC.equals(saved)) radioGroup.check(R.id.colorThemeRadioCosmic);
-        else if (ThemeHelper.COLOR_THEME_OBSIDIAN_PULSE.equals(saved)) radioGroup.check(R.id.colorThemeRadioObsidianPulse);
+        if (ThemeHelper.COLOR_THEME_AMOLED.equals(saved)) radioGroup.check(R.id.colorThemeRadioAmoled);
+        else if (ThemeHelper.COLOR_THEME_DRACULA.equals(saved)) radioGroup.check(R.id.colorThemeRadioDracula);
+        else if (ThemeHelper.COLOR_THEME_MONOKAI.equals(saved)) radioGroup.check(R.id.colorThemeRadioMonokai);
+        else if (ThemeHelper.COLOR_THEME_CATPPUCCIN.equals(saved)) radioGroup.check(R.id.colorThemeRadioCatppuccin);
         else radioGroup.check(R.id.colorThemeRadioDefault);
 
         sheetView.findViewById(R.id.colorThemesCloseBtn).setOnClickListener(v -> bottomSheet.dismiss());
 
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             String themeId = ThemeHelper.COLOR_THEME_DEFAULT;
-            if (checkedId == R.id.colorThemeRadioEclipse) themeId = ThemeHelper.COLOR_THEME_ECLIPSE;
-            else if (checkedId == R.id.colorThemeRadioNeuroNight) themeId = ThemeHelper.COLOR_THEME_NEURONIGHT;
-            else if (checkedId == R.id.colorThemeRadioNeuralBlue) themeId = ThemeHelper.COLOR_THEME_NEURAL_BLUE;
-            else if (checkedId == R.id.colorThemeRadioCosmic) themeId = ThemeHelper.COLOR_THEME_COSMIC;
-            else if (checkedId == R.id.colorThemeRadioObsidianPulse) themeId = ThemeHelper.COLOR_THEME_OBSIDIAN_PULSE;
+            if (checkedId == R.id.colorThemeRadioAmoled) themeId = ThemeHelper.COLOR_THEME_AMOLED;
+            else if (checkedId == R.id.colorThemeRadioDracula) themeId = ThemeHelper.COLOR_THEME_DRACULA;
+            else if (checkedId == R.id.colorThemeRadioMonokai) themeId = ThemeHelper.COLOR_THEME_MONOKAI;
+            else if (checkedId == R.id.colorThemeRadioCatppuccin) themeId = ThemeHelper.COLOR_THEME_CATPPUCCIN;
 
             viewModel.setColorThemeId(themeId);
             bottomSheet.dismiss();
@@ -204,11 +202,10 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void updateColorThemeLabel(TextView label, String themeId) {
         int resId = R.string.color_theme_default;
-        if (ThemeHelper.COLOR_THEME_ECLIPSE.equals(themeId)) resId = R.string.color_theme_eclipse;
-        else if (ThemeHelper.COLOR_THEME_NEURONIGHT.equals(themeId)) resId = R.string.color_theme_neuronight;
-        else if (ThemeHelper.COLOR_THEME_NEURAL_BLUE.equals(themeId)) resId = R.string.color_theme_neural_blue;
-        else if (ThemeHelper.COLOR_THEME_COSMIC.equals(themeId)) resId = R.string.color_theme_cosmic;
-        else if (ThemeHelper.COLOR_THEME_OBSIDIAN_PULSE.equals(themeId)) resId = R.string.color_theme_obsidian_pulse;
+        if (ThemeHelper.COLOR_THEME_AMOLED.equals(themeId)) resId = R.string.color_theme_amoled;
+        else if (ThemeHelper.COLOR_THEME_DRACULA.equals(themeId)) resId = R.string.color_theme_dracula;
+        else if (ThemeHelper.COLOR_THEME_MONOKAI.equals(themeId)) resId = R.string.color_theme_monokai;
+        else if (ThemeHelper.COLOR_THEME_CATPPUCCIN.equals(themeId)) resId = R.string.color_theme_catppuccin;
         label.setText(resId);
     }
 

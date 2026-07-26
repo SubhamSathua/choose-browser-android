@@ -99,54 +99,43 @@
                 android:buttonTint="@color/PriBtn_BgCol"
                 android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
 
-
             <RadioButton
-                android:id="@+id/colorThemeRadioEclipse"
+                android:id="@+id/colorThemeRadioAmoled"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/PriBtn_BgCol"
                 android:fontFamily="@font/body"
-                android:text="@string/color_theme_eclipse"
+                android:text="@string/color_theme_amoled"
                 android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
                 android:textColor="@color/text" />
 
             <RadioButton
-                android:id="@+id/colorThemeRadioNeuroNight"
+                android:id="@+id/colorThemeRadioDracula"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/PriBtn_BgCol"
                 android:fontFamily="@font/body"
-                android:text="@string/color_theme_neuronight"
+                android:text="@string/color_theme_dracula"
                 android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
                 android:textColor="@color/text" />
 
             <RadioButton
-                android:id="@+id/colorThemeRadioNeuralBlue"
+                android:id="@+id/colorThemeRadioMonokai"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/PriBtn_BgCol"
                 android:fontFamily="@font/body"
-                android:text="@string/color_theme_neural_blue"
+                android:text="@string/color_theme_monokai"
                 android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
                 android:textColor="@color/text" />
 
             <RadioButton
-                android:id="@+id/colorThemeRadioCosmic"
+                android:id="@+id/colorThemeRadioCatppuccin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/PriBtn_BgCol"
                 android:fontFamily="@font/body"
-                android:text="@string/color_theme_cosmic"
-                android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
-                android:textColor="@color/text" />
-
-            <RadioButton
-                android:id="@+id/colorThemeRadioObsidianPulse"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:buttonTint="@color/PriBtn_BgCol"
-                android:fontFamily="@font/body"
-                android:text="@string/color_theme_obsidian_pulse"
+                android:text="@string/color_theme_catppuccin"
                 android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
                 android:textColor="@color/text" />
         </RadioGroup>

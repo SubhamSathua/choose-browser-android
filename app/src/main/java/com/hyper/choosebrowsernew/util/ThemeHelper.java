@@ -17,11 +17,10 @@ public class ThemeHelper {
     private static final String COLOR_THEME_KEY = "selected_color_theme";
 
     public static final String COLOR_THEME_DEFAULT = "default";
-    public static final String COLOR_THEME_ECLIPSE = "eclipse";
-    public static final String COLOR_THEME_NEURONIGHT = "neuronight";
-    public static final String COLOR_THEME_NEURAL_BLUE = "neural_blue";
-    public static final String COLOR_THEME_COSMIC = "cosmic";
-    public static final String COLOR_THEME_OBSIDIAN_PULSE = "obsidian_pulse";
+    public static final String COLOR_THEME_AMOLED = "amoled";
+    public static final String COLOR_THEME_DRACULA = "dracula";
+    public static final String COLOR_THEME_MONOKAI = "monokai";
+    public static final String COLOR_THEME_CATPPUCCIN = "catppuccin";
 
     public static void applySavedTheme(Context context) {
         int mode = getSavedThemeMode(context);
@@ -57,16 +56,14 @@ public class ThemeHelper {
     public static int getColorThemeOverlayStyleRes(Context context) {
         String themeId = getSavedColorThemeId(context);
         switch (themeId) {
-            case COLOR_THEME_ECLIPSE:
-                return R.style.ThemeOverlay_ChooseBrowserNEW_Color_eclipse;
-            case COLOR_THEME_NEURONIGHT:
-                return R.style.ThemeOverlay_ChooseBrowserNEW_Color_neuronight;
-            case COLOR_THEME_NEURAL_BLUE:
-                return R.style.ThemeOverlay_ChooseBrowserNEW_Color_neural_blue;
-            case COLOR_THEME_COSMIC:
-                return R.style.ThemeOverlay_ChooseBrowserNEW_Color_cosmic;
-            case COLOR_THEME_OBSIDIAN_PULSE:
-                return R.style.ThemeOverlay_ChooseBrowserNEW_Color_obsidian_pulse;
+            case COLOR_THEME_AMOLED:
+                return R.style.ThemeOverlay_ChooseBrowserNEW_Color_amoled;
+            case COLOR_THEME_DRACULA:
+                return R.style.ThemeOverlay_ChooseBrowserNEW_Color_dracula;
+            case COLOR_THEME_MONOKAI:
+                return R.style.ThemeOverlay_ChooseBrowserNEW_Color_monokai;
+            case COLOR_THEME_CATPPUCCIN:
+                return R.style.ThemeOverlay_ChooseBrowserNEW_Color_catppuccin;
             case COLOR_THEME_DEFAULT:
             default:
                 return R.style.ThemeOverlay_ChooseBrowserNEW_Color_default;
@@ -93,18 +90,12 @@ public class ThemeHelper {
             return COLOR_THEME_DEFAULT;
         }
 
-        // One-time legacy migrations.
-        if ("dracula".equals(themeId)) themeId = COLOR_THEME_NEURONIGHT;
-        if ("copilot".equals(themeId)) themeId = COLOR_THEME_ECLIPSE;
-        if ("theme4".equals(themeId)) themeId = COLOR_THEME_OBSIDIAN_PULSE;
-
         switch (themeId) {
             case COLOR_THEME_DEFAULT:
-            case COLOR_THEME_ECLIPSE:
-            case COLOR_THEME_NEURONIGHT:
-            case COLOR_THEME_NEURAL_BLUE:
-            case COLOR_THEME_COSMIC:
-            case COLOR_THEME_OBSIDIAN_PULSE:
+            case COLOR_THEME_AMOLED:
+            case COLOR_THEME_DRACULA:
+            case COLOR_THEME_MONOKAI:
+            case COLOR_THEME_CATPPUCCIN:
                 return themeId;
             default:
                 return COLOR_THEME_DEFAULT;

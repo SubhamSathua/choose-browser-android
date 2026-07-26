@@ -51,19 +51,41 @@
     <color name="PopUpCard_ActionBtnSec_Bg">#b2b2b2</color>
 
     <!-- ........ Popup Screen Variants (Light) ........ -->
-    <color name="dracula_popup_surface">#F3EEFF</color>
-    <color name="dracula_popup_dock">#E7DFFF</color>
-    <color name="dracula_popup_dock_button">#6A4BBE</color>
-    <color name="dracula_popup_dock_button_text">#FFFFFF</color>
-    <color name="dracula_popup_action">#DCD0FF</color>
-    <color name="dracula_popup_text">#2A1E4A</color>
+    <!-- Amoled -->
+    <color name="amoled_popup_surface">#ffffff</color>
+    <color name="amoled_popup_dock">#d9d9d9</color>
+    <color name="amoled_popup_dock_button">#ff0064</color>
+    <color name="amoled_popup_dock_button_icon">#000000</color>
+    <color name="amoled_popup_dock_button_text">#000000</color>
+    <color name="amoled_popup_action">#d9d9d9</color>
+    <color name="amoled_popup_text">#000000</color>
 
-    <color name="copilot_popup_surface">#F4F7FB</color>
-    <color name="copilot_popup_dock">#E5ECF5</color>
-    <color name="copilot_popup_dock_button">#0A66C2</color>
-    <color name="copilot_popup_dock_button_text">#FFFFFF</color>
-    <color name="copilot_popup_action">#D7E3F2</color>
-    <color name="copilot_popup_text">#0F172A</color>
+    <!-- Dracula (Vampire Ink/ Nightshade) -->
+    <color name="dracula_popup_surface">#f6f6f6</color>
+    <color name="dracula_popup_dock">#dcdcdc</color>
+    <color name="dracula_popup_dock_button">#624bca</color>
+    <color name="dracula_popup_dock_button_icon">#f6f6f6</color>
+    <color name="dracula_popup_dock_button_text">#282b36</color>
+    <color name="dracula_popup_action">#dcdcdc</color>
+    <color name="dracula_popup_text">#282b36</color>
+
+    <!-- Monokai (Electric Dark) -->
+    <color name="monokai_popup_surface">#faf4f2</color>
+    <color name="monokai_popup_dock">#e0dad9</color>
+    <color name="monokai_popup_dock_button">#e14775</color>
+    <color name="monokai_popup_dock_button_icon">#faf4f2</color>
+    <color name="monokai_popup_dock_button_text">#19181a</color>
+    <color name="monokai_popup_action">#e0dad9</color>
+    <color name="monokai_popup_text">#19181a</color>
+
+    <!-- Catppuccin (Soft Espresso / Velvet Dusk) -->
+    <color name="catppuccin_popup_surface">#eff1f5</color>
+    <color name="catppuccin_popup_dock">#dce0e8</color>
+    <color name="catppuccin_popup_dock_button">#893bef</color>
+    <color name="catppuccin_popup_dock_button_icon">#eff1f5</color>
+    <color name="catppuccin_popup_dock_button_text">#893bef</color>
+    <color name="catppuccin_popup_action">#dce0e8</color>
+    <color name="catppuccin_popup_text">#2e3440</color>
 
     <color name="solidBtn_BgCol">#1a39d0</color> <!-- Buttons, scroll thumb, radio-->  
     <color name="solidBtn_txtCol">#ffffff</color>
