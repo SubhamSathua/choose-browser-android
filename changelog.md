@@ -1,5 +1,9 @@
 # Changelog
 
+## Documentation & Assets — August 9, 2026
+- Added scrn.md with categorized screenshot tables for all application features.
+- Updated README.md with CB_ screenshots and link to scrn.md gallery.
+
 ## v2.1 — March 8, 2026
 
 ### Preview Page
