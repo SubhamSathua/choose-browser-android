@@ -530,7 +530,7 @@ public class PreviewPageActivity extends AppCompatActivity {
 
             @Override
             public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
-                if (adBlockEnabled) {
+                if (adBlockEnabled && !request.isForMainFrame()) {
                     String host = request.getUrl().getHost();
                     if (host != null && viewModel.shouldBlock(host)) {
                         viewModel.incrementBlockedCount();
@@ -543,8 +543,13 @@ public class PreviewPageActivity extends AppCompatActivity {
 
             @Override
             public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                handler.cancel();
-                loadErrorPage(error.getUrl(), "SSL_ERROR", "SSL certificate error – page blocked for safety.");
+                String errUrl = error.getUrl();
+                if (errUrl != null && errUrl.equals(currentUrl)) {
+                    handler.cancel();
+                    loadErrorPage(errUrl, "SSL_ERROR", "SSL certificate error – page blocked for safety.");
+                } else {
+                    handler.cancel();
+                }
             }
 
             @Override

@@ -17,7 +17,7 @@ public class PreviewRepository {
     private static final List<String> BLOCKED_DOMAINS = Arrays.asList(
             "doubleclick.net", "googlesyndication.com", "googleadservices.com",
             "google-analytics.com", "googletagmanager.com", "facebook.net",
-            "facebook.com/tr", "connect.facebook.net", "analytics.twitter.com",
+            "connect.facebook.net", "analytics.twitter.com",
             "ads-twitter.com", "ad.doubleclick.net", "adservice.google.com",
             "pagead2.googlesyndication.com", "amazon-adsystem.com",
             "scorecardresearch.com", "quantserve.com", "outbrain.com",
@@ -64,12 +64,13 @@ public class PreviewRepository {
 
     public boolean shouldBlock(String host, String currentMode) {
         if (host == null) return false;
+        String h = host.toLowerCase();
         for (String domain : BLOCKED_DOMAINS) {
-            if (host.contains(domain)) return true;
+            if (h.equals(domain) || h.endsWith("." + domain)) return true;
         }
         if ("dns".equals(currentMode)) {
             for (String domain : ADGUARD_EXTRA_DOMAINS) {
-                if (host.contains(domain)) return true;
+                if (h.equals(domain) || h.endsWith("." + domain)) return true;
             }
         }
         return false;
