@@ -10,6 +10,8 @@
 
 Choose Browser acts as a lightweight system-wide browser router and link interceptor for Android. It bypasses Android 11's removal of the native "Ask Every Time" browser selection prompt by displaying a fast, customizable overlay picker whenever an HTTP/HTTPS link is opened or shared.
 
+> **Download:** [Get the latest release here](https://github.com/SubhamSathua/choose-browser-android/releases)
+> 
 ---
 
 ## # Screenshots
