@@ -1,8 +1,8 @@
 # Changelog
 
 ## Documentation & Assets — August 9, 2026
-- Added scrn.md with categorized screenshot tables for all application features.
-- Updated README.md with CB_ screenshots and link to scrn.md gallery.
+- Fixed Markdown heading structure and TOC anchors in README.md and scrn.md.
+- Created assets/screenshots/images.md gallery with relative image paths.
 
 ## v2.1 — March 8, 2026
 
