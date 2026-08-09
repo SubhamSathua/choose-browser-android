@@ -35,32 +35,38 @@ jobs:
         run: |
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > release.jks
 
-      # 2. Build and Sign APKs via Gradle directly using Environment Variables
+      # 2. Determine Build Variant and Release Type based on Tag Name
+      - name: Determine Build Variant
+        id: build_variant
+        run: |
+          TAG_NAME="${{ github.ref_name }}"
+          if [[ "$TAG_NAME" == *"-alpha"* ]] || [[ "$TAG_NAME" == *"-pre"* ]]; then
+            echo "BUILD_TASK=assembleAlpha" >> $GITHUB_ENV
+            echo "APK_PATH=app/build/outputs/apk/alpha/*.apk" >> $GITHUB_ENV
+            echo "IS_PRERELEASE=true" >> $GITHUB_ENV
+            echo "Building Alpha Pre-release variant for tag: $TAG_NAME"
+          else
+            echo "BUILD_TASK=assembleRelease" >> $GITHUB_ENV
+            echo "APK_PATH=app/build/outputs/apk/release/*.apk" >> $GITHUB_ENV
+            echo "IS_PRERELEASE=false" >> $GITHUB_ENV
+            echo "Building Production Release variant for tag: $TAG_NAME"
+          fi
+
+      # 3. Build Signed APKs via Gradle using Environment Variables
       - name: Build Signed APKs
         env:
           KEYSTORE_FILE: "release.jks"
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-        run: ./gradlew assembleRelease
+        run: ./gradlew ${{ env.BUILD_TASK }}
 
-      # 3. Check if Alpha/Pre-release
-      - name: Check Release Type
-        id: check_type
-        run: |
-          TAG_NAME="${{ github.ref_name }}"
-          if [[ "$TAG_NAME" == *"-alpha"* ]] || [[ "$TAG_NAME" == *"-pre"* ]]; then
-            echo "IS_PRERELEASE=true" >> $GITHUB_ENV
-          else
-            echo "IS_PRERELEASE=false" >> $GITHUB_ENV
-          fi
-
-      # 4. Publish Signed APKs to GitHub Releases
+      # 4. Create GitHub Release
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: app/build/outputs/apk/release/*.apk
-          prerelease: ${{ env.IS_PRERELEASE }}
+          files: ${{ env.APK_PATH }}
+          prerelease: ${{ env.IS_PRERELEASE == 'true' }}
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

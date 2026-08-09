@@ -113,7 +113,12 @@ android {
             initWith release
             applicationIdSuffix ".alpha"
             resValue "string", "app_name", "Choose Browser Alpha"
-            signingConfig signingConfigs.debug
+            def envKsFile = System.getenv("KEYSTORE_FILE") ?: "release.jks"
+            if (keystorePropsFile.exists() || (rootProject.file(envKsFile).exists() && System.getenv("KEYSTORE_PASSWORD") != null)) {
+                signingConfig signingConfigs.release
+            } else {
+                signingConfig signingConfigs.debug
+            }
         }
     }
 

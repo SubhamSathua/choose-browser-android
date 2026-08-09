@@ -1,8 +1,8 @@
 # Changelog
 
 ## Documentation & CI/CD — August 9, 2026
-- Added contents:write permissions block to cd.yml workflow to resolve 403 release permissions error.
-- Configured Gradle signingConfigs and automated release publishing.
+- Fixed workflow tag detection to run assembleAlpha for -alpha/-pre tags and upload alpha APKs.
+- Updated alpha buildType in app/build.gradle to sign with release key on CI.
 
 ## v2.1 — March 8, 2026
 
