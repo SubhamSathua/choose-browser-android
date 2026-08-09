@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cfg_app_brand_name">Choose Browser</string>
+    <string name="cfg_made_by">Made by Subham Kumar Sathua</string>
+    <string name="cfg_contact_email">hyper.devstudio@protonmail.com</string>
+    <string name="cfg_email_card_title">Email</string>
+    <string name="cfg_about_footer">© 2026 Choose Browser · All rights reserved.</string>
+</resources>

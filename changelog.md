@@ -1,8 +1,8 @@
 # Changelog
 
 ## Documentation & CI/CD — August 9, 2026
-- Replaced external signing action with native apksigner in cd.yml workflow.
-- Configured Base64 keystore decoding and loop signing for all release APKs.
+- Fixed CI build failure by removing AppConstantsDetails files from .gitignore.
+- Verified clean assembleRelease resource linking build.
 
 ## v2.1 — March 8, 2026
 
