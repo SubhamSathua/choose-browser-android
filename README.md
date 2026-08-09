@@ -19,7 +19,7 @@ Choose Browser acts as a lightweight system-wide browser router and link interce
 | <img src="assets/screenshots/CB_PopUp.png" alt="Browser Overlay Popup" width="260"> | <img src="assets/screenshots/CB_Settings.png" alt="App Settings" width="260"> | <img src="assets/screenshots/CB_Preview.png" alt="Web Preview" width="260"> |
 
 <p align="center">
-  <b><a href="scrn.md">View Full Screenshot & Feature Gallery (scrn.md)</a></b>
+  <b><a href="assets/screenshots/images.md">View Full Screenshot & Feature Gallery</a></b>
 </p>
 
 ---
