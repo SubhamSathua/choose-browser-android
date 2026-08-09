@@ -23,22 +23,30 @@ jobs:
       - name: Make Gradlew Executable
         run: chmod +x gradlew
 
-      # Build APKs (release builds)
+      # 1. Build release APKs (unsigned)
       - name: Build APKs
         run: ./gradlew assembleRelease
 
-      # Sign the APKs using GitHub Secrets
-      - name: Sign APKs
-        uses: r0adk3ll/sign-android-release@v1
-        id: sign_app
-        with:
-          releaseDirectory: app/build/outputs/apk/release
-          signingKeyBase64: ${{ secrets.KEYSTORE_BASE64 }}
-          alias: ${{ secrets.KEY_ALIAS }}
-          keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
-          keyPassword: ${{ secrets.KEY_PASSWORD }}
+      # 2. Decode the Base64 Keystore into a file
+      - name: Decode Keystore
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > release.jks
 
-      # Check if this is an Alpha/Pre-release tag
+      # 3. Sign all generated APKs using native apksigner
+      - name: Sign APKs
+        run: |
+          ANDROID_BUILD_TOOLS=$(ls -d $ANDROID_HOME/build-tools/* | tail -n 1)
+          for apk in app/build/outputs/apk/release/*.apk; do
+            echo "Signing $apk..."
+            $ANDROID_BUILD_TOOLS/apksigner sign \
+              --ks release.jks \
+              --ks-pass pass:"${{ secrets.KEYSTORE_PASSWORD }}" \
+              --key-pass pass:"${{ secrets.KEY_PASSWORD }}" \
+              --ks-key-alias "${{ secrets.KEY_ALIAS }}" \
+              "$apk"
+          done
+
+      # 4. Check if this is an Alpha/Pre-release tag
       - name: Check Release Type
         id: check_type
         run: |
@@ -49,11 +57,11 @@ jobs:
             echo "IS_PRERELEASE=false" >> $GITHUB_ENV
           fi
 
-      # Publish Signed APKs to GitHub Releases
+      # 5. Publish Signed APKs to GitHub Releases
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: ${{ steps.sign_app.outputs.signedReleaseFile }}
+          files: app/build/outputs/apk/release/*.apk
           prerelease: ${{ env.IS_PRERELEASE }}
           generate_release_notes: true
         env:
