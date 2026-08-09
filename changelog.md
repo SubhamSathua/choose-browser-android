@@ -1,8 +1,8 @@
 # Changelog
 
 ## Documentation & CI/CD — August 9, 2026
-- Integrated automated APK signing via r0adk3ll/sign-android-release action in cd.yml.
-- Made gradle release signingConfig conditional and updated .gitignore security patterns.
+- Replaced external signing action with native apksigner in cd.yml workflow.
+- Configured Base64 keystore decoding and loop signing for all release APKs.
 
 ## v2.1 — March 8, 2026
 
