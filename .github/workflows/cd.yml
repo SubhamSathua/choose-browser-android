@@ -3,7 +3,7 @@ name: Android CI/CD
 on:
   push:
     tags:
-      - 'v*' # Triggers on any tag starting with 'v' (e.g. v1.0.0, v1.0.0-alpha)
+      - 'v*'
 
 jobs:
   build-and-release:
@@ -23,11 +23,22 @@ jobs:
       - name: Make Gradlew Executable
         run: chmod +x gradlew
 
-      # Build Release APKs (generates both split and universal APKs)
+      # Build APKs (release builds)
       - name: Build APKs
         run: ./gradlew assembleRelease
 
-      # Detect if the tag is an Alpha release (contains 'alpha' or '-pre')
+      # Sign the APKs using GitHub Secrets
+      - name: Sign APKs
+        uses: r0adk3ll/sign-android-release@v1
+        id: sign_app
+        with:
+          releaseDirectory: app/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.KEYSTORE_BASE64 }}
+          alias: ${{ secrets.KEY_ALIAS }}
+          keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+
+      # Check if this is an Alpha/Pre-release tag
       - name: Check Release Type
         id: check_type
         run: |
@@ -38,11 +49,11 @@ jobs:
             echo "IS_PRERELEASE=false" >> $GITHUB_ENV
           fi
 
-      # Publish all generated APKs to GitHub Releases
+      # Publish Signed APKs to GitHub Releases
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: app/build/outputs/apk/release/*.apk
+          files: ${{ steps.sign_app.outputs.signedReleaseFile }}
           prerelease: ${{ env.IS_PRERELEASE }}
           generate_release_notes: true
         env:

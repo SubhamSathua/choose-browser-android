@@ -88,8 +88,9 @@ android {
 
     buildTypes {
         release {
-            // MUST be present so Gradle signs the release APK
-            signingConfig signingConfigs.release
+            if (keystorePropsFile.exists()) {
+                signingConfig signingConfigs.release
+            }
 
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

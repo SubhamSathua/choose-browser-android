@@ -29,4 +29,6 @@ Dev-LAB/
 app/src/main/res/font/olds/
 key.properties
 release.jks
+*.jks
+*.keystore
 app/release/

@@ -1,8 +1,8 @@
 # Changelog
 
 ## Documentation & CI/CD — August 9, 2026
-- Fixed CI build error by removing local hardcoded org.gradle.java.home from gradle.properties.
-- Added GitHub Actions workflow (.github/workflows/cd.yml) for automated tag releases.
+- Integrated automated APK signing via r0adk3ll/sign-android-release action in cd.yml.
+- Made gradle release signingConfig conditional and updated .gitignore security patterns.
 
 ## v2.1 — March 8, 2026
 
