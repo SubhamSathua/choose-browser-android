@@ -79,16 +79,29 @@ android {
                 keyAlias keystoreProps['keyAlias']
                 keyPassword keystoreProps['keyPassword']
             } else {
-                println "========================================"
-                println "WARNING: key.properties NOT FOUND!"
-                println "========================================"
+                def envKsFile = System.getenv("KEYSTORE_FILE") ?: "release.jks"
+                if (rootProject.file(envKsFile).exists() && System.getenv("KEYSTORE_PASSWORD") != null) {
+                    println "========================================"
+                    println "LOADING KEY FROM ENVIRONMENT VARIABLES (CI/CD)..."
+                    println "========================================"
+
+                    storeFile rootProject.file(envKsFile)
+                    storePassword System.getenv("KEYSTORE_PASSWORD")
+                    keyAlias System.getenv("KEY_ALIAS")
+                    keyPassword System.getenv("KEY_PASSWORD")
+                } else {
+                    println "========================================"
+                    println "WARNING: key.properties AND environment secrets NOT FOUND!"
+                    println "========================================"
+                }
             }
         }
     }
 
     buildTypes {
         release {
-            if (keystorePropsFile.exists()) {
+            def envKsFile = System.getenv("KEYSTORE_FILE") ?: "release.jks"
+            if (keystorePropsFile.exists() || (rootProject.file(envKsFile).exists() && System.getenv("KEYSTORE_PASSWORD") != null)) {
                 signingConfig signingConfigs.release
             }
 

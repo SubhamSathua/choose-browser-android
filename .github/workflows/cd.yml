@@ -23,30 +23,21 @@ jobs:
       - name: Make Gradlew Executable
         run: chmod +x gradlew
 
-      # 1. Build release APKs (unsigned)
-      - name: Build APKs
-        run: ./gradlew assembleRelease
-
-      # 2. Decode the Base64 Keystore into a file
+      # 1. Decode Keystore to a file in the workspace
       - name: Decode Keystore
         run: |
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > release.jks
 
-      # 3. Sign all generated APKs using native apksigner
-      - name: Sign APKs
-        run: |
-          ANDROID_BUILD_TOOLS=$(ls -d $ANDROID_HOME/build-tools/* | tail -n 1)
-          for apk in app/build/outputs/apk/release/*.apk; do
-            echo "Signing $apk..."
-            $ANDROID_BUILD_TOOLS/apksigner sign \
-              --ks release.jks \
-              --ks-pass pass:"${{ secrets.KEYSTORE_PASSWORD }}" \
-              --key-pass pass:"${{ secrets.KEY_PASSWORD }}" \
-              --ks-key-alias "${{ secrets.KEY_ALIAS }}" \
-              "$apk"
-          done
+      # 2. Build and Sign APKs via Gradle directly using Environment Variables
+      - name: Build Signed APKs
+        env:
+          KEYSTORE_FILE: "release.jks"
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: ./gradlew assembleRelease
 
-      # 4. Check if this is an Alpha/Pre-release tag
+      # 3. Check if Alpha/Pre-release
       - name: Check Release Type
         id: check_type
         run: |
@@ -57,7 +48,7 @@ jobs:
             echo "IS_PRERELEASE=false" >> $GITHUB_ENV
           fi
 
-      # 5. Publish Signed APKs to GitHub Releases
+      # 4. Publish Signed APKs to GitHub Releases
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:

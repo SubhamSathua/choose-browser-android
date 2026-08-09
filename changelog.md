@@ -1,8 +1,8 @@
 # Changelog
 
 ## Documentation & CI/CD — August 9, 2026
-- Fixed CI build failure by removing AppConstantsDetails files from .gitignore.
-- Verified clean assembleRelease resource linking build.
+- Configured Gradle signingConfigs in app/build.gradle to read release keys from env vars on CI.
+- Updated cd.yml workflow to sign release APKs directly via Gradle build step.
 
 ## v2.1 — March 8, 2026
 
