@@ -1,8 +1,8 @@
 # Changelog
 
 ## Documentation & CI/CD — August 9, 2026
-- Configured Gradle signingConfigs in app/build.gradle to read release keys from env vars on CI.
-- Updated cd.yml workflow to sign release APKs directly via Gradle build step.
+- Added contents:write permissions block to cd.yml workflow to resolve 403 release permissions error.
+- Configured Gradle signingConfigs and automated release publishing.
 
 ## v2.1 — March 8, 2026
 
