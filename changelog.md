@@ -1,5 +1,9 @@
 # Changelog
 
+## Exclusion Toggles & Asset Path Modernization
+- Replaced browser exclusion eye icons with monochrome MaterialSwitch toggles.
+- Relocated screenshots and branding assets to .github directory and updated docs.
+
 ## Material 3 Monochrome Theme — October 4, 2026
 - Adopted official Material 3 Monochrome color scheme for app accents, buttons, and system bars.
 - Harmonized high-contrast neutral tokens across light and dark theme configurations.

@@ -37,10 +37,12 @@
             android:textSize="@dimen/font_11" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/visibilityIcon"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:contentDescription="Toggle exclude" />
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/switchExclusion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:focusable="false"
+        android:contentDescription="Toggle browser inclusion" />
 
 </LinearLayout>

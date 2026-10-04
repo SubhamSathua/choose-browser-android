@@ -12,8 +12,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.hyper.choosebrowsernew.R;
 import com.hyper.choosebrowsernew.data.model.AppInfo;
+import com.hyper.choosebrowsernew.util.ThemeHelper;
 
 import java.util.List;
 import java.util.Set;
@@ -67,24 +69,22 @@ public class BrowserExclusionAdapter extends BaseAdapter {
             holder.icon = view.findViewById(R.id.browserIcon);
             holder.name = view.findViewById(R.id.appName);
             holder.packageName = view.findViewById(R.id.packageName);
-            holder.visibilityIcon = view.findViewById(R.id.visibilityIcon);
+            holder.switchExclusion = view.findViewById(R.id.switchExclusion);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
         }
 
         AppInfo app = apps.get(i);
-        boolean excluded = excludedPackages.contains(app.packageName);
+        boolean isIncluded = !excludedPackages.contains(app.packageName);
 
         holder.icon.setImageDrawable(scaleIcon(app.icon));
         holder.name.setText(app.name);
         holder.packageName.setText(app.packageName);
-        holder.visibilityIcon.setImageResource(excluded ? R.drawable.visibility_off : R.drawable.visibility);
+        holder.switchExclusion.setChecked(isIncluded);
+        ThemeHelper.applyMonochromeSwitchTint(holder.switchExclusion, context);
 
         view.setOnClickListener(v -> {
-            if (toggleListener != null) toggleListener.onToggle(app);
-        });
-        holder.visibilityIcon.setOnClickListener(v -> {
             if (toggleListener != null) toggleListener.onToggle(app);
         });
 
@@ -108,6 +108,6 @@ public class BrowserExclusionAdapter extends BaseAdapter {
         ImageView icon;
         TextView name;
         TextView packageName;
-        ImageView visibilityIcon;
+        MaterialSwitch switchExclusion;
     }
 }

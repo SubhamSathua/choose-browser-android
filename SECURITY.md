@@ -15,7 +15,7 @@ The table below outlines which versions of this project currently receive securi
 We take the security of this project seriously. If you believe you have found a security vulnerability, please do **NOT** open a public GitHub issue.
 
 ### How to Contact Us
-* **Email:** Send a detailed report to `hyper.devstudio@protonmail.com`.
+* **Email:** Send a detailed report to `contact.hefty730@slmail.me`.
 * **GitHub Private Advisory:** You can also submit a report via [GitHub Private Vulnerability Reporting](https://github.com/SubhamSathua/choose-browser-android/security/advisories/new) if enabled.
 
 ### What to Include in Your Report

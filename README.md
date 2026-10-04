@@ -1,28 +1,29 @@
 # Choose Browser
 
 <p align="center">
-  <img src="assets/icon.png" alt="Choose Browser Icon" width="128" height="128" />
+  <img src=".github/icons/icon.png" alt="Logo" width="128">
+  <br>
+  <b>Instantly choose your preferred browser when tapping links on Android.</b>
 </p>
 
 <p align="center">
-  <b>Instantly choose your preferred browser when tapping links on Android.</b>
+  <a href="#-how-to-install">Installation</a> • <a href="#-screenshots">Screenshots</a>
 </p>
 
 Choose Browser acts as a lightweight system-wide browser router and link interceptor for Android. It bypasses Android 11's removal of the native "Ask Every Time" browser selection prompt by displaying a fast, customizable overlay picker whenever an HTTP/HTTPS link is opened or shared.
 
 > **Download:** [Get the latest release here](https://github.com/SubhamSathua/choose-browser-android/releases)
-> 
+
 ---
 
 ## # Screenshots
 
+> [!NOTE] 
+> [All Screenshots](.github/screenshots/images.md)
+
 | Browser Overlay Popup | App Settings & Themes | In-App Web Preview |
 | :---: | :---: | :---: |
-| <img src="assets/screenshots/CB_PopUp.png" alt="Browser Overlay Popup" width="260"> | <img src="assets/screenshots/CB_Settings.png" alt="App Settings" width="260"> | <img src="assets/screenshots/CB_Preview.png" alt="Web Preview" width="260"> |
-
-<p align="center">
-  <b><a href="assets/screenshots/images.md">View Full Screenshot & Feature Gallery</a></b>
-</p>
+| <img src=".github/screenshots/CB_PopUp.png" alt="Browser Overlay Popup" width="260"> | <img src=".github/screenshots/CB_Settings.png" alt="App Settings" width="260"> | <img src=".github/screenshots/CB_Preview.png" alt="Web Preview" width="260"> |
 
 ---
 
@@ -124,7 +125,7 @@ This project is licensed under the **Apache License 2.0**.
 ## # Contact
 **Author:** Subham Kumar Sathua  
 **GitHub:** [@SubhamSathua](https://github.com/SubhamSathua)  
-**Email:** [hyper.devstudio@protonmail.com](mailto:hyper.devstudio@protonmail.com)  
+**Email:** [contact.hefty730@slmail.me](mailto:contact.hefty730@slmail.me)  
 
 ---
 

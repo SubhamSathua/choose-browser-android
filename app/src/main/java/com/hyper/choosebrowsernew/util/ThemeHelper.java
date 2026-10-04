@@ -85,6 +85,24 @@ public class ThemeHelper {
         return ContextCompat.getColor(themedContext, fallbackColorRes);
     }
 
+    public static void applyMonochromeSwitchTint(androidx.appcompat.widget.SwitchCompat switchCompat, Context context) {
+        if (switchCompat == null || context == null) return;
+        int checkedThumb = ContextCompat.getColor(context, R.color.PrimaryCol);
+        int uncheckedThumb = ContextCompat.getColor(context, R.color.radio_unchecked);
+        int checkedTrack = (checkedThumb & 0x00FFFFFF) | 0x66000000;
+        int uncheckedTrack = ContextCompat.getColor(context, R.color.SecBtn_BgCol);
+
+        android.content.res.ColorStateList thumbTint = new android.content.res.ColorStateList(
+                new int[][]{ new int[]{android.R.attr.state_checked}, new int[]{} },
+                new int[]{ checkedThumb, uncheckedThumb });
+        android.content.res.ColorStateList trackTint = new android.content.res.ColorStateList(
+                new int[][]{ new int[]{android.R.attr.state_checked}, new int[]{} },
+                new int[]{ checkedTrack, uncheckedTrack });
+
+        switchCompat.setThumbTintList(thumbTint);
+        switchCompat.setTrackTintList(trackTint);
+    }
+
     private static String sanitizeColorThemeId(Context context, String themeId) {
         if (themeId == null || themeId.trim().isEmpty()) {
             return COLOR_THEME_DEFAULT;

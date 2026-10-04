@@ -815,16 +815,16 @@ public class PreviewPageActivity extends AppCompatActivity {
             webView.reload();
         });
 
-        // ── Style all switches with Windows blue ──
-        ColorStateList thumbTint = new ColorStateList(
-                new int[][]{ new int[]{android.R.attr.state_checked}, new int[]{} },
-                new int[]{ 0xFF0078D4, 0xFFAAAAAA });
-        ColorStateList trackTint = new ColorStateList(
-                new int[][]{ new int[]{android.R.attr.state_checked}, new int[]{} },
-                new int[]{ 0x550078D4, 0x33888888 });
+        // ── Style all switches with Material 3 Monochrome ──
+
+
+
+
+
+
         for (SwitchCompat sw : new SwitchCompat[]{ switchDesktop, switchScreenshot, switchAllowJs }) {
-            sw.setThumbTintList(thumbTint);
-            sw.setTrackTintList(trackTint);
+            ThemeHelper.applyMonochromeSwitchTint(sw, this);
+
         }
 
         // Ad-Blocker Mode row (below Allow JavaScript switch)
