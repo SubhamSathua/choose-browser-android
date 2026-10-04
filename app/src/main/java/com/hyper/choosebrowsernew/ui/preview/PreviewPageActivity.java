@@ -272,6 +272,7 @@ public class PreviewPageActivity extends AppCompatActivity {
         });
 
         btnClose.setOnClickListener(v -> {
+            Toast.makeText(this, "All data cleared", Toast.LENGTH_SHORT).show();
             clearAllData();
             finish();
         });
@@ -293,7 +294,7 @@ public class PreviewPageActivity extends AppCompatActivity {
 
         btnFire.setOnClickListener(v -> {
             clearAllData();
-            Toast.makeText(this, "Data cleared", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "All data cleared", Toast.LENGTH_SHORT).show();
             finish();
         });
 
@@ -803,8 +804,8 @@ public class PreviewPageActivity extends AppCompatActivity {
 
         // Allow JS (persistent toggle)
         SwitchCompat switchAllowJs = view.findViewById(R.id.switchAllowJs);
-        Boolean currentJs = viewModel.jsEnabled.getValue();
-        switchAllowJs.setChecked(currentJs != null && currentJs);
+
+        switchAllowJs.setChecked(viewModel.isPersistentJsEnabled());
         switchAllowJs.setOnCheckedChangeListener((btn, isChecked) -> {
             viewModel.setPersistentJs(isChecked);
             Toast.makeText(this,

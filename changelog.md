@@ -1,5 +1,9 @@
 # Changelog
 
+## Preview Page JS & Exit Updates
+- Fixed temporary JavaScript lifecycle to follow persistent preference on load and reset on window close.
+- Added "All data cleared" toast feedback when exiting Preview via close or fire buttons.
+
 ## Documentation & CI/CD — August 9, 2026
 - Fixed workflow tag detection to run assembleAlpha for -alpha/-pre tags and upload alpha APKs.
 - Updated alpha buildType in app/build.gradle to sign with release key on CI.

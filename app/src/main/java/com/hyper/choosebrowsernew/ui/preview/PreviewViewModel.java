@@ -12,6 +12,7 @@ public class PreviewViewModel extends ViewModel {
 
     private final MutableLiveData<Boolean> _jsEnabled = new MutableLiveData<>();
     public final LiveData<Boolean> jsEnabled = _jsEnabled;
+    public final LiveData<Boolean> tempJs = _jsEnabled;
 
     private final MutableLiveData<String> _adBlockMode = new MutableLiveData<>();
     public final LiveData<String> adBlockMode = _adBlockMode;
@@ -30,6 +31,15 @@ public class PreviewViewModel extends ViewModel {
         allowJsEnabled = repository.isAllowJsEnabled();
         _jsEnabled.setValue(allowJsEnabled);
         _adBlockMode.setValue(repository.getAdBlockMode());
+    }
+
+    public boolean isPersistentJsEnabled() {
+        return repository.isAllowJsEnabled();
+    }
+
+    public void toggleTempJs() {
+        boolean current = _jsEnabled.getValue() != null && _jsEnabled.getValue();
+        _jsEnabled.setValue(!current);
     }
 
     public void toggleJs() {
