@@ -5,11 +5,11 @@
 
     <!--======== ==== APP CUSTOM COLs ==== ========-->
     <!--=========Permission Screen========-->
-    <color name="PrimaryCol">#377aff</color>
+    <color name="PrimaryCol">#000000</color>
     <color name="PrimaryTextCol">#ffffff</color>
-    <color name="PriBtn_BgCol">#1e1a24</color>
+    <color name="PriBtn_BgCol">#000000</color>
     <color name="PriBtn_TxtCol">#ffffff</color>
-    <color name="SecBtn_BgCol">#e6e6e6</color>
+    <color name="SecBtn_BgCol">#e2e2e2</color>
     <color name="SecBtn_TxtCol">#000000</color>
 
     <color name="backgroundPrimary">#f1f1f3</color>
@@ -26,10 +26,10 @@
     <color name="textSubSecondary">#4a4a4a</color>
 
     <!-- ======= For Permission Screen ===========-->
-    <color name="icon_Color">#377aff</color>
-    <color name="permBtn_Bg">#377aff</color>
+    <color name="icon_Color">#000000</color>
+    <color name="permBtn_Bg">#000000</color>
     <color name="permBtn_Txt">#ffffff</color>
-    <color name="radio_unchecked">#757575</color>
+    <color name="radio_unchecked">#747474</color>
 
 
 
@@ -38,7 +38,7 @@
     <color name="popupActionBox_bgCol">#f3f3f3</color>
     <!--  Link Pop Up  card-->
     <color name="popLink_bgCol">#f3f3f3</color>
-    <color name="popLinkPreview_bgCol">#e1e5ff</color>
+    <color name="popLinkPreview_bgCol">#e2e2e2</color>
     <color name="transparent_black">#99000000</color>
     <!--    Popup card-->
     <color name="PopUpCardBg">#fcfcfe</color>
@@ -87,10 +87,10 @@
     <color name="catppuccin_popup_action">#dce0e8</color>
     <color name="catppuccin_popup_text">#2e3440</color>
 
-    <color name="solidBtn_BgCol">#1a39d0</color> <!-- Buttons, scroll thumb, radio-->  
+    <color name="solidBtn_BgCol">#000000</color> <!-- Buttons, scroll thumb, radio-->  
     <color name="solidBtn_txtCol">#ffffff</color>
-    <color name="tonalBtn_BgColor">#bbc3ff</color>
-    <color name="tonalBtn_txtColor">#31344D</color>
+    <color name="tonalBtn_BgColor">#e2e2e2</color>
+    <color name="tonalBtn_txtColor">#1a1a1a</color>
     <!-- .... -->
 
     <!-- ======== Show Link Dialog ======== -->
@@ -127,7 +127,7 @@
     <!-- ======== In-app Browser (missing refs) ======== -->
     <color name="ib_menuBg">#3b3b3d</color>
     <color name="ib_progressTrack">#3b3b3d</color>
-    <color name="ib_progressSeek">#377aff</color>
+    <color name="ib_progressSeek">#000000</color>
 
 
     <!-- ==== ABOUT ==== -->

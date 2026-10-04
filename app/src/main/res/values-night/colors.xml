@@ -7,14 +7,14 @@
     <!--Permission Screen-->
     <color name="PriBtn_BgCol">#ffffff</color>
     <color name="PriBtn_TxtCol">#000000</color>
-    <color name="SecBtn_BgCol">#3c3c3d</color>
+    <color name="SecBtn_BgCol">#333333</color>
     <color name="backgroundPrimary">#010101</color>
     <color name="backgroundSecondary">#171719</color>
     <color name="text">#ffffff</color>
     <color name="textSub">#b7b7b7</color>
-    <color name="SettingsBtnText">#334bb1</color>
-    <!--    <color name="PrimaryCol">#bbc3ff</color>-->
-    <!--    <color name="PrimaryTextCol">#334bb1</color>-->
+    <color name="SettingsBtnText">#000000</color>
+    <color name="PrimaryCol">#ffffff</color>
+    <color name="PrimaryTextCol">#000000</color>
 
     <!--Update Card-->
     <color name="whatsNew_textCol">#8AB4F8</color>
@@ -23,10 +23,10 @@
     <color name="textSubSecondary">#a3a3a5</color>
 
     <!--  ======== For Permission Screen ======== -->
-    <color name="icon_Color">#bbc3ff</color>
-    <color name="permBtn_Bg">#bbc3ff</color>
-    <color name="permBtn_Txt">#334BB1</color>
-    <color name="radio_unchecked">#49454f</color>
+    <color name="icon_Color">#ffffff</color>
+    <color name="permBtn_Bg">#ffffff</color>
+    <color name="permBtn_Txt">#000000</color>
+    <color name="radio_unchecked">#8c8c8c</color>
     <!--<color name="dark_button_text">#FFFFFF</color>-->
 
 
@@ -83,7 +83,12 @@
     <color name="catppuccin_popup_action">#383e4d</color>
     <color name="catppuccin_popup_text">#ffffff</color>
 
-    <color name="popLinkPreview_bgCol">#3b426a</color> <!-- Thumb, linkBg-->
+    <color name="popLinkPreview_bgCol">#333333</color> <!-- Thumb, linkBg-->
+    <color name="solidBtn_BgCol">#ffffff</color>
+    <color name="solidBtn_txtCol">#000000</color>
+    <color name="tonalBtn_BgColor">#333333</color>
+    <color name="tonalBtn_txtColor">#e2e2e2</color>
+    <color name="ib_progressSeek">#ffffff</color>
 
     <!-- ======== Show Link Dialog ======== -->
     <color name="showLinkDialog_primary">#252527</color>

@@ -1,5 +1,9 @@
 # Changelog
 
+## Material 3 Monochrome Theme — October 4, 2026
+- Adopted official Material 3 Monochrome color scheme for app accents, buttons, and system bars.
+- Harmonized high-contrast neutral tokens across light and dark theme configurations.
+
 ## Preview Page JS & Exit Updates
 - Fixed temporary JavaScript lifecycle to follow persistent preference on load and reset on window close.
 - Added "All data cleared" toast feedback when exiting Preview via close or fire buttons.
