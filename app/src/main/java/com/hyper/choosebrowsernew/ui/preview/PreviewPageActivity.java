@@ -46,6 +46,7 @@ import android.webkit.WebStorage;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.webkit.WebViewDatabase;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -109,6 +110,11 @@ public class PreviewPageActivity extends AppCompatActivity {
     private View findBar;
     private EditText etFind;
     private TextView tvFindCount;
+    private View errorOverlay;
+    private TextView errorTitle;
+    private TextView tvErrorCode;
+    private TextView tvErrorDesc;
+    private Button btnErrorRetry;
 
     private PreviewViewModel viewModel;
     private boolean darkModeEnabled = false;
@@ -192,6 +198,15 @@ public class PreviewPageActivity extends AppCompatActivity {
 
         View focusCopy  = findViewById(R.id.focusBtnCopy);
         View focusShare = findViewById(R.id.focusBtnShare);
+        errorOverlay = findViewById(R.id.errorOverlay);
+        errorTitle = findViewById(R.id.errorTitle);
+        tvErrorCode = findViewById(R.id.errorCode);
+        tvErrorDesc = findViewById(R.id.errorDesc);
+        btnErrorRetry = findViewById(R.id.btnErrorRetry);
+        if (btnErrorRetry != null) {
+            btnErrorRetry.setOnClickListener(v -> retryPageLoad());
+            applyPressScale(btnErrorRetry);
+        }
 
         String url = getIntent().getStringExtra("url");
         if (url == null || url.isEmpty()) {
@@ -260,7 +275,7 @@ public class PreviewPageActivity extends AppCompatActivity {
         });
 
         // ── Address bar buttons ──
-        btnReload.setOnClickListener(v -> webView.reload());
+        btnReload.setOnClickListener(v -> retryPageLoad());
 
         btnToggleJs.setOnClickListener(v -> {
             viewModel.toggleJs();
@@ -268,7 +283,7 @@ public class PreviewPageActivity extends AppCompatActivity {
                     (viewModel.jsEnabled.getValue() != null && viewModel.jsEnabled.getValue())
                             ? "JavaScript enabled (temporary)" : "JavaScript disabled (temporary)",
                     Toast.LENGTH_SHORT).show();
-            webView.reload();
+            retryPageLoad();
         });
 
         btnClose.setOnClickListener(v -> {
@@ -279,6 +294,9 @@ public class PreviewPageActivity extends AppCompatActivity {
 
         // ── Bottom nav buttons ──
         btnBack.setOnClickListener(v -> {
+            if (errorOverlay != null && errorOverlay.getVisibility() == View.VISIBLE) {
+                errorOverlay.setVisibility(View.GONE);
+            }
             if (webView.canGoBack()) webView.goBack();
         });
         btnForward.setOnClickListener(v -> {
@@ -361,11 +379,7 @@ public class PreviewPageActivity extends AppCompatActivity {
             }
             @android.webkit.JavascriptInterface
             public void retry() {
-                runOnUiThread(() -> {
-                    if (failedUrl != null && !failedUrl.isEmpty()) {
-                        webView.loadUrl(failedUrl);
-                    }
-                });
+                runOnUiThread(PreviewPageActivity.this::retryPageLoad);
             }
         }, "Android");
 
@@ -377,6 +391,9 @@ public class PreviewPageActivity extends AppCompatActivity {
      *  Navigate to URL or DuckDuckGo search
      * ════════════════════════════════════════════ */
     private void navigateToInput(String input) {
+        if (errorOverlay != null) {
+            errorOverlay.setVisibility(View.GONE);
+        }
         if (TextUtils.isEmpty(input)) return;
 
         String urlToLoad;
@@ -480,6 +497,9 @@ public class PreviewPageActivity extends AppCompatActivity {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
                 currentUrl = url;
+                if (errorOverlay != null) {
+                    errorOverlay.setVisibility(View.GONE);
+                }
                 if (!etUrl.hasFocus()) {
                     if (url.contains("private_browser/index.html")) {
                         etUrl.setText("Search or type URL");
@@ -633,14 +653,36 @@ public class PreviewPageActivity extends AppCompatActivity {
     }
 
     /* ════════════════════════════════════════════
-     *  Load custom error page from assets
+     *  Native Chrome-style error overlay & retry
      * ════════════════════════════════════════════ */
     private void loadErrorPage(String url, String errorCode, String errorDesc) {
         failedUrl = url;
-        String errorUrl = "file:///android_asset/private_browser/error.html"
-                + "?code=" + Uri.encode(errorCode)
-                + "&desc=" + Uri.encode(errorDesc);
-        webView.loadUrl(errorUrl);
+        runOnUiThread(() -> {
+            if (errorOverlay != null) {
+                if (tvErrorCode != null) {
+                    tvErrorCode.setText(errorCode != null && !errorCode.isEmpty() ? errorCode : "NET_ERROR");
+                }
+                if (tvErrorDesc != null) {
+                    tvErrorDesc.setText(errorDesc != null && !errorDesc.isEmpty() ? errorDesc : "The page could not be loaded.");
+                }
+                errorOverlay.setVisibility(View.VISIBLE);
+            }
+            if (progressBar != null) {
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private void retryPageLoad() {
+        if (errorOverlay != null) {
+            errorOverlay.setVisibility(View.GONE);
+        }
+        String targetUrl = (failedUrl != null && !failedUrl.isEmpty()) ? failedUrl : currentUrl;
+        if (targetUrl != null && !targetUrl.isEmpty() && !targetUrl.contains("private_browser/index.html")) {
+            webView.loadUrl(targetUrl);
+        } else {
+            webView.reload();
+        }
     }
 
     /* ── Update back/forward button alpha ── */
@@ -695,7 +737,7 @@ public class PreviewPageActivity extends AppCompatActivity {
 
         // Reload
         view.findViewById(R.id.moreReloadBtn).setOnClickListener(v -> {
-            webView.reload();
+            retryPageLoad();
             dialog.dismiss();
         });
 
@@ -711,6 +753,9 @@ public class PreviewPageActivity extends AppCompatActivity {
         });
 
         view.findViewById(R.id.moreHome).setOnClickListener(v -> {
+            if (errorOverlay != null) {
+                errorOverlay.setVisibility(View.GONE);
+            }
             webView.loadUrl("file:///android_asset/private_browser/index.html");
             dialog.dismiss();
         });
@@ -752,7 +797,7 @@ public class PreviewPageActivity extends AppCompatActivity {
             adBlockText.setText(adBlockEnabled ? "Ad Blocker" : "Ads On");
             Toast.makeText(this, adBlockEnabled ? "Ad Blocker enabled" : "Ad Blocker disabled",
                     Toast.LENGTH_SHORT).show();
-            webView.reload();
+            retryPageLoad();
         });
 
         // Permissions page
@@ -812,7 +857,7 @@ public class PreviewPageActivity extends AppCompatActivity {
                     isChecked ? "JavaScript enabled — will persist on next load"
                               : "JavaScript disabled — will persist on next load",
                     Toast.LENGTH_SHORT).show();
-            webView.reload();
+            retryPageLoad();
         });
 
         // ── Style all switches with Material 3 Monochrome ──
@@ -1085,6 +1130,17 @@ public class PreviewPageActivity extends AppCompatActivity {
         if (etUrl.hasFocus()) {
             etUrl.clearFocus();
             return;
+        }
+        if (errorOverlay != null && errorOverlay.getVisibility() == View.VISIBLE) {
+            errorOverlay.setVisibility(View.GONE);
+            if (webView != null && webView.canGoBack()) {
+                webView.goBack();
+                return;
+            } else {
+                clearAllData();
+                finish();
+                return;
+            }
         }
         if (webView != null && webView.canGoBack()) {
             webView.goBack();

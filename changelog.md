@@ -1,5 +1,9 @@
 # Changelog
 
+## Native Error Overlay & Unified Reload
+- Replaced WebView error page navigation with a native Chrome-style overlay preserving target URL.
+- Unified page reload across address bar, error overlay, and menu buttons.
+
 ## Exclusion Toggles & Asset Path Modernization
 - Replaced browser exclusion eye icons with monochrome MaterialSwitch toggles.
 - Relocated screenshots and branding assets to .github directory and updated docs.
