@@ -868,7 +868,7 @@ public class PreviewPageActivity extends AppCompatActivity {
 
 
         for (SwitchCompat sw : new SwitchCompat[]{ switchDesktop, switchScreenshot, switchAllowJs }) {
-            ThemeHelper.applyMonochromeSwitchTint(sw, this);
+            ThemeHelper.applyMonochromeSwitchTint(sw, this, true);
 
         }
 

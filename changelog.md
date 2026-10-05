@@ -1,5 +1,13 @@
 # Changelog
 
+## Error Page Suggestions & Typography Refinement
+- Added contextual troubleshooting suggestions to the native error overlay.
+- Replaced hardbound font references in the address bar with semantic typography.
+
+## Monochrome Toggle Alignment
+- Styled MaterialSwitch toggles to match high-contrast monochrome design for light and dark themes.
+- Enforced dark-theme toggles in preview mode to align with dark preview appearance.
+
 ## Native Error Overlay & Unified Reload
 - Replaced WebView error page navigation with a native Chrome-style overlay preserving target URL.
 - Unified page reload across address bar, error overlay, and menu buttons.

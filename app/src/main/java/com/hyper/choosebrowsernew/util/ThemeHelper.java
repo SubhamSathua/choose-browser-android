@@ -85,12 +85,40 @@ public class ThemeHelper {
         return ContextCompat.getColor(themedContext, fallbackColorRes);
     }
 
+    public static boolean isDarkTheme(Context context) {
+        if (context == null) return false;
+        int mode = getSavedThemeMode(context);
+        if (mode == AppCompatDelegate.MODE_NIGHT_YES) return true;
+        if (mode == AppCompatDelegate.MODE_NIGHT_NO) return false;
+        return (context.getResources().getConfiguration().uiMode
+                & android.content.res.Configuration.UI_MODE_NIGHT_MASK)
+                == android.content.res.Configuration.UI_MODE_NIGHT_YES;
+    }
+
     public static void applyMonochromeSwitchTint(androidx.appcompat.widget.SwitchCompat switchCompat, Context context) {
+        applyMonochromeSwitchTint(switchCompat, context, isDarkTheme(context));
+    }
+
+    public static void applyMonochromeSwitchTint(androidx.appcompat.widget.SwitchCompat switchCompat, Context context, boolean isDark) {
         if (switchCompat == null || context == null) return;
-        int checkedThumb = ContextCompat.getColor(context, R.color.PrimaryCol);
-        int uncheckedThumb = ContextCompat.getColor(context, R.color.radio_unchecked);
-        int checkedTrack = (checkedThumb & 0x00FFFFFF) | 0x66000000;
-        int uncheckedTrack = ContextCompat.getColor(context, R.color.SecBtn_BgCol);
+        int checkedTrack;
+        int checkedThumb;
+        int uncheckedTrack;
+        int uncheckedThumb;
+
+        if (isDark) {
+            // DT (Dark Theme): solid white track, black thumb
+            checkedTrack = 0xFFFFFFFF;
+            checkedThumb = 0xFF000000;
+            uncheckedTrack = 0xFF333333;
+            uncheckedThumb = 0xFF8C8C8C;
+        } else {
+            // LT (Light Theme): solid black track, light thumb (#E2E2E2)
+            checkedTrack = 0xFF000000;
+            checkedThumb = 0xFFE2E2E2;
+            uncheckedTrack = 0xFFE2E2E2;
+            uncheckedThumb = 0xFF747474;
+        }
 
         android.content.res.ColorStateList thumbTint = new android.content.res.ColorStateList(
                 new int[][]{ new int[]{android.R.attr.state_checked}, new int[]{} },
