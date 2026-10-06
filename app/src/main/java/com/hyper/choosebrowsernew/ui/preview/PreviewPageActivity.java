@@ -225,7 +225,11 @@ public class PreviewPageActivity extends AppCompatActivity {
         });
 
         configureIncognitoWebView();
-        etUrl.setText(url);
+        if (url.contains("private_browser/index.html")) {
+            etUrl.setText("");
+        } else {
+            etUrl.setText(url);
+        }
 
         // ── Address bar: EditText focus behaviour ──
         etUrl.setOnFocusChangeListener((v, hasFocus) -> {
@@ -237,6 +241,11 @@ public class PreviewPageActivity extends AppCompatActivity {
                 btnClearUrl.setVisibility(View.GONE);
                 focusActionsBar.setVisibility(View.GONE);
                 hideKeyboard();
+                if (currentUrl != null && !currentUrl.contains("private_browser/index.html")) {
+                    etUrl.setText(currentUrl);
+                } else {
+                    etUrl.setText("");
+                }
             }
         });
 
@@ -257,22 +266,37 @@ public class PreviewPageActivity extends AppCompatActivity {
 
         // Focus-bar Copy
         focusCopy.setOnClickListener(v -> {
-            ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-            if (cm != null) {
-                cm.setPrimaryClip(ClipData.newPlainText("URL", currentUrl));
-                Toast.makeText(this, "Link copied", Toast.LENGTH_SHORT).show();
+            String target = getShareableUrl();
+            if (!target.isEmpty()) {
+                ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                if (cm != null) {
+                    cm.setPrimaryClip(ClipData.newPlainText("URL", target));
+                    Toast.makeText(this, "Link copied", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(this, "No link to copy", Toast.LENGTH_SHORT).show();
             }
             etUrl.clearFocus();
         });
 
         // Focus-bar Share
         focusShare.setOnClickListener(v -> {
-            Intent share = new Intent(Intent.ACTION_SEND);
-            share.setType("text/plain");
-            share.putExtra(Intent.EXTRA_TEXT, currentUrl);
-            startActivity(Intent.createChooser(share, "Share URL"));
+            String target = getShareableUrl();
+            if (!target.isEmpty()) {
+                Intent share = new Intent(Intent.ACTION_SEND);
+                share.setType("text/plain");
+                share.putExtra(Intent.EXTRA_TEXT, target);
+                startActivity(Intent.createChooser(share, "Share URL"));
+            } else {
+                Toast.makeText(this, "No link to share", Toast.LENGTH_SHORT).show();
+            }
             etUrl.clearFocus();
         });
+
+        ViewCompat.setTooltipText(focusCopy, "Copy link");
+        ViewCompat.setTooltipText(focusShare, "Share link");
+        applyPressScale(focusCopy);
+        applyPressScale(focusShare);
 
         // ── Address bar buttons ──
         btnReload.setOnClickListener(v -> retryPageLoad());
@@ -502,7 +526,7 @@ public class PreviewPageActivity extends AppCompatActivity {
                 }
                 if (!etUrl.hasFocus()) {
                     if (url.contains("private_browser/index.html")) {
-                        etUrl.setText("Search or type URL");
+                        etUrl.setText("");
                     } else {
                         etUrl.setText(url);
                     }
@@ -517,7 +541,7 @@ public class PreviewPageActivity extends AppCompatActivity {
                 currentUrl = url;
                 if (!etUrl.hasFocus()) {
                     if (url.contains("private_browser/index.html")) {
-                        etUrl.setText("Search or type URL");
+                        etUrl.setText("");
                     } else {
                         etUrl.setText(url);
                     }
@@ -1028,23 +1052,29 @@ public class PreviewPageActivity extends AppCompatActivity {
         }
     }
 
+    /* ── Resolve shareable URL: typed address or loaded page URL ── */
+    private String getShareableUrl() {
+        if (etUrl != null) {
+            String text = etUrl.getText().toString().trim();
+            if (!text.isEmpty() && !text.contains("private_browser/index.html") && !text.equals("Search or type URL")) {
+                return text;
+            }
+        }
+        if (currentUrl != null && !currentUrl.isEmpty() && !currentUrl.contains("private_browser/index.html")) {
+            return currentUrl;
+        }
+        return "";
+    }
+
     /* ── Dismiss keyboard when tapping outside the URL bar ── */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN && etUrl.hasFocus()) {
             float x = ev.getRawX(), y = ev.getRawY();
-            if (isTouchInside(focusActionsBar, x, y)) {
-                // Let taps on copy/share buttons through without losing focus
+            if (isTouchInside(focusActionsBar, x, y) || isTouchInside(findViewById(R.id.urlBox), x, y)) {
+                // Inside urlBox or focusActionsBar (copy/share) - keep focus
             } else {
-                View urlBox = findViewById(R.id.urlBox);
-                if (urlBox != null) {
-                    int[] loc = new int[2];
-                    urlBox.getLocationOnScreen(loc);
-                    if (x < loc[0] || x > loc[0] + urlBox.getWidth()
-                            || y < loc[1] || y > loc[1] + urlBox.getHeight()) {
-                        etUrl.clearFocus();
-                    }
-                }
+                etUrl.clearFocus();
             }
         }
         return super.dispatchTouchEvent(ev);
@@ -1054,8 +1084,9 @@ public class PreviewPageActivity extends AppCompatActivity {
         if (view == null || view.getVisibility() != View.VISIBLE) return false;
         int[] loc = new int[2];
         view.getLocationOnScreen(loc);
-        return x >= loc[0] && x <= loc[0] + view.getWidth()
-                && y >= loc[1] && y <= loc[1] + view.getHeight();
+        int slop = (int) (8 * getResources().getDisplayMetrics().density);
+        return x >= (loc[0] - slop) && x <= (loc[0] + view.getWidth() + slop)
+                && y >= (loc[1] - slop) && y <= (loc[1] + view.getHeight() + slop);
     }
 
     /* ── Scale-down on press, scale-up on release ── */

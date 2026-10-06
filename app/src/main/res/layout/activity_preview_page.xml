@@ -118,8 +118,8 @@
             <!-- JS Toggle Button -->
             <ImageButton
                 android:id="@+id/btnToggleJs"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:background="@drawable/bg_preview_addr_btn_ripple"
                 android:contentDescription="Toggle JavaScript"
                 android:padding="6dp"
@@ -167,6 +167,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:background="@drawable/bg_preview_addr_action_btn"
+                android:clickable="true"
+                android:focusable="true"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingHorizontal="14dp">
@@ -193,6 +195,8 @@
                 android:layout_height="32dp"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/bg_preview_addr_action_btn"
+                android:clickable="true"
+                android:focusable="true"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingHorizontal="14dp">
@@ -407,7 +411,7 @@
                                 android:fontFamily="@font/body"
                                 android:lineSpacingExtra="4dp"
                                 android:text="&#8226; Check your internet connection&#10;&#8226; Make sure the URL is correct&#10;&#8226; Try disabling ad/tracker blocking&#10;&#8226; The site may be temporarily down&#10;&#8226; Try enabling JavaScript"
-                                android:textColor="@color/textSub"
+                                android:textColor="@color/white"
                                 android:textSize="@dimen/font_12" />
                         </LinearLayout>
 

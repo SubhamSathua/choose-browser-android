@@ -1,5 +1,9 @@
 # Changelog
 
+## Preview Page Icons & Interactive Address Actions
+- Updated preview icons and added touch ripple, hover states, and press feedback to address bar actions.
+- Fixed home page URL placeholder and resolved address bar copy/share touch handling.
+
 ## Error Page Suggestions & Typography Refinement
 - Added contextual troubleshooting suggestions to the native error overlay.
 - Replaced hardbound font references in the address bar with semantic typography.
