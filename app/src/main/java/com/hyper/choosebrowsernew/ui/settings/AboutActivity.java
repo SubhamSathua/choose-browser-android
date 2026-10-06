@@ -27,11 +27,8 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Status bar matches the dark hero; nav bar matches page background
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            boolean isDark = isDarkModeEnabled();
-            getWindow().setStatusBarColor(getResources().getColor(
-                    isDark ? R.color.previewPage_primary : R.color.white));
+            getWindow().setStatusBarColor(getResources().getColor(R.color.backgroundPrimary));
             getWindow().setNavigationBarColor(getResources().getColor(R.color.backgroundPrimary));
         }
 

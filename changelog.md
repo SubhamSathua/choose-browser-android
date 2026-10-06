@@ -1,5 +1,9 @@
 # Changelog
 
+## Sticky Headers & Preview Downloads Action
+- Implemented sticky headers across Settings and About screens similar to Debug page.
+- Added Downloads grid action in Preview menu and relocated Permissions above Privacy Policy.
+
 ## Preview Page Icons & Interactive Address Actions
 - Updated preview icons and added touch ripple, hover states, and press feedback to address bar actions.
 - Fixed home page URL placeholder and resolved address bar copy/share touch handling.

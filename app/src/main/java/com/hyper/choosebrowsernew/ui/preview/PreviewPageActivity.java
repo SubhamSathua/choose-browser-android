@@ -824,11 +824,21 @@ public class PreviewPageActivity extends AppCompatActivity {
             retryPageLoad();
         });
 
-        // Permissions page
+        // Permissions page (moved to bottom group)
         view.findViewById(R.id.morePermissions).setOnClickListener(v -> {
             dialog.dismiss();
             showPermissionsSheet();
         });
+
+        // Downloads
+        View moreDownloads = view.findViewById(R.id.moreDownloads);
+        if (moreDownloads != null) {
+            applyPressScale(moreDownloads);
+            moreDownloads.setOnClickListener(v -> {
+                dialog.dismiss();
+                Toast.makeText(this, "Downloads", Toast.LENGTH_SHORT).show();
+            });
+        }
 
         // Dark Mode toggle
         ImageView darkModeIcon = view.findViewById(R.id.darkModeIcon);
