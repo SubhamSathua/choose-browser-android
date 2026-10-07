@@ -1,5 +1,9 @@
 # Changelog
 
+## Cross-Site Cookie Blocking & Responsive Sticky Settings
+- Blocked cross-site cookies in Preview and unified exit toast on close and fire actions.
+- Propagated sticky settings across sw screen qualifiers and added rounded card to About.
+
 ## Sticky Headers & Preview Downloads Action
 - Implemented sticky headers across Settings and About screens similar to Debug page.
 - Added Downloads grid action in Preview menu and relocated Permissions above Privacy Policy.

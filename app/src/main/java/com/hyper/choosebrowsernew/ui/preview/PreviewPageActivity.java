@@ -311,8 +311,8 @@ public class PreviewPageActivity extends AppCompatActivity {
         });
 
         btnClose.setOnClickListener(v -> {
-            Toast.makeText(this, "All data cleared", Toast.LENGTH_SHORT).show();
             clearAllData();
+            Toast.makeText(this, "All data cleared", Toast.LENGTH_SHORT).show();
             finish();
         });
 
@@ -473,9 +473,9 @@ public class PreviewPageActivity extends AppCompatActivity {
         s.setJavaScriptCanOpenWindowsAutomatically(false);
         s.setMediaPlaybackRequiresUserGesture(true);
 
-        // Cookies – fully disabled
+        // Block cross-site (third-party) cookies while allowing first-party session cookies
         CookieManager cm = CookieManager.getInstance();
-        cm.setAcceptCookie(false);
+        cm.setAcceptCookie(true);
         cm.setAcceptThirdPartyCookies(webView, false);
 
         // ── WebChromeClient (progress, title, favicon, permissions) ──
@@ -1179,6 +1179,7 @@ public class PreviewPageActivity extends AppCompatActivity {
                 return;
             } else {
                 clearAllData();
+                Toast.makeText(this, "All data cleared", Toast.LENGTH_SHORT).show();
                 finish();
                 return;
             }
@@ -1187,6 +1188,7 @@ public class PreviewPageActivity extends AppCompatActivity {
             webView.goBack();
         } else {
             clearAllData();
+            Toast.makeText(this, "All data cleared", Toast.LENGTH_SHORT).show();
             finish();
         }
     }
