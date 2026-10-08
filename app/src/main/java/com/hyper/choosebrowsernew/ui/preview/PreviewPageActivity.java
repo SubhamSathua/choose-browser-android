@@ -106,7 +106,6 @@ public class PreviewPageActivity extends AppCompatActivity {
      *  jsEnabled      = current runtime state (starts as allowJsEnabled).
      *  Address-bar toggle flips jsEnabled temporarily.
      *  More-menu toggle updates BOTH allowJsEnabled and jsEnabled. */
-    private ImageView urlSiteIcon;
     private View findBar;
     private EditText etFind;
     private TextView tvFindCount;
@@ -181,7 +180,6 @@ public class PreviewPageActivity extends AppCompatActivity {
         btnForward      = findViewById(R.id.btnForward);
         btnClearUrl     = findViewById(R.id.btnClearUrl);
         focusActionsBar = findViewById(R.id.focusActionsBar);
-        urlSiteIcon     = findViewById(R.id.urlSiteIcon);
         findBar         = findViewById(R.id.findBar);
         etFind          = findViewById(R.id.etFind);
         tvFindCount     = findViewById(R.id.tvFindCount);
@@ -502,11 +500,6 @@ public class PreviewPageActivity extends AppCompatActivity {
             public void onReceivedIcon(WebView view, Bitmap icon) {
                 super.onReceivedIcon(view, icon);
                 siteFavicon = icon;
-                if (icon != null) {
-                    urlSiteIcon.setImageBitmap(icon);
-                } else {
-                    urlSiteIcon.setImageResource(R.drawable.site_icon_demo);
-                }
             }
 
             @Override

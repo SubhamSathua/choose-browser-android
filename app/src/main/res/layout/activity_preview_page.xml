@@ -67,15 +67,8 @@
 
 
                 <Space
-                    android:layout_width="12dp"
+                    android:layout_width="8dp"
                     android:layout_height="wrap_content" />
-
-                <ImageView
-                    android:id="@+id/urlSiteIcon"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="4dp"
-                    android:src="@drawable/site_icon_demo" />
 
 
                 <EditText

@@ -1,5 +1,9 @@
 # Changelog
 
+## Address Bar Favicon Removal & Selectable Sheet Title
+- Removed site favicon from address bar and changed cursor color to white.
+- Made more menu title selectable with horizontal scroll indicator on overflow.
+
 ## Cross-Site Cookie Blocking & Responsive Sticky Settings
 - Blocked cross-site cookies in Preview and unified exit toast on close and fire actions.
 - Propagated sticky settings across sw screen qualifiers and added rounded card to About.

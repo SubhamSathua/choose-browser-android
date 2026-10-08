@@ -37,19 +37,35 @@
             android:layout_marginEnd="12dp"
             android:src="@drawable/site_icon_demo" />
 
-        <!-- Site title (centred in remaining space) -->
-        <TextView
-            android:id="@+id/siteTitle"
+        <!-- Site title (horizontally scrollable with mini indicator and selectable) -->
+        <HorizontalScrollView
+            android:id="@+id/siteTitleScroll"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:ellipsize="end"
-            android:fontFamily="@font/body"
-            android:gravity="start"
-            android:maxLines="1"
-            android:text="Site Title"
-            android:textColor="@color/previewPage_textSecondary"
-            android:textSize="@dimen/font_14" />
+            android:layout_marginEnd="6dp"
+            android:scrollbars="horizontal"
+            android:scrollbarSize="2dp"
+            android:scrollbarThumbHorizontal="@drawable/scrollbar_mini_thumb"
+            android:fadeScrollbars="true"
+            android:scrollbarDefaultDelayBeforeFade="600"
+            android:scrollbarFadeDuration="300"
+            android:overScrollMode="ifContentScrolls">
+
+            <TextView
+                android:id="@+id/siteTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/body"
+                android:gravity="start|center_vertical"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                android:text="Site Title"
+                android:textColor="@color/previewPage_textSecondary"
+                android:textIsSelectable="true"
+                android:textSize="@dimen/font_14" />
+        </HorizontalScrollView>
 
         <!-- Copy link (circular ripple bg) -->
         <ImageButton
