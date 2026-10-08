@@ -1,5 +1,9 @@
 # Changelog
 
+## Connection Security Detection & Informative Top Sheet
+- Implemented real-time SSL and HTTP security detection with dynamic lock and warning icons.
+- Added tappable top sheet dialog explaining connection status and certificate details in plain English using Inter font.
+
 ## Address Bar Favicon Removal & Selectable Sheet Title
 - Removed site favicon from address bar and changed cursor color to white.
 - Made more menu title selectable with horizontal scroll indicator on overflow.

@@ -2,6 +2,7 @@ package com.hyper.choosebrowsernew.ui.preview;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.Manifest;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
+import android.net.http.SslCertificate;
 import android.provider.Settings;
 import android.text.Editable;
 import android.text.SpannableString;
@@ -26,12 +28,15 @@ import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintManager;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
+import java.text.DateFormat;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.CookieManager;
@@ -95,6 +100,10 @@ public class PreviewPageActivity extends AppCompatActivity {
     private WebView webView;
     private EditText etUrl;
     private ProgressBar progressBar;
+    private ImageButton urlSecurityIcon;
+    private boolean isCurrentPageSecure = false;
+    private SslCertificate currentSslCert = null;
+    private SslError currentSslError = null;
     private ImageButton btnToggleJs;
     private ImageButton btnBack;
     private ImageButton btnForward;
@@ -179,6 +188,10 @@ public class PreviewPageActivity extends AppCompatActivity {
         btnBack         = findViewById(R.id.btnBack);
         btnForward      = findViewById(R.id.btnForward);
         btnClearUrl     = findViewById(R.id.btnClearUrl);
+        urlSecurityIcon = findViewById(R.id.urlSecurityIcon);
+        if (urlSecurityIcon != null) {
+            urlSecurityIcon.setOnClickListener(v -> showSecurityTopSheet());
+        }
         focusActionsBar = findViewById(R.id.focusActionsBar);
         findBar         = findViewById(R.id.findBar);
         etFind          = findViewById(R.id.etFind);
@@ -228,6 +241,7 @@ public class PreviewPageActivity extends AppCompatActivity {
         } else {
             etUrl.setText(url);
         }
+        updateSecurityStatus(currentUrl);
 
         // ── Address bar: EditText focus behaviour ──
         etUrl.setOnFocusChangeListener((v, hasFocus) -> {
@@ -514,6 +528,9 @@ public class PreviewPageActivity extends AppCompatActivity {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
                 currentUrl = url;
+                currentSslError = null;
+                currentSslCert = null;
+                updateSecurityStatus(url);
                 if (errorOverlay != null) {
                     errorOverlay.setVisibility(View.GONE);
                 }
@@ -532,6 +549,7 @@ public class PreviewPageActivity extends AppCompatActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 currentUrl = url;
+                updateSecurityStatus(url);
                 if (!etUrl.hasFocus()) {
                     if (url.contains("private_browser/index.html")) {
                         etUrl.setText("");
@@ -582,6 +600,8 @@ public class PreviewPageActivity extends AppCompatActivity {
             @Override
             public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
                 String errUrl = error.getUrl();
+                currentSslError = error;
+                updateSecurityStatus(errUrl);
                 if (errUrl != null && errUrl.equals(currentUrl)) {
                     handler.cancel();
                     loadErrorPage(errUrl, "SSL_ERROR", "SSL certificate error – page blocked for safety.");
@@ -706,6 +726,180 @@ public class PreviewPageActivity extends AppCompatActivity {
     private void updateNavButtons() {
         btnBack.setAlpha(webView.canGoBack() ? 1.0f : 0.4f);
         btnForward.setAlpha(webView.canGoForward() ? 1.0f : 0.4f);
+    }
+
+    /* ════════════════════════════════════════════
+     *  Connection Security & Top Sheet
+     * ════════════════════════════════════════════ */
+    private void updateSecurityStatus(String url) {
+        if (url == null || url.contains("private_browser/index.html") || url.equals("about:blank")) {
+            if (urlSecurityIcon != null) {
+                urlSecurityIcon.setVisibility(View.GONE);
+            }
+            isCurrentPageSecure = false;
+            currentSslCert = null;
+            return;
+        }
+
+        if (urlSecurityIcon == null) return;
+        urlSecurityIcon.setVisibility(View.VISIBLE);
+
+        if (url.startsWith("https://")) {
+            SslCertificate cert = (webView != null) ? webView.getCertificate() : null;
+            if (cert != null) {
+                currentSslCert = cert;
+            }
+            if (currentSslError == null) {
+                isCurrentPageSecure = true;
+                urlSecurityIcon.setImageResource(R.drawable.pp_secure_lock);
+                urlSecurityIcon.setContentDescription("Connection is secure");
+            } else {
+                isCurrentPageSecure = false;
+                urlSecurityIcon.setImageResource(R.drawable.pp_site_warning);
+                urlSecurityIcon.setContentDescription("Connection is not secure");
+            }
+        } else if (url.startsWith("http://")) {
+            isCurrentPageSecure = false;
+            currentSslCert = null;
+            urlSecurityIcon.setImageResource(R.drawable.pp_site_warning);
+            urlSecurityIcon.setContentDescription("Connection is not secure");
+        } else {
+            urlSecurityIcon.setVisibility(View.GONE);
+        }
+    }
+
+    private void showSecurityTopSheet() {
+        if (currentUrl == null || currentUrl.contains("private_browser/index.html")) {
+            return;
+        }
+        if (etUrl != null && etUrl.hasFocus()) {
+            etUrl.clearFocus();
+            hideKeyboard();
+        }
+
+        Dialog dialog = new Dialog(this, R.style.PreviewTopSheetDialog);
+        View sheetView = getLayoutInflater().inflate(R.layout.topsheet_preview_security, null);
+        dialog.setContentView(sheetView);
+
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.setGravity(Gravity.TOP);
+            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            window.setDimAmount(0.5f);
+            window.setWindowAnimations(R.style.Animation_TopSheet);
+        }
+
+        // Host name
+        TextView tvHost = sheetView.findViewById(R.id.tvSecurityHost);
+        ImageView headerHostIcon = sheetView.findViewById(R.id.headerHostIcon);
+        String host = "";
+        try {
+            Uri uri = Uri.parse(currentUrl);
+            host = uri.getHost() != null ? uri.getHost() : currentUrl;
+        } catch (Exception e) {
+            host = currentUrl;
+        }
+        if (tvHost != null) {
+            tvHost.setText(host);
+        }
+
+        // Close button
+        View btnClose = sheetView.findViewById(R.id.btnCloseSecuritySheet);
+        if (btnClose != null) {
+            btnClose.setOnClickListener(v -> dialog.dismiss());
+        }
+
+        // Status Header & Views
+        ImageView statusIcon = sheetView.findViewById(R.id.securityStatusIcon);
+        TextView statusTitle = sheetView.findViewById(R.id.securityStatusTitle);
+
+        ImageView certIcon = sheetView.findViewById(R.id.securityCertIcon);
+        TextView issuerTitle = sheetView.findViewById(R.id.securityIssuerTitle);
+        TextView issuerDesc = sheetView.findViewById(R.id.securityIssuerDesc);
+        TextView certDetails = sheetView.findViewById(R.id.securityCertDetails);
+
+        ImageView encIcon = sheetView.findViewById(R.id.securityEncIcon);
+        TextView encTitle = sheetView.findViewById(R.id.securityEncryptionTitle);
+        TextView encDesc = sheetView.findViewById(R.id.securityEncryptionDesc);
+
+        // Fetch certificate if available
+        if (currentSslCert == null && webView != null) {
+            currentSslCert = webView.getCertificate();
+        }
+
+        if (isCurrentPageSecure && currentUrl.startsWith("https://")) {
+            // SECURE
+            if (headerHostIcon != null) headerHostIcon.setImageResource(R.drawable.pp_secure_lock);
+            if (statusIcon != null) statusIcon.setImageResource(R.drawable.pp_secure_lock);
+            if (statusTitle != null) statusTitle.setText("Connection is secure");
+
+            if (certIcon != null) certIcon.setImageResource(R.drawable.pp_secure_lock);
+            if (issuerTitle != null) issuerTitle.setText("Verified Certificate");
+
+            String issuer = null;
+            if (currentSslCert != null && currentSslCert.getIssuedBy() != null) {
+                issuer = currentSslCert.getIssuedBy().getCName();
+                if (issuer == null || issuer.isEmpty()) {
+                    issuer = currentSslCert.getIssuedBy().getOName();
+                }
+            }
+
+            if (issuer != null && !issuer.isEmpty()) {
+                if (issuerDesc != null) {
+                    issuerDesc.setText("ChooseBrowser verified that " + issuer + " issued this website's certificate.");
+                }
+            } else {
+                if (issuerDesc != null) {
+                    issuerDesc.setText("ChooseBrowser verified that a trusted certificate authority issued this website's certificate.");
+                }
+            }
+
+            if (currentSslCert != null && currentSslCert.getValidNotAfterDate() != null) {
+                String expiryStr = DateFormat.getDateInstance(DateFormat.MEDIUM)
+                        .format(currentSslCert.getValidNotAfterDate());
+                if (certDetails != null) {
+                    certDetails.setText("Valid until: " + expiryStr);
+                    certDetails.setVisibility(View.VISIBLE);
+                }
+            } else {
+                if (certDetails != null) certDetails.setVisibility(View.GONE);
+            }
+
+            if (encIcon != null) encIcon.setImageResource(R.drawable.pp_shield);
+            if (encTitle != null) encTitle.setText("Private & Encrypted");
+            if (encDesc != null) {
+                encDesc.setText("Your information (like passwords or credit card numbers) is private when sent to this site.");
+            }
+        } else {
+            // INSECURE / WARNING
+            if (headerHostIcon != null) headerHostIcon.setImageResource(R.drawable.pp_site_warning);
+            if (statusIcon != null) statusIcon.setImageResource(R.drawable.pp_site_warning);
+            if (statusTitle != null) statusTitle.setText("Connection is not secure");
+
+            if (certIcon != null) certIcon.setImageResource(R.drawable.pp_site_warning);
+            if (issuerTitle != null) issuerTitle.setText("Sensitive Information Warning");
+            if (issuerDesc != null) {
+                issuerDesc.setText("You should not enter any sensitive information on this site (for example, passwords or credit cards), because it could be stolen by attackers.");
+            }
+
+            if (certDetails != null) {
+                if (currentSslError != null) {
+                    certDetails.setText("Reason: Invalid or untrusted security certificate.");
+                } else {
+                    certDetails.setText("Reason: Plain unencrypted HTTP connection.");
+                }
+                certDetails.setVisibility(View.VISIBLE);
+            }
+
+            if (encIcon != null) encIcon.setImageResource(R.drawable.pp_site_warning);
+            if (encTitle != null) encTitle.setText("Unencrypted Connection");
+            if (encDesc != null) {
+                encDesc.setText("This website does not use modern HTTPS encryption. Anyone on your local network or Wi-Fi can see the pages you view.");
+            }
+        }
+
+        dialog.show();
     }
 
     /* ════════════════════════════════════════════
@@ -1153,6 +1347,7 @@ public class PreviewPageActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.stay, R.anim.slide_down);
     }
 
+    @SuppressLint("MissingSuperCall")
     @Override
     public void onBackPressed() {
         // Close find bar first

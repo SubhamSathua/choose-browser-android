@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_preview_top_sheet"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="14dp">
+
+    <!-- Top Row: Host info + Close button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/headerHostIcon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/pp_secure_lock"
+            android:contentDescription="Host security" />
+
+        <TextView
+            android:id="@+id/tvSecurityHost"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:fontFamily="@font/inter"
+            android:maxLines="1"
+            android:textColor="#99FFFFFF"
+            android:textSize="13sp"
+            tools:text="google.com" />
+
+        <ImageButton
+            android:id="@+id/btnCloseSecuritySheet"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/bg_preview_addr_btn_ripple"
+            android:contentDescription="Close"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/close" />
+    </LinearLayout>
+
+    <!-- Primary Status Title Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="14dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/securityStatusIcon"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/pp_secure_lock"
+            android:contentDescription="Status icon" />
+
+        <TextView
+            android:id="@+id/securityStatusTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/inter"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="Connection is secure" />
+    </LinearLayout>
+
+    <!-- Card 1: Certificate & Authenticity -->
+    <LinearLayout
+        android:id="@+id/cardSecurityCert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_preview_url_box"
+        android:gravity="top"
+        android:orientation="horizontal"
+        android:padding="14dp">
+
+        <ImageView
+            android:id="@+id/securityCertIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="1dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/pp_secure_lock"
+            android:contentDescription="Certificate status" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/securityIssuerTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="Verified Certificate" />
+
+            <TextView
+                android:id="@+id/securityIssuerDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/inter"
+                android:lineSpacingExtra="2dp"
+                android:textColor="#B3FFFFFF"
+                android:textSize="12sp"
+                tools:text="ChooseBrowser verified that Google Trust Services issued this website's certificate." />
+
+            <TextView
+                android:id="@+id/securityCertDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/inter"
+                android:textColor="#66FFFFFF"
+                android:textSize="11sp"
+                tools:text="Valid until: Oct 28, 2026" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Card 2: Privacy & Encryption -->
+    <LinearLayout
+        android:id="@+id/cardSecurityEncryption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_preview_url_box"
+        android:gravity="top"
+        android:orientation="horizontal"
+        android:padding="14dp">
+
+        <ImageView
+            android:id="@+id/securityEncIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="1dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/pp_shield"
+            android:contentDescription="Encryption status" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/securityEncryptionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="Private &amp; Encrypted" />
+
+            <TextView
+                android:id="@+id/securityEncryptionDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/inter"
+                android:lineSpacingExtra="2dp"
+                android:textColor="#B3FFFFFF"
+                android:textSize="12sp"
+                tools:text="Your information (like passwords or credit card numbers) is private when sent to this site." />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Card 3: Session Privacy -->
+    <LinearLayout
+        android:id="@+id/cardSecuritySession"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_preview_url_box"
+        android:gravity="top"
+        android:orientation="horizontal"
+        android:padding="14dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="1dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/fire"
+            android:contentDescription="Session privacy" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:text="Ephemeral Session" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/inter"
+                android:lineSpacingExtra="2dp"
+                android:textColor="#B3FFFFFF"
+                android:textSize="12sp"
+                android:text="Cookies, cache, and site data are automatically wiped when you close this preview window." />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Bottom Drag / Dismiss Handle -->
+    <View
+        android:layout_width="36dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/bg_preview_drag_handle" />
+
+</LinearLayout>

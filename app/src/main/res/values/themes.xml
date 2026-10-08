@@ -88,6 +88,19 @@
 
 
 
+    <!-- Preview Top Sheet: Animation & Dialog -->
+    <style name="Animation.TopSheet" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/slide_down_from_top</item>
+        <item name="android:windowExitAnimation">@anim/slide_up_to_top</item>
+    </style>
+
+    <style name="PreviewTopSheetDialog" parent="Theme.MaterialComponents.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowAnimationStyle">@style/Animation.TopSheet</item>
+        <item name="android:statusBarColor">@color/previewPage_primary</item>
+    </style>
 </resources>
 
 
