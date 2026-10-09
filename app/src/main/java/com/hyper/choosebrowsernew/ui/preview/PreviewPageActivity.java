@@ -129,12 +129,14 @@ public class PreviewPageActivity extends AppCompatActivity {
 
     private static final String PREFS_NAME = "preview_prefs";
     private static final String KEY_ALLOW_JS = "allow_js";
+    private static final String KEY_ALLOW_HTTP = "allow_http";
     private static final String KEY_AD_BLOCK_MODE = "ad_block_mode";
     private static final int REQ_CODE_PERM = 2001;
 
     private boolean adBlockEnabled = true;
     private boolean desktopSiteEnabled = false;
     private boolean screenshotAllowed = false;
+    private boolean allowHttpEnabled = false;
     private String currentUrl = "";
     private String failedUrl = "";
     private Bitmap siteFavicon = null;
@@ -226,6 +228,7 @@ public class PreviewPageActivity extends AppCompatActivity {
             return;
         }
         currentUrl = url;
+        allowHttpEnabled = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).getBoolean(KEY_ALLOW_HTTP, false);
 
         // Observe ViewModel state
         viewModel.jsEnabled.observe(this, enabled -> {
@@ -420,6 +423,17 @@ public class PreviewPageActivity extends AppCompatActivity {
         }, "Android");
 
         // Load page
+        if (url.startsWith("http://") && !allowHttpEnabled) {
+            failedUrl = url;
+            currentUrl = url;
+            if (etUrl != null && !etUrl.hasFocus()) {
+                etUrl.setText(url);
+            }
+            updateSecurityStatus(url);
+            loadErrorPage(url, "ERR_HTTP_BLOCKED",
+                    "Unencrypted HTTP websites are blocked by default for your safety.\nTo load this page, enable 'Allow HTTP connection' in the More menu.");
+            return;
+        }
         webView.loadUrl(url);
     }
 
@@ -445,6 +459,17 @@ public class PreviewPageActivity extends AppCompatActivity {
             } catch (Exception e) {
                 urlToLoad = DUCKDUCKGO_SEARCH + input;
             }
+        }
+        if (urlToLoad.startsWith("http://") && !allowHttpEnabled) {
+            failedUrl = urlToLoad;
+            currentUrl = urlToLoad;
+            if (etUrl != null && !etUrl.hasFocus()) {
+                etUrl.setText(urlToLoad);
+            }
+            updateSecurityStatus(urlToLoad);
+            loadErrorPage(urlToLoad, "ERR_HTTP_BLOCKED",
+                    "Unencrypted HTTP websites are blocked by default for your safety.\nTo load this page, enable 'Allow HTTP connection' in the More menu.");
+            return;
         }
         webView.loadUrl(urlToLoad);
     }
@@ -531,6 +556,13 @@ public class PreviewPageActivity extends AppCompatActivity {
                 currentSslError = null;
                 currentSslCert = null;
                 updateSecurityStatus(url);
+                if (url.startsWith("http://") && !allowHttpEnabled) {
+                    view.stopLoading();
+                    failedUrl = url;
+                    loadErrorPage(url, "ERR_HTTP_BLOCKED",
+                            "Unencrypted HTTP websites are blocked by default for your safety.\nTo load this page, enable 'Allow HTTP connection' in the More menu.");
+                    return;
+                }
                 if (errorOverlay != null) {
                     errorOverlay.setVisibility(View.GONE);
                 }
@@ -613,7 +645,22 @@ public class PreviewPageActivity extends AppCompatActivity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 String url = request.getUrl().toString();
-                if (url.startsWith("http://") || url.startsWith("https://")) {
+                if (url.startsWith("http://")) {
+                    if (!allowHttpEnabled) {
+                        view.stopLoading();
+                        failedUrl = url;
+                        currentUrl = url;
+                        if (etUrl != null && !etUrl.hasFocus()) {
+                            etUrl.setText(url);
+                        }
+                        updateSecurityStatus(url);
+                        loadErrorPage(url, "ERR_HTTP_BLOCKED",
+                                "Unencrypted HTTP websites are blocked by default for your safety.\nTo load this page, enable 'Allow HTTP connection' in the More menu.");
+                        return true;
+                    }
+                    return false;
+                }
+                if (url.startsWith("https://")) {
                     return false;
                 }
                 return true; // block intent://, market://, tel:, mailto:, etc.
@@ -1081,16 +1128,29 @@ public class PreviewPageActivity extends AppCompatActivity {
             retryPageLoad();
         });
 
+        // Allow HTTP (insecure connection toggle - disabled by default)
+        SwitchCompat switchAllowHttp = view.findViewById(R.id.switchAllowHttp);
+        if (switchAllowHttp != null) {
+            switchAllowHttp.setChecked(allowHttpEnabled);
+            switchAllowHttp.setOnCheckedChangeListener((btn, isChecked) -> {
+                allowHttpEnabled = isChecked;
+                getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                        .edit().putBoolean(KEY_ALLOW_HTTP, isChecked).apply();
+                Toast.makeText(this,
+                        isChecked ? "HTTP connections allowed (Insecure)"
+                                  : "HTTP connections blocked",
+                        Toast.LENGTH_SHORT).show();
+                if (isChecked && failedUrl != null && failedUrl.startsWith("http://")) {
+                    retryPageLoad();
+                }
+            });
+        }
+
         // ── Style all switches with Material 3 Monochrome ──
-
-
-
-
-
-
-        for (SwitchCompat sw : new SwitchCompat[]{ switchDesktop, switchScreenshot, switchAllowJs }) {
-            ThemeHelper.applyMonochromeSwitchTint(sw, this, true);
-
+        for (SwitchCompat sw : new SwitchCompat[]{ switchDesktop, switchScreenshot, switchAllowJs, switchAllowHttp }) {
+            if (sw != null) {
+                ThemeHelper.applyMonochromeSwitchTint(sw, this, true);
+            }
         }
 
         // Ad-Blocker Mode row (below Allow JavaScript switch)

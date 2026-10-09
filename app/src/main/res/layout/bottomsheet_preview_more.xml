@@ -342,6 +342,37 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
+    <!-- Allow HTTP connection toggle -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="8dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/pp_site_warning"
+            app:tint="@color/previewPage_textSecondary" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/body"
+            android:text="Allow HTTP connection"
+            android:textColor="@color/previewPage_textSecondary"
+            android:textSize="@dimen/font_14" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switchAllowHttp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
     <!-- Ad-Blocker Mode row -->
     <LinearLayout
         android:id="@+id/moreAdBlockMode"

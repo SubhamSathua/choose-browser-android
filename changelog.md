@@ -1,5 +1,9 @@
 # Changelog
 
+## Allow HTTP Connection Toggle & Safety Blocking
+- Added 'Allow HTTP connection' switch (disabled by default) in preview More menu with M3 monochrome styling.
+- Blocked unencrypted HTTP traffic by default with safe error guidance and instant reload upon enabling.
+
 ## Connection Security Detection & Informative Top Sheet
 - Implemented real-time SSL and HTTP security detection with dynamic lock and warning icons.
 - Added tappable top sheet dialog explaining connection status and certificate details in plain English using Inter font.
