@@ -1,5 +1,23 @@
 # Changelog
 
+## Download Popups Theming & 0.7 Opaque Dim Overlay
+- Harmonized all download confirmation, sort, and file action popups to match blocked dialog styling.
+- Added 70% opaque background dim overlay across all download-related dialogs and sheets.
+
+## Alternative Apps Comparative Feature Analysis
+- Completed deep scan of alternative browser routing projects and documented unique features in features.md.
+
+## Downloads Page Popups & Sticky Header Refinement
+- Replaced default system dialogs and menus with custom rounded dropdowns and themed confirmation popups.
+- Added scroll-responsive sticky header elevation and updated back button to pp_back icon.
+
+## Downloads Page Crash Fix
+- Fixed ClassCastException crash when opening the downloads page by correcting view type.
+
+## Native Downloads & Safety Protection
+- Added download safety blocker and Opera-style confirmation sheet with harmful extension warnings.
+- Added full Downloads manager page with sticky header, live search, categories, and multi-select actions.
+
 ## Allow HTTP Connection Toggle & Safety Blocking
 - Added 'Allow HTTP connection' switch (disabled by default) in preview More menu with M3 monochrome styling.
 - Blocked unencrypted HTTP traffic by default with safe error guidance and instant reload upon enabling.

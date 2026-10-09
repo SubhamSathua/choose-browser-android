@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_preview_more_sheet"
@@ -263,6 +264,55 @@
             android:text="Allow"
             android:textColor="@color/previewPage_textSecondary"
             android:textSize="@dimen/font_12" />
+    </LinearLayout>
+
+    <!-- ─── Downloads ─── -->
+    <LinearLayout
+        android:id="@+id/permRowDownloads"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/bg_preview_grid_item_hover"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="14dp">
+
+        <ImageView
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginEnd="14dp"
+            android:src="@drawable/pp_downloads"
+            app:tint="@color/previewPage_textSecondary" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/body"
+                android:text="Downloads"
+                android:textColor="@color/previewPage_textSecondary"
+                android:textSize="@dimen/font_14" />
+
+            <TextView
+                android:id="@+id/permStatusDownloads"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/body"
+                android:text="Disabled"
+                android:textColor="#FF5252"
+                android:textSize="@dimen/font_11" />
+        </LinearLayout>
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switchPermDownloads"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </LinearLayout>

@@ -3,6 +3,12 @@ package com.hyper.choosebrowsernew.ui.preview;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DownloadManager;
+import android.os.Environment;
+import android.webkit.URLUtil;
+import java.io.File;
+import com.hyper.choosebrowsernew.ui.downloads.DownloadsActivity;
+import com.hyper.choosebrowsernew.ui.downloads.DownloadsHelper;
 import android.Manifest;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -130,6 +136,7 @@ public class PreviewPageActivity extends AppCompatActivity {
     private static final String PREFS_NAME = "preview_prefs";
     private static final String KEY_ALLOW_JS = "allow_js";
     private static final String KEY_ALLOW_HTTP = "allow_http";
+    private static final String KEY_ALLOW_DOWNLOAD = "allow_download";
     private static final String KEY_AD_BLOCK_MODE = "ad_block_mode";
     private static final int REQ_CODE_PERM = 2001;
 
@@ -137,6 +144,7 @@ public class PreviewPageActivity extends AppCompatActivity {
     private boolean desktopSiteEnabled = false;
     private boolean screenshotAllowed = false;
     private boolean allowHttpEnabled = false;
+    private boolean allowDownloadEnabled = false;
     private String currentUrl = "";
     private String failedUrl = "";
     private Bitmap siteFavicon = null;
@@ -229,6 +237,7 @@ public class PreviewPageActivity extends AppCompatActivity {
         }
         currentUrl = url;
         allowHttpEnabled = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).getBoolean(KEY_ALLOW_HTTP, false);
+        allowDownloadEnabled = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).getBoolean(KEY_ALLOW_DOWNLOAD, false);
 
         // Observe ViewModel state
         viewModel.jsEnabled.observe(this, enabled -> {
@@ -667,9 +676,175 @@ public class PreviewPageActivity extends AppCompatActivity {
             }
         });
 
-        // Disable download
+        // Native download listener
         webView.setDownloadListener((url, userAgent, contentDisposition, mimetype, contentLength) ->
-                Toast.makeText(this, "Downloads disabled in preview mode", Toast.LENGTH_SHORT).show());
+                handleIncomingDownload(url, userAgent, contentDisposition, mimetype, contentLength));
+    }
+
+    /* ════════════════════════════════════════════
+     *  Download Management Engine
+     * ════════════════════════════════════════════ */
+    private void handleIncomingDownload(String url, String userAgent, String contentDisposition, String mimeType, long contentLength) {
+        String guessedName = URLUtil.guessFileName(url, contentDisposition, mimeType);
+        if (!allowDownloadEnabled) {
+            showDownloadBlockedDialog(url, userAgent, mimeType, guessedName, contentLength);
+        } else {
+            showDownloadPromptDialog(url, userAgent, mimeType, guessedName, contentLength);
+        }
+    }
+
+    private void showDownloadBlockedDialog(String url, String userAgent, String mimeType, String fileName, long contentLength) {
+        BottomSheetDialog dialog = new BottomSheetDialog(this, R.style.PreviewMoreBottomSheet);
+        View view = getLayoutInflater().inflate(R.layout.dialog_download_blocked, null);
+        dialog.setContentView(view);
+
+        View bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+        if (bottomSheet != null) bottomSheet.setBackgroundColor(Color.TRANSPARENT);
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            dialog.getWindow().setDimAmount(0.7f);
+        }
+
+        view.findViewById(R.id.btnBlockedClose).setOnClickListener(v -> dialog.dismiss());
+        view.findViewById(R.id.btnBlockedCancel).setOnClickListener(v -> dialog.dismiss());
+
+        TextView tvBaseName = view.findViewById(R.id.tvBlockedBaseName);
+        TextView tvExt = view.findViewById(R.id.tvBlockedExtension);
+        TextView tvSize = view.findViewById(R.id.tvBlockedFileSize);
+        TextView tvWarning = view.findViewById(R.id.tvBlockedWarningMsg);
+
+        String baseName = DownloadsHelper.getBaseName(fileName);
+        String ext = DownloadsHelper.getFileExtension(fileName);
+        boolean isHarmful = DownloadsHelper.isHarmfulExtension(fileName);
+
+        tvBaseName.setText(baseName);
+        if (!ext.isEmpty()) {
+            tvExt.setText("." + ext);
+            tvExt.setVisibility(View.VISIBLE);
+            if (isHarmful) {
+                tvExt.setTextColor(Color.parseColor("#FFD600")); // Yellow
+            } else {
+                tvExt.setTextColor(Color.parseColor("#4C8BF5")); // Blue
+            }
+        } else {
+            tvExt.setVisibility(View.GONE);
+        }
+
+        tvSize.setText("Estimated size: " + DownloadsHelper.formatFileSize(contentLength));
+
+        if (isHarmful) {
+            tvWarning.setText("Harmful File Warning: This file (." + ext + ") is an executable or script application that could potentially harm your device. Downloads are currently disabled.");
+            tvWarning.setTextColor(Color.parseColor("#FFD600"));
+        } else {
+            tvWarning.setText("Downloads are currently disabled in Preview Mode. You can enable 'Allow Download' to download this file.");
+            tvWarning.setTextColor(Color.parseColor("#CCFFFFFF"));
+        }
+
+        view.findViewById(R.id.btnBlockedEnable).setOnClickListener(v -> {
+            allowDownloadEnabled = true;
+            getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                    .edit().putBoolean(KEY_ALLOW_DOWNLOAD, true).apply();
+            dialog.dismiss();
+            Toast.makeText(this, "Downloads enabled", Toast.LENGTH_SHORT).show();
+            showDownloadPromptDialog(url, userAgent, mimeType, fileName, contentLength);
+        });
+
+        dialog.show();
+    }
+
+    private void showDownloadPromptDialog(String url, String userAgent, String mimeType, String fileName, long contentLength) {
+        BottomSheetDialog dialog = new BottomSheetDialog(this, R.style.PreviewMoreBottomSheet);
+        View view = getLayoutInflater().inflate(R.layout.dialog_download_prompt, null);
+        dialog.setContentView(view);
+
+        View bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+        if (bottomSheet != null) bottomSheet.setBackgroundColor(Color.TRANSPARENT);
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            dialog.getWindow().setDimAmount(0.7f);
+        }
+
+        EditText etFileName = view.findViewById(R.id.etPromptFileName);
+        etFileName.setText(fileName);
+
+        TextView tvSize = view.findViewById(R.id.tvPromptFileSize);
+        tvSize.setText("Estimated size: " + DownloadsHelper.formatFileSize(contentLength));
+
+        boolean isHarmful = DownloadsHelper.isHarmfulExtension(fileName);
+
+        View layoutSafeActions = view.findViewById(R.id.layoutSafeActions);
+        View layoutHarmfulCard = view.findViewById(R.id.layoutHarmfulCard);
+
+        if (isHarmful) {
+            layoutSafeActions.setVisibility(View.GONE);
+            layoutHarmfulCard.setVisibility(View.VISIBLE);
+
+            View headerAdvanced = view.findViewById(R.id.headerAdvancedOptions);
+            View containerAdvanced = view.findViewById(R.id.containerAdvancedOptions);
+            TextView tvArrow = view.findViewById(R.id.tvAdvancedArrow);
+
+            headerAdvanced.setOnClickListener(v -> {
+                boolean isExpanded = containerAdvanced.getVisibility() == View.VISIBLE;
+                containerAdvanced.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
+                tvArrow.setText(isExpanded ? "▼" : "▲");
+            });
+
+            view.findViewById(R.id.btnDownloadAnyway).setOnClickListener(v -> {
+                String chosenName = etFileName.getText().toString().trim();
+                if (chosenName.isEmpty()) chosenName = fileName;
+                startNativeDownload(url, userAgent, mimeType, chosenName);
+                dialog.dismiss();
+            });
+
+            view.findViewById(R.id.btnHarmfulCancel).setOnClickListener(v -> dialog.dismiss());
+        } else {
+            layoutSafeActions.setVisibility(View.VISIBLE);
+            layoutHarmfulCard.setVisibility(View.GONE);
+
+            view.findViewById(R.id.rowSafeDownload).setOnClickListener(v -> {
+                String chosenName = etFileName.getText().toString().trim();
+                if (chosenName.isEmpty()) chosenName = fileName;
+                startNativeDownload(url, userAgent, mimeType, chosenName);
+                dialog.dismiss();
+            });
+
+            view.findViewById(R.id.rowSafeCancel).setOnClickListener(v -> dialog.dismiss());
+        }
+
+        dialog.show();
+    }
+
+    private void startNativeDownload(String url, String userAgent, String mimeType, String fileName) {
+        try {
+            DownloadManager dm = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+            if (dm == null) {
+                Toast.makeText(this, "Download Manager unavailable", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            File dir = DownloadsHelper.getDownloadsDir();
+            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+            request.setTitle(fileName);
+            request.setDescription("Downloading via ChooseBrowser...");
+            if (mimeType != null && !mimeType.isEmpty()) {
+                request.setMimeType(mimeType);
+            }
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, DownloadsHelper.FOLDER_NAME + "/" + fileName);
+
+            String cookie = CookieManager.getInstance().getCookie(url);
+            if (cookie != null) {
+                request.addRequestHeader("Cookie", cookie);
+            }
+            if (userAgent != null) {
+                request.addRequestHeader("User-Agent", userAgent);
+            }
+
+            dm.enqueue(request);
+            Toast.makeText(this, "Downloading " + fileName + "...", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "Failed to start download: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     /* ════════════════════════════════════════════
@@ -1070,7 +1245,7 @@ public class PreviewPageActivity extends AppCompatActivity {
             applyPressScale(moreDownloads);
             moreDownloads.setOnClickListener(v -> {
                 dialog.dismiss();
-                Toast.makeText(this, "Downloads", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, DownloadsActivity.class));
             });
         }
 
@@ -1115,6 +1290,20 @@ public class PreviewPageActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         });
 
+        // Allow Download
+        SwitchCompat switchAllowDownload = view.findViewById(R.id.switchAllowDownload);
+        if (switchAllowDownload != null) {
+            switchAllowDownload.setChecked(allowDownloadEnabled);
+            switchAllowDownload.setOnCheckedChangeListener((btn, isChecked) -> {
+                allowDownloadEnabled = isChecked;
+                getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                        .edit().putBoolean(KEY_ALLOW_DOWNLOAD, isChecked).apply();
+                Toast.makeText(this,
+                        isChecked ? "Downloads allowed" : "Downloads blocked",
+                        Toast.LENGTH_SHORT).show();
+            });
+        }
+
         // Allow JS (persistent toggle)
         SwitchCompat switchAllowJs = view.findViewById(R.id.switchAllowJs);
 
@@ -1147,7 +1336,7 @@ public class PreviewPageActivity extends AppCompatActivity {
         }
 
         // ── Style all switches with Material 3 Monochrome ──
-        for (SwitchCompat sw : new SwitchCompat[]{ switchDesktop, switchScreenshot, switchAllowJs, switchAllowHttp }) {
+        for (SwitchCompat sw : new SwitchCompat[]{ switchDesktop, switchScreenshot, switchAllowDownload, switchAllowJs, switchAllowHttp }) {
             if (sw != null) {
                 ThemeHelper.applyMonochromeSwitchTint(sw, this, true);
             }
@@ -1291,6 +1480,29 @@ public class PreviewPageActivity extends AppCompatActivity {
                 }
             });
         }
+
+        // Downloads toggle in permissions
+        SwitchCompat switchPermDownloads = v.findViewById(R.id.switchPermDownloads);
+        TextView permStatusDownloads = v.findViewById(R.id.permStatusDownloads);
+        if (switchPermDownloads != null) {
+            switchPermDownloads.setChecked(allowDownloadEnabled);
+            if (permStatusDownloads != null) {
+                permStatusDownloads.setText(allowDownloadEnabled ? "Allowed" : "Disabled");
+                permStatusDownloads.setTextColor(allowDownloadEnabled ? 0xFF4CAF50 : 0xFFFF5252);
+            }
+            ThemeHelper.applyMonochromeSwitchTint(switchPermDownloads, this, true);
+            switchPermDownloads.setOnCheckedChangeListener((btn, isChecked) -> {
+                allowDownloadEnabled = isChecked;
+                getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                        .edit().putBoolean(KEY_ALLOW_DOWNLOAD, isChecked).apply();
+                if (permStatusDownloads != null) {
+                    permStatusDownloads.setText(isChecked ? "Allowed" : "Disabled");
+                    permStatusDownloads.setTextColor(isChecked ? 0xFF4CAF50 : 0xFFFF5252);
+                }
+                Toast.makeText(this, isChecked ? "Downloads allowed" : "Downloads disabled", Toast.LENGTH_SHORT).show();
+            });
+        }
+
         sheet.show();
     }
 

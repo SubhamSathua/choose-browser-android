@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/previewPage_primary"
+    android:orientation="vertical">
+
+    <!-- Sticky Header Container -->
+    <LinearLayout
+        android:id="@+id/stickyHeaderContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/previewPage_primary"
+        android:orientation="vertical">
+
+        <!-- Header Toolbar -->
+        <LinearLayout
+            android:id="@+id/downloadsStickyHeader"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/previewPage_primary"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="6dp"
+            android:paddingEnd="12dp">
+
+            <ImageButton
+                android:id="@+id/btnDownloadsBack"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_preview_addr_btn_ripple"
+                android:contentDescription="Back"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/pp_back" />
+
+        <TextView
+            android:id="@+id/tvDownloadsHeaderTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/inter"
+            android:text="Downloads"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Search Icon / Bar Toggle -->
+        <ImageButton
+            android:id="@+id/btnDownloadsSearch"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/bg_preview_addr_btn_ripple"
+            android:contentDescription="Search"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ix_search" />
+
+        <!-- Sort Icon -->
+        <ImageButton
+            android:id="@+id/btnDownloadsSort"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/bg_preview_addr_btn_ripple"
+            android:contentDescription="Sort"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_sort" />
+
+        <!-- More (3 dots) -->
+        <ImageButton
+            android:id="@+id/btnDownloadsMore"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/bg_preview_addr_btn_ripple"
+            android:contentDescription="More"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/menu" />
+    </LinearLayout>
+
+    <!-- Expandable Search Input Bar -->
+    <LinearLayout
+        android:id="@+id/barSearch"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/bg_preview_url_box"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="12dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/ix_search"
+            app:tint="#80FFFFFF" />
+
+        <EditText
+            android:id="@+id/etSearchQuery"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:fontFamily="@font/inter"
+            android:hint="Search downloads..."
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#80FFFFFF"
+            android:textCursorDrawable="@drawable/cursor_dynamic"
+            android:textSize="14sp" />
+
+        <ImageButton
+            android:id="@+id/btnClearSearch"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Clear"
+            android:padding="6dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/close" />
+    </LinearLayout>
+
+    <!-- ════ Normal Mode: Filter Chips Row ════ -->
+    <HorizontalScrollView
+        android:id="@+id/scrollChips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="4dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/chipAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_preview_addr_action_btn"
+                android:fontFamily="@font/inter"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="6dp"
+                android:text="All"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/chipImages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_preview_addr_action_btn"
+                android:fontFamily="@font/inter"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="6dp"
+                android:text="Images"
+                android:textColor="#99FFFFFF"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/chipPdf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_preview_addr_action_btn"
+                android:fontFamily="@font/inter"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="6dp"
+                android:text="PDF"
+                android:textColor="#99FFFFFF"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/chipDocs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_preview_addr_action_btn"
+                android:fontFamily="@font/inter"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="6dp"
+                android:text="Documents"
+                android:textColor="#99FFFFFF"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/chipOthers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_preview_addr_action_btn"
+                android:fontFamily="@font/inter"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="6dp"
+                android:text="Others"
+                android:textColor="#99FFFFFF"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- ════ Multi-Select Mode Bar (File Manager Mode) ════ -->
+    <LinearLayout
+        android:id="@+id/barSelectionMode"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <ImageButton
+            android:id="@+id/btnCancelSelection"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/bg_preview_addr_btn_ripple"
+            android:contentDescription="Cancel selection"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/close" />
+
+        <TextView
+            android:id="@+id/tvSelectedCount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/inter"
+            android:text="0 selected"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btnSelectAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_preview_addr_action_btn"
+            android:fontFamily="@font/inter"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp"
+            android:text="Select All"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp" />
+
+        <ImageButton
+            android:id="@+id/btnDeleteSelected"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_preview_addr_btn_ripple"
+            android:contentDescription="Delete selected"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_delete" />
+    </LinearLayout>
+
+    <!-- Header Divider -->
+    <View
+        android:id="@+id/headerDivider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="6dp"
+        android:background="#22FFFFFF" />
+
+    </LinearLayout>
+
+    <!-- Content: RecyclerView or Empty State -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDownloads"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="6dp"
+            android:paddingBottom="24dp"
+            android:scrollbars="vertical" />
+
+        <!-- Empty State View -->
+        <LinearLayout
+            android:id="@+id/layoutEmptyDownloads"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/pp_downloads"
+                app:tint="#40FFFFFF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/inter"
+                android:text="No downloads yet"
+                android:textColor="#80FFFFFF"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/inter"
+                android:text="Files downloaded in Preview will appear here"
+                android:textColor="#40FFFFFF"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>

@@ -30,7 +30,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ChooseBrowserNEW"
-        android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
         <activity
@@ -62,8 +61,7 @@
         <activity
             android:name=".ui.settings.ExcludedBrowsersActivity"
             android:exported="false"
-            android:theme="@style/Theme.ChooseBrowserNEW"
-        android:usesCleartextTraffic="true" />
+            android:theme="@style/Theme.ChooseBrowserNEW" />
 
         <activity android:name=".ui.chooser.BrowserChooserActivity"
             android:exported="true"
@@ -87,42 +85,51 @@
         <activity
             android:name=".ui.preview.PreviewPageActivity"
             android:exported="false"
-            android:theme="@style/Theme.ChooseBrowserNEW"
-        android:usesCleartextTraffic="true" />
+            android:theme="@style/Theme.ChooseBrowserNEW" />
 
         <activity
             android:name=".ui.webview.PrivacyPolicyActivity"
             android:exported="false"
-            android:theme="@style/Theme.ChooseBrowserNEW"
-        android:usesCleartextTraffic="true" />
+            android:theme="@style/Theme.ChooseBrowserNEW" />
 
         <activity
             android:name=".ui.webview.WebViewActivity"
             android:exported="false"
-            android:theme="@style/Theme.ChooseBrowserNEW"
-        android:usesCleartextTraffic="true" />
+            android:theme="@style/Theme.ChooseBrowserNEW" />
 
         <activity
             android:name=".ui.settings.AboutActivity"
             android:exported="false"
-            android:theme="@style/Theme.ChooseBrowserNEW"
-        android:usesCleartextTraffic="true" />
+            android:theme="@style/Theme.ChooseBrowserNEW" />
 
         <activity
             android:name=".ui.licenses.LicenseListActivity"
             android:exported="false"
-            android:theme="@style/Theme.ChooseBrowserNEW"
-        android:usesCleartextTraffic="true" />
+            android:theme="@style/Theme.ChooseBrowserNEW" />
 
         <activity
             android:name=".ui.debug.DebugActivity"
             android:exported="false"
-            android:theme="@style/Theme.ChooseBrowserNEW"
-        android:usesCleartextTraffic="true" />
+            android:theme="@style/Theme.ChooseBrowserNEW" />
 
 
 
 
+
+        <activity
+            android:name=".ui.downloads.DownloadsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ChooseBrowserNEW" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
     </application>
 

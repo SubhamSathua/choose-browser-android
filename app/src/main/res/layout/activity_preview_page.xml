@@ -29,7 +29,7 @@
                 android:layout_height="36dp"
                 android:background="@drawable/bg_preview_addr_btn_ripple"
                 android:contentDescription="Reload"
-                android:padding="12dp"
+                android:padding="8dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/reload" />
 
@@ -90,7 +90,7 @@
                     android:background="@null"
                     android:cursorVisible="true"
                     android:ellipsize="end"
-                    android:fontFamily="@font/body"
+                    android:fontFamily="@font/inter"
                     android:hint="Search or type URL"
                     android:imeOptions="actionGo"
                     android:inputType="textUri"
