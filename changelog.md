@@ -1,5 +1,9 @@
 # Changelog
 
+## Default Apps Links Inspector in Debug
+- Added Default Apps Links screen in Debug to inspect supported domains and deep links per app.
+- Implemented dual-pipeline link parser with optimistic real-time streaming and search filter.
+
 ## Download Popups Theming & 0.7 Opaque Dim Overlay
 - Harmonized all download confirmation, sort, and file action popups to match blocked dialog styling.
 - Added 70% opaque background dim overlay across all download-related dialogs and sheets.

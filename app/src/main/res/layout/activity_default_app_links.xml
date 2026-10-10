@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundPrimary"
+    android:orientation="vertical">
+
+    <!-- Sticky Header Toolbar -->
+    <LinearLayout
+        android:id="@+id/appLinksStickyHeader"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/backgroundPrimary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="4dp"
+        android:paddingEnd="16dp">
+
+        <ImageButton
+            android:id="@+id/btnAppLinksBack"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginRight="10dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Back"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ix_back" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/link"
+            app:tint="@color/text" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/heading"
+            android:text="Default Apps Links"
+            android:textColor="@color/text"
+            android:textSize="@dimen/font_18"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/btnAppLinksSearch"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Search"
+            android:padding="6dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ix_search"
+            app:tint="@color/text" />
+    </LinearLayout>
+
+    <!-- Expandable Search Bar -->
+    <LinearLayout
+        android:id="@+id/barAppLinksSearch"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginHorizontal="14dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/bg_preview_url_box"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="12dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ix_search"
+            app:tint="#80FFFFFF" />
+
+        <EditText
+            android:id="@+id/etAppLinksSearch"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:fontFamily="@font/body"
+            android:hint="Search apps or domains (e.g. flipkart)..."
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#80FFFFFF"
+            android:textSize="13sp" />
+
+        <ImageButton
+            android:id="@+id/btnClearAppLinksSearch"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Clear"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/close"
+            app:tint="#80FFFFFF" />
+    </LinearLayout>
+
+    <!-- Top Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#22000000" />
+
+    <!-- Progress indicator -->
+    <ProgressBar
+        android:id="@+id/pbAppLinksLoading"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:indeterminate="true"
+        android:visibility="visible" />
+
+    <!-- Status counter banner -->
+    <TextView
+        android:id="@+id/tvAppLinksStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/mono"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:text="Scanning installed applications for supported links…"
+        android:textColor="@color/textSub"
+        android:textSize="@dimen/font_11" />
+
+    <!-- Content: RecyclerView -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvAppLinks"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="4dp"
+            android:paddingBottom="24dp"
+            android:scrollbars="vertical" />
+
+        <!-- Empty state -->
+        <TextView
+            android:id="@+id/tvAppLinksEmpty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/body"
+            android:text="No matching apps with supported links found"
+            android:textColor="@color/textSub"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+</LinearLayout>

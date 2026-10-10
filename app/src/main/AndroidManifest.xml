@@ -15,9 +15,15 @@
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <queries>
         <intent>
+            <action android:name="android.intent.action.MAIN" />
+        </intent>
+        <intent>
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="http" />
-
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
         </intent>
     </queries>
     <application
@@ -118,6 +124,11 @@
 
         <activity
             android:name=".ui.downloads.DownloadsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ChooseBrowserNEW" />
+
+        <activity
+            android:name=".ui.debug.DefaultAppLinksActivity"
             android:exported="false"
             android:theme="@style/Theme.ChooseBrowserNEW" />
 

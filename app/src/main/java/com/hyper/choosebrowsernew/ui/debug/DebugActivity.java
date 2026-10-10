@@ -1,5 +1,6 @@
 package com.hyper.choosebrowsernew.ui.debug;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -42,6 +43,13 @@ public class DebugActivity extends AppCompatActivity {
         setContentView(R.layout.activity_debug);
 
         findViewById(R.id.debugBackBtn).setOnClickListener(v -> finish());
+
+        View cardAppLinks = findViewById(R.id.cardDefaultAppLinks);
+        View btnAppLinks = findViewById(R.id.debugOpenAppLinksBtn);
+        View.OnClickListener openAppLinksListener = v ->
+                startActivity(new Intent(this, DefaultAppLinksActivity.class));
+        if (cardAppLinks != null) cardAppLinks.setOnClickListener(openAppLinksListener);
+        if (btnAppLinks != null) btnAppLinks.setOnClickListener(openAppLinksListener);
 
         Button clearBtn   = findViewById(R.id.debugClearCacheBtn);
         tvTime            = findViewById(R.id.debugLastFetchTime);
