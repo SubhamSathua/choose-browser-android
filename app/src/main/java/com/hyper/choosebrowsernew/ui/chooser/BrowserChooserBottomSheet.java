@@ -130,12 +130,16 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
 
         // Preview Page button – opens sandboxed incognito WebView
         previewPageBtn.setOnClickListener(v -> {
-            Intent previewIntent = new Intent(requireContext(), PreviewPageActivity.class);
-            previewIntent.putExtra("url", url);
-            startActivity(previewIntent);
-            dismiss();
-            if (getActivity() != null) {
-                getActivity().finish();
+            if (getActivity() instanceof PreviewPageActivity) {
+                dismiss();
+            } else {
+                Intent previewIntent = new Intent(requireContext(), PreviewPageActivity.class);
+                previewIntent.putExtra("url", url);
+                startActivity(previewIntent);
+                dismiss();
+                if (getActivity() instanceof BrowserChooserActivity) {
+                    getActivity().finish();
+                }
             }
         });
 
@@ -181,7 +185,7 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
             }
         });
 
-        viewModel.loadBrowsers();
+        viewModel.loadAppsForUrl(url);
 
         return view;
     }
@@ -190,7 +194,9 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
         viewModel.browsers.observe(getViewLifecycleOwner(), browsers -> {
             BrowserGridAdapter adapter = new BrowserGridAdapter(requireContext(), browsers, url, () -> {
                 dismiss();
-                if (getActivity() != null) getActivity().finish();
+                if (getActivity() instanceof BrowserChooserActivity) {
+                    getActivity().finish();
+                }
             });
             gridView.setAdapter(adapter);
         });
@@ -275,7 +281,7 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
-        if (getActivity() != null) {
+        if (getActivity() instanceof BrowserChooserActivity) {
             getActivity().finish();  // Close the transparent activity when popup closes
         }
     }
@@ -291,9 +297,11 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
         try {
             startActivity(intent);
             dismiss();
-            requireActivity().finish(); // close your app after opening external browser
+            if (getActivity() instanceof BrowserChooserActivity) {
+                requireActivity().finish(); // close transparent activity after opening external app
+            }
         } catch (Exception e) {
-            Toast.makeText(requireContext(), "Failed to open browser", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Failed to open app", Toast.LENGTH_SHORT).show();
         }
     }
 }

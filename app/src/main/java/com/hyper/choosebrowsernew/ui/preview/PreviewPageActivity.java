@@ -75,6 +75,7 @@ import androidx.core.view.ViewCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.hyper.choosebrowsernew.ui.chooser.BrowserChooserBottomSheet;
 import com.hyper.choosebrowsernew.ui.common.ViewModelFactory;
 import com.hyper.choosebrowsernew.ui.main.MainActivity;
 import com.hyper.choosebrowsernew.R;
@@ -1177,12 +1178,13 @@ public class PreviewPageActivity extends AppCompatActivity {
         // ── Grid Row 1: Open In, Home, Print, Find ──
 
         view.findViewById(R.id.moreOpenIn).setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(currentUrl));
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            try { startActivity(intent); } catch (Exception e) {
-                Toast.makeText(this, "No browser found", Toast.LENGTH_SHORT).show();
-            }
             dialog.dismiss();
+            if (!TextUtils.isEmpty(currentUrl)) {
+                BrowserChooserBottomSheet chooser = BrowserChooserBottomSheet.newInstance(currentUrl);
+                chooser.show(getSupportFragmentManager(), "browser_chooser");
+            } else {
+                Toast.makeText(this, "No URL to open", Toast.LENGTH_SHORT).show();
+            }
         });
 
         view.findViewById(R.id.moreHome).setOnClickListener(v -> {

@@ -70,7 +70,7 @@ public class BrowserGridAdapter extends BaseAdapter {
                 context.startActivity(intent);
                 if (onDismiss != null) onDismiss.run();
             } catch (Exception e) {
-                Toast.makeText(context, "Failed to open browser", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Failed to open app", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.hyper.choosebrowsernew.R;
 import com.hyper.choosebrowsernew.UpdateChecker;
+import com.hyper.choosebrowsernew.ui.chooser.BrowserChooserBottomSheet;
 
 import org.json.JSONObject;
 
@@ -100,6 +101,8 @@ public class DebugActivity extends AppCompatActivity {
             refreshTempStatus();
             Toast.makeText(this, "Temp JSON cleared", Toast.LENGTH_SHORT).show();
         });
+
+        setupSampleLinksTester();
     }
 
     private void refreshUi() {
@@ -195,5 +198,37 @@ public class DebugActivity extends AppCompatActivity {
             if (i < lines.length - 1) sb.append('\n');
         }
         return sb.toString();
+    }
+    private void setupSampleLinksTester() {
+        bindLinkTester(R.id.btnTestGoogleDrive, "https://drive.google.com");
+        bindLinkTester(R.id.btnTestGoogleMaps, "https://maps.google.com");
+        bindLinkTester(R.id.btnTestYouTubeMusic, "https://music.youtube.com");
+        bindLinkTester(R.id.btnTestGmail, "mailto:support@example.com");
+        bindLinkTester(R.id.btnTestYouTube, "https://www.youtube.com");
+
+        EditText etCustom = findViewById(R.id.etDebugCustomUrl);
+        View btnCustom = findViewById(R.id.btnDebugTestCustomUrl);
+        if (btnCustom != null && etCustom != null) {
+            btnCustom.setOnClickListener(v -> {
+                String input = etCustom.getText() != null ? etCustom.getText().toString().trim() : "";
+                if (!input.isEmpty()) {
+                    triggerChooserPopup(input);
+                } else {
+                    Toast.makeText(this, "Enter a URL to test", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+    private void bindLinkTester(int viewId, String url) {
+        View view = findViewById(viewId);
+        if (view != null) {
+            view.setOnClickListener(v -> triggerChooserPopup(url));
+        }
+    }
+
+    private void triggerChooserPopup(String url) {
+        BrowserChooserBottomSheet chooser = BrowserChooserBottomSheet.newInstance(url);
+        chooser.show(getSupportFragmentManager(), "browser_chooser");
     }
 }

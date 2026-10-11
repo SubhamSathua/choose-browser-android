@@ -1,5 +1,13 @@
 # Changelog
 
+## Sample Deep Links Tester in Debug
+- Added interactive test cards for Google Drive, Maps, YouTube Music, Gmail, and custom URLs.
+- Verified zero Google Play policy impact with standard HTTPS App Links and safe intent testing.
+
+## Supported Native Apps in Chooser Popup
+- Dynamically queries supported native apps for the tapped link and lists them before browsers.
+- Connected Preview page Open In menu to show unified chooser popup with supported native apps.
+
 ## Default Apps Links Inspector in Debug
 - Added Default Apps Links screen in Debug to inspect supported domains and deep links per app.
 - Implemented dual-pipeline link parser with optimistic real-time streaming and search filter.

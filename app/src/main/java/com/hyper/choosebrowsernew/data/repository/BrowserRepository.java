@@ -12,6 +12,7 @@ import com.hyper.choosebrowsernew.data.local.BrowserExclusionManager;
 import com.hyper.choosebrowsernew.data.model.AppInfo;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -69,6 +70,80 @@ public class BrowserRepository {
         cachedBrowsers = browsers;
         cacheTimestamp = now;
         return browsers;
+    }
+
+    public List<AppInfo> getAppsForUrl(String url) {
+        List<AppInfo> browsers = getInstalledBrowsers();
+        if (TextUtils.isEmpty(url)) {
+            return browsers;
+        }
+
+        String validUrl = url.trim();
+        if (!validUrl.contains("://")) {
+            validUrl = "https://" + validUrl;
+        }
+
+        Set<String> browserPackages = new HashSet<>();
+        for (AppInfo b : browsers) {
+            browserPackages.add(b.packageName);
+        }
+
+        PackageManager pm = context.getPackageManager();
+        Intent urlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(validUrl));
+
+        List<ResolveInfo> resolveInfos;
+        try {
+            resolveInfos = pm.queryIntentActivities(urlIntent, PackageManager.MATCH_ALL);
+        } catch (Exception e) {
+            return browsers;
+        }
+
+        if (resolveInfos == null || resolveInfos.isEmpty()) {
+            return browsers;
+        }
+
+        Set<String> excludedPackages = BrowserExclusionManager.getExcludedPackages(context);
+        String myPackage = context.getPackageName();
+
+        List<AppInfo> supportedNativeApps = new ArrayList<>();
+        Set<String> seenNativePackages = new HashSet<>();
+
+        for (ResolveInfo info : resolveInfos) {
+            if (info == null || info.activityInfo == null || info.activityInfo.packageName == null) continue;
+            String pkgName = info.activityInfo.packageName;
+
+            if (pkgName.equals(myPackage)) continue;
+            if (excludedPackages.contains(pkgName)) continue;
+            if (browserPackages.contains(pkgName)) continue;
+
+            if (!seenNativePackages.contains(pkgName)) {
+                seenNativePackages.add(pkgName);
+                String label;
+                try {
+                    CharSequence cs = info.loadLabel(pm);
+                    label = cs != null ? cs.toString() : pkgName;
+                } catch (Exception e) {
+                    label = pkgName;
+                }
+                Drawable icon = null;
+                try {
+                    icon = info.loadIcon(pm);
+                } catch (Exception ignored) {}
+
+                supportedNativeApps.add(new AppInfo(label, pkgName, icon));
+            }
+        }
+
+        if (supportedNativeApps.isEmpty()) {
+            return browsers;
+        }
+
+        // List non-browser app at before of any browser
+        List<AppInfo> allApps = new ArrayList<>(supportedNativeApps.size() + browsers.size());
+        allApps.addAll(supportedNativeApps);
+        allApps.addAll(browsers);
+
+        return allApps;
     }
 
     public void invalidateBrowserCache() {

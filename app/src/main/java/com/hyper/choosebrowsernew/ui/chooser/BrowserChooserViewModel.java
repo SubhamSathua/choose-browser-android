@@ -24,6 +24,10 @@ public class BrowserChooserViewModel extends ViewModel {
         _browsers.setValue(repository.getInstalledBrowsers());
     }
 
+    public void loadAppsForUrl(String url) {
+        _browsers.setValue(repository.getAppsForUrl(url));
+    }
+
     public List<String> findUrls(String text) {
         return repository.extractUrls(text);
     }
