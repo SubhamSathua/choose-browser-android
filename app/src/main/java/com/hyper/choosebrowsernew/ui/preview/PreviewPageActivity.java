@@ -76,6 +76,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.hyper.choosebrowsernew.ui.chooser.BrowserChooserBottomSheet;
+import com.hyper.choosebrowsernew.data.model.AppInfo;
+import com.hyper.choosebrowsernew.data.repository.BrowserRepository;
 import com.hyper.choosebrowsernew.ui.common.ViewModelFactory;
 import com.hyper.choosebrowsernew.ui.main.MainActivity;
 import com.hyper.choosebrowsernew.R;
@@ -1261,6 +1263,45 @@ public class PreviewPageActivity extends AppCompatActivity {
             applyDarkMode(darkModeEnabled);
             dialog.dismiss();
         });
+
+        // ── Open in App (if native apps available for currentUrl) ──
+        View rowOpenInApp = view.findViewById(R.id.rowOpenInApp);
+        TextView tvOpenInAppName = view.findViewById(R.id.tvOpenInAppName);
+        if (rowOpenInApp != null && !TextUtils.isEmpty(currentUrl)) {
+            BrowserRepository repo = new BrowserRepository(this);
+            List<AppInfo> nativeApps = repo.getNativeAppsForUrl(currentUrl);
+
+            if (nativeApps != null && !nativeApps.isEmpty()) {
+                rowOpenInApp.setVisibility(View.VISIBLE);
+                AppInfo firstApp = nativeApps.get(0);
+                if (nativeApps.size() == 1 && tvOpenInAppName != null) {
+                    tvOpenInAppName.setText(firstApp.name);
+                } else if (tvOpenInAppName != null) {
+                    tvOpenInAppName.setText(nativeApps.size() + " apps");
+                }
+
+                rowOpenInApp.setOnClickListener(v -> {
+                    dialog.dismiss();
+                    if (nativeApps.size() == 1) {
+                        try {
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(currentUrl));
+                            intent.setPackage(firstApp.packageName);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        } catch (Exception e) {
+                            Toast.makeText(this, "Failed to open app", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        BrowserChooserBottomSheet chooser = BrowserChooserBottomSheet.newInstance(currentUrl);
+                        chooser.show(getSupportFragmentManager(), "browser_chooser");
+                    }
+                });
+            } else {
+                rowOpenInApp.setVisibility(View.GONE);
+            }
+        } else if (rowOpenInApp != null) {
+            rowOpenInApp.setVisibility(View.GONE);
+        }
 
         // ── Toggles ──
 

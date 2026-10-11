@@ -249,6 +249,55 @@
 
     <!-- ===== Toggles section ===== -->
 
+    <!-- Open in App row -->
+    <LinearLayout
+        android:id="@+id/rowOpenInApp"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/bg_preview_grid_item_hover"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="8dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/ivOpenInAppIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/pp_open_in_apps"
+            app:tint="@color/previewPage_textSecondary" />
+
+        <TextView
+            android:id="@+id/tvOpenInAppTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/body"
+            android:text="Open in app"
+            android:textColor="@color/previewPage_textSecondary"
+            android:textSize="@dimen/font_14" />
+
+        <TextView
+            android:id="@+id/tvOpenInAppName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/body"
+            android:textColor="#99ffffff"
+            android:textSize="@dimen/font_12" />
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="6dp"
+            android:src="@drawable/forward"
+            android:alpha="0.5"
+            app:tint="@color/previewPage_textSecondary" />
+    </LinearLayout>
+
     <!-- Desktop Site toggle -->
     <LinearLayout
         android:layout_width="match_parent"

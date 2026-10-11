@@ -12,6 +12,7 @@ import com.hyper.choosebrowsernew.data.local.BrowserExclusionManager;
 import com.hyper.choosebrowsernew.data.model.AppInfo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -72,10 +73,9 @@ public class BrowserRepository {
         return browsers;
     }
 
-    public List<AppInfo> getAppsForUrl(String url) {
-        List<AppInfo> browsers = getInstalledBrowsers();
+    public List<AppInfo> getNativeAppsForUrl(String url) {
         if (TextUtils.isEmpty(url)) {
-            return browsers;
+            return Collections.emptyList();
         }
 
         String validUrl = url.trim();
@@ -83,6 +83,7 @@ public class BrowserRepository {
             validUrl = "https://" + validUrl;
         }
 
+        List<AppInfo> browsers = getInstalledBrowsers();
         Set<String> browserPackages = new HashSet<>();
         for (AppInfo b : browsers) {
             browserPackages.add(b.packageName);
@@ -95,11 +96,11 @@ public class BrowserRepository {
         try {
             resolveInfos = pm.queryIntentActivities(urlIntent, PackageManager.MATCH_ALL);
         } catch (Exception e) {
-            return browsers;
+            return Collections.emptyList();
         }
 
         if (resolveInfos == null || resolveInfos.isEmpty()) {
-            return browsers;
+            return Collections.emptyList();
         }
 
         Set<String> excludedPackages = BrowserExclusionManager.getExcludedPackages(context);
@@ -134,6 +135,12 @@ public class BrowserRepository {
             }
         }
 
+        return supportedNativeApps;
+    }
+
+    public List<AppInfo> getAppsForUrl(String url) {
+        List<AppInfo> browsers = getInstalledBrowsers();
+        List<AppInfo> supportedNativeApps = getNativeAppsForUrl(url);
         if (supportedNativeApps.isEmpty()) {
             return browsers;
         }

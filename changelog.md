@@ -1,5 +1,9 @@
 # Changelog
 
+## Open in App Action in Preview More Menu
+- Added 'Open in app' row right above Desktop Site with pp_open_in_apps icon.
+- Dynamically resolves native handlers and hides automatically when no app links are available.
+
 ## Sample Deep Links Tester in Debug
 - Added interactive test cards for Google Drive, Maps, YouTube Music, Gmail, and custom URLs.
 - Verified zero Google Play policy impact with standard HTTPS App Links and safe intent testing.
