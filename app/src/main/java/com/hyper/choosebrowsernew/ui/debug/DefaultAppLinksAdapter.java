@@ -70,7 +70,7 @@ public class DefaultAppLinksAdapter extends RecyclerView.Adapter<DefaultAppLinks
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_app_link, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.debug_item_app_link, parent, false);
         return new ViewHolder(view);
     }
 

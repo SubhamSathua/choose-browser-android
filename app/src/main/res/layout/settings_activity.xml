@@ -435,7 +435,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <include layout="@layout/fragment_help" />
+                    <include layout="@layout/common_fragment_help" />
                 </FrameLayout>
 
                 <!-- Buttons Column -->

@@ -83,7 +83,7 @@ public class UpdateUiHelper {
         if (result == null) return;
 
         BottomSheetDialog dialog = new BottomSheetDialog(activity, R.style.PreviewMoreBottomSheet);
-        View sheet = activity.getLayoutInflater().inflate(R.layout.bottomsheet_update_info, null);
+        View sheet = activity.getLayoutInflater().inflate(R.layout.common_sheet_update_info, null);
         dialog.setContentView(sheet);
 
         View bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
@@ -136,7 +136,7 @@ public class UpdateUiHelper {
      */
     public static void showMarkdownPopup(AppCompatActivity activity, String url) {
         BottomSheetDialog dialog = new BottomSheetDialog(activity, R.style.PreviewMoreBottomSheet);
-        View sheet = activity.getLayoutInflater().inflate(R.layout.bottomsheet_markdown_viewer, null);
+        View sheet = activity.getLayoutInflater().inflate(R.layout.common_sheet_markdown, null);
         dialog.setContentView(sheet);
 
         View bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
@@ -224,7 +224,7 @@ public class UpdateUiHelper {
      */
     public static void showStoresSheet(AppCompatActivity activity) {
         BottomSheetDialog dialog = new BottomSheetDialog(activity, R.style.PreviewMoreBottomSheet);
-        View sheet = activity.getLayoutInflater().inflate(R.layout.bottomsheet_update_stores, null);
+        View sheet = activity.getLayoutInflater().inflate(R.layout.common_sheet_update_stores, null);
         dialog.setContentView(sheet);
 
         View bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);

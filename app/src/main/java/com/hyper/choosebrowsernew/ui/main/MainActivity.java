@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main_activity);
 
         viewModel = new ViewModelProvider(this, new ViewModelFactory(this)).get(MainViewModel.class);
 

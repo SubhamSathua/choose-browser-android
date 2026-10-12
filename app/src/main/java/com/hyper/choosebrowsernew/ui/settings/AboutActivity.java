@@ -32,7 +32,7 @@ public class AboutActivity extends AppCompatActivity {
             getWindow().setNavigationBarColor(getResources().getColor(R.color.backgroundPrimary));
         }
 
-        setContentView(R.layout.activity_about);
+        setContentView(R.layout.about_activity);
 
         // Back
         findViewById(R.id.aboutBackBtn).setOnClickListener(v -> finish());

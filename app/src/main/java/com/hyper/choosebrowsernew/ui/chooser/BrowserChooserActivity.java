@@ -124,7 +124,7 @@ public class BrowserChooserActivity extends AppCompatActivity {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
 
-        View view = LayoutInflater.from(themedContext).inflate(R.layout.dialog_link_picker, null);
+        View view = LayoutInflater.from(themedContext).inflate(R.layout.chooser_dialog_link_picker, null);
         dialog.setContentView(view);
 
         int surface = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupSurface, R.color.backgroundSecondary);
@@ -160,7 +160,7 @@ public class BrowserChooserActivity extends AppCompatActivity {
 
         ListView listView = view.findViewById(R.id.linkPickerList);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                themedContext, R.layout.item_link_picker, android.R.id.text1, links) {
+                themedContext, R.layout.chooser_item_link_picker, android.R.id.text1, links) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View v = super.getView(position, convertView, parent);

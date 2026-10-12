@@ -46,7 +46,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.settings_activity);
 
         // Block access if critical update is required
         if (UpdateChecker.getCachedResult(this).priority == UpdateChecker.Priority.CRITICAL) {
@@ -173,7 +173,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void showColorThemePicker(TextView label) {
         BottomSheetDialog bottomSheet = new BottomSheetDialog(this, R.style.PreviewMoreBottomSheet);
-        View sheetView = LayoutInflater.from(this).inflate(R.layout.bottomsheet_color_themes, null);
+        View sheetView = LayoutInflater.from(this).inflate(R.layout.settings_sheet_themes, null);
         bottomSheet.setContentView(sheetView);
 
         RadioGroup radioGroup = sheetView.findViewById(R.id.colorThemesRadioGroup);

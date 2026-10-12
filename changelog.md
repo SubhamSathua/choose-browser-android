@@ -1,5 +1,9 @@
 # Changelog
 
+## Layout Architecture & Feature-Prefix Organization
+- Reorganized all 36 layout files into feature-first prefix hierarchy (pp_, chooser_, download_, settings_, debug_).
+- Synchronized all sw screen qualifiers and Java layout references with zero build regressions.
+
 ## Open in App Action in Preview More Menu
 - Added 'Open in app' row right above Desktop Site with pp_open_in_apps icon.
 - Dynamically resolves native handlers and hides automatically when no app links are available.

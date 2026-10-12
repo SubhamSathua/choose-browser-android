@@ -39,7 +39,7 @@ public class LicenseListActivity extends AppCompatActivity {
             getWindow().setNavigationBarColor(bgColor);
         }
 
-        setContentView(R.layout.activity_license_list);
+        setContentView(R.layout.about_activity_license);
 
         findViewById(R.id.licenseListBackBtn).setOnClickListener(v -> finish());
 

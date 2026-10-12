@@ -59,7 +59,7 @@ public class DownloadsActivity extends AppCompatActivity implements DownloadsAda
             insetsController.setAppearanceLightStatusBars(false);
         }
 
-        setContentView(R.layout.activity_downloads);
+        setContentView(R.layout.download_activity);
 
         rvDownloads = findViewById(R.id.rvDownloads);
         layoutEmpty = findViewById(R.id.layoutEmptyDownloads);
@@ -169,7 +169,7 @@ public class DownloadsActivity extends AppCompatActivity implements DownloadsAda
 
     private void showSortMenu() {
         BottomSheetDialog dialog = new BottomSheetDialog(this, R.style.PreviewMoreBottomSheet);
-        View view = getLayoutInflater().inflate(R.layout.dialog_download_sort, null);
+        View view = getLayoutInflater().inflate(R.layout.download_dialog_sort, null);
         dialog.setContentView(view);
 
         View bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
@@ -257,7 +257,7 @@ public class DownloadsActivity extends AppCompatActivity implements DownloadsAda
 
     private void showConfirmDialog(String title, String subtitle, String message, String positiveText, Runnable onConfirm) {
         BottomSheetDialog dialog = new BottomSheetDialog(this, R.style.PreviewMoreBottomSheet);
-        View view = getLayoutInflater().inflate(R.layout.dialog_download_confirm, null);
+        View view = getLayoutInflater().inflate(R.layout.download_dialog_confirm, null);
         dialog.setContentView(view);
 
         View bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
@@ -321,7 +321,7 @@ public class DownloadsActivity extends AppCompatActivity implements DownloadsAda
     @Override
     public void onFileMoreClick(DownloadItem item) {
         BottomSheetDialog dialog = new BottomSheetDialog(this, R.style.PreviewMoreBottomSheet);
-        View view = getLayoutInflater().inflate(R.layout.dialog_download_file_actions, null);
+        View view = getLayoutInflater().inflate(R.layout.download_dialog_actions, null);
         dialog.setContentView(view);
 
         View bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);

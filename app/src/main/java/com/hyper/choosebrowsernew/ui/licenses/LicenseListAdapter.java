@@ -38,7 +38,7 @@ public class LicenseListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.license_list_item, parent, false);
+            convertView = inflater.inflate(R.layout.about_item_license, parent, false);
         }
         LicenseListActivity.LicenseItem item = items.get(position);
         ((TextView) convertView.findViewById(R.id.licenseItemName)).setText(item.name);

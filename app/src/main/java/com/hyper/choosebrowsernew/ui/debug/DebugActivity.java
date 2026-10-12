@@ -41,7 +41,7 @@ public class DebugActivity extends AppCompatActivity {
             getWindow().setNavigationBarColor(getResources().getColor(R.color.backgroundPrimary));
         }
 
-        setContentView(R.layout.activity_debug);
+        setContentView(R.layout.debug_activity);
 
         findViewById(R.id.debugBackBtn).setOnClickListener(v -> finish());
 

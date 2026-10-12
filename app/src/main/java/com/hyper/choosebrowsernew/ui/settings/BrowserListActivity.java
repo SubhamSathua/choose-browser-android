@@ -34,7 +34,7 @@ public class BrowserListActivity extends AppCompatActivity {
         }
 //        ThemeHelper.applySavedTheme(this);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_browser_list);
+        setContentView(R.layout.settings_activity_browser_list);
 
         listView = findViewById(R.id.browserListView);
         backBtn = findViewById(R.id.backBtn);

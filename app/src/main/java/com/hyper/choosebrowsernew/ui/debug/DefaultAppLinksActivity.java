@@ -50,7 +50,7 @@ public class DefaultAppLinksActivity extends AppCompatActivity {
             getWindow().setNavigationBarColor(getResources().getColor(R.color.backgroundPrimary));
         }
 
-        setContentView(R.layout.activity_default_app_links);
+        setContentView(R.layout.debug_activity_app_links);
 
         findViewById(R.id.btnAppLinksBack).setOnClickListener(v -> finish());
 

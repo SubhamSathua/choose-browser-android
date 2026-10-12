@@ -183,7 +183,7 @@ public class PreviewPageActivity extends AppCompatActivity {
         WindowInsetsControllerCompat controller = WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView());
         controller.setAppearanceLightStatusBars(false);
 
-        setContentView(R.layout.activity_preview_page);
+        setContentView(R.layout.pp_activity_preview);
 
         // Block access if critical update is required
         if (UpdateChecker.getCachedResult(this).priority == UpdateChecker.Priority.CRITICAL) {
@@ -698,7 +698,7 @@ public class PreviewPageActivity extends AppCompatActivity {
 
     private void showDownloadBlockedDialog(String url, String userAgent, String mimeType, String fileName, long contentLength) {
         BottomSheetDialog dialog = new BottomSheetDialog(this, R.style.PreviewMoreBottomSheet);
-        View view = getLayoutInflater().inflate(R.layout.dialog_download_blocked, null);
+        View view = getLayoutInflater().inflate(R.layout.download_dialog_blocked, null);
         dialog.setContentView(view);
 
         View bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
@@ -757,7 +757,7 @@ public class PreviewPageActivity extends AppCompatActivity {
 
     private void showDownloadPromptDialog(String url, String userAgent, String mimeType, String fileName, long contentLength) {
         BottomSheetDialog dialog = new BottomSheetDialog(this, R.style.PreviewMoreBottomSheet);
-        View view = getLayoutInflater().inflate(R.layout.dialog_download_prompt, null);
+        View view = getLayoutInflater().inflate(R.layout.download_dialog_prompt, null);
         dialog.setContentView(view);
 
         View bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
@@ -880,7 +880,7 @@ public class PreviewPageActivity extends AppCompatActivity {
         } catch (Exception ignored) {}
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View dlg = getLayoutInflater().inflate(R.layout.dialog_permission_request, null);
+        View dlg = getLayoutInflater().inflate(R.layout.common_dialog_permission, null);
         builder.setView(dlg);
         builder.setCancelable(true);
 
@@ -1003,7 +1003,7 @@ public class PreviewPageActivity extends AppCompatActivity {
         }
 
         Dialog dialog = new Dialog(this, R.style.PreviewTopSheetDialog);
-        View sheetView = getLayoutInflater().inflate(R.layout.topsheet_preview_security, null);
+        View sheetView = getLayoutInflater().inflate(R.layout.pp_sheet_security, null);
         dialog.setContentView(sheetView);
 
         Window window = dialog.getWindow();
@@ -1132,7 +1132,7 @@ public class PreviewPageActivity extends AppCompatActivity {
      * ════════════════════════════════════════════ */
     private void showMoreMenu() {
         BottomSheetDialog dialog = new BottomSheetDialog(this, R.style.PreviewMoreBottomSheet);
-        View view = getLayoutInflater().inflate(R.layout.bottomsheet_preview_more, null);
+        View view = getLayoutInflater().inflate(R.layout.pp_sheet_more, null);
         dialog.setContentView(view);
 
         // Transparent background for rounded corners
@@ -1408,7 +1408,7 @@ public class PreviewPageActivity extends AppCompatActivity {
      * ════════════════════════════════════════════ */
     private void showAdBlockModeDialog() {
         BottomSheetDialog sheet = new BottomSheetDialog(this, R.style.PreviewMoreBottomSheet);
-        View view = getLayoutInflater().inflate(R.layout.bottomsheet_adblock_mode, null);
+        View view = getLayoutInflater().inflate(R.layout.pp_sheet_adblock, null);
         sheet.setContentView(view);
 
         View bg = sheet.findViewById(com.google.android.material.R.id.design_bottom_sheet);
@@ -1483,7 +1483,7 @@ public class PreviewPageActivity extends AppCompatActivity {
      * ════════════════════════════════════════════ */
     private void showPermissionsSheet() {
         BottomSheetDialog sheet = new BottomSheetDialog(this, R.style.PreviewMoreBottomSheet);
-        View v = getLayoutInflater().inflate(R.layout.bottomsheet_preview_permissions, null);
+        View v = getLayoutInflater().inflate(R.layout.pp_sheet_permissions, null);
         sheet.setContentView(v);
         View bg = sheet.findViewById(com.google.android.material.R.id.design_bottom_sheet);
         if (bg != null) bg.setBackgroundColor(Color.TRANSPARENT);

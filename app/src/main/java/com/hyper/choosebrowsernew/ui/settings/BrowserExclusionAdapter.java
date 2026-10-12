@@ -64,7 +64,7 @@ public class BrowserExclusionAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup parent) {
         ViewHolder holder;
         if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.browser_exclusion_item, parent, false);
+            view = LayoutInflater.from(context).inflate(R.layout.settings_item_excluded, parent, false);
             holder = new ViewHolder();
             holder.icon = view.findViewById(R.id.browserIcon);
             holder.name = view.findViewById(R.id.appName);

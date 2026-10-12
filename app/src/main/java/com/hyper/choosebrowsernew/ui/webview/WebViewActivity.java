@@ -84,7 +84,7 @@ public class WebViewActivity extends AppCompatActivity {
             getWindow().setNavigationBarColor(getResources().getColor(R.color.backgroundPrimary));
         }
 
-        setContentView(R.layout.activity_webview);
+        setContentView(R.layout.common_activity_webview);
 
         webProgress = findViewById(R.id.webviewProgress);
         applyProgressTheme();

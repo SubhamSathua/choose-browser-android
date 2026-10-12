@@ -34,7 +34,7 @@ public class ExcludedBrowsersActivity extends AppCompatActivity {
         }
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_excluded_browsers);
+        setContentView(R.layout.settings_activity_excluded);
 
         ListView listView = findViewById(R.id.listViewBrowsers);
         ImageView backBtn = findViewById(R.id.backBtn);

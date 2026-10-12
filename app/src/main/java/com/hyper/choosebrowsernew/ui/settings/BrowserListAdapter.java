@@ -49,7 +49,7 @@ public class BrowserListAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup parent) {
         ViewHolder holder;
         if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.browser_list_item, parent, false);
+            view = LayoutInflater.from(context).inflate(R.layout.settings_item_browser, parent, false);
             holder = new ViewHolder();
             holder.icon = view.findViewById(R.id.browserIcon);
             holder.name = view.findViewById(R.id.appName);

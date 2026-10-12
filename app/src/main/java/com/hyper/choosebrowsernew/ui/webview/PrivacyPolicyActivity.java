@@ -32,7 +32,7 @@ public class PrivacyPolicyActivity extends AppCompatActivity {
             getWindow().setNavigationBarColor(getResources().getColor(R.color.backgroundPrimary));
         }
 
-        setContentView(R.layout.activity_privacy_policy);
+        setContentView(R.layout.about_activity_privacy);
 
         privacyProgress = findViewById(R.id.privacyProgress);
 

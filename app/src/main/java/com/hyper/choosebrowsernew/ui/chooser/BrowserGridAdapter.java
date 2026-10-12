@@ -49,7 +49,7 @@ public class BrowserGridAdapter extends BaseAdapter {
     public View getView(int i, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.browser_grid_item, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.chooser_item_browser, parent, false);
             holder = new ViewHolder();
             holder.icon = convertView.findViewById(R.id.browserIcon);
             holder.name = convertView.findViewById(R.id.appName);

@@ -48,7 +48,7 @@ public class ShowLinkDialogHelper {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
 
-        View view = LayoutInflater.from(themedContext).inflate(R.layout.dialog_show_link, null);
+        View view = LayoutInflater.from(themedContext).inflate(R.layout.chooser_dialog_show_link, null);
         dialog.setContentView(view);
 
         applyPopupTheme(themedContext, view);
