@@ -119,7 +119,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/open"
+                    android:src="@drawable/pp_open_with"
                     app:tint="@color/previewPage_textSecondary" />
                 <TextView
                     style="@style/PreviewMoreGridText"

@@ -130,6 +130,22 @@
     <string name="licenses_not_found">Unable to load licenses.\nPlease try again later.</string>
 
 
+    <!-- Context Menu Strings -->
+    <string name="ctx_open_with">Open with…</string>
+    <string name="ctx_copy_link_address">Copy link address</string>
+    <string name="ctx_copy_link_text">Copy link text</string>
+    <string name="ctx_share_link">Share link</string>
+    <string name="ctx_open_full_image">Open full image</string>
+    <string name="ctx_copy_image">Copy image</string>
+    <string name="ctx_copy_image_link">Copy image link</string>
+    <string name="ctx_download_image">Download image</string>
+    <string name="ctx_search_google_image">Search Google for this image</string>
+    <string name="ctx_share_image">Share image</string>
+    <string name="ctx_open_in_viewer">Open in viewer</string>
+    <string name="ctx_copy_media_link">Copy media link</string>
+    <string name="ctx_download_media">Download media</string>
+    <string name="ctx_share_media">Share media</string>
+
     <style name="Theme.Transparent" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>

@@ -1,5 +1,9 @@
 # Changelog
 
+## Chrome-Style Context Menu & Strict Type Detection
+- Added Chrome-style hold context menu for links, images, video, and audio with rich metadata and haptics.
+- Fixed element type detection so image hold shows only image options and link hold shows only link options.
+
 ## Layout Architecture & Feature-Prefix Organization
 - Reorganized all 36 layout files into feature-first prefix hierarchy (pp_, chooser_, download_, settings_, debug_).
 - Synchronized all sw screen qualifiers and Java layout references with zero build regressions.

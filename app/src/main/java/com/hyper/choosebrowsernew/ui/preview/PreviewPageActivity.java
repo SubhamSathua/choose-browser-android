@@ -6,6 +6,18 @@ import android.app.Dialog;
 import android.app.DownloadManager;
 import android.os.Environment;
 import android.webkit.URLUtil;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.util.Base64;
+import android.view.HapticFeedbackConstants;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+import androidx.core.content.FileProvider;
 import java.io.File;
 import com.hyper.choosebrowsernew.ui.downloads.DownloadsActivity;
 import com.hyper.choosebrowsernew.ui.downloads.DownloadsHelper;
@@ -152,6 +164,9 @@ public class PreviewPageActivity extends AppCompatActivity {
     private String failedUrl = "";
     private Bitmap siteFavicon = null;
     private String sitePageTitle = "";
+    private float lastTouchX = 0f;
+    private float lastTouchY = 0f;
+    private BottomSheetDialog contextMenuDialog = null;
 
     private static final String DESKTOP_USER_AGENT =
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
@@ -338,7 +353,11 @@ public class PreviewPageActivity extends AppCompatActivity {
         });
 
         btnClose.setOnClickListener(v -> {
-            clearAllData();
+            if (contextMenuDialog != null && contextMenuDialog.isShowing()) {
+            contextMenuDialog.dismiss();
+            contextMenuDialog = null;
+        }
+        clearAllData();
             Toast.makeText(this, "All data cleared", Toast.LENGTH_SHORT).show();
             finish();
         });
@@ -362,7 +381,11 @@ public class PreviewPageActivity extends AppCompatActivity {
         });
 
         btnFire.setOnClickListener(v -> {
-            clearAllData();
+            if (contextMenuDialog != null && contextMenuDialog.isShowing()) {
+            contextMenuDialog.dismiss();
+            contextMenuDialog = null;
+        }
+        clearAllData();
             Toast.makeText(this, "All data cleared", Toast.LENGTH_SHORT).show();
             finish();
         });
@@ -680,8 +703,634 @@ public class PreviewPageActivity extends AppCompatActivity {
         });
 
         // Native download listener
-        webView.setDownloadListener((url, userAgent, contentDisposition, mimetype, contentLength) ->
-                handleIncomingDownload(url, userAgent, contentDisposition, mimetype, contentLength));
+        webView.setDownloadListener((url, userAgent, contentDisposition, mimetype, contentLength) -> handleIncomingDownload(url, userAgent, contentDisposition, mimetype, contentLength));
+
+
+        // Touch tracker for long-click coordinates (for context menu)
+        webView.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                lastTouchX = event.getX();
+                lastTouchY = event.getY();
+            }
+            return false;
+        });
+
+        // Chrome-style Context Menu on hold / long-press
+        // Chrome-style Context Menu on hold / long-press
+        webView.setOnLongClickListener(v -> handleWebViewLongClick());
+    }
+
+    /* ════════════════════════════════════════════
+     *  Context Menu Engine (Chrome-style Hold/Long-press)
+     * ════════════════════════════════════════════ */
+    private static final int CTX_MODE_NONE = 0;
+    private static final int CTX_MODE_LINK = 1;
+    private static final int CTX_MODE_IMAGE = 2;
+    private static final int CTX_MODE_IMAGE_LINK = 3;
+    private static final int CTX_MODE_VIDEO = 4;
+    private static final int CTX_MODE_AUDIO = 5;
+
+    private static class ParsedContextTarget {
+        int mode = CTX_MODE_NONE;
+        String linkUrl;
+        String linkText;
+        String linkTitle;
+        String imageUrl;
+        String imageAlt;
+        String videoUrl;
+        String audioUrl;
+
+        boolean hasAnyTarget() {
+            return mode != CTX_MODE_NONE;
+        }
+    }
+
+    private static String getValidString(JSONObject obj, String key) {
+        if (obj == null || obj.isNull(key)) return null;
+        String val = obj.optString(key, null);
+        if (val == null) return null;
+        val = val.trim();
+        if (val.isEmpty() || "null".equalsIgnoreCase(val) || "undefined".equalsIgnoreCase(val)) {
+            return null;
+        }
+        return val;
+    }
+
+    private ParsedContextTarget buildContextTarget(int hitType, String hitExtra, String jsResult) {
+        JSONObject obj = null;
+        if (jsResult != null && !jsResult.equals("null") && !jsResult.isEmpty()) {
+            try {
+                String json = jsResult;
+                if (json.startsWith("\"") && json.endsWith("\"")) {
+                    JSONTokener tokener = new JSONTokener(json);
+                    Object unescaped = tokener.nextValue();
+                    if (unescaped instanceof String) {
+                        json = (String) unescaped;
+                    }
+                }
+                if (json.startsWith("{")) {
+                    obj = new JSONObject(json);
+                }
+            } catch (Exception ignored) {}
+        }
+
+        String jsLinkUrl = getValidString(obj, "linkUrl");
+        String jsLinkText = getValidString(obj, "linkText");
+        String jsLinkTitle = getValidString(obj, "linkTitle");
+        String jsImageUrl = getValidString(obj, "imageUrl");
+        String jsImageAlt = getValidString(obj, "imageAlt");
+        String jsVideoUrl = getValidString(obj, "videoUrl");
+        String jsAudioUrl = getValidString(obj, "audioUrl");
+
+        ParsedContextTarget target = new ParsedContextTarget();
+
+        if (hitType == WebView.HitTestResult.SRC_ANCHOR_TYPE) {
+            target.mode = CTX_MODE_LINK;
+            target.linkUrl = !TextUtils.isEmpty(hitExtra) ? hitExtra : jsLinkUrl;
+            target.linkText = jsLinkText;
+            target.linkTitle = jsLinkTitle;
+        } else if (hitType == WebView.HitTestResult.IMAGE_TYPE) {
+            target.mode = CTX_MODE_IMAGE;
+            target.imageUrl = !TextUtils.isEmpty(hitExtra) ? hitExtra : jsImageUrl;
+            target.imageAlt = jsImageAlt;
+        } else if (hitType == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
+            target.mode = CTX_MODE_IMAGE_LINK;
+            target.imageUrl = !TextUtils.isEmpty(hitExtra) ? hitExtra : jsImageUrl;
+            target.imageAlt = jsImageAlt;
+            target.linkUrl = jsLinkUrl;
+            target.linkText = jsLinkText;
+            target.linkTitle = jsLinkTitle;
+        } else if (hitType == WebView.HitTestResult.UNKNOWN_TYPE) {
+            if (!TextUtils.isEmpty(jsVideoUrl)) {
+                target.mode = CTX_MODE_VIDEO;
+                target.videoUrl = jsVideoUrl;
+            } else if (!TextUtils.isEmpty(jsAudioUrl)) {
+                target.mode = CTX_MODE_AUDIO;
+                target.audioUrl = jsAudioUrl;
+            } else if (!TextUtils.isEmpty(jsImageUrl) && !TextUtils.isEmpty(jsLinkUrl)) {
+                target.mode = CTX_MODE_IMAGE_LINK;
+                target.imageUrl = jsImageUrl;
+                target.imageAlt = jsImageAlt;
+                target.linkUrl = jsLinkUrl;
+                target.linkText = jsLinkText;
+                target.linkTitle = jsLinkTitle;
+            } else if (!TextUtils.isEmpty(jsImageUrl)) {
+                target.mode = CTX_MODE_IMAGE;
+                target.imageUrl = jsImageUrl;
+                target.imageAlt = jsImageAlt;
+            } else if (!TextUtils.isEmpty(jsLinkUrl)) {
+                target.mode = CTX_MODE_LINK;
+                target.linkUrl = jsLinkUrl;
+                target.linkText = jsLinkText;
+                target.linkTitle = jsLinkTitle;
+            }
+        }
+
+        return target;
+    }
+
+    private boolean handleWebViewLongClick() {
+        if (webView == null) return false;
+        WebView.HitTestResult hr = webView.getHitTestResult();
+        if (hr == null) return false;
+
+        int type = hr.getType();
+        if (type == WebView.HitTestResult.EDIT_TEXT_TYPE) {
+            return false;
+        }
+
+        boolean isDirectHit = (type == WebView.HitTestResult.SRC_ANCHOR_TYPE
+                || type == WebView.HitTestResult.IMAGE_TYPE
+                || type == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE);
+
+        if (isDirectHit) {
+            webView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+        }
+
+        float density = getResources().getDisplayMetrics().density;
+        int cssX = density > 0 ? Math.round(lastTouchX / density) : Math.round(lastTouchX);
+        int cssY = density > 0 ? Math.round(lastTouchY / density) : Math.round(lastTouchY);
+
+        String extra = hr.getExtra();
+
+        if (webView.getSettings().getJavaScriptEnabled()) {
+            String jsQuery = "(function() {" +
+                    "  var x = " + cssX + ", y = " + cssY + ";" +
+                    "  var el = document.elementFromPoint(x, y);" +
+                    "  if (!el) return null;" +
+                    "  var video = el.closest('video') || (el.tagName && el.tagName.toLowerCase() === 'video' ? el : null);" +
+                    "  var audio = el.closest('audio') || (el.tagName && el.tagName.toLowerCase() === 'audio' ? el : null);" +
+                    "  if (!video && !audio && el.tagName && el.tagName.toLowerCase() === 'source' && el.parentElement) {" +
+                    "    var pt = el.parentElement.tagName.toLowerCase();" +
+                    "    if (pt === 'video') video = el.parentElement;" +
+                    "    if (pt === 'audio') audio = el.parentElement;" +
+                    "  }" +
+                    "  var a = el.closest('a');" +
+                    "  var img = el.closest('img') || (el.tagName && el.tagName.toLowerCase() === 'img' ? el : null);" +
+                    "  var linkUrl = a ? (a.href || a.getAttribute('href') || '') : '';" +
+                    "  var linkText = a ? (a.innerText || a.textContent || '').trim() : '';" +
+                    "  var linkTitle = a ? (a.title || '') : '';" +
+                    "  var imageUrl = img ? (img.currentSrc || img.src || img.getAttribute('src') || '') : '';" +
+                    "  var imageAlt = img ? (img.alt || img.title || '') : '';" +
+                    "  var videoUrl = '';" +
+                    "  if (video) {" +
+                    "    videoUrl = video.currentSrc || video.src || '';" +
+                    "    if (!videoUrl) {" +
+                    "      var s = video.querySelector('source');" +
+                    "      if (s) videoUrl = s.src || s.getAttribute('src') || '';" +
+                    "    }" +
+                    "  }" +
+                    "  var audioUrl = '';" +
+                    "  if (audio) {" +
+                    "    audioUrl = audio.currentSrc || audio.src || '';" +
+                    "    if (!audioUrl) {" +
+                    "      var s = audio.querySelector('source');" +
+                    "      if (s) audioUrl = s.src || s.getAttribute('src') || '';" +
+                    "    }" +
+                    "  }" +
+                    "  return JSON.stringify({" +
+                    "    linkUrl: linkUrl," +
+                    "    linkText: linkText," +
+                    "    linkTitle: linkTitle," +
+                    "    imageUrl: imageUrl," +
+                    "    imageAlt: imageAlt," +
+                    "    videoUrl: videoUrl," +
+                    "    audioUrl: audioUrl" +
+                    "  });" +
+                    "})();";
+
+            webView.evaluateJavascript(jsQuery, val -> {
+                ParsedContextTarget target = buildContextTarget(type, extra, val);
+
+                if (type == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE && TextUtils.isEmpty(target.linkUrl)) {
+                    Message msg = new Handler(Looper.getMainLooper(), m -> {
+                        String u = m.getData().getString("url");
+                        if (!TextUtils.isEmpty(u)) {
+                            target.linkUrl = u;
+                            updateContextMenuUrls(target);
+                        }
+                        return true;
+                    }).obtainMessage();
+                    webView.requestFocusNodeHref(msg);
+                }
+
+                if (target.hasAnyTarget()) {
+                    if (!isDirectHit) {
+                        webView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                        webView.evaluateJavascript("window.getSelection && window.getSelection().removeAllRanges();", null);
+                    }
+                    showContextMenuBottomSheet(target);
+                }
+            });
+        } else {
+            // JS disabled; build strictly from HitTestResult
+            ParsedContextTarget target = buildContextTarget(type, extra, null);
+            if (type == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
+                Message msg = new Handler(Looper.getMainLooper(), m -> {
+                    String u = m.getData().getString("url");
+                    if (!TextUtils.isEmpty(u)) {
+                        target.linkUrl = u;
+                        updateContextMenuUrls(target);
+                    }
+                    return true;
+                }).obtainMessage();
+                webView.requestFocusNodeHref(msg);
+            }
+            if (target.hasAnyTarget()) {
+                showContextMenuBottomSheet(target);
+            }
+        }
+
+        return isDirectHit;
+    }
+
+    private void updateContextMenuUrls(ParsedContextTarget target) {
+        if (contextMenuDialog == null || !contextMenuDialog.isShowing()) return;
+        if (target.mode != CTX_MODE_IMAGE_LINK) return;
+
+        View groupLink = contextMenuDialog.findViewById(R.id.groupLinkActions);
+        View divider = contextMenuDialog.findViewById(R.id.ctxDividerImageLink);
+        TextView headerUrl = contextMenuDialog.findViewById(R.id.ctxHeaderUrl);
+        if (groupLink != null && !TextUtils.isEmpty(target.linkUrl)) {
+            groupLink.setVisibility(View.VISIBLE);
+            if (divider != null && !TextUtils.isEmpty(target.imageUrl)) {
+                divider.setVisibility(View.VISIBLE);
+            }
+            if (headerUrl != null) {
+                headerUrl.setText(target.linkUrl);
+            }
+        }
+    }
+
+    private void showContextMenuBottomSheet(ParsedContextTarget target) {
+        if (isFinishing() || isDestroyed()) return;
+
+        if (contextMenuDialog != null && contextMenuDialog.isShowing()) {
+            contextMenuDialog.dismiss();
+        }
+
+        contextMenuDialog = new BottomSheetDialog(this, R.style.PreviewMoreBottomSheet);
+        View sheetView = getLayoutInflater().inflate(R.layout.pp_sheet_context_menu, null);
+        contextMenuDialog.setContentView(sheetView);
+
+        View bottomSheet = contextMenuDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+        if (bottomSheet != null) {
+            bottomSheet.setBackgroundColor(Color.TRANSPARENT);
+        }
+        if (contextMenuDialog.getWindow() != null) {
+            contextMenuDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            contextMenuDialog.getWindow().setDimAmount(0.6f);
+        }
+
+        ImageView headerIcon = sheetView.findViewById(R.id.ctxHeaderIcon);
+        TextView headerTitle = sheetView.findViewById(R.id.ctxHeaderTitle);
+        TextView headerUrl = sheetView.findViewById(R.id.ctxHeaderUrl);
+
+        View groupLink = sheetView.findViewById(R.id.groupLinkActions);
+        View groupImage = sheetView.findViewById(R.id.groupImageActions);
+        View groupMedia = sheetView.findViewById(R.id.groupMediaActions);
+        View dividerImageLink = sheetView.findViewById(R.id.ctxDividerImageLink);
+
+        boolean showLink = (target.mode == CTX_MODE_LINK || target.mode == CTX_MODE_IMAGE_LINK)
+                && !TextUtils.isEmpty(target.linkUrl);
+        boolean showImage = (target.mode == CTX_MODE_IMAGE || target.mode == CTX_MODE_IMAGE_LINK)
+                && !TextUtils.isEmpty(target.imageUrl);
+        boolean showMedia = (target.mode == CTX_MODE_VIDEO || target.mode == CTX_MODE_AUDIO);
+        boolean isVideo = (target.mode == CTX_MODE_VIDEO);
+        String mediaUrl = isVideo ? target.videoUrl : target.audioUrl;
+
+        groupLink.setVisibility(showLink ? View.VISIBLE : View.GONE);
+        groupImage.setVisibility(showImage ? View.VISIBLE : View.GONE);
+        groupMedia.setVisibility(showMedia ? View.VISIBLE : View.GONE);
+        dividerImageLink.setVisibility((showLink && showImage) ? View.VISIBLE : View.GONE);
+
+        // Header Population
+        String displayTitle;
+        String displayUrl;
+        if (target.mode == CTX_MODE_IMAGE) {
+            displayTitle = !TextUtils.isEmpty(target.imageAlt) ? target.imageAlt : getDisplayTitleFromUrl(target.imageUrl, "Image");
+            displayUrl = target.imageUrl;
+            headerIcon.setImageResource(R.drawable.preview);
+            loadThumbnailAsync(target.imageUrl, headerIcon);
+        } else if (target.mode == CTX_MODE_IMAGE_LINK) {
+            displayTitle = !TextUtils.isEmpty(target.imageAlt) ? target.imageAlt :
+                    (!TextUtils.isEmpty(target.linkText) ? target.linkText : getDisplayTitleFromUrl(target.linkUrl, "Link"));
+            displayUrl = !TextUtils.isEmpty(target.linkUrl) ? target.linkUrl : target.imageUrl;
+            headerIcon.setImageResource(R.drawable.preview);
+            loadThumbnailAsync(target.imageUrl, headerIcon);
+        } else if (target.mode == CTX_MODE_VIDEO) {
+            displayTitle = getDisplayTitleFromUrl(target.videoUrl, "Video");
+            displayUrl = target.videoUrl;
+            headerIcon.setImageResource(R.drawable.preview);
+        } else if (target.mode == CTX_MODE_AUDIO) {
+            displayTitle = getDisplayTitleFromUrl(target.audioUrl, "Audio");
+            displayUrl = target.audioUrl;
+            headerIcon.setImageResource(R.drawable.preview);
+        } else { // CTX_MODE_LINK
+            displayTitle = !TextUtils.isEmpty(target.linkText) ? target.linkText :
+                    (!TextUtils.isEmpty(target.linkTitle) ? target.linkTitle : getDisplayTitleFromUrl(target.linkUrl, "Link"));
+            displayUrl = target.linkUrl;
+            headerIcon.setImageResource(R.drawable.link);
+        }
+
+        headerTitle.setText(displayTitle);
+        headerUrl.setText(displayUrl);
+
+        // ── Link Actions ──
+        if (showLink) {
+            sheetView.findViewById(R.id.ctxActionOpenWith).setOnClickListener(v -> {
+                contextMenuDialog.dismiss();
+                BrowserChooserBottomSheet.newInstance(target.linkUrl)
+                        .show(getSupportFragmentManager(), "browser_chooser");
+            });
+
+            sheetView.findViewById(R.id.ctxActionCopyLinkAddress).setOnClickListener(v -> {
+                contextMenuDialog.dismiss();
+                copyTextToClipboard("Link Address", target.linkUrl);
+                Toast.makeText(this, "Link copied to clipboard", Toast.LENGTH_SHORT).show();
+            });
+
+            sheetView.findViewById(R.id.ctxActionCopyLinkText).setOnClickListener(v -> {
+                contextMenuDialog.dismiss();
+                String textToCopy = !TextUtils.isEmpty(target.linkText) ? target.linkText :
+                        (!TextUtils.isEmpty(target.linkTitle) ? target.linkTitle : target.linkUrl);
+                copyTextToClipboard("Link Text", textToCopy);
+                Toast.makeText(this, "Link text copied to clipboard", Toast.LENGTH_SHORT).show();
+            });
+
+            sheetView.findViewById(R.id.ctxActionShareLink).setOnClickListener(v -> {
+                contextMenuDialog.dismiss();
+                shareUrl("Share link", target.linkUrl);
+            });
+        }
+
+        // ── Image Actions ──
+        if (showImage) {
+            sheetView.findViewById(R.id.ctxActionOpenFullImage).setOnClickListener(v -> {
+                contextMenuDialog.dismiss();
+                navigateToInput(target.imageUrl);
+            });
+
+            sheetView.findViewById(R.id.ctxActionCopyImage).setOnClickListener(v -> {
+                contextMenuDialog.dismiss();
+                copyImageToClipboard(target.imageUrl);
+            });
+
+            sheetView.findViewById(R.id.ctxActionCopyImageLink).setOnClickListener(v -> {
+                contextMenuDialog.dismiss();
+                copyTextToClipboard("Image Link", target.imageUrl);
+                Toast.makeText(this, "Image link copied to clipboard", Toast.LENGTH_SHORT).show();
+            });
+
+            sheetView.findViewById(R.id.ctxActionDownloadImage).setOnClickListener(v -> {
+                contextMenuDialog.dismiss();
+                handleIncomingDownload(target.imageUrl, webView.getSettings().getUserAgentString(), null, "image/*", -1);
+            });
+
+            sheetView.findViewById(R.id.ctxActionSearchGoogleImage).setOnClickListener(v -> {
+                contextMenuDialog.dismiss();
+                try {
+                    String searchUrl = "https://lens.google.com/uploadbyurl?url=" + URLEncoder.encode(target.imageUrl, "UTF-8");
+                    navigateToInput(searchUrl);
+                } catch (Exception e) {
+                    navigateToInput("https://www.google.com/searchbyimage?image_url=" + target.imageUrl);
+                }
+            });
+
+            sheetView.findViewById(R.id.ctxActionShareImage).setOnClickListener(v -> {
+                contextMenuDialog.dismiss();
+                shareImage(target.imageUrl);
+            });
+        }
+
+        // ── Media (Video / Audio) Actions ──
+        if (showMedia) {
+            TextView tvOpenMedia = sheetView.findViewById(R.id.tvCtxOpenMediaText);
+            TextView tvCopyMedia = sheetView.findViewById(R.id.tvCtxCopyMediaText);
+            TextView tvDownloadMedia = sheetView.findViewById(R.id.tvCtxDownloadMediaText);
+            TextView tvShareMedia = sheetView.findViewById(R.id.tvCtxShareMediaText);
+
+            if (isVideo) {
+                if (tvOpenMedia != null) tvOpenMedia.setText("Open video");
+                if (tvCopyMedia != null) tvCopyMedia.setText("Copy video link");
+                if (tvDownloadMedia != null) tvDownloadMedia.setText("Download video");
+                if (tvShareMedia != null) tvShareMedia.setText("Share video");
+            } else {
+                if (tvOpenMedia != null) tvOpenMedia.setText("Open audio");
+                if (tvCopyMedia != null) tvCopyMedia.setText("Copy audio link");
+                if (tvDownloadMedia != null) tvDownloadMedia.setText("Download audio");
+                if (tvShareMedia != null) tvShareMedia.setText("Share audio");
+            }
+
+            sheetView.findViewById(R.id.ctxActionOpenMedia).setOnClickListener(v -> {
+                contextMenuDialog.dismiss();
+                navigateToInput(mediaUrl);
+            });
+
+            sheetView.findViewById(R.id.ctxActionCopyMediaLink).setOnClickListener(v -> {
+                contextMenuDialog.dismiss();
+                copyTextToClipboard(isVideo ? "Video Link" : "Audio Link", mediaUrl);
+                Toast.makeText(this, (isVideo ? "Video" : "Audio") + " link copied to clipboard", Toast.LENGTH_SHORT).show();
+            });
+
+            sheetView.findViewById(R.id.ctxActionDownloadMedia).setOnClickListener(v -> {
+                contextMenuDialog.dismiss();
+                handleIncomingDownload(mediaUrl, webView.getSettings().getUserAgentString(), null, isVideo ? "video/*" : "audio/*", -1);
+            });
+
+            sheetView.findViewById(R.id.ctxActionShareMedia).setOnClickListener(v -> {
+                contextMenuDialog.dismiss();
+                shareUrl("Share " + (isVideo ? "video" : "audio"), mediaUrl);
+            });
+
+            sheetView.findViewById(R.id.ctxActionOpenMediaWith).setOnClickListener(v -> {
+                contextMenuDialog.dismiss();
+                BrowserChooserBottomSheet.newInstance(mediaUrl)
+                        .show(getSupportFragmentManager(), "browser_chooser");
+            });
+        }
+
+        contextMenuDialog.show();
+    }
+
+    private void loadThumbnailAsync(String imageUrl, ImageView iconView) {
+        if (imageUrl == null || imageUrl.isEmpty()) return;
+
+        if (imageUrl.startsWith("data:image/") && imageUrl.contains(";base64,")) {
+            try {
+                String base64Data = imageUrl.substring(imageUrl.indexOf(";base64,") + 8);
+                byte[] bytes = Base64.decode(base64Data, Base64.DEFAULT);
+                Bitmap bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                if (bmp != null) {
+                    iconView.setImageBitmap(bmp);
+                    iconView.setImageTintList(null);
+                    iconView.setPadding(0, 0, 0, 0);
+                    return;
+                }
+            } catch (Exception ignored) {}
+        }
+
+        new Thread(() -> {
+            try {
+                URL u = new URL(imageUrl);
+                HttpURLConnection conn = (HttpURLConnection) u.openConnection();
+                conn.setConnectTimeout(3000);
+                conn.setReadTimeout(3000);
+                conn.setInstanceFollowRedirects(true);
+                InputStream is = conn.getInputStream();
+                Bitmap bmp = android.graphics.BitmapFactory.decodeStream(is);
+                is.close();
+                conn.disconnect();
+                if (bmp != null) {
+                    runOnUiThread(() -> {
+                        if (iconView != null) {
+                            iconView.setImageBitmap(bmp);
+                            iconView.setImageTintList(null);
+                            iconView.setPadding(0, 0, 0, 0);
+                        }
+                    });
+                }
+            } catch (Exception ignored) {}
+        }).start();
+    }
+
+    private void copyImageToClipboard(String imageUrl) {
+        if (imageUrl == null || imageUrl.isEmpty()) return;
+        Toast.makeText(this, "Copying image...", Toast.LENGTH_SHORT).show();
+
+        new Thread(() -> {
+            try {
+                Bitmap bmp = null;
+                if (imageUrl.startsWith("data:image/") && imageUrl.contains(";base64,")) {
+                    String b64 = imageUrl.substring(imageUrl.indexOf(";base64,") + 8);
+                    byte[] bytes = Base64.decode(b64, Base64.DEFAULT);
+                    bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                } else {
+                    URL u = new URL(imageUrl);
+                    HttpURLConnection conn = (HttpURLConnection) u.openConnection();
+                    conn.setConnectTimeout(5000);
+                    conn.setReadTimeout(5000);
+                    bmp = android.graphics.BitmapFactory.decodeStream(conn.getInputStream());
+                    conn.disconnect();
+                }
+
+                if (bmp != null) {
+                    File dir = new File(getCacheDir(), "shared_images");
+                    if (!dir.exists()) dir.mkdirs();
+                    File imgFile = new File(dir, "copied_image.png");
+                    FileOutputStream fos = new FileOutputStream(imgFile);
+                    bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                    fos.flush();
+                    fos.close();
+
+                    Uri uri = FileProvider.getUriForFile(
+                            this,
+                            getPackageName() + ".fileprovider",
+                            imgFile);
+
+                    runOnUiThread(() -> {
+                        ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                        if (cm != null) {
+                            ClipData clip = ClipData.newUri(getContentResolver(), "Image", uri);
+                            cm.setPrimaryClip(clip);
+                            Toast.makeText(this, "Image copied to clipboard", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    return;
+                }
+            } catch (Exception ignored) {}
+
+            runOnUiThread(() -> {
+                copyTextToClipboard("Image URL", imageUrl);
+                Toast.makeText(this, "Image link copied to clipboard", Toast.LENGTH_SHORT).show();
+            });
+        }).start();
+    }
+
+    private void shareImage(String imageUrl) {
+        if (imageUrl == null || imageUrl.isEmpty()) return;
+        Toast.makeText(this, "Preparing image...", Toast.LENGTH_SHORT).show();
+
+        new Thread(() -> {
+            try {
+                Bitmap bmp = null;
+                if (imageUrl.startsWith("data:image/") && imageUrl.contains(";base64,")) {
+                    String b64 = imageUrl.substring(imageUrl.indexOf(";base64,") + 8);
+                    byte[] bytes = Base64.decode(b64, Base64.DEFAULT);
+                    bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                } else {
+                    URL u = new URL(imageUrl);
+                    HttpURLConnection conn = (HttpURLConnection) u.openConnection();
+                    conn.setConnectTimeout(5000);
+                    conn.setReadTimeout(5000);
+                    bmp = android.graphics.BitmapFactory.decodeStream(conn.getInputStream());
+                    conn.disconnect();
+                }
+
+                if (bmp != null) {
+                    File dir = new File(getCacheDir(), "shared_images");
+                    if (!dir.exists()) dir.mkdirs();
+                    File imgFile = new File(dir, "shared_image.png");
+                    FileOutputStream fos = new FileOutputStream(imgFile);
+                    bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                    fos.flush();
+                    fos.close();
+
+                    Uri uri = FileProvider.getUriForFile(
+                            this,
+                            getPackageName() + ".fileprovider",
+                            imgFile);
+
+                    runOnUiThread(() -> {
+                        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                        shareIntent.setType("image/png");
+                        shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        startActivity(Intent.createChooser(shareIntent, "Share image"));
+                    });
+                    return;
+                }
+            } catch (Exception ignored) {}
+
+            runOnUiThread(() -> {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, imageUrl);
+                startActivity(Intent.createChooser(shareIntent, "Share image link"));
+            });
+        }).start();
+    }
+
+    private void copyTextToClipboard(String label, String text) {
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        if (clipboard != null && text != null) {
+            ClipData clip = ClipData.newPlainText(label, text);
+            clipboard.setPrimaryClip(clip);
+        }
+    }
+
+    private void shareUrl(String chooserTitle, String url) {
+        if (url == null || url.isEmpty()) return;
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, url);
+        startActivity(Intent.createChooser(intent, chooserTitle));
+    }
+
+    private String getDisplayTitleFromUrl(String url, String defaultTitle) {
+        if (url == null || url.isEmpty()) return defaultTitle;
+        try {
+            Uri uri = Uri.parse(url);
+            String lastPath = uri.getLastPathSegment();
+            if (lastPath != null && !lastPath.isEmpty()) {
+                return lastPath;
+            }
+            if (uri.getHost() != null && !uri.getHost().isEmpty()) {
+                return uri.getHost();
+            }
+        } catch (Exception ignored) {}
+        return defaultTitle;
+
     }
 
     /* ════════════════════════════════════════════
@@ -1648,6 +2297,10 @@ public class PreviewPageActivity extends AppCompatActivity {
      * ════════════════════════════════════════════ */
     @Override
     protected void onDestroy() {
+        if (contextMenuDialog != null && contextMenuDialog.isShowing()) {
+            contextMenuDialog.dismiss();
+            contextMenuDialog = null;
+        }
         clearAllData();
         if (webView != null) {
             webView.destroy();
@@ -1681,7 +2334,11 @@ public class PreviewPageActivity extends AppCompatActivity {
                 webView.goBack();
                 return;
             } else {
-                clearAllData();
+                if (contextMenuDialog != null && contextMenuDialog.isShowing()) {
+            contextMenuDialog.dismiss();
+            contextMenuDialog = null;
+        }
+        clearAllData();
                 Toast.makeText(this, "All data cleared", Toast.LENGTH_SHORT).show();
                 finish();
                 return;
@@ -1690,7 +2347,11 @@ public class PreviewPageActivity extends AppCompatActivity {
         if (webView != null && webView.canGoBack()) {
             webView.goBack();
         } else {
-            clearAllData();
+            if (contextMenuDialog != null && contextMenuDialog.isShowing()) {
+            contextMenuDialog.dismiss();
+            contextMenuDialog = null;
+        }
+        clearAllData();
             Toast.makeText(this, "All data cleared", Toast.LENGTH_SHORT).show();
             finish();
         }

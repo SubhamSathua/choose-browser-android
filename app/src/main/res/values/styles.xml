@@ -4,12 +4,9 @@
 <!--    <style name="Theme.ChooseBrowserNEW" parent="Theme.MaterialComponents.DayNight.NoActionBar">-->
 <!--        &lt;!&ndash; Customize your theme colors here &ndash;&gt;-->
 <!--        <item name="colorPrimary">@color/PrimaryCol</item>-->
-
 <!--        <item name="colorPrimaryVariant">@color/PrimaryColDark</item>-->
 <!--        <item name="colorOnPrimary">@color/white</item>-->
-
 <!--        &lt;!&ndash; System bars &ndash;&gt;-->
-<!--        -->
 <!--    </style>-->
 
     <!-- Preview More menu grid item style (inside big card, no individual bg) -->
@@ -34,6 +31,28 @@
         <item name="android:layout_marginTop">4dp</item>
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
+    </style>
+
+    <!-- Context Menu Action Row & Text -->
+    <style name="PreviewContextMenuActionRow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_marginHorizontal">20dp</item>
+        <item name="android:background">@drawable/bg_preview_grid_item_hover</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingHorizontal">8dp</item>
+    </style>
+
+    <style name="PreviewContextMenuActionText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:fontFamily">@font/body</item>
+        <item name="android:textColor">@color/previewPage_textSecondary</item>
+        <item name="android:textSize">@dimen/font_14</item>
     </style>
 
 </resources>
