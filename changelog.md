@@ -1,5 +1,9 @@
 # Changelog
 
+## Collapsible Advanced Settings & Home Page Menu Disabling
+- Moved Allow JS, HTTP, and Download into a collapsible Advanced section with info buttons.
+- Disabled page-specific actions (Open in, Home, Print, Find, Share, Dark mode, Open in app) on the home page.
+
 ## Responsive Multi-Screen Layouts & Watch Screen Optimization
 - Added tailored responsive layouts for watches (sw200dp), small phones (sw280dp, sw320dp), and tablets (sw600dp).
 - Optimized Home, Settings, About, Excluded Browsers, and Licenses screens with centered views and safe padding.

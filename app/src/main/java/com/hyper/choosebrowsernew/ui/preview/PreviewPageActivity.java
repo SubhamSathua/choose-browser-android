@@ -1826,51 +1826,81 @@ public class PreviewPageActivity extends AppCompatActivity {
             dialog.dismiss();
         });
 
+        // ── Check if currently on home page ──
+        boolean isHomePage = currentUrl == null || currentUrl.isEmpty()
+                || currentUrl.contains("private_browser/index.html")
+                || (webView != null && webView.getUrl() != null && webView.getUrl().contains("private_browser/index.html"));
+
         // ── Grid Row 1: Open In, Home, Print, Find ──
 
-        view.findViewById(R.id.moreOpenIn).setOnClickListener(v -> {
-            dialog.dismiss();
-            if (!TextUtils.isEmpty(currentUrl)) {
-                BrowserChooserBottomSheet chooser = BrowserChooserBottomSheet.newInstance(currentUrl);
-                chooser.show(getSupportFragmentManager(), "browser_chooser");
-            } else {
-                Toast.makeText(this, "No URL to open", Toast.LENGTH_SHORT).show();
-            }
-        });
+        View moreOpenIn = view.findViewById(R.id.moreOpenIn);
+        if (isHomePage) {
+            disableGridItem(moreOpenIn);
+        } else {
+            moreOpenIn.setOnClickListener(v -> {
+                dialog.dismiss();
+                if (!TextUtils.isEmpty(currentUrl)) {
+                    BrowserChooserBottomSheet chooser = BrowserChooserBottomSheet.newInstance(currentUrl);
+                    chooser.show(getSupportFragmentManager(), "browser_chooser");
+                } else {
+                    Toast.makeText(this, "No URL to open", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
 
-        view.findViewById(R.id.moreHome).setOnClickListener(v -> {
-            if (errorOverlay != null) {
-                errorOverlay.setVisibility(View.GONE);
-            }
-            webView.loadUrl("file:///android_asset/private_browser/index.html");
-            dialog.dismiss();
-        });
+        View moreHome = view.findViewById(R.id.moreHome);
+        if (isHomePage) {
+            disableGridItem(moreHome);
+        } else {
+            moreHome.setOnClickListener(v -> {
+                if (errorOverlay != null) {
+                    errorOverlay.setVisibility(View.GONE);
+                }
+                webView.loadUrl("file:///android_asset/private_browser/index.html");
+                dialog.dismiss();
+            });
+        }
 
-        view.findViewById(R.id.morePrint).setOnClickListener(v -> {
-            PrintManager pm = (PrintManager) getSystemService(Context.PRINT_SERVICE);
-            if (pm != null) {
-                PrintDocumentAdapter adapter = webView.createPrintDocumentAdapter("Preview_Page");
-                pm.print("Preview Page", adapter, new PrintAttributes.Builder().build());
-            }
-            dialog.dismiss();
-        });
+        View morePrint = view.findViewById(R.id.morePrint);
+        if (isHomePage) {
+            disableGridItem(morePrint);
+        } else {
+            morePrint.setOnClickListener(v -> {
+                PrintManager pm = (PrintManager) getSystemService(Context.PRINT_SERVICE);
+                if (pm != null) {
+                    PrintDocumentAdapter adapter = webView.createPrintDocumentAdapter("Preview_Page");
+                    pm.print("Preview Page", adapter, new PrintAttributes.Builder().build());
+                }
+                dialog.dismiss();
+            });
+        }
 
-        view.findViewById(R.id.moreFind).setOnClickListener(v -> {
-            dialog.dismiss();
-            findBar.setVisibility(View.VISIBLE);
-            etFind.requestFocus();
-            showKeyboard(etFind);
-        });
+        View moreFind = view.findViewById(R.id.moreFind);
+        if (isHomePage) {
+            disableGridItem(moreFind);
+        } else {
+            moreFind.setOnClickListener(v -> {
+                dialog.dismiss();
+                findBar.setVisibility(View.VISIBLE);
+                etFind.requestFocus();
+                showKeyboard(etFind);
+            });
+        }
 
         // ── Grid Row 2: Share, Ad Block, Permissions, Dark Mode ──
 
-        view.findViewById(R.id.moreShare).setOnClickListener(v -> {
-            Intent share = new Intent(Intent.ACTION_SEND);
-            share.setType("text/plain");
-            share.putExtra(Intent.EXTRA_TEXT, currentUrl);
-            startActivity(Intent.createChooser(share, "Share URL"));
-            dialog.dismiss();
-        });
+        View moreShare = view.findViewById(R.id.moreShare);
+        if (isHomePage) {
+            disableGridItem(moreShare);
+        } else {
+            moreShare.setOnClickListener(v -> {
+                Intent share = new Intent(Intent.ACTION_SEND);
+                share.setType("text/plain");
+                share.putExtra(Intent.EXTRA_TEXT, currentUrl);
+                startActivity(Intent.createChooser(share, "Share URL"));
+                dialog.dismiss();
+            });
+        }
 
         // Ad Block toggle
         ImageView adBlockIcon = view.findViewById(R.id.adBlockIcon);
@@ -1907,16 +1937,26 @@ public class PreviewPageActivity extends AppCompatActivity {
         TextView  darkModeText = view.findViewById(R.id.darkModeText);
         darkModeIcon.setImageResource(darkModeEnabled ? R.drawable.darkmode : R.drawable.darkmode_off);
         darkModeText.setText(darkModeEnabled ? "Light Off" : "Dark Mode");
-        view.findViewById(R.id.moreDarkMode).setOnClickListener(v -> {
-            darkModeEnabled = !darkModeEnabled;
-            applyDarkMode(darkModeEnabled);
-            dialog.dismiss();
-        });
+        View moreDarkMode = view.findViewById(R.id.moreDarkMode);
+        if (isHomePage) {
+            disableGridItem(moreDarkMode);
+        } else {
+            moreDarkMode.setOnClickListener(v -> {
+                darkModeEnabled = !darkModeEnabled;
+                applyDarkMode(darkModeEnabled);
+                dialog.dismiss();
+            });
+        }
 
-        // ── Open in App (if native apps available for currentUrl) ──
+        // ── Open in App (disabled/hidden on home page) ──
         View rowOpenInApp = view.findViewById(R.id.rowOpenInApp);
         TextView tvOpenInAppName = view.findViewById(R.id.tvOpenInAppName);
-        if (rowOpenInApp != null && !TextUtils.isEmpty(currentUrl)) {
+        if (isHomePage) {
+            if (rowOpenInApp != null) {
+                rowOpenInApp.setVisibility(View.GONE);
+                rowOpenInApp.setEnabled(false);
+            }
+        } else if (rowOpenInApp != null && !TextUtils.isEmpty(currentUrl)) {
             BrowserRepository repo = new BrowserRepository(this);
             List<AppInfo> nativeApps = repo.getNativeAppsForUrl(currentUrl);
 
@@ -1982,23 +2022,22 @@ public class PreviewPageActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         });
 
-        // Allow Download
-        SwitchCompat switchAllowDownload = view.findViewById(R.id.switchAllowDownload);
-        if (switchAllowDownload != null) {
-            switchAllowDownload.setChecked(allowDownloadEnabled);
-            switchAllowDownload.setOnCheckedChangeListener((btn, isChecked) -> {
-                allowDownloadEnabled = isChecked;
-                getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-                        .edit().putBoolean(KEY_ALLOW_DOWNLOAD, isChecked).apply();
-                Toast.makeText(this,
-                        isChecked ? "Downloads allowed" : "Downloads blocked",
-                        Toast.LENGTH_SHORT).show();
+        // ── Advanced (Collapsible) Section ──
+        View rowAdvanced = view.findViewById(R.id.rowAdvancedSettings);
+        View layoutAdvanced = view.findViewById(R.id.layoutAdvancedSettings);
+        ImageView ivAdvancedChevron = view.findViewById(R.id.ivAdvancedChevron);
+        if (rowAdvanced != null && layoutAdvanced != null) {
+            rowAdvanced.setOnClickListener(v -> {
+                boolean willExpand = layoutAdvanced.getVisibility() != View.VISIBLE;
+                layoutAdvanced.setVisibility(willExpand ? View.VISIBLE : View.GONE);
+                if (ivAdvancedChevron != null) {
+                    ivAdvancedChevron.animate().rotation(willExpand ? 90f : 0f).setDuration(200).start();
+                }
             });
         }
 
         // Allow JS (persistent toggle)
         SwitchCompat switchAllowJs = view.findViewById(R.id.switchAllowJs);
-
         switchAllowJs.setChecked(viewModel.isPersistentJsEnabled());
         switchAllowJs.setOnCheckedChangeListener((btn, isChecked) -> {
             viewModel.setPersistentJs(isChecked);
@@ -2027,6 +2066,45 @@ public class PreviewPageActivity extends AppCompatActivity {
             });
         }
 
+        // Allow Download
+        SwitchCompat switchAllowDownload = view.findViewById(R.id.switchAllowDownload);
+        if (switchAllowDownload != null) {
+            switchAllowDownload.setChecked(allowDownloadEnabled);
+            switchAllowDownload.setOnCheckedChangeListener((btn, isChecked) -> {
+                allowDownloadEnabled = isChecked;
+                getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                        .edit().putBoolean(KEY_ALLOW_DOWNLOAD, isChecked).apply();
+                Toast.makeText(this,
+                        isChecked ? "Downloads allowed" : "Downloads blocked",
+                        Toast.LENGTH_SHORT).show();
+            });
+        }
+
+        // Info ("i") buttons for Advanced items
+        View btnInfoJs = view.findViewById(R.id.btnInfoAllowJs);
+        if (btnInfoJs != null) {
+            btnInfoJs.setOnClickListener(v -> showSettingInfoDialog(
+                    "Allow JavaScript",
+                    "Enables interactive scripts on web pages. Disabling JavaScript enhances privacy and security and speeds up browsing, but may break certain website features."
+            ));
+        }
+
+        View btnInfoHttp = view.findViewById(R.id.btnInfoAllowHttp);
+        if (btnInfoHttp != null) {
+            btnInfoHttp.setOnClickListener(v -> showSettingInfoDialog(
+                    "Allow HTTP connection",
+                    "Allows loading unencrypted HTTP websites. HTTP traffic is not secure and can be read or altered in transit. Keep disabled to ensure encrypted HTTPS connections."
+            ));
+        }
+
+        View btnInfoDownload = view.findViewById(R.id.btnInfoAllowDownload);
+        if (btnInfoDownload != null) {
+            btnInfoDownload.setOnClickListener(v -> showSettingInfoDialog(
+                    "Allow Download",
+                    "Permits downloading files and documents from websites directly to your device storage. When disabled, downloads initiated by web pages will be blocked."
+            ));
+        }
+
         // ── Style all switches with Material 3 Monochrome ──
         for (SwitchCompat sw : new SwitchCompat[]{ switchDesktop, switchScreenshot, switchAllowDownload, switchAllowJs, switchAllowHttp }) {
             if (sw != null) {
@@ -2050,6 +2128,33 @@ public class PreviewPageActivity extends AppCompatActivity {
         });
 
         dialog.show();
+    }
+
+    private void disableGridItem(View v) {
+        if (v != null) {
+            v.setEnabled(false);
+            v.setClickable(false);
+            v.setFocusable(false);
+            v.setAlpha(0.35f);
+            v.setOnClickListener(null);
+            if (v instanceof ViewGroup) {
+                ViewGroup vg = (ViewGroup) v;
+                for (int i = 0; i < vg.getChildCount(); i++) {
+                    View child = vg.getChildAt(i);
+                    child.setEnabled(false);
+                    child.setClickable(false);
+                    child.setFocusable(false);
+                }
+            }
+        }
+    }
+
+    private void showSettingInfoDialog(String title, String message) {
+        new com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.dismiss())
+                .show();
     }
 
     /* ════════════════════════════════════════════
