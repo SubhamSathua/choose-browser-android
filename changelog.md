@@ -1,5 +1,9 @@
 # Changelog
 
+## Responsive Multi-Screen Layouts & Watch Screen Optimization
+- Added tailored responsive layouts for watches (sw200dp), small phones (sw280dp, sw320dp), and tablets (sw600dp).
+- Optimized Home, Settings, About, Excluded Browsers, and Licenses screens with centered views and safe padding.
+
 ## Chrome-Style Context Menu & Strict Type Detection
 - Added Chrome-style hold context menu for links, images, video, and audio with rich metadata and haptics.
 - Fixed element type detection so image hold shows only image options and link hold shows only link options.
