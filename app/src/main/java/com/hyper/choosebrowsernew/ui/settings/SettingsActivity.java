@@ -49,7 +49,8 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.settings_activity);
 
         // Block access if critical update is required
-        if (UpdateChecker.getCachedResult(this).priority == UpdateChecker.Priority.CRITICAL) {
+        UpdateChecker.Result cachedUpdate = UpdateChecker.getCachedResult(this);
+        if (cachedUpdate.priority == UpdateChecker.Priority.CRITICAL || cachedUpdate.priority == UpdateChecker.Priority.KILL_SWITCH) {
             startActivity(new Intent(this, MainActivity.class)
                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
             finish();
@@ -160,6 +161,7 @@ public class SettingsActivity extends AppCompatActivity {
             UpdateUiHelper.applyUpdateCardStyle(this, settingsUpdateCardInner, settingsUpdateDot, settingsUpdateTitle, settingsUpdateMsg, result.priority);
 
             switch (result.priority) {
+                case KILL_SWITCH: settingsUpdateTitle.setText(result.title != null ? result.title : "Service Suspended"); break;
                 case CRITICAL: settingsUpdateTitle.setText("Critical Update Required"); break;
                 case WARNING: settingsUpdateTitle.setText("Update Recommended"); break;
                 case LATEST: settingsUpdateTitle.setText("Update Available"); break;

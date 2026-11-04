@@ -5,8 +5,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -21,10 +19,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.hyper.choosebrowsernew.AppConstantsDetails;
 import com.hyper.choosebrowsernew.R;
 import com.hyper.choosebrowsernew.UpdateChecker;
-import com.hyper.choosebrowsernew.ui.webview.WebViewActivity;
 
 /**
- * Shared UI helpers for showing update-related bottom sheets.
+ * Shared UI helpers for showing update-related bottom sheets and kill-switch locks.
  */
 public class UpdateUiHelper {
 
@@ -37,6 +34,7 @@ public class UpdateUiHelper {
         int bgRes, dotRes, titleCol, msgCol;
 
         switch (priority) {
+            case KILL_SWITCH:
             case CRITICAL:
                 bgRes = R.drawable.bg_update_card_critical;
                 dotRes = R.drawable.dot_critical;
@@ -76,11 +74,15 @@ public class UpdateUiHelper {
     }
 
     /**
-     * Shows the update info sheet with short_msg, md_file note, and conditional close button.
-     * For CRITICAL: no close, non-cancellable. Otherwise: close + update.
+     * Shows either the kill-switch blocking screen or update info sheet.
      */
     public static void showInfoSheet(AppCompatActivity activity, UpdateChecker.Result result) {
         if (result == null) return;
+
+        if (result.priority == UpdateChecker.Priority.KILL_SWITCH) {
+            showKillSwitchSheet(activity, result);
+            return;
+        }
 
         BottomSheetDialog dialog = new BottomSheetDialog(activity, R.style.PreviewMoreBottomSheet);
         View sheet = activity.getLayoutInflater().inflate(R.layout.common_sheet_update_info, null);
@@ -98,33 +100,39 @@ public class UpdateUiHelper {
         Button btnUpdate  = sheet.findViewById(R.id.updateInfoBtn);
         Button btnClose   = sheet.findViewById(R.id.updateInfoCloseBtn);
 
-        tvTitle.setText(result.shortMsg != null ? result.shortMsg : "Update Available");
+        String displayTitle = (result.title != null && !result.title.isEmpty()) ? result.title : "Update Available";
+        tvTitle.setText(displayTitle);
         tvTitle.setTextColor(activity.getResources().getColor(R.color.text));
 
         if (result.mdFileUrl != null && !result.mdFileUrl.isEmpty()) {
             tvMdFile.setVisibility(View.VISIBLE);
             tvMdFile.setText("What's New >");
             tvMdFile.setOnClickListener(v -> {
-                // Construct MD URL: replace update.json with the md_file name
-                String baseUrl = AppConstantsDetails.UPDATE_JSON_URL;
-                String mdUrl = baseUrl.replace("update.json", result.mdFileUrl);
+                String mdUrl;
+                if (result.mdFileUrl.startsWith("http://") || result.mdFileUrl.startsWith("https://")) {
+                    mdUrl = result.mdFileUrl;
+                } else {
+                    String baseUrl = AppConstantsDetails.UPDATE_JSON_URL;
+                    mdUrl = baseUrl.replace("update.json", result.mdFileUrl);
+                }
                 showMarkdownPopup(activity, mdUrl);
             });
         } else {
             tvMdFile.setVisibility(View.GONE);
         }
 
-        if (result.priority == UpdateChecker.Priority.CRITICAL) {
-            // No close, cannot dismiss
+        if (result.isBlocking || result.priority == UpdateChecker.Priority.CRITICAL) {
+            // Mandatory update: No close, cannot dismiss
             btnClose.setVisibility(View.GONE);
             dialog.setCancelable(false);
+            dialog.setCanceledOnTouchOutside(false);
         } else {
             btnClose.setVisibility(View.VISIBLE);
             btnClose.setOnClickListener(v -> dialog.dismiss());
         }
 
         btnUpdate.setOnClickListener(v -> {
-            dialog.setOnDismissListener(d -> showStoresSheet(activity));
+            dialog.setOnDismissListener(d -> showStoresSheet(activity, result));
             dialog.dismiss();
         });
 
@@ -132,7 +140,49 @@ public class UpdateUiHelper {
     }
 
     /**
-     * Renders the markdown file in a bottom sheet viewer with premium styling.
+     * Emergency Kill-Switch screen: completely locks application actions.
+     */
+    public static void showKillSwitchSheet(AppCompatActivity activity, UpdateChecker.Result result) {
+        if (result == null) return;
+
+        BottomSheetDialog dialog = new BottomSheetDialog(activity, R.style.PreviewMoreBottomSheet);
+        View sheet = activity.getLayoutInflater().inflate(R.layout.common_sheet_update_info, null);
+        dialog.setContentView(sheet);
+
+        View bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+        if (bottomSheet != null) {
+            bottomSheet.setBackgroundResource(android.R.color.transparent);
+            BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(bottomSheet);
+            behavior.setDraggable(false);
+        }
+
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+
+        TextView tvTitle  = sheet.findViewById(R.id.updateInfoTitle);
+        TextView tvStatus = sheet.findViewById(R.id.updateInfoMdFile);
+        Button btnAction  = sheet.findViewById(R.id.updateInfoBtn);
+        Button btnClose   = sheet.findViewById(R.id.updateInfoCloseBtn);
+
+        String title = (result.title != null && !result.title.isEmpty()) ? result.title : "Service Temporarily Suspended";
+        String msg = (result.shortMsg != null && !result.shortMsg.isEmpty()) ? result.shortMsg : "Choose Browser operations are temporarily paused for maintenance.";
+
+        tvTitle.setText(title + "\n\n" + msg);
+        tvTitle.setTextColor(activity.getResources().getColor(R.color.updateCritical_title));
+
+        tvStatus.setVisibility(View.VISIBLE);
+        tvStatus.setText("Check Live Status >");
+        tvStatus.setOnClickListener(v -> openUrl(activity, AppConstantsDetails.UPDATE_HUB_URL));
+
+        btnClose.setVisibility(View.GONE);
+        btnAction.setText("Exit App");
+        btnAction.setOnClickListener(v -> activity.finishAffinity());
+
+        dialog.show();
+    }
+
+    /**
+     * Renders markdown in a bottom sheet viewer.
      */
     public static void showMarkdownPopup(AppCompatActivity activity, String url) {
         BottomSheetDialog dialog = new BottomSheetDialog(activity, R.style.PreviewMoreBottomSheet);
@@ -144,7 +194,7 @@ public class UpdateUiHelper {
             bottomSheet.setBackgroundResource(android.R.color.transparent);
             bottomSheet.getLayoutParams().height = (int) (activity.getResources().getDisplayMetrics().heightPixels * 0.85);
             BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(bottomSheet);
-            behavior.setDraggable(false); // Disable swipe to dismiss
+            behavior.setDraggable(false);
         }
 
         View closeBtn = sheet.findViewById(R.id.markdownClose);
@@ -157,7 +207,6 @@ public class UpdateUiHelper {
         webView.getSettings().setDomStorageEnabled(true);
         webView.setBackgroundColor(Color.TRANSPARENT);
 
-        // Determine colors based on current theme
         boolean isDark = (activity.getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK) 
                           == android.content.res.Configuration.UI_MODE_NIGHT_YES;
         String bodyTextCol = isDark ? "#E0E0E0" : "#212121";
@@ -165,7 +214,6 @@ public class UpdateUiHelper {
         String codeBg = isDark ? "#2A2D35" : "#F0F0F0";
         String codeText = isDark ? "#FFD700" : "#D32F2F";
 
-        // "Top Notch" Markdown Renderer Template
         String htmlTemplate = 
             "<!DOCTYPE html><html><head>" +
             "<meta name='viewport' content='width=device-width, initial-scale=1.0'>" +
@@ -220,9 +268,12 @@ public class UpdateUiHelper {
 
     /**
      * Shows the download sources bottom sheet.
-     * Store rows are easy to enable/disable by toggling visibility in the layout.
      */
     public static void showStoresSheet(AppCompatActivity activity) {
+        showStoresSheet(activity, null);
+    }
+
+    public static void showStoresSheet(AppCompatActivity activity, UpdateChecker.Result result) {
         BottomSheetDialog dialog = new BottomSheetDialog(activity, R.style.PreviewMoreBottomSheet);
         View sheet = activity.getLayoutInflater().inflate(R.layout.common_sheet_update_stores, null);
         dialog.setContentView(sheet);
@@ -230,20 +281,48 @@ public class UpdateUiHelper {
         View bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
         if (bottomSheet != null) bottomSheet.setBackgroundResource(android.R.color.transparent);
 
-        sheet.findViewById(R.id.storeGithubReleases).setOnClickListener(v -> {
-            openUrl(activity, "https://github.com/Subham-x/Testing/releases");
-            dialog.dismiss();
-        });
+        final String githubUrl = (result != null && result.githubUrl != null && !result.githubUrl.isEmpty())
+                ? result.githubUrl : AppConstantsDetails.GITHUB_URL;
+        final String directApk = (result != null) ? result.directApkUrl : null;
+        final String obtainium = (result != null) ? result.obtainiumUrl : null;
+        final String fdroid = (result != null) ? result.fdroidUrl : null;
 
-        sheet.findViewById(R.id.storeGithub).setOnClickListener(v -> {
-            openUrl(activity, "https://github.com/Subham-x/Testing");
-            dialog.dismiss();
-        });
+        View vReleases = sheet.findViewById(R.id.storeGithubReleases);
+        if (vReleases != null) {
+            vReleases.setOnClickListener(v -> {
+                String target = (directApk != null && !directApk.isEmpty()) ? directApk : (githubUrl.endsWith("/releases") ? githubUrl : (githubUrl + "/releases"));
+                openUrl(activity, target);
+                dialog.dismiss();
+            });
+        }
+
+        View vGithub = sheet.findViewById(R.id.storeGithub);
+        if (vGithub != null) {
+            vGithub.setOnClickListener(v -> {
+                openUrl(activity, githubUrl);
+                dialog.dismiss();
+            });
+        }
+
+        View vFDroid = sheet.findViewById(R.id.storeFDroid);
+        if (vFDroid != null && fdroid != null && !fdroid.isEmpty()) {
+            vFDroid.setVisibility(View.VISIBLE);
+            vFDroid.setAlpha(1.0f);
+            vFDroid.setClickable(true);
+            vFDroid.setFocusable(true);
+            vFDroid.setOnClickListener(v -> {
+                openUrl(activity, fdroid);
+                dialog.dismiss();
+            });
+        }
 
         dialog.show();
     }
 
     private static void openUrl(AppCompatActivity activity, String url) {
-        activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+        try {
+            activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+        } catch (Exception ignored) {
+        }
     }
 }

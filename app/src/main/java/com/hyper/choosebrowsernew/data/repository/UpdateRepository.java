@@ -11,8 +11,6 @@ import com.hyper.choosebrowsernew.UpdateChecker;
 import com.hyper.choosebrowsernew.data.model.UpdateResult;
 import com.hyper.choosebrowsernew.ui.debug.DebugConfig;
 
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -22,7 +20,6 @@ import java.util.concurrent.Executors;
 
 public class UpdateRepository {
 
-    private static final String UPDATE_URL = AppConstantsDetails.UPDATE_JSON_URL;
     private static final String PREFS_NAME = "update_checker_prefs";
     private static final String KEY_JSON = "cached_json";
     private static final String KEY_FETCH_TS = "last_fetch_time";
@@ -83,25 +80,30 @@ public class UpdateRepository {
     }
 
     private boolean isOnline() {
+        return UpdateChecker.isOnline(context);
+    }
+
+    private String fetchJson() {
         try {
-            ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            Network net = cm.getActiveNetwork();
-            if (net == null) return false;
-            NetworkCapabilities caps = cm.getNetworkCapabilities(net);
-            return caps != null && (caps.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
-                    || caps.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
-                    || caps.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET));
+            return fetchHttp(AppConstantsDetails.UPDATE_JSON_URL);
         } catch (Exception e) {
-            return false;
+            try {
+                return fetchHttp(AppConstantsDetails.UPDATE_JSON_FALLBACK_URL);
+            } catch (Exception ex) {
+                return null;
+            }
         }
     }
 
-    private String fetchJson() throws Exception {
-        URL url = new URL(UPDATE_URL);
+    private String fetchHttp(String urlStr) throws Exception {
+        URL url = new URL(urlStr);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setConnectTimeout(8000);
         conn.setReadTimeout(8000);
+        conn.setRequestProperty("Accept", "application/json");
         try {
+            int code = conn.getResponseCode();
+            if (code != 200) throw new Exception("HTTP " + code);
             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             StringBuilder sb = new StringBuilder();
             String line;
@@ -114,39 +116,29 @@ public class UpdateRepository {
     }
 
     private UpdateResult evaluate(String json) {
-        String appVersion = getAppVersion();
-        UpdateChecker.Result r = UpdateChecker.evaluate(json, appVersion);
-        return new UpdateResult(mapPriority(r.priority), r.shortMsg, r.mdFileUrl, r.latestVersion);
+        String appVersion = UpdateChecker.getAppVersion(context);
+        int appVersionCode = UpdateChecker.getAppVersionCode(context);
+        String channel = UpdateChecker.getSelectedChannel(context);
+        UpdateChecker.Result r = UpdateChecker.evaluate(json, appVersion, appVersionCode, channel);
+        return new UpdateResult(
+                mapPriority(r.priority),
+                r.title,
+                r.shortMsg,
+                r.mdFileUrl,
+                r.latestVersion,
+                r.latestVersionCode,
+                r.releaseDate,
+                r.changelog,
+                r.directApkUrl,
+                r.githubUrl,
+                r.obtainiumUrl,
+                r.fdroidUrl,
+                r.sha256,
+                r.isBlocking
+        );
     }
 
     private UpdateResult.Priority mapPriority(UpdateChecker.Priority p) {
         return UpdateResult.Priority.valueOf(p.name());
-    }
-
-    private String getAppVersion() {
-        try {
-            return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
-        } catch (Exception e) {
-            return "0";
-        }
-    }
-
-    private int compareVersions(String v1, String v2) {
-        if (v1 == null) v1 = "0";
-        if (v2 == null) v2 = "0";
-        String[] parts1 = v1.split("\\.");
-        String[] parts2 = v2.split("\\.");
-        int len = Math.max(parts1.length, parts2.length);
-        for (int i = 0; i < len; i++) {
-            long n1 = 0, n2 = 0;
-            if (i < parts1.length) {
-                try { n1 = Long.parseLong(parts1[i]); } catch (NumberFormatException ignored) {}
-            }
-            if (i < parts2.length) {
-                try { n2 = Long.parseLong(parts2[i]); } catch (NumberFormatException ignored) {}
-            }
-            if (n1 != n2) return Long.compare(n1, n2);
-        }
-        return 0;
     }
 }

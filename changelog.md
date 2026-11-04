@@ -1,5 +1,9 @@
 # Changelog
 
+## Multi-Ring Update Engine & Version Management
+- Linked GitHub Pages update repository and implemented RFC-042 multi-ring updates with emergency kill-switch.
+- Added Android version bumper script syncing version.properties, history tracking, and manifest payload.
+
 ## Chrome-Style Context Menu & Strict Type Detection
 - Added Chrome-style hold context menu for links, images, video, and audio with rich metadata and haptics.
 - Fixed element type detection so image hold shows only image options and link hold shows only link options.

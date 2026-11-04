@@ -30,3 +30,4 @@ release.jks
 *.jks
 *.keystore
 app/release/
+app-updates/
