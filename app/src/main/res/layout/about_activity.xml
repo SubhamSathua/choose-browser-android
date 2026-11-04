@@ -142,7 +142,8 @@
 
                     <!-- Purpose text -->
                     <TextView
-                        android:layout_width="280dp"
+                        android:layout_width="match_parent"
+                        android:layout_marginHorizontal="16dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/body"
