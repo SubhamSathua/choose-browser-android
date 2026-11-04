@@ -360,11 +360,15 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <!-- Allow Download toggle -->
+    <!-- Advanced (Collapsible) Header -->
     <LinearLayout
+        android:id="@+id/rowAdvancedSettings"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginHorizontal="20dp"
+        android:background="@drawable/bg_preview_grid_item_hover"
+        android:clickable="true"
+        android:focusable="true"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="8dp">
@@ -373,7 +377,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="12dp"
-            android:src="@drawable/pp_downloads"
+            android:src="@drawable/ix_settings"
             app:tint="@color/previewPage_textSecondary" />
 
         <TextView
@@ -381,76 +385,157 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/body"
-            android:text="Allow Download"
+            android:text="Advanced"
             android:textColor="@color/previewPage_textSecondary"
             android:textSize="@dimen/font_14" />
 
-        <com.google.android.material.materialswitch.MaterialSwitch
-            android:id="@+id/switchAllowDownload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/ivAdvancedChevron"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="6dp"
+            android:src="@drawable/forward"
+            android:alpha="0.6"
+            app:tint="@color/previewPage_textSecondary" />
     </LinearLayout>
 
-    <!-- Allow JS toggle -->
+    <!-- Advanced Collapsible Container -->
     <LinearLayout
+        android:id="@+id/layoutAdvancedSettings"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginHorizontal="20dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingHorizontal="8dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
 
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="12dp"
-            android:src="@drawable/js_on"
-            app:tint="@color/previewPage_textSecondary" />
+        <!-- Allow JS toggle -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="8dp">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/body"
-            android:text="Allow JavaScript"
-            android:textColor="@color/previewPage_textSecondary"
-            android:textSize="@dimen/font_14" />
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/js_on"
+                app:tint="@color/previewPage_textSecondary" />
 
-        <com.google.android.material.materialswitch.MaterialSwitch
-            android:id="@+id/switchAllowJs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/body"
+                android:text="Allow JavaScript"
+                android:textColor="@color/previewPage_textSecondary"
+                android:textSize="@dimen/font_14" />
 
-    <!-- Allow HTTP connection toggle -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginHorizontal="20dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingHorizontal="8dp">
+            <ImageButton
+                android:id="@+id/btnInfoAllowJs"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="JavaScript info"
+                android:padding="6dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/info_24px"
+                app:tint="@color/previewPage_textSecondary" />
 
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="12dp"
-            android:src="@drawable/pp_site_warning"
-            app:tint="@color/previewPage_textSecondary" />
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switchAllowJs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/body"
-            android:text="Allow HTTP connection"
-            android:textColor="@color/previewPage_textSecondary"
-            android:textSize="@dimen/font_14" />
+        <!-- Allow HTTP connection toggle -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="8dp">
 
-        <com.google.android.material.materialswitch.MaterialSwitch
-            android:id="@+id/switchAllowHttp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/pp_site_warning"
+                app:tint="@color/previewPage_textSecondary" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/body"
+                android:text="Allow HTTP connection"
+                android:textColor="@color/previewPage_textSecondary"
+                android:textSize="@dimen/font_14" />
+
+            <ImageButton
+                android:id="@+id/btnInfoAllowHttp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="HTTP connection info"
+                android:padding="6dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/info_24px"
+                app:tint="@color/previewPage_textSecondary" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switchAllowHttp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- Allow Download toggle -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="8dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/pp_downloads"
+                app:tint="@color/previewPage_textSecondary" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/body"
+                android:text="Allow Download"
+                android:textColor="@color/previewPage_textSecondary"
+                android:textSize="@dimen/font_14" />
+
+            <ImageButton
+                android:id="@+id/btnInfoAllowDownload"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Download info"
+                android:padding="6dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/info_24px"
+                app:tint="@color/previewPage_textSecondary" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switchAllowDownload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <!-- Ad-Blocker Mode row -->

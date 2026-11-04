@@ -147,6 +147,9 @@ public class MainActivity extends AppCompatActivity {
         viewModel.updateResult.observe(this, result -> {
             currentUpdateResult = result;
             applyUpdateCard(result);
+            if (result != null && (result.priority == UpdateResult.Priority.KILL_SWITCH || result.priority == UpdateResult.Priority.CRITICAL)) {
+                UpdateUiHelper.showInfoSheet(this, convertToOldResult(result));
+            }
         });
     }
 
@@ -248,6 +251,7 @@ public class MainActivity extends AppCompatActivity {
         UpdateUiHelper.applyUpdateCardStyle(this, updateCardInner, updateDot, updateTitle, updateMsg, convertPriority(result.priority));
 
         switch (result.priority) {
+            case KILL_SWITCH: updateTitle.setText(result.title != null ? result.title : "Service Suspended"); break;
             case CRITICAL: updateTitle.setText("Critical Update Required"); break;
             case WARNING: updateTitle.setText("Update Recommended"); break;
             case LATEST: updateTitle.setText("Update Available"); break;
@@ -259,7 +263,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private UpdateChecker.Result convertToOldResult(UpdateResult r) {
-        return new UpdateChecker.Result(convertPriority(r.priority), r.shortMsg, r.mdFileUrl, r.latestVersion);
+        if (r == null) return null;
+        return new UpdateChecker.Result(
+                convertPriority(r.priority),
+                r.title,
+                r.shortMsg,
+                r.mdFileUrl,
+                r.latestVersion,
+                r.latestVersionCode,
+                r.releaseDate,
+                r.changelog,
+                r.directApkUrl,
+                r.githubUrl,
+                r.obtainiumUrl,
+                r.fdroidUrl,
+                r.sha256,
+                r.isBlocking
+        );
     }
 
     private void requestPinPrivateSearchShortcut() {

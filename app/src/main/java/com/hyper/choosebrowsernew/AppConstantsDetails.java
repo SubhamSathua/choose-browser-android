@@ -11,8 +11,16 @@ public final class AppConstantsDetails {
     public static final String DEVELOPER_NAME = "Subham Kumar Sathua";
     public static final String CONTACT_EMAIL = "contact.hefty730@slmail.me";
 
+    public static final String GH_PAGES_BASE_URL =
+        "https://subhamsathua.github.io/app-updates/";
+    public static final String UPDATE_HUB_URL =
+        "https://subhamsathua.github.io/app-updates/choose-browser/";
     public static final String UPDATE_JSON_URL =
-        "https://raw.githubusercontent.com/SubhamSathua/choose-browser-android/refs/heads/main/updates/update.json";
+        "https://subhamsathua.github.io/app-updates/choose-browser/update.json";
+    public static final String UPDATE_JSON_FALLBACK_URL =
+        "https://raw.githubusercontent.com/SubhamSathua/app-updates/main/choose-browser/update.json";
+    public static final String CHANGES_MD_URL =
+        "https://subhamsathua.github.io/app-updates/choose-browser/changes.md";
     public static final String GITHUB_URL =
         "https://github.com/SubhamSathua/choose-browser-android";
     public static final String FEEDBACK_URL = "https://tally.so/r/VLlZpM";

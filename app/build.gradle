@@ -20,19 +20,7 @@ def computedVersionName = "${vMajor}.${String.format('%02d', vX)}.${vSub}"
 // Base offset ensures this is always higher than old date-based codes (max was ~26030823)
 def computedVersionCode = 26031000 + vMajor * 10000 + vX * 100 + vSub
 
-// Only increment when actually assembling (not on IDE sync / Gradle sync)
-def assembling = gradle.startParameter.taskNames.any { name ->
-    name.toLowerCase().contains('assemble')
-}
-if (assembling) {
-    def nextSub = vSub + 1
-    def nextX   = vX
-    if (nextSub > 14) { nextSub = 1; nextX = vX + 1 }
-    versionProps['VERSION_MAJOR'] = vMajor.toString()
-    versionProps['VERSION_X']     = nextX.toString()
-    versionProps['VERSION_SUB']   = nextSub.toString()
-    versionPropsFile.withWriter { versionProps.store(it, null) }
-}
+// Version bumping is managed authoritatively via bump_version.ps1
 // ─────────────────────────────────────────────────────────────────────────
 
 // Load keystore credentials from key.properties or environment variables (CI/CD)

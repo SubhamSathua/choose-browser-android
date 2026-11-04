@@ -63,7 +63,8 @@ public class BrowserChooserActivity extends AppCompatActivity {
             return;
         }
 
-        if (UpdateChecker.getCachedResult(this).priority == UpdateChecker.Priority.CRITICAL) {
+        UpdateChecker.Result cachedUpdate = UpdateChecker.getCachedResult(this);
+        if (cachedUpdate.priority == UpdateChecker.Priority.CRITICAL || cachedUpdate.priority == UpdateChecker.Priority.KILL_SWITCH) {
             Intent i = new Intent(this, MainActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);

@@ -88,7 +88,8 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
         viewModel = new ViewModelProvider(this, new ViewModelFactory(requireContext())).get(BrowserChooserViewModel.class);
 
         // ── Critical update: block all app usage, redirect to MainActivity ──
-        if (UpdateChecker.getCachedResult(requireContext()).priority == UpdateChecker.Priority.CRITICAL) {
+        UpdateChecker.Result cachedUpdate = UpdateChecker.getCachedResult(requireContext());
+        if (cachedUpdate.priority == UpdateChecker.Priority.CRITICAL || cachedUpdate.priority == UpdateChecker.Priority.KILL_SWITCH) {
             redirectToMainForUpdate();
             return view;
         }
@@ -161,7 +162,7 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
         UpdateChecker.check(requireContext(), result -> {
             if (!isAdded() || getView() == null) return;
 
-            if (result.priority == UpdateChecker.Priority.CRITICAL) {
+            if (result.priority == UpdateChecker.Priority.CRITICAL || result.priority == UpdateChecker.Priority.KILL_SWITCH) {
                 // Also enforce critical block if freshly detected
                 redirectToMainForUpdate();
             } else if (result.priority == UpdateChecker.Priority.WARNING || result.priority == UpdateChecker.Priority.LATEST) {
