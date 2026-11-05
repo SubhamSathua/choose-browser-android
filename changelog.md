@@ -1,5 +1,13 @@
 ﻿# Changelog
 
+## Debug JSON Preview Collapse
+- Added 7-line collapse with interactive 'More v' and 'Less ^' toggle for debug JSON preview.
+- Cleaned update manifest ring versions and types to adhere strictly to RFC-042.
+
+## Version 4.29.1 Minor Bump & Updates Reference
+- Bumped app minor version to 4.29.1 (code 26073901) and linked app-updates in root workspace.
+- Synchronized version history and multi-ring update configuration manifests.
+
 ## Frictionless Markdown and Text File Previewer
 - Registered intent filters to preview Markdown (.md) and plain text (.txt) files with zero permissions.
 - Added modular previewer with wrap toggle, clamped zoom (50%-250%), and offline marked.js.

@@ -201,6 +201,23 @@
                         android:textIsSelectable="true"
                         android:textSize="@dimen/font_11" />
 
+                    <TextView
+                        android:id="@+id/debugJsonToggle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="4dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/mono"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="4dp"
+                        android:text="More v"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="@dimen/font_11"
+                        android:visibility="gone" />
+
                     <!-- Divider -->
                     <View
                         android:layout_width="match_parent"

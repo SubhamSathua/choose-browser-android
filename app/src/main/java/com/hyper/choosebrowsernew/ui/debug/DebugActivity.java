@@ -29,8 +29,9 @@ public class DebugActivity extends AppCompatActivity {
     private static final String KEY_JSON     = "cached_json";
     private static final String KEY_FETCH_TS = "last_fetch_time";
 
-    private TextView tvTime, tvJson, tvCacheFlag, tvTempStatus, tvFetchLog;
+    private TextView tvTime, tvJson, tvCacheFlag, tvTempStatus, tvFetchLog, tvJsonToggle;
     private Button clearTempBtn, refetchBtn;
+    private boolean isJsonExpanded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +56,20 @@ public class DebugActivity extends AppCompatActivity {
         Button clearBtn   = findViewById(R.id.debugClearCacheBtn);
         tvTime            = findViewById(R.id.debugLastFetchTime);
         tvJson            = findViewById(R.id.debugRawJson);
+        tvJsonToggle      = findViewById(R.id.debugJsonToggle);
         tvCacheFlag       = findViewById(R.id.debugCacheFlag);
         tvTempStatus      = findViewById(R.id.debugTempStatus);
         tvFetchLog        = findViewById(R.id.debugFetchLog);
         clearTempBtn      = findViewById(R.id.debugClearTempBtn);
         refetchBtn        = findViewById(R.id.debugRefetchBtn);
         Button editBtn    = findViewById(R.id.debugEditJsonBtn);
+
+        if (tvJsonToggle != null) {
+            tvJsonToggle.setOnClickListener(v -> {
+                isJsonExpanded = !isJsonExpanded;
+                applyJsonCollapseState();
+            });
+        }
 
         tvCacheFlag.setText(String.valueOf(DebugConfig.CACHE_UPDATE_JSON));
         tvCacheFlag.setTextColor(DebugConfig.CACHE_UPDATE_JSON
@@ -118,7 +127,49 @@ public class DebugActivity extends AppCompatActivity {
             tvTime.setText("Never");
         }
 
-        tvJson.setText(json != null ? prettyJson(json) : "No cached JSON");
+        String rawContent = (UpdateChecker.tempJson != null)
+                ? UpdateChecker.tempJson
+                : json;
+        String formatted = (rawContent != null) ? prettyJson(rawContent) : "No cached JSON";
+        tvJson.setText(formatted);
+        updateJsonCollapse(formatted);
+    }
+
+    private void updateJsonCollapse(String text) {
+        if (text == null || text.isEmpty()) {
+            if (tvJsonToggle != null) tvJsonToggle.setVisibility(View.GONE);
+            tvJson.setMaxLines(Integer.MAX_VALUE);
+            tvJson.setEllipsize(null);
+            return;
+        }
+
+        int count = 0;
+        for (int i = 0; i < text.length(); i++) {
+            if (text.charAt(i) == '\n') count++;
+        }
+        count++; // including last line
+
+        if (count > 7) {
+            if (tvJsonToggle != null) tvJsonToggle.setVisibility(View.VISIBLE);
+            applyJsonCollapseState();
+        } else {
+            if (tvJsonToggle != null) tvJsonToggle.setVisibility(View.GONE);
+            tvJson.setMaxLines(Integer.MAX_VALUE);
+            tvJson.setEllipsize(null);
+        }
+    }
+
+    private void applyJsonCollapseState() {
+        if (tvJson == null) return;
+        if (isJsonExpanded) {
+            tvJson.setMaxLines(Integer.MAX_VALUE);
+            tvJson.setEllipsize(null);
+            if (tvJsonToggle != null) tvJsonToggle.setText("Less ^");
+        } else {
+            tvJson.setMaxLines(7);
+            tvJson.setEllipsize(android.text.TextUtils.TruncateAt.END);
+            if (tvJsonToggle != null) tvJsonToggle.setText("More v");
+        }
     }
 
     private void refreshTempStatus() {
@@ -131,6 +182,7 @@ public class DebugActivity extends AppCompatActivity {
             tvTempStatus.setTextColor(0xFFFF9800); // orange
             clearTempBtn.setVisibility(View.GONE);
         }
+        refreshUi();
     }
 
     private void showEditJsonDialog() {
