@@ -157,4 +157,14 @@
     </style>
 
 
+    <string name="title_file_preview">File Preview</string>
+    <string name="action_back">Back</string>
+    <string name="preview_wrap_on">Wrap</string>
+    <string name="preview_wrap_off">Unwrap</string>
+    <string name="preview_loading">Loading preview…</string>
+    <string name="preview_error">Unable to preview this file.</string>
+    <string name="preview_share">Share</string>
+    <string name="preview_open_with">Open with</string>
+    <string name="preview_zoom_reset">Reset zoom</string>
+
 </resources>

@@ -1,4 +1,8 @@
-# Changelog
+﻿# Changelog
+
+## Frictionless Markdown and Text File Previewer
+- Registered intent filters to preview Markdown (.md) and plain text (.txt) files with zero permissions.
+- Added modular previewer with wrap toggle, clamped zoom (50%-250%), and offline marked.js.
 
 ## Multi-Ring Update Engine & Version Management
 - Linked GitHub Pages update repository and implemented RFC-042 multi-ring updates with emergency kill-switch.

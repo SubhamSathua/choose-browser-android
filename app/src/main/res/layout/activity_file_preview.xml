@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPopupSurface"
+    android:orientation="vertical">
+
+    <!-- Header Toolbar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="?attr/colorPopupSurface"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="4dp"
+        android:paddingEnd="8dp">
+
+        <ImageButton
+            android:id="@+id/filePreviewBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/action_back"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ix_back"
+            app:tint="?attr/colorPopupText" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/filePreviewTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="middle"
+                android:fontFamily="@font/heading"
+                android:singleLine="true"
+                android:textColor="?attr/colorPopupText"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/filePreviewBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_format_pill"
+                android:fontFamily="sans-serif-medium"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="2dp"
+                android:textColor="?attr/colorPopupText"
+                android:textSize="11sp"
+                tools:text="TXT" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/filePreviewWrapBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/preview_wrap_on"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_wrap_text"
+            app:tint="?attr/colorPopupText" />
+
+        <ImageButton
+            android:id="@+id/filePreviewOpenWithBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/preview_open_with"
+            android:padding="9dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ix_open_in_new"
+            app:tint="?attr/colorPopupText" />
+
+        <ImageButton
+            android:id="@+id/filePreviewShareBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/preview_share"
+            android:padding="9dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ix_share"
+            app:tint="?attr/colorPopupText" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/colorPopupDock" />
+
+    <!-- Content Viewer -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <WebView
+            android:id="@+id/filePreviewWebView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/colorPopupSurface" />
+
+        <ProgressBar
+            android:id="@+id/filePreviewProgress"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_gravity="center"
+            android:indeterminate="true" />
+
+        <LinearLayout
+            android:id="@+id/filePreviewErrorContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/preview_error"
+                android:src="@drawable/ix_not_permitted"
+                app:tint="?attr/colorPopupText" />
+
+            <TextView
+                android:id="@+id/filePreviewErrorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/body"
+                android:gravity="center"
+                android:text="@string/preview_error"
+                android:textColor="?attr/colorPopupText"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- Floating Zoom indicator chip -->
+        <TextView
+            android:id="@+id/filePreviewZoomBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/bg_zoom_pill"
+            android:clickable="true"
+            android:elevation="6dp"
+            android:focusable="true"
+            android:fontFamily="sans-serif-medium"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="7dp"
+            android:textColor="?attr/colorPopupText"
+            android:textSize="13sp"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+</LinearLayout>
