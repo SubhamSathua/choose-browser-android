@@ -2,7 +2,7 @@
 
 ## OSL Text Viewer Enhancements & JSON Dialog Fix
 - Fixed debug JSON edit dialog inflation crash and restored Fluent UI Icons MIT in Open Source Licenses.
-- Upgraded license viewer with reflowed prose, section headers, bold definitions, and adaptive dark/light cards.
+- Simplified license viewer to clean reflowed plain text with responsive line wrapping and theme styling.
 
 ## Light Theme Navigation Icons & Mature JSON Debugger
 - Fixed white navigation bar icons in Light Theme by applying dynamic light navbar flags across all screens.
