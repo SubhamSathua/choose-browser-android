@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.hyper.choosebrowsernew.R;
 import com.hyper.choosebrowsernew.data.model.AppInfo;
+import com.hyper.choosebrowsernew.util.ThemeHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,13 +28,8 @@ public class BrowserListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // ==== Status and Navbar color ====
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.backgroundPrimary));
-            getWindow().setNavigationBarColor(getResources().getColor(R.color.backgroundPrimary));
-        }
-//        ThemeHelper.applySavedTheme(this);
         super.onCreate(savedInstanceState);
+        ThemeHelper.applySystemBars(this);
         setContentView(R.layout.settings_activity_browser_list);
 
         listView = findViewById(R.id.browserListView);

@@ -78,11 +78,7 @@ public class WebViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.backgroundPrimary));
-            getWindow().setNavigationBarColor(getResources().getColor(R.color.backgroundPrimary));
-        }
+        ThemeHelper.applySystemBars(this);
 
         setContentView(R.layout.common_activity_webview);
 

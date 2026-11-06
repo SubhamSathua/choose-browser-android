@@ -79,6 +79,13 @@ public class FilePreviewActivity extends AppCompatActivity {
         int surface = ThemeHelper.resolveThemeColor(this, R.attr.colorPopupSurface, R.color.backgroundSecondary);
         getWindow().setStatusBarColor(surface);
         getWindow().setNavigationBarColor(surface);
+        boolean isDark = ThemeHelper.isDarkTheme(this);
+        androidx.core.view.WindowInsetsControllerCompat controller =
+                androidx.core.view.WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView());
+        if (controller != null) {
+            controller.setAppearanceLightStatusBars(!isDark);
+            controller.setAppearanceLightNavigationBars(!isDark);
+        }
 
         setContentView(R.layout.activity_file_preview);
 

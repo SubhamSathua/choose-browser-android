@@ -178,14 +178,46 @@
                         android:layout_marginVertical="12dp"
                         android:background="#22000000" />
 
-                    <!-- Raw JSON label -->
-                    <TextView
+                    <!-- Raw JSON header -->
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/mono"
-                        android:text="Cached JSON:"
-                        android:textColor="@color/textSub"
-                        android:textSize="@dimen/font_12" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/mono"
+                            android:text="Cached JSON:"
+                            android:textColor="@color/textSub"
+                            android:textSize="@dimen/font_12" />
+
+                        <TextView
+                            android:id="@+id/debugJsonLineCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="12dp"
+                            android:fontFamily="@font/mono"
+                            android:textColor="@color/textSub"
+                            android:textSize="@dimen/font_11"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/debugCopyJsonBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:fontFamily="@font/mono"
+                            android:paddingHorizontal="6dp"
+                            android:paddingVertical="2dp"
+                            android:text="Copy"
+                            android:textColor="?attr/colorPrimary"
+                            android:textSize="@dimen/font_11" />
+                    </LinearLayout>
 
                     <!-- Raw JSON value -->
                     <TextView
@@ -193,9 +225,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
-                        android:background="#1A1A2E"
+                        android:background="@drawable/bg_debug_json_box"
                         android:fontFamily="@font/mono"
-                        android:padding="10dp"
+                        android:padding="12dp"
                         android:text="No cached JSON"
                         android:textColor="#E0E0E0"
                         android:textIsSelectable="true"
@@ -209,11 +241,14 @@
                         android:layout_marginTop="4dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:clickable="true"
+                        android:drawableEnd="@drawable/ic_expand_more"
+                        android:drawablePadding="6dp"
                         android:focusable="true"
                         android:fontFamily="@font/mono"
+                        android:gravity="center_vertical"
                         android:paddingHorizontal="8dp"
                         android:paddingVertical="4dp"
-                        android:text="More v"
+                        android:text="Show more"
                         android:textColor="?attr/colorPrimary"
                         android:textSize="@dimen/font_11"
                         android:visibility="gone" />

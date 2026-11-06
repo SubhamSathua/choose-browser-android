@@ -39,13 +39,8 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // ==== Status and Navbar color ====
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.backgroundPrimary));
-            getWindow().setNavigationBarColor(getResources().getColor(R.color.backgroundPrimary));
-        }
-
         super.onCreate(savedInstanceState);
+        ThemeHelper.applySystemBars(this);
         setContentView(R.layout.settings_activity);
 
         // Block access if critical update is required
@@ -146,6 +141,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        ThemeHelper.applySystemBars(this);
     }
 
     private void checkForUpdates() {
@@ -213,6 +209,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         finish();
     }
 }

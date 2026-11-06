@@ -1,14 +1,18 @@
 package com.hyper.choosebrowsernew.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
+import android.view.Window;
 
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 
 import com.hyper.choosebrowsernew.R;
-import androidx.core.content.ContextCompat;
 
 public class ThemeHelper {
 
@@ -93,6 +97,27 @@ public class ThemeHelper {
         return (context.getResources().getConfiguration().uiMode
                 & android.content.res.Configuration.UI_MODE_NIGHT_MASK)
                 == android.content.res.Configuration.UI_MODE_NIGHT_YES;
+    }
+
+    /**
+     * Applies system status bar and navigation bar colors and updates light/dark icons
+     * so that navigation icons are never invisible/white on light backgrounds.
+     */
+    public static void applySystemBars(Activity activity) {
+        if (activity == null || activity.getWindow() == null) return;
+        boolean isDark = isDarkTheme(activity);
+        Window window = activity.getWindow();
+
+        int bg = ContextCompat.getColor(activity, R.color.backgroundPrimary);
+        window.setStatusBarColor(bg);
+        window.setNavigationBarColor(bg);
+
+        WindowInsetsControllerCompat controller =
+                WindowCompat.getInsetsController(window, window.getDecorView());
+        if (controller != null) {
+            controller.setAppearanceLightStatusBars(!isDark);
+            controller.setAppearanceLightNavigationBars(!isDark);
+        }
     }
 
     public static void applyMonochromeSwitchTint(androidx.appcompat.widget.SwitchCompat switchCompat, Context context) {

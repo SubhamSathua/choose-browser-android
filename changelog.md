@@ -1,5 +1,13 @@
 ﻿# Changelog
 
+## OSL Text Viewer Enhancements & JSON Dialog Fix
+- Fixed debug JSON edit dialog inflation crash and restored Fluent UI Icons MIT in Open Source Licenses.
+- Upgraded license viewer with reflowed prose, section headers, bold definitions, and adaptive dark/light cards.
+
+## Light Theme Navigation Icons & Mature JSON Debugger
+- Fixed white navigation bar icons in Light Theme by applying dynamic light navbar flags across all screens.
+- Unescaped JSON forward slashes, added chevron icons, and upgraded to an interactive validated JSON editor.
+
 ## Debug JSON Preview Collapse
 - Added 7-line collapse with interactive 'More v' and 'Less ^' toggle for debug JSON preview.
 - Cleaned update manifest ring versions and types to adhere strictly to RFC-042.

@@ -33,6 +33,7 @@ import com.hyper.choosebrowsernew.ui.preview.PreviewPageActivity;
 import com.hyper.choosebrowsernew.ui.settings.BrowserListActivity;
 import com.hyper.choosebrowsernew.ui.settings.SettingsActivity;
 import com.hyper.choosebrowsernew.util.MotionUiHelper;
+import com.hyper.choosebrowsernew.util.ThemeHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -61,13 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // ==== Status and Navbar color ====
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.backgroundPrimary));
-            getWindow().setNavigationBarColor(getResources().getColor(R.color.backgroundPrimary));
-        }
-
         super.onCreate(savedInstanceState);
+        ThemeHelper.applySystemBars(this);
         setContentView(R.layout.main_activity);
 
         viewModel = new ViewModelProvider(this, new ViewModelFactory(this)).get(MainViewModel.class);

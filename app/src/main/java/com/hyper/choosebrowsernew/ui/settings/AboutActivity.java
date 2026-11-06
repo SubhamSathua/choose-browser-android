@@ -26,11 +26,7 @@ public class AboutActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.backgroundPrimary));
-            getWindow().setNavigationBarColor(getResources().getColor(R.color.backgroundPrimary));
-        }
+        ThemeHelper.applySystemBars(this);
 
         setContentView(R.layout.about_activity);
 

@@ -16,7 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.hyper.choosebrowsernew.R;
 import com.hyper.choosebrowsernew.UpdateChecker;
 import com.hyper.choosebrowsernew.ui.chooser.BrowserChooserBottomSheet;
+import com.hyper.choosebrowsernew.util.ThemeHelper;
 
+import android.view.LayoutInflater;
+import androidx.core.content.ContextCompat;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -29,18 +32,14 @@ public class DebugActivity extends AppCompatActivity {
     private static final String KEY_JSON     = "cached_json";
     private static final String KEY_FETCH_TS = "last_fetch_time";
 
-    private TextView tvTime, tvJson, tvCacheFlag, tvTempStatus, tvFetchLog, tvJsonToggle;
+    private TextView tvTime, tvJson, tvCacheFlag, tvTempStatus, tvFetchLog, tvJsonToggle, tvJsonLineCount;
     private Button clearTempBtn, refetchBtn;
     private boolean isJsonExpanded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.backgroundPrimary));
-            getWindow().setNavigationBarColor(getResources().getColor(R.color.backgroundPrimary));
-        }
+        ThemeHelper.applySystemBars(this);
 
         setContentView(R.layout.debug_activity);
 
@@ -57,12 +56,18 @@ public class DebugActivity extends AppCompatActivity {
         tvTime            = findViewById(R.id.debugLastFetchTime);
         tvJson            = findViewById(R.id.debugRawJson);
         tvJsonToggle      = findViewById(R.id.debugJsonToggle);
+        tvJsonLineCount   = findViewById(R.id.debugJsonLineCount);
         tvCacheFlag       = findViewById(R.id.debugCacheFlag);
         tvTempStatus      = findViewById(R.id.debugTempStatus);
         tvFetchLog        = findViewById(R.id.debugFetchLog);
         clearTempBtn      = findViewById(R.id.debugClearTempBtn);
         refetchBtn        = findViewById(R.id.debugRefetchBtn);
         Button editBtn    = findViewById(R.id.debugEditJsonBtn);
+
+        TextView copyJsonBtn = findViewById(R.id.debugCopyJsonBtn);
+        if (copyJsonBtn != null) {
+            copyJsonBtn.setOnClickListener(v -> copyJsonToClipboard());
+        }
 
         if (tvJsonToggle != null) {
             tvJsonToggle.setOnClickListener(v -> {
@@ -135,9 +140,22 @@ public class DebugActivity extends AppCompatActivity {
         updateJsonCollapse(formatted);
     }
 
+    private void copyJsonToClipboard() {
+        String text = (tvJson != null) ? tvJson.getText().toString() : "";
+        if (!text.isEmpty() && !"No cached JSON".equals(text)) {
+            android.content.ClipboardManager cm =
+                    (android.content.ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+            if (cm != null) {
+                cm.setPrimaryClip(android.content.ClipData.newPlainText("JSON", text));
+                Toast.makeText(this, "JSON copied to clipboard", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
     private void updateJsonCollapse(String text) {
-        if (text == null || text.isEmpty()) {
+        if (text == null || text.isEmpty() || "No cached JSON".equals(text)) {
             if (tvJsonToggle != null) tvJsonToggle.setVisibility(View.GONE);
+            if (tvJsonLineCount != null) tvJsonLineCount.setVisibility(View.GONE);
             tvJson.setMaxLines(Integer.MAX_VALUE);
             tvJson.setEllipsize(null);
             return;
@@ -148,6 +166,11 @@ public class DebugActivity extends AppCompatActivity {
             if (text.charAt(i) == '\n') count++;
         }
         count++; // including last line
+
+        if (tvJsonLineCount != null) {
+            tvJsonLineCount.setVisibility(View.VISIBLE);
+            tvJsonLineCount.setText("(" + count + " lines)");
+        }
 
         if (count > 7) {
             if (tvJsonToggle != null) tvJsonToggle.setVisibility(View.VISIBLE);
@@ -164,11 +187,19 @@ public class DebugActivity extends AppCompatActivity {
         if (isJsonExpanded) {
             tvJson.setMaxLines(Integer.MAX_VALUE);
             tvJson.setEllipsize(null);
-            if (tvJsonToggle != null) tvJsonToggle.setText("Less ^");
+            if (tvJsonToggle != null) {
+                tvJsonToggle.setText("Show less");
+                tvJsonToggle.setCompoundDrawablesWithIntrinsicBounds(null, null,
+                        ContextCompat.getDrawable(this, R.drawable.ic_expand_less), null);
+            }
         } else {
             tvJson.setMaxLines(7);
             tvJson.setEllipsize(android.text.TextUtils.TruncateAt.END);
-            if (tvJsonToggle != null) tvJsonToggle.setText("More v");
+            if (tvJsonToggle != null) {
+                tvJsonToggle.setText("Show more");
+                tvJsonToggle.setCompoundDrawablesWithIntrinsicBounds(null, null,
+                        ContextCompat.getDrawable(this, R.drawable.ic_expand_more), null);
+            }
         }
     }
 
@@ -191,51 +222,87 @@ public class DebugActivity extends AppCompatActivity {
                 ? UpdateChecker.tempJson
                 : prefs.getString(KEY_JSON, "");
 
-        // Pre-fill with pretty-printed JSON so it's readable while editing
         String prefilled = prettyJson(current);
 
-        EditText editText = new EditText(this);
-        editText.setText(prefilled);
-        editText.setSingleLine(false);
-        editText.setMinLines(14);
-        editText.setMaxLines(30);
-        editText.setVerticalScrollBarEnabled(true);
-        editText.setBackgroundColor(0xFF1A1A2E);
-        editText.setTextColor(0xFFE0E0E0);
-        editText.setTypeface(android.graphics.Typeface.MONOSPACE);
-        editText.setTextSize(12f);
-        int dp = (int)(getResources().getDisplayMetrics().density * 10);
-        editText.setPadding(dp, dp, dp, dp);
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.debug_dialog_edit_json, null);
+        EditText input = dialogView.findViewById(R.id.dialogJsonInput);
+        TextView errorBanner = dialogView.findViewById(R.id.dialogJsonErrorBanner);
+        TextView status = dialogView.findViewById(R.id.dialogJsonStatus);
+        TextView formatBtn = dialogView.findViewById(R.id.dialogJsonFormatBtn);
+        TextView resetBtn = dialogView.findViewById(R.id.dialogJsonResetBtn);
+        TextView cancelBtn = dialogView.findViewById(R.id.dialogJsonCancelBtn);
+        View applyBtn = dialogView.findViewById(R.id.dialogJsonApplyBtn);
 
-        android.widget.ScrollView sv = new android.widget.ScrollView(this);
-        sv.addView(editText);
-        sv.setBackgroundColor(0xFF1A1A2E);
+        input.setText(prefilled);
+        if (status != null) {
+            status.setText(UpdateChecker.tempJson != null ? "TEMP ACTIVE" : "CACHED");
+        }
 
-        new AlertDialog.Builder(this)
-                .setTitle("Edit JSON (Temp)")
-                .setMessage("Applied immediately. Cleared when app is closed.")
-                .setView(sv)
-                .setPositiveButton("Apply", (d, w) -> {
-                    String newJson = editText.getText().toString().trim();
-                    if (newJson.isEmpty()) {
-                        Toast.makeText(this, "JSON is empty — not applied", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    UpdateChecker.tempJson = newJson;
-                    refreshTempStatus();
-                    Toast.makeText(this, "Temp JSON applied", Toast.LENGTH_SHORT).show();
-                })
-                .setNegativeButton("Cancel", null)
-                .show();
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(dialogView)
+                .setCancelable(true)
+                .create();
+
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
+        }
+
+        formatBtn.setOnClickListener(v -> {
+            String text = input.getText().toString().trim();
+            if (text.isEmpty()) return;
+            try {
+                String formatted = new JSONObject(text).toString(2).replace("\\/", "/");
+                input.setText(formatted);
+                input.setSelection(formatted.length());
+                errorBanner.setVisibility(View.GONE);
+                Toast.makeText(this, "Formatted JSON", Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                errorBanner.setVisibility(View.VISIBLE);
+                errorBanner.setText("Format error: " + e.getMessage());
+            }
+        });
+
+        resetBtn.setOnClickListener(v -> {
+            String cached = prefs.getString(KEY_JSON, "");
+            String formatted = prettyJson(cached);
+            input.setText(formatted);
+            errorBanner.setVisibility(View.GONE);
+            Toast.makeText(this, "Reset to cached JSON", Toast.LENGTH_SHORT).show();
+        });
+
+        cancelBtn.setOnClickListener(v -> dialog.dismiss());
+
+        applyBtn.setOnClickListener(v -> {
+            String text = input.getText().toString().trim();
+            if (text.isEmpty()) {
+                errorBanner.setVisibility(View.VISIBLE);
+                errorBanner.setText("JSON cannot be empty");
+                return;
+            }
+            try {
+                // Strict validation
+                JSONObject parsed = new JSONObject(text);
+                String clean = parsed.toString(2).replace("\\/", "/");
+                UpdateChecker.tempJson = clean;
+                refreshTempStatus();
+                Toast.makeText(this, "Temp JSON applied", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            } catch (Exception e) {
+                errorBanner.setVisibility(View.VISIBLE);
+                errorBanner.setText("Invalid JSON: " + e.getMessage());
+            }
+        });
+
+        dialog.show();
     }
 
-    /** Pretty-prints JSON with 2-space indentation. Returns original string on parse error. */
+    /** Pretty-prints JSON with 2-space indentation and unescapes forward slashes. */
     private static String prettyJson(String json) {
         if (json == null || json.isEmpty()) return json;
         try {
-            return new JSONObject(json).toString(2);
+            return new JSONObject(json).toString(2).replace("\\/", "/");
         } catch (Exception e) {
-            return json; // not valid JSON, show as-is
+            return json.replace("\\/", "/");
         }
     }
 

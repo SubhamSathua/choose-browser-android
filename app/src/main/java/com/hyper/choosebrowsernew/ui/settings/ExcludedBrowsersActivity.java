@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.hyper.choosebrowsernew.R;
 import com.hyper.choosebrowsernew.data.local.BrowserExclusionManager;
 import com.hyper.choosebrowsernew.data.model.AppInfo;
+import com.hyper.choosebrowsernew.util.ThemeHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +29,8 @@ public class ExcludedBrowsersActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.backgroundPrimary));
-            getWindow().setNavigationBarColor(getResources().getColor(R.color.backgroundPrimary));
-        }
-
         super.onCreate(savedInstanceState);
+        ThemeHelper.applySystemBars(this);
         setContentView(R.layout.settings_activity_excluded);
 
         ListView listView = findViewById(R.id.listViewBrowsers);
