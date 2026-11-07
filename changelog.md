@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## Icon Silhouette Shadows & Text Justification
+- Added adaptive silhouette drop shadows with LRU caching to app icons across all screens.
+- Enabled clean text justification with hyphenation across the license viewer and privacy policy.
+
 ## OSL Text Viewer Enhancements & JSON Dialog Fix
 - Fixed debug JSON edit dialog inflation crash and restored Fluent UI Icons MIT in Open Source Licenses.
 - Simplified license viewer to clean reflowed plain text with responsive line wrapping and theme styling.

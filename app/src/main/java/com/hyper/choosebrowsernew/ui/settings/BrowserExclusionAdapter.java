@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.hyper.choosebrowsernew.R;
 import com.hyper.choosebrowsernew.data.model.AppInfo;
+import com.hyper.choosebrowsernew.util.IconShadowHelper;
 import com.hyper.choosebrowsernew.util.ThemeHelper;
 
 import java.util.List;
@@ -78,7 +79,7 @@ public class BrowserExclusionAdapter extends BaseAdapter {
         AppInfo app = apps.get(i);
         boolean isIncluded = !excludedPackages.contains(app.packageName);
 
-        holder.icon.setImageDrawable(scaleIcon(app.icon));
+        holder.icon.setImageDrawable(IconShadowHelper.getShadowedIcon(context, app.icon, app.packageName));
         holder.name.setText(app.name);
         holder.packageName.setText(app.packageName);
         holder.switchExclusion.setChecked(isIncluded);

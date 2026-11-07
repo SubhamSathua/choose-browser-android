@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hyper.choosebrowsernew.R;
+import com.hyper.choosebrowsernew.util.IconShadowHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +80,7 @@ public class DefaultAppLinksAdapter extends RecyclerView.Adapter<DefaultAppLinks
         AppLinksItem item = displayList.get(position);
 
         if (item.getIcon() != null) {
-            holder.ivIcon.setImageDrawable(item.getIcon());
+            holder.ivIcon.setImageDrawable(IconShadowHelper.getShadowedIcon(context, item.getIcon(), item.getPackageName()));
         } else {
             holder.ivIcon.setImageResource(R.mipmap.ic_launcher);
         }

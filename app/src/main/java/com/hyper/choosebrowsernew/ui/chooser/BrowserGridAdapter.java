@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.hyper.choosebrowsernew.R;
 import com.hyper.choosebrowsernew.data.model.AppInfo;
+import com.hyper.choosebrowsernew.util.IconShadowHelper;
 
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class BrowserGridAdapter extends BaseAdapter {
         }
 
         final AppInfo app = apps.get(i);
-        holder.icon.setImageDrawable(app.icon);
+        holder.icon.setImageDrawable(IconShadowHelper.getShadowedIcon(context, app.icon, app.packageName));
         holder.name.setText(app.name);
 
         convertView.setOnClickListener(v -> {

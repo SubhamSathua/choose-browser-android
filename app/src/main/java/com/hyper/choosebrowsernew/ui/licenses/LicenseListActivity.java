@@ -89,7 +89,7 @@ public class LicenseListActivity extends AppCompatActivity {
                 "body{background:" + bg + ";color:" + textColor + ";font-family:'Inter',sans-serif;" +
                 "font-size:14px;line-height:1.65;padding:16px 18px;-webkit-text-size-adjust:100%;word-break:break-word;}" +
                 ".content-wrap{max-width:700px;margin:0 auto;}" +
-                "p{margin-bottom:14px;text-align:left;}" +
+                "p{margin-bottom:14px;text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyphens:auto;}" +
                 "p:last-child{margin-bottom:0;}" +
                 "a{color:" + linkColor + ";text-decoration:underline;}" +
                 "hr{border:0;border-top:1px solid " + hrColor + ";margin:16px 0;}" +
