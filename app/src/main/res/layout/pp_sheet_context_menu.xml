@@ -142,7 +142,7 @@
                     android:layout_width="22dp"
                     android:layout_height="22dp"
                     android:layout_marginEnd="14dp"
-                    android:src="@drawable/ix_copy"
+                    android:src="@drawable/pp_copy"
                     app:tint="@color/previewPage_textSecondary" />
                 <TextView
                     style="@style/PreviewContextMenuActionText"
@@ -207,7 +207,7 @@
                     android:layout_width="22dp"
                     android:layout_height="22dp"
                     android:layout_marginEnd="14dp"
-                    android:src="@drawable/ix_copy"
+                    android:src="@drawable/pp_copy"
                     app:tint="@color/previewPage_textSecondary" />
                 <TextView
                     style="@style/PreviewContextMenuActionText"

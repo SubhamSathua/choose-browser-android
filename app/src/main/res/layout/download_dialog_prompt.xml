@@ -36,7 +36,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center"
-                android:src="@drawable/pp_downloads"
+                android:src="@drawable/ix_download"
                 app:tint="#FFFFFF" />
         </FrameLayout>
 
@@ -142,7 +142,7 @@
             <ImageView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:src="@drawable/pp_downloads"
+                android:src="@drawable/ix_download"
                 app:tint="#FFFFFF" />
 
             <TextView
@@ -210,7 +210,7 @@
             <ImageView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:src="@drawable/pp_site_warning"
+                android:src="@drawable/download_warning"
                 app:tint="#FFD600" />
 
             <TextView

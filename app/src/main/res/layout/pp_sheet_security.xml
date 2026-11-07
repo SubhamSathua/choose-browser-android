@@ -203,7 +203,7 @@
             android:layout_height="20dp"
             android:layout_marginTop="1dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/fire"
+            android:src="@drawable/pp_fire"
             android:contentDescription="Session privacy" />
 
         <LinearLayout

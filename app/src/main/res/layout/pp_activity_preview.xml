@@ -31,7 +31,7 @@
                 android:contentDescription="Reload"
                 android:padding="8dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/reload" />
+                android:src="@drawable/pp_reload" />
 
             <!-- URL bar (incognito icon + editable text + clear) -->
             <LinearLayout
@@ -61,7 +61,7 @@
                         android:layout_width="18dp"
                         android:layout_height="18dp"
                         android:layout_margin="4dp"
-                        android:src="@drawable/ix_incognito" />
+                        android:src="@drawable/pp_incognito" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -99,9 +99,9 @@
                     android:textColor="@color/previewPage_textSecondary"
                     android:textColorHint="#88ffffff"
                     android:textCursorDrawable="@drawable/cursor_dynamic"
-                    android:textSelectHandle="@drawable/text_select_handle_dynamic"
-                    android:textSelectHandleLeft="@drawable/text_select_handle_dynamic"
-                    android:textSelectHandleRight="@drawable/text_select_handle_dynamic"
+                    android:textSelectHandle="@drawable/pp_text_select_handle_dynamic"
+                    android:textSelectHandleLeft="@drawable/pp_text_select_handle_dynamic"
+                    android:textSelectHandleRight="@drawable/pp_text_select_handle_dynamic"
                     android:textSize="@dimen/font_15"
                     tools:text="https:///www.bing.com/"/>
 
@@ -128,7 +128,7 @@
                 android:contentDescription="Toggle JavaScript"
                 android:padding="6dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/js_off" />
+                android:src="@drawable/pp_js_off" />
 
             <!-- Close Button -->
             <ImageButton
@@ -152,7 +152,7 @@
             android:indeterminate="false"
             android:max="100"
             android:progress="0"
-            android:progressDrawable="@drawable/progress_bar_preview"
+            android:progressDrawable="@drawable/pp_progress_bar"
             android:visibility="gone" />
 
         <!-- Focus actions bar (Copy, Share) – shown when URL bar is focused -->
@@ -181,7 +181,7 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_marginEnd="5dp"
-                    android:src="@drawable/ix_copy" />
+                    android:src="@drawable/pp_copy" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -247,9 +247,9 @@
                 android:textColor="@color/previewPage_textSecondary"
                 android:textColorHint="#88ffffff"
                 android:textCursorDrawable="@drawable/cursor_dynamic"
-                android:textSelectHandle="@drawable/text_select_handle_dynamic"
-                android:textSelectHandleLeft="@drawable/text_select_handle_dynamic"
-                android:textSelectHandleRight="@drawable/text_select_handle_dynamic"
+                android:textSelectHandle="@drawable/pp_text_select_handle_dynamic"
+                android:textSelectHandleLeft="@drawable/pp_text_select_handle_dynamic"
+                android:textSelectHandleRight="@drawable/pp_text_select_handle_dynamic"
                 android:textSize="@dimen/font_13" />
 
             <TextView
@@ -270,7 +270,7 @@
                 android:contentDescription="Previous result"
                 android:padding="8dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/back" />
+                android:src="@drawable/pp_back" />
 
             <ImageButton
                 android:id="@+id/btnFindNext"
@@ -446,7 +446,7 @@
                 android:contentDescription="Back"
                 android:padding="6dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/back" />
+                android:src="@drawable/pp_back" />
 
             <!-- Forward -->
             <ImageButton
@@ -483,7 +483,7 @@
                 android:contentDescription="Clear and Exit"
                 android:padding="6dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/fire" />
+                android:src="@drawable/pp_fire" />
 
             <!-- More menu -->
             <ImageButton

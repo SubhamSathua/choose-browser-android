@@ -23,7 +23,7 @@
             android:layout_width="22dp"
             android:layout_height="22dp"
             android:layout_gravity="center"
-            android:src="@drawable/pp_downloads"
+            android:src="@drawable/ix_download"
             app:tint="#FFFFFF" />
     </FrameLayout>
 

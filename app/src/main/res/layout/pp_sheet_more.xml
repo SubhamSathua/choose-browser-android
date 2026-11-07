@@ -35,7 +35,7 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginEnd="12dp"
-            android:src="@drawable/site_icon_demo" />
+            android:src="@drawable/pp_site_icon_demo" />
 
         <!-- Site title (horizontally scrollable with mini indicator and selectable) -->
         <HorizontalScrollView
@@ -46,7 +46,7 @@
             android:layout_marginEnd="6dp"
             android:scrollbars="horizontal"
             android:scrollbarSize="2dp"
-            android:scrollbarThumbHorizontal="@drawable/scrollbar_mini_thumb"
+            android:scrollbarThumbHorizontal="@drawable/pp_scrollbar_mini_thumb"
             android:fadeScrollbars="true"
             android:scrollbarDefaultDelayBeforeFade="600"
             android:scrollbarFadeDuration="300"
@@ -76,7 +76,7 @@
             android:contentDescription="Copy link"
             android:padding="7dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ix_copy"
+            android:src="@drawable/pp_copy"
             app:tint="@color/previewPage_textSecondary" />
 
         <!-- Reload -->
@@ -89,7 +89,7 @@
             android:contentDescription="Reload"
             android:padding="8dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/reload"
+            android:src="@drawable/pp_reload"
             app:tint="@color/previewPage_textSecondary" />
     </LinearLayout>
 
@@ -134,7 +134,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/home"
+                    android:src="@drawable/pp_home"
                     app:tint="@color/previewPage_textSecondary" />
                 <TextView
                     style="@style/PreviewMoreGridText"
@@ -149,7 +149,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/print"
+                    android:src="@drawable/pp_print"
                     app:tint="@color/previewPage_textSecondary" />
                 <TextView
                     style="@style/PreviewMoreGridText"
@@ -164,7 +164,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/find"
+                    android:src="@drawable/pp_find"
                     app:tint="@color/previewPage_textSecondary" />
                 <TextView
                     style="@style/PreviewMoreGridText"
@@ -204,7 +204,7 @@
                     android:id="@+id/adBlockIcon"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ad_close"
+                    android:src="@drawable/pp_ad_close"
                     app:tint="@color/previewPage_textSecondary" />
                 <TextView
                     android:id="@+id/adBlockText"
@@ -237,7 +237,7 @@
                     android:id="@+id/darkModeIcon"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/darkmode_off"
+                    android:src="@drawable/pp_darkmode_off"
                     app:tint="@color/previewPage_textSecondary" />
                 <TextView
                     android:id="@+id/darkModeText"
@@ -311,7 +311,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="12dp"
-            android:src="@drawable/desktop"
+            android:src="@drawable/pp_desktop"
             app:tint="@color/previewPage_textSecondary" />
 
         <TextView
@@ -342,7 +342,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="12dp"
-            android:src="@drawable/screenshot"
+            android:src="@drawable/pp_screenshot"
             app:tint="@color/previewPage_textSecondary" />
 
         <TextView
@@ -377,7 +377,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="12dp"
-            android:src="@drawable/ix_settings"
+            android:src="@drawable/pp_settings"
             app:tint="@color/previewPage_textSecondary" />
 
         <TextView
@@ -420,7 +420,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginEnd="12dp"
-                android:src="@drawable/js_on"
+                android:src="@drawable/pp_js_on"
                 app:tint="@color/previewPage_textSecondary" />
 
             <TextView
@@ -441,7 +441,7 @@
                 android:contentDescription="JavaScript info"
                 android:padding="6dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/info_24px"
+                android:src="@drawable/pp_info_24px"
                 app:tint="@color/previewPage_textSecondary" />
 
             <com.google.android.material.materialswitch.MaterialSwitch
@@ -484,7 +484,7 @@
                 android:contentDescription="HTTP connection info"
                 android:padding="6dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/info_24px"
+                android:src="@drawable/pp_info_24px"
                 app:tint="@color/previewPage_textSecondary" />
 
             <com.google.android.material.materialswitch.MaterialSwitch
@@ -527,7 +527,7 @@
                 android:contentDescription="Download info"
                 android:padding="6dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/info_24px"
+                android:src="@drawable/pp_info_24px"
                 app:tint="@color/previewPage_textSecondary" />
 
             <com.google.android.material.materialswitch.MaterialSwitch
@@ -555,7 +555,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="12dp"
-            android:src="@drawable/ad_close"
+            android:src="@drawable/pp_ad_close"
             app:tint="@color/previewPage_textSecondary" />
 
         <TextView

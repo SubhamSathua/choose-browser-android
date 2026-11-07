@@ -261,7 +261,7 @@ public class PreviewPageActivity extends AppCompatActivity {
         viewModel.jsEnabled.observe(this, enabled -> {
             if (webView != null) {
                 webView.getSettings().setJavaScriptEnabled(enabled);
-                btnToggleJs.setImageResource(enabled ? R.drawable.js_on : R.drawable.js_off);
+                btnToggleJs.setImageResource(enabled ? R.drawable.pp_js_on : R.drawable.pp_js_off);
             }
         });
 
@@ -1905,11 +1905,11 @@ public class PreviewPageActivity extends AppCompatActivity {
         // Ad Block toggle
         ImageView adBlockIcon = view.findViewById(R.id.adBlockIcon);
         TextView adBlockText  = view.findViewById(R.id.adBlockText);
-        adBlockIcon.setImageResource(adBlockEnabled ? R.drawable.ad_close : R.drawable.ad);
+        adBlockIcon.setImageResource(adBlockEnabled ? R.drawable.pp_ad_close : R.drawable.pp_ad);
         adBlockText.setText(adBlockEnabled ? "Ad Blocker" : "Ads On");
         view.findViewById(R.id.moreAdBlock).setOnClickListener(v -> {
             adBlockEnabled = !adBlockEnabled;
-            adBlockIcon.setImageResource(adBlockEnabled ? R.drawable.ad_close : R.drawable.ad);
+            adBlockIcon.setImageResource(adBlockEnabled ? R.drawable.pp_ad_close : R.drawable.pp_ad);
             adBlockText.setText(adBlockEnabled ? "Ad Blocker" : "Ads On");
             Toast.makeText(this, adBlockEnabled ? "Ad Blocker enabled" : "Ad Blocker disabled",
                     Toast.LENGTH_SHORT).show();
@@ -1935,7 +1935,7 @@ public class PreviewPageActivity extends AppCompatActivity {
         // Dark Mode toggle
         ImageView darkModeIcon = view.findViewById(R.id.darkModeIcon);
         TextView  darkModeText = view.findViewById(R.id.darkModeText);
-        darkModeIcon.setImageResource(darkModeEnabled ? R.drawable.darkmode : R.drawable.darkmode_off);
+        darkModeIcon.setImageResource(darkModeEnabled ? R.drawable.pp_darkmode : R.drawable.pp_darkmode_off);
         darkModeText.setText(darkModeEnabled ? "Light Off" : "Dark Mode");
         View moreDarkMode = view.findViewById(R.id.moreDarkMode);
         if (isHomePage) {

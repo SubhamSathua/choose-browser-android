@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## Preview Page Icon Scoping & Reuse Cleanup
+- Renamed all 22 preview-exclusive icons with 'pp_' prefix and updated layout and Java references.
+- Replaced improper 'pp_' icon reuse in download screens with dedicated feature drawables.
+
 ## Icon Silhouette Shadows & Text Justification
 - Added adaptive silhouette drop shadows with LRU caching to app icons across all screens.
 - Enabled clean text justification with hyphenation across the license viewer and privacy policy.

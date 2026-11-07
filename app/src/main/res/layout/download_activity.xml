@@ -34,7 +34,7 @@
                 android:contentDescription="Back"
                 android:padding="8dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/pp_back" />
+                android:src="@drawable/back" />
 
         <TextView
             android:id="@+id/tvDownloadsHeaderTitle"
@@ -307,7 +307,7 @@
             <ImageView
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/pp_downloads"
+                android:src="@drawable/ix_download"
                 app:tint="#40FFFFFF" />
 
             <TextView

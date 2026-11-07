@@ -56,7 +56,7 @@
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:layout_marginEnd="14dp"
-            android:src="@drawable/ix_permissions" />
+            android:src="@drawable/pp_permissions" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -113,7 +113,7 @@
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:layout_marginEnd="14dp"
-            android:src="@drawable/ix_permissions" />
+            android:src="@drawable/pp_permissions" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -170,7 +170,7 @@
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:layout_marginEnd="14dp"
-            android:src="@drawable/ix_permissions" />
+            android:src="@drawable/pp_permissions" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -227,7 +227,7 @@
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:layout_marginEnd="14dp"
-            android:src="@drawable/ix_permissions" />
+            android:src="@drawable/pp_permissions" />
 
         <LinearLayout
             android:layout_width="0dp"
