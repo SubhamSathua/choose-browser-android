@@ -1,33 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/showLinkDialogRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="16dp"
     android:background="@drawable/bg_show_link_dialog"
     android:orientation="vertical"
-    android:layout_marginHorizontal="15dp"
-    android:layout_marginVertical="15dp"
     android:padding="20dp">
 
-    <!-- Header: icon + title + close button -->
-    <RelativeLayout
+    <!-- Header: icon + title/subtitle + (Edit & Close circular buttons) -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp">
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginBottom="14dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+        <!-- Icon badge -->
+        <FrameLayout
+            android:id="@+id/showLinkIconContainer"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@drawable/bg_show_link_close_btn">
 
             <ImageView
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:layout_marginEnd="8dp"
+                android:id="@+id/showLinkIcon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
                 android:src="@drawable/link" />
+        </FrameLayout>
+
+        <!-- Title & Subtitle column -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/showLinkTitle"
@@ -35,115 +48,324 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/heading"
                 android:text="Full Link"
-                android:textSize="@dimen/font_20" />
+                android:textSize="@dimen/font_18"
+                android:textStyle="bold" />
+
+            <!-- Subtitle: bold site.domain • xx chars -->
+            <TextView
+                android:id="@+id/showLinkSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:ellipsize="middle"
+                android:fontFamily="@font/body"
+                android:singleLine="true"
+                android:textSize="@dimen/font_12"
+                tools:text="github.com • 142 chars" />
         </LinearLayout>
 
+        <!-- Edit button (circular) -->
+        <ImageView
+            android:id="@+id/showLinkEditBtn"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/bg_show_link_close_btn"
+            android:clickable="true"
+            android:contentDescription="Edit link"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:padding="9dp"
+            android:src="@drawable/ic_edit" />
+
+        <!-- Close button (circular) -->
         <ImageView
             android:id="@+id/showLinkCloseBtn"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
             android:background="@drawable/bg_show_link_close_btn"
             android:clickable="true"
+            android:contentDescription="Close"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackgroundBorderless"
-            android:padding="8dp"
+            android:padding="9dp"
             android:src="@drawable/ic_close_24" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
-    <!-- Scrollable link area -->
-    <ScrollView
-        android:id="@+id/showLinkScrollArea"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:maxHeight="280dp"
-        android:background="@drawable/bg_show_link_url_box"
-        android:fadeScrollbars="false"
-        android:scrollbarSize="5dp"
-        android:scrollbarThumbVertical="@drawable/scrollbar_thumb_show_link"
-        android:scrollbarTrackVertical="@drawable/scrollbar_track_show_link"
-        android:scrollbars="vertical"
-        android:padding="16dp">
-
-        <TextView
-            android:id="@+id/showLinkUrlText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:breakStrategy="simple"
-            android:fontFamily="@font/body"
-            android:lineSpacingExtra="3dp"
-            tools:text="Hello"
-            android:textIsSelectable="true"
-            android:textSize="@dimen/font_13" />
-    </ScrollView>
-
-    <!-- Action buttons row -->
+    <!-- Scrollable / Editable URL Area -->
     <LinearLayout
+        android:id="@+id/showLinkUrlBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:gravity="end"
+        android:background="@drawable/bg_show_link_url_box"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- Metadata badges pill bar (Icons, no emojis; domain removed) -->
+        <LinearLayout
+            android:id="@+id/showLinkBadgeBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- Security badge (Lock / Warning icon + text) -->
+            <LinearLayout
+                android:id="@+id/showLinkSecurityBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_show_link_badge"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp">
+
+                <ImageView
+                    android:id="@+id/showLinkSecurityIcon"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/ic_lock_16" />
+
+                <TextView
+                    android:id="@+id/showLinkSecurityText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/label"
+                    android:textSize="11sp"
+                    tools:text="HTTPS" />
+            </LinearLayout>
+
+            <!-- Status badge (Check / Warning icon + text) -->
+            <LinearLayout
+                android:id="@+id/showLinkStatusBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/bg_show_link_badge"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/showLinkStatusIcon"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/ic_check_circle_16" />
+
+                <TextView
+                    android:id="@+id/showLinkStatusText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/label"
+                    android:textSize="11sp"
+                    tools:text="Clean" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- View mode: scrollable selectable text -->
+        <ScrollView
+            android:id="@+id/showLinkScrollArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fadeScrollbars="false"
+            android:maxHeight="220dp"
+            android:scrollbarSize="4dp"
+            android:scrollbarThumbVertical="@drawable/scrollbar_thumb_show_link"
+            android:scrollbarTrackVertical="@drawable/scrollbar_track_show_link"
+            android:scrollbars="vertical">
+
+            <TextView
+                android:id="@+id/showLinkUrlText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:breakStrategy="simple"
+                android:fontFamily="@font/body"
+                android:lineSpacingExtra="3dp"
+                android:paddingVertical="2dp"
+                android:textIsSelectable="true"
+                android:textSize="@dimen/font_13"
+                tools:text="https://example.com/very/long/url/path/with?query=params" />
+        </ScrollView>
+
+        <!-- Edit mode: single-line URL input (no Enter key allowed) -->
+        <ScrollView
+            android:id="@+id/showLinkEditArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fadeScrollbars="false"
+            android:maxHeight="220dp"
+            android:scrollbarSize="4dp"
+            android:scrollbarThumbVertical="@drawable/scrollbar_thumb_show_link"
+            android:scrollbarTrackVertical="@drawable/scrollbar_track_show_link"
+            android:scrollbars="vertical"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/showLinkUrlEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:fontFamily="@font/body"
+                android:gravity="top|start"
+                android:hint="Enter full URL…"
+                android:imeOptions="actionDone"
+                android:inputType="textUri"
+                android:lineSpacingExtra="3dp"
+                android:maxLines="3"
+                android:paddingVertical="2dp"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:textSize="@dimen/font_13"
+                tools:text="https://example.com/editable" />
+        </ScrollView>
+
+    </LinearLayout>
+
+    <!-- Bottom Action Row: View Mode (Clean, [Spacer], Circular Copy, Primary Set) -->
+    <LinearLayout
+        android:id="@+id/showLinkViewActions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <!-- Share button -->
+        <!-- Clean button -->
         <LinearLayout
-            android:id="@+id/showLinkShareBtn"
+            android:id="@+id/showLinkCleanBtn"
             android:layout_width="wrap_content"
-            android:layout_height="44dp"
-            android:layout_marginEnd="10dp"
+            android:layout_height="42dp"
             android:background="@drawable/bg_show_link_share_btn"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingHorizontal="20dp">
+            android:paddingHorizontal="18dp">
 
             <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:id="@+id/showLinkCleanIcon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 android:layout_marginEnd="6dp"
-                android:src="@drawable/share_ico" />
+                android:src="@drawable/ic_clean_sparkle_24" />
 
             <TextView
-                android:id="@+id/showLinkShareText"
+                android:id="@+id/showLinkCleanText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/heading"
-                android:text="Share"
-                android:textSize="@dimen/font_14" />
+                android:text="Clean"
+                android:textSize="@dimen/font_13" />
         </LinearLayout>
 
-        <!-- Copy Clean Link button -->
+        <!-- Spacer -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <!-- Circular Copy button -->
+        <ImageView
+            android:id="@+id/showLinkCopyBtn"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/bg_show_link_close_btn"
+            android:clickable="true"
+            android:contentDescription="Copy URL"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:padding="11dp"
+            android:src="@drawable/copy" />
+
+        <!-- Primary Set button -->
         <LinearLayout
-            android:id="@+id/showLinkCopyCleanBtn"
+            android:id="@+id/showLinkSetBtn"
             android:layout_width="wrap_content"
-            android:layout_height="44dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="8dp"
             android:background="@drawable/bg_show_link_copy_clean_btn"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingHorizontal="20dp">
-
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginEnd="6dp"
-                android:src="@drawable/copy"
-                android:tint="?attr/colorPopupDockButtonIcon" />
+            android:paddingHorizontal="22dp">
 
             <TextView
-                android:id="@+id/showLinkCopyText"
+                android:id="@+id/showLinkSetText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/heading"
-                android:text="Copy Clean Link"
+                android:text="Set"
                 android:textColor="@color/PopUpCardDockText"
-                android:textSize="@dimen/font_14" />
+                android:textSize="@dimen/font_14"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Bottom Action Row: Edit Mode (Cancel & Set) -->
+    <LinearLayout
+        android:id="@+id/showLinkEditActions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="end|center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <!-- Cancel button -->
+        <LinearLayout
+            android:id="@+id/showLinkCancelEditBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_show_link_share_btn"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="18dp">
+
+            <TextView
+                android:id="@+id/showLinkCancelEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/heading"
+                android:text="Cancel"
+                android:textSize="@dimen/font_13" />
+        </LinearLayout>
+
+        <!-- Set button (confirm edit) -->
+        <LinearLayout
+            android:id="@+id/showLinkSetEditBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:background="@drawable/bg_show_link_copy_clean_btn"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="24dp">
+
+            <TextView
+                android:id="@+id/showLinkSetEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/heading"
+                android:text="Set"
+                android:textColor="@color/PopUpCardDockText"
+                android:textSize="@dimen/font_14"
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>

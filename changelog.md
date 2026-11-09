@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## Refined Show Link Card & Vector Badges
+- Replaced emojis with crisp vector badges and made domain bold in header metadata.
+- Removed share button, disabled enter key in editor, and streamlined clean/copy/set actions.
+
 ## Debug Menu 7-Tap Unlock & 24h Auto-Hide
 - Added 7-tap version unlock with countdown toast, 2s timeout, and 24-hour auto-hide in stable.
 - Kept debug permanent in alpha and added immediate hide buttons for stable across debug and settings.

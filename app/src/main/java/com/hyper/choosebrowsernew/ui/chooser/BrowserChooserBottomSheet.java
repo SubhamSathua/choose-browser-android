@@ -126,7 +126,15 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
 
         // Show Link button – opens the Full Link dialog
         previewLinkBtn.setOnClickListener(v -> {
-            ShowLinkDialogHelper.show(requireContext(), url);
+            ShowLinkDialogHelper.show(requireContext(), url, newUrl -> {
+                if (!TextUtils.isEmpty(newUrl) && !newUrl.equals(this.url)) {
+                    this.url = newUrl;
+                    if (urlTextView != null) {
+                        urlTextView.setText(newUrl);
+                    }
+                    viewModel.loadAppsForUrl(newUrl);
+                }
+            });
         });
 
         // Preview Page button – opens sandboxed incognito WebView
