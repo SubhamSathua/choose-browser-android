@@ -45,6 +45,20 @@ public class DebugActivity extends AppCompatActivity {
 
         findViewById(R.id.debugBackBtn).setOnClickListener(v -> finish());
 
+        View hideBtn = findViewById(R.id.debugHideBtn);
+        if (hideBtn != null) {
+            if (!DebugConfig.isAlpha()) {
+                hideBtn.setVisibility(View.VISIBLE);
+                hideBtn.setOnClickListener(v -> {
+                    DebugConfig.hideDebug(this);
+                    Toast.makeText(this, "Debug menu hidden", Toast.LENGTH_SHORT).show();
+                    finish();
+                });
+            } else {
+                hideBtn.setVisibility(View.GONE);
+            }
+        }
+
         View cardAppLinks = findViewById(R.id.cardDefaultAppLinks);
         View btnAppLinks = findViewById(R.id.debugOpenAppLinksBtn);
         View.OnClickListener openAppLinksListener = v ->

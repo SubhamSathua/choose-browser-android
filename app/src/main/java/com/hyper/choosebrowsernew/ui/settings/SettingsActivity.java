@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -24,6 +26,7 @@ import com.hyper.choosebrowsernew.R;
 import com.hyper.choosebrowsernew.UpdateChecker;
 import com.hyper.choosebrowsernew.ui.common.UpdateUiHelper;
 import com.hyper.choosebrowsernew.ui.debug.DebugActivity;
+import com.hyper.choosebrowsernew.ui.debug.DebugConfig;
 import com.hyper.choosebrowsernew.ui.webview.WebViewActivity;
 import com.hyper.choosebrowsernew.util.MotionUiHelper;
 import com.hyper.choosebrowsernew.util.ThemeHelper;
@@ -36,6 +39,12 @@ public class SettingsActivity extends AppCompatActivity {
     private View settingsUpdateDot;
     private TextView settingsUpdateTitle, settingsUpdateMsg;
     private SettingsViewModel viewModel;
+
+    private int debugTapCount = 0;
+    private long lastDebugTapTime = 0L;
+    private static final long DEBUG_TAP_TIMEOUT_MS = 2000L;
+    private static final int TOTAL_DEBUG_TAPS = 7;
+    private Toast debugToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,12 +123,12 @@ public class SettingsActivity extends AppCompatActivity {
         settingsUpdateCard.setOnClickListener(updateClick);
         settingsUpdateCardInner.setOnClickListener(updateClick);
 
-        // Alpha: show debug card always
-        // Release: future — add 7-tap on version text to unlock
-        if ("alpha".equals(BuildConfig.BUILD_TYPE)) {
-            debugCard.setVisibility(View.VISIBLE);
-            debugCard.setOnClickListener(v -> startActivity(new Intent(this, DebugActivity.class)));
-        }
+        // 7-tap sequence on version card/text to unlock debug in stable; alpha is always unhidden
+        View.OnClickListener versionTapListener = v -> handleVersionTap();
+        versionCard.setOnClickListener(versionTapListener);
+        versionText.setOnClickListener(versionTapListener);
+
+        updateDebugVisibility();
 
         checkForUpdates();
     }
@@ -133,7 +142,80 @@ public class SettingsActivity extends AppCompatActivity {
         MotionUiHelper.applyTapScale(findViewById(R.id.colorThemesCard));
         MotionUiHelper.applyTapScale(findViewById(R.id.versionCard));
         MotionUiHelper.applyTapScale(findViewById(R.id.debugCard));
+        MotionUiHelper.applyTapScale(findViewById(R.id.debugCardHideBtn));
         MotionUiHelper.applyTapScale(findViewById(R.id.backBtn));
+    }
+
+    private void handleVersionTap() {
+        if (DebugConfig.isAlpha()) {
+            showDebugToast("Debug menu is already available in Alpha");
+            return;
+        }
+
+        if (DebugConfig.isDebugUnlocked(this)) {
+            showDebugToast("Debug menu is already unhidden");
+            return;
+        }
+
+        long now = SystemClock.uptimeMillis();
+        if (now - lastDebugTapTime > DEBUG_TAP_TIMEOUT_MS) {
+            debugTapCount = 0;
+        }
+        lastDebugTapTime = now;
+        debugTapCount++;
+
+        if (debugTapCount < 4) {
+            // Taps 1 to 3: silent
+            return;
+        }
+
+        int remaining = TOTAL_DEBUG_TAPS - debugTapCount;
+        if (remaining > 0) {
+            String stepWord = remaining == 1 ? "step" : "steps";
+            showDebugToast("You are now " + remaining + " " + stepWord + " away from unhiding debug menu.");
+        } else {
+            debugTapCount = 0;
+            DebugConfig.unlockDebug(this);
+            showDebugToast("Debug menu unhidden!");
+            updateDebugVisibility();
+        }
+    }
+
+    private void showDebugToast(String message) {
+        if (debugToast != null) {
+            debugToast.cancel();
+        }
+        debugToast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        debugToast.show();
+    }
+
+    private void updateDebugVisibility() {
+        CardView debugCard = findViewById(R.id.debugCard);
+        View debugCardHideBtn = findViewById(R.id.debugCardHideBtn);
+        if (debugCard == null) return;
+
+        boolean isUnlocked = DebugConfig.isDebugUnlocked(this);
+        if (isUnlocked) {
+            debugCard.setVisibility(View.VISIBLE);
+            debugCard.setOnClickListener(v -> startActivity(new Intent(this, DebugActivity.class)));
+            if (debugCardHideBtn != null) {
+                if (!DebugConfig.isAlpha()) {
+                    debugCardHideBtn.setVisibility(View.VISIBLE);
+                    debugCardHideBtn.setOnClickListener(v -> {
+                        DebugConfig.hideDebug(this);
+                        showDebugToast("Debug menu hidden");
+                        updateDebugVisibility();
+                    });
+                } else {
+                    debugCardHideBtn.setVisibility(View.GONE);
+                }
+            }
+        } else {
+            debugCard.setVisibility(View.GONE);
+            if (debugCardHideBtn != null) {
+                debugCardHideBtn.setVisibility(View.GONE);
+            }
+        }
     }
 
     private UpdateChecker.Result lastUpdateResult;
@@ -142,6 +224,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         ThemeHelper.applySystemBars(this);
+        updateDebugVisibility();
     }
 
     private void checkForUpdates() {

@@ -505,6 +505,19 @@
                             android:textColor="@color/text"
                             android:textSize="@dimen/font_16" />
 
+                        <ImageButton
+                            android:id="@+id/debugCardHideBtn"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_marginEnd="6dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Hide debug menu"
+                            android:padding="7dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/close"
+                            android:tint="@color/textSub"
+                            android:visibility="gone" />
+
                         <ImageView
                             android:layout_width="18dp"
                             android:layout_height="18dp"

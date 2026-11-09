@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## Debug Menu 7-Tap Unlock & 24h Auto-Hide
+- Added 7-tap version unlock with countdown toast, 2s timeout, and 24-hour auto-hide in stable.
+- Kept debug permanent in alpha and added immediate hide buttons for stable across debug and settings.
+
 ## Preview Page Icon Scoping & Reuse Cleanup
 - Renamed all 22 preview-exclusive icons with 'pp_' prefix and updated layout and Java references.
 - Replaced improper 'pp_' icon reuse in download screens with dedicated feature drawables.
