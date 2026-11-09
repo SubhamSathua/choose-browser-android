@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "license": "MPL-2.0",
+  "source": "Brave Software Inc. - query_filter",
+  "simple": [
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_term",
+    "utm_content",
+    "utm_id",
+    "utm_source_platform",
+    "utm_creative_format",
+    "utm_marketing_tactic",
+    "gclid",
+    "gclsrc",
+    "dclid",
+    "gbraid",
+    "wbraid",
+    "srsltid",
+    "fbclid",
+    "fb_action_ids",
+    "fb_action_types",
+    "fb_ref",
+    "fb_source",
+    "msclkid",
+    "twclid",
+    "igshid",
+    "mc_cid",
+    "mc_eid",
+    "_ga",
+    "_gl",
+    "_gac",
+    "_hsenc",
+    "_hsmi",
+    "hsa_cam",
+    "hsa_grp",
+    "hsa_mt",
+    "hsa_src",
+    "hsa_ad",
+    "hsa_acc",
+    "hsa_net",
+    "hsa_ver",
+    "hsa_la",
+    "hsa_ol",
+    "hsa_kw",
+    "hsa_tgt",
+    "yclid",
+    "ymclid",
+    "_openstat",
+    "mkt_tok",
+    "vero_id",
+    "zanpid",
+    "irclickid"
+  ],
+  "scoped": {
+    "amazon": [
+      "ref_",
+      "tag",
+      "linkCode",
+      "camp",
+      "creative",
+      "pd_rd_.*",
+      "pf_rd_.*"
+    ],
+    "youtube.com": [
+      "si",
+      "feature",
+      "pp"
+    ],
+    "youtu.be": [
+      "si",
+      "feature"
+    ],
+    "x.com": [
+      "t",
+      "s",
+      "ref_src",
+      "ref_url"
+    ],
+    "twitter.com": [
+      "t",
+      "s",
+      "ref_src",
+      "ref_url"
+    ],
+    "reddit.com": [
+      "ref",
+      "ref_source",
+      "share_id"
+    ],
+    "tiktok.com": [
+      "_r",
+      "_t",
+      "checksum",
+      "is_copy_url",
+      "is_from_webapp"
+    ],
+    "instagram.com": [
+      "igsh",
+      "ig_rid",
+      "ig_mid"
+    ],
+    "linkedin.com": [
+      "trackingId",
+      "refId",
+      "trk"
+    ],
+    "spotify.com": [
+      "si",
+      "context"
+    ],
+    "aliexpress.com": [
+      "spm",
+      "scm",
+      "pvid",
+      "algo_pvid",
+      "algo_exp_id"
+    ]
+  },
+  "redirects": [
+    {
+      "host": "google.",
+      "path": "/url",
+      "param": "q"
+    },
+    {
+      "host": "l.facebook.com",
+      "path": "/l.php",
+      "param": "u"
+    },
+    {
+      "host": "out.reddit.com",
+      "path": "",
+      "param": "url"
+    }
+  ]
+}

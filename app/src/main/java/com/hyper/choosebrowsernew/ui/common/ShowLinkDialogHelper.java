@@ -106,10 +106,14 @@ public class ShowLinkDialogHelper {
         ImageView statusIcon = view.findViewById(R.id.showLinkStatusIcon);
         TextView statusText = view.findViewById(R.id.showLinkStatusText);
 
-        ScrollView scrollArea = view.findViewById(R.id.showLinkScrollArea);
+        MaxHeightScrollView scrollArea = view.findViewById(R.id.showLinkScrollArea);
         TextView urlTextView = view.findViewById(R.id.showLinkUrlText);
-        ScrollView editArea = view.findViewById(R.id.showLinkEditArea);
+        MaxHeightScrollView editArea = view.findViewById(R.id.showLinkEditArea);
         EditText urlEditText = view.findViewById(R.id.showLinkUrlEdit);
+
+        // Cap height dynamically to exactly 7 lines based on user's active system font
+        scrollArea.setMaxLines(7, urlTextView);
+        editArea.setMaxLines(7, urlEditText);
 
         // Disallow Enter key in edit mode:
         // 1. InputFilter to strip \n and \r
@@ -178,7 +182,7 @@ public class ShowLinkDialogHelper {
             applySecurityBadge(current, securityIcon, securityText);
 
             // Tracker status badge
-            String cleanedCandidate = LinkCleaner.clean(current);
+            String cleanedCandidate = LinkCleaner.clean(themedContext, current);
             boolean hasTrackers = !cleanedCandidate.equals(current);
 
             if (state.wasCleaned) {
@@ -245,7 +249,7 @@ public class ShowLinkDialogHelper {
 
         // Clean button
         cleanBtn.setOnClickListener(v -> {
-            String cleaned = LinkCleaner.clean(state.url);
+            String cleaned = LinkCleaner.clean(context, state.url);
             if (!cleaned.equals(state.url)) {
                 state.url = cleaned;
                 state.wasCleaned = true;

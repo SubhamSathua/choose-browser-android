@@ -1,5 +1,11 @@
 [
   {
+    "fileName": "brave_query_filter.txt",
+    "name": "Brave Query Filter",
+    "author": "Brave Software Inc.",
+    "type": "Mozilla Public License 2.0"
+  },
+  {
     "fileName": "MSFT_FluentUI_Icons_License.txt",
     "name": "Microsoft Fluent UI Icons",
     "author": "Microsoft Corporation",

@@ -168,13 +168,12 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- View mode: scrollable selectable text -->
-        <ScrollView
+        <!-- View mode: scrollable selectable text (max 7 lines based on system font) -->
+        <com.hyper.choosebrowsernew.ui.common.MaxHeightScrollView
             android:id="@+id/showLinkScrollArea"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fadeScrollbars="false"
-            android:maxHeight="220dp"
             android:scrollbarSize="4dp"
             android:scrollbarThumbVertical="@drawable/scrollbar_thumb_show_link"
             android:scrollbarTrackVertical="@drawable/scrollbar_track_show_link"
@@ -191,15 +190,14 @@
                 android:textIsSelectable="true"
                 android:textSize="@dimen/font_13"
                 tools:text="https://example.com/very/long/url/path/with?query=params" />
-        </ScrollView>
+        </com.hyper.choosebrowsernew.ui.common.MaxHeightScrollView>
 
-        <!-- Edit mode: single-line URL input (no Enter key allowed) -->
-        <ScrollView
+        <!-- Edit mode: multi-line wrapped URL input (no Enter key, max 7 lines based on system font) -->
+        <com.hyper.choosebrowsernew.ui.common.MaxHeightScrollView
             android:id="@+id/showLinkEditArea"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fadeScrollbars="false"
-            android:maxHeight="220dp"
             android:scrollbarSize="4dp"
             android:scrollbarThumbVertical="@drawable/scrollbar_thumb_show_link"
             android:scrollbarTrackVertical="@drawable/scrollbar_track_show_link"
@@ -215,15 +213,13 @@
                 android:gravity="top|start"
                 android:hint="Enter full URL…"
                 android:imeOptions="actionDone"
-                android:inputType="textUri"
+                android:inputType="textUri|textMultiLine"
                 android:lineSpacingExtra="3dp"
-                android:maxLines="3"
                 android:paddingVertical="2dp"
                 android:selectAllOnFocus="true"
-                android:singleLine="true"
                 android:textSize="@dimen/font_13"
                 tools:text="https://example.com/editable" />
-        </ScrollView>
+        </com.hyper.choosebrowsernew.ui.common.MaxHeightScrollView>
 
     </LinearLayout>
 

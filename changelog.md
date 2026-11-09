@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## Brave Query Filter & 7-Line Clamped Link Box
+- Integrated Brave Query Filter rules under MPL-2.0 and added attribution to Open Source Licenses.
+- Added MaxHeightScrollView capping Show Link to 7 lines based on system font to prevent button overflow.
+
 ## Refined Show Link Card & Vector Badges
 - Replaced emojis with crisp vector badges and made domain bold in header metadata.
 - Removed share button, disabled enter key in editor, and streamlined clean/copy/set actions.
