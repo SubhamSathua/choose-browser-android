@@ -325,7 +325,7 @@ public class PreviewPageActivity extends AppCompatActivity {
         focusShare.setOnClickListener(v -> {
             String target = getShareableUrl();
             if (!target.isEmpty()) {
-                com.hyper.choosebrowsernew.ui.common.ShareDialogHelper.show(this, target);
+                com.hyper.choosebrowsernew.ui.common.ShareDialogHelper.share(this, target);
             } else {
                 Toast.makeText(this, "No link to share", Toast.LENGTH_SHORT).show();
             }
@@ -1892,7 +1892,7 @@ public class PreviewPageActivity extends AppCompatActivity {
         } else {
             moreShare.setOnClickListener(v -> {
                 dialog.dismiss();
-                com.hyper.choosebrowsernew.ui.common.ShareDialogHelper.show(this, currentUrl);
+                com.hyper.choosebrowsernew.ui.common.ShareDialogHelper.share(this, currentUrl);
             });
         }
 

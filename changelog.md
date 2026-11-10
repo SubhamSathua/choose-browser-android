@@ -1,8 +1,8 @@
 ﻿# Changelog
 
-## Chrome-Style Share Menu & QR Code Generator
-- Added Chrome-style Share Menu dialog with on-device pure Java QR code generator.
-- Added live QR code viewer with download, image sharing, clean link, and clipboard copy.
+## Chrome-Style Sharesheet QR Code Action
+- Added QR Code ChooserAction into Android's system share sheet matching Google Chrome.
+- Added live on-device QR code generator dialog with download, image share, and copy.
 
 ## Brave Query Filter & 7-Line Clamped Link Box
 - Integrated Brave Query Filter rules under MPL-2.0 and added attribution to Open Source Licenses.

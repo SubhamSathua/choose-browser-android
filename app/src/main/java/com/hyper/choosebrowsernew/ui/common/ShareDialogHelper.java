@@ -1,6 +1,8 @@
 package com.hyper.choosebrowsernew.ui.common;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.ContentValues;
@@ -9,21 +11,23 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.service.chooser.ChooserAction;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.content.FileProvider;
 
 import com.hyper.choosebrowsernew.R;
@@ -35,29 +39,59 @@ import com.hyper.choosebrowsernew.util.qr.QrBitmapGenerator;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.util.Locale;
 
 /**
- * Chrome-style Share Menu dialog featuring a live on-device QR Code generator,
- * Clean & Share, Copy Link, and Android system chooser sharing.
+ * Chrome-style Share integration:
+ * - On Android 14+ (API 34): Adds "QR Code" ChooserAction directly into the system share popup.
+ * - On all Android versions: Provides an on-device QR Code dialog with download, image sharing,
+ *   and copy shortcuts.
  */
 public class ShareDialogHelper {
 
     private static final String TAG = "ShareDialogHelper";
 
+    /**
+     * Primary entry point for sharing a link:
+     * Launches the system share popup with a "QR Code" action button right at the top
+     * (matching Google Chrome's Android 14 Sharesheet behavior).
+     */
+    public static void share(Context context, String url) {
+        if (context == null || TextUtils.isEmpty(url)) return;
+
+        Intent sendIntent = new Intent(Intent.ACTION_SEND);
+        sendIntent.setType("text/plain");
+        sendIntent.putExtra(Intent.EXTRA_TEXT, url);
+
+        Intent chooserIntent = Intent.createChooser(sendIntent, "Share URL");
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            Api34Helper.addQrAction(context, chooserIntent, url);
+        }
+
+        if (!(context instanceof Activity)) {
+            chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        context.startActivity(chooserIntent);
+    }
+
     public static void show(Context context, String url) {
-        show(context, url, false);
+        show(context, url, false, null);
     }
 
     public static void showQr(Context context, String url) {
-        show(context, url, true);
+        show(context, url, true, null);
     }
 
-    public static void show(Context context, String rawUrl, boolean startInQrMode) {
+    public static void showQr(Context context, String url, Runnable onDismiss) {
+        show(context, url, true, onDismiss);
+    }
+
+    public static void show(Context context, String rawUrl, boolean startInQrMode, Runnable onDismiss) {
         if (context == null) return;
         final String url = rawUrl != null ? rawUrl.trim() : "";
         if (TextUtils.isEmpty(url)) {
             Toast.makeText(context, "No link to share", Toast.LENGTH_SHORT).show();
+            if (onDismiss != null) onDismiss.run();
             return;
         }
 
@@ -78,6 +112,10 @@ public class ShareDialogHelper {
                     WindowManager.LayoutParams.WRAP_CONTENT
             );
             dialog.getWindow().setDimAmount(0.55f);
+        }
+
+        if (onDismiss != null) {
+            dialog.setOnDismissListener(d -> onDismiss.run());
         }
 
         // Header views
@@ -130,7 +168,7 @@ public class ShareDialogHelper {
         Runnable showQrView = () -> {
             titleText.setText("QR Code");
             iconView.setImageResource(R.drawable.ic_qr_code_24);
-            backBtn.setVisibility(View.VISIBLE);
+            backBtn.setVisibility(startInQrMode ? View.GONE : View.VISIBLE);
             optionsMode.setVisibility(View.GONE);
             qrMode.setVisibility(View.VISIBLE);
 
@@ -169,12 +207,12 @@ public class ShareDialogHelper {
 
         actionCleanShare.setOnClickListener(v -> {
             String cleaned = LinkCleaner.clean(themedContext, url);
-            shareTextViaSystem(context, cleaned, "Share Clean Link");
+            share(context, cleaned);
             dialog.dismiss();
         });
 
         actionMoreApps.setOnClickListener(v -> {
-            shareTextViaSystem(context, url, "Share URL");
+            share(context, url);
             dialog.dismiss();
         });
 
@@ -211,13 +249,6 @@ public class ShareDialogHelper {
             clipboard.setPrimaryClip(ClipData.newPlainText("URL", text));
             Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private static void shareTextViaSystem(Context context, String text, String title) {
-        Intent share = new Intent(Intent.ACTION_SEND);
-        share.setType("text/plain");
-        share.putExtra(Intent.EXTRA_TEXT, text);
-        context.startActivity(Intent.createChooser(share, title));
     }
 
     private static void shareQrBitmap(Context context, Bitmap bitmap, String url) {
@@ -391,5 +422,36 @@ public class ShareDialogHelper {
     private static void tintIcon(View root, int viewId, int color) {
         ImageView iv = root.findViewById(viewId);
         if (iv != null) iv.setColorFilter(color);
+    }
+
+    /**
+     * Isolated API 34 helper to prevent ClassNotFound/VerifyError on earlier Android versions.
+     */
+    @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+    private static class Api34Helper {
+        static void addQrAction(Context context, Intent chooserIntent, String url) {
+            try {
+                Intent qrIntent = new Intent(context, QrCodeViewerActivity.class);
+                qrIntent.putExtra(QrCodeViewerActivity.EXTRA_URL, url);
+                qrIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                PendingIntent qrPendingIntent = PendingIntent.getActivity(
+                        context,
+                        url.hashCode(),
+                        qrIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+                );
+
+                ChooserAction qrAction = new ChooserAction.Builder(
+                        Icon.createWithResource(context, R.drawable.ic_qr_code_24),
+                        "QR Code",
+                        qrPendingIntent
+                ).build();
+
+                chooserIntent.putExtra(Intent.EXTRA_CHOOSER_CUSTOM_ACTIONS, new ChooserAction[]{qrAction});
+            } catch (Exception e) {
+                Log.w(TAG, "Failed to attach ChooserAction", e);
+            }
+        }
     }
 }
