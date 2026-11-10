@@ -122,7 +122,6 @@ public class ShareDialogHelper {
         ImageView backBtn = view.findViewById(R.id.shareBackBtn);
         ImageView iconView = view.findViewById(R.id.shareIcon);
         TextView titleText = view.findViewById(R.id.shareTitle);
-        TextView subtitleText = view.findViewById(R.id.shareSubtitle);
         ImageView closeBtn = view.findViewById(R.id.shareCloseBtn);
 
         // Mode containers
@@ -142,13 +141,10 @@ public class ShareDialogHelper {
         TextView qrLinkText = view.findViewById(R.id.qrLinkText);
         View qrDownloadBtn = view.findViewById(R.id.qrDownloadBtn);
         View qrShareImageBtn = view.findViewById(R.id.qrShareImageBtn);
-        ImageView qrCopyBtn = view.findViewById(R.id.qrCopyBtn);
+        View qrCopyBtn = view.findViewById(R.id.qrCopyBtn);
 
-        // Setup domain and char count
+        // Setup domain and text
         String domain = extractDomain(url);
-        int chars = url.length();
-        String subtitle = domain + "  •  " + chars + (chars == 1 ? " char" : " chars");
-        subtitleText.setText(subtitle);
         previewDomain.setText(domain);
         previewUrl.setText(url);
         qrLinkText.setText(url);
@@ -363,11 +359,6 @@ public class ShareDialogHelper {
         TextView title = root.findViewById(R.id.shareTitle);
         if (title != null) title.setTextColor(text);
 
-        TextView subtitle = root.findViewById(R.id.shareSubtitle);
-        if (subtitle != null) {
-            subtitle.setTextColor(Color.argb(190, Color.red(text), Color.green(text), Color.blue(text)));
-        }
-
         TextView previewDomain = root.findViewById(R.id.sharePreviewDomain);
         if (previewDomain != null) previewDomain.setTextColor(text);
 
@@ -390,6 +381,7 @@ public class ShareDialogHelper {
         tintText(root, R.id.qrLinkText, subtextColor);
         tintText(root, R.id.qrDownloadText, dockBtnText);
         tintText(root, R.id.qrShareImageText, text);
+        tintText(root, R.id.qrCopyText, text);
 
         // Icons tint
         tintIcon(root, R.id.shareBackBtn, text);
@@ -401,7 +393,7 @@ public class ShareDialogHelper {
         tintIcon(root, R.id.actionMoreIcon, text);
         tintIcon(root, R.id.qrDownloadIcon, dockBtnText);
         tintIcon(root, R.id.qrShareImageIcon, text);
-        tintIcon(root, R.id.qrCopyBtn, text);
+        tintIcon(root, R.id.qrCopyIcon, text);
     }
 
     private static void tintBackground(View view, int color) {
