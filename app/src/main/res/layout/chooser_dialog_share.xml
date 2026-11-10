@@ -378,14 +378,14 @@
                     android:scaleType="fitCenter" />
             </FrameLayout>
 
-            <!-- URL: max 2 lines, centered, wrapped + truncated, written in Inter font -->
+            <!-- URL: max 2 lines, centered, wrapped + truncated with ... at end, written in Inter font -->
             <TextView
                 android:id="@+id/qrLinkText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:breakStrategy="simple"
-                android:ellipsize="middle"
+                android:ellipsize="end"
                 android:fontFamily="@font/inter"
                 android:gravity="center"
                 android:lineSpacingExtra="2dp"

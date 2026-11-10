@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## Full-Page QR Screen & Theme Lab Prototype
+- Added full-page QR viewer activity with top close button and end-truncated 2-line URL text.
+- Created standalone interactive single-file theme testing prototype in Dev-LAB for chooser sheet.
+
 ## Chrome-Style Sharesheet QR Code Action
 - Added QR Code ChooserAction into Android's system share sheet matching Google Chrome.
 - Redesigned QR card with 2-row layout, matching QR width, Inter typography, and clean header.

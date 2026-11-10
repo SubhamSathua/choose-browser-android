@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/qrScreenRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <!-- Top Bar: Title + Close Button at top -->
+    <LinearLayout
+        android:id="@+id/qrTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="20dp">
+
+        <TextView
+            android:id="@+id/qrScreenTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/heading"
+            android:text="QR Code"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!-- Circular Close Button at top -->
+        <ImageView
+            android:id="@+id/qrScreenCloseBtn"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@drawable/bg_show_link_close_btn"
+            android:clickable="true"
+            android:contentDescription="Close"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:padding="10dp"
+            android:src="@drawable/ic_close_24" />
+
+    </LinearLayout>
+
+    <!-- Center Content: perfectly vertically and horizontally centered -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="24dp">
+
+        <!-- Column strictly matching QR code width (240dp) -->
+        <LinearLayout
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <!-- Scannable QR Code card (solid high-contrast white container, 240dp x 240dp) -->
+            <FrameLayout
+                android:id="@+id/qrCardFrame"
+                android:layout_width="240dp"
+                android:layout_height="240dp"
+                android:background="@drawable/bg_qr_code_card"
+                android:elevation="3dp"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/qrImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="Scannable QR code"
+                    android:scaleType="fitCenter" />
+            </FrameLayout>
+
+            <!-- URL: max 2 lines, centered, wrapped + truncated with ... at end, written in Inter font -->
+            <TextView
+                android:id="@+id/qrLinkText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:breakStrategy="simple"
+                android:ellipsize="end"
+                android:fontFamily="@font/inter"
+                android:gravity="center"
+                android:lineSpacingExtra="3dp"
+                android:maxLines="2"
+                android:textAlignment="center"
+                android:textSize="@dimen/font_13"
+                tools:text="https://github.com/SubhamSathua/choose-browser-android/releases/tag/v4.29.1" />
+
+            <!-- Row 1: Download button (100% width = same size as QR code: 240dp) -->
+            <LinearLayout
+                android:id="@+id/qrDownloadBtn"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_show_link_copy_clean_btn"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp">
+
+                <ImageView
+                    android:id="@+id/qrDownloadIcon"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/ix_download" />
+
+                <TextView
+                    android:id="@+id/qrDownloadText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/body"
+                    android:text="Download"
+                    android:textSize="@dimen/font_14"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Row 2: Share and Copy circular/pill - shared width (50% / 50%) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <!-- Share Image button -->
+                <LinearLayout
+                    android:id="@+id/qrShareImageBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="46dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/bg_show_link_copy_clean_btn"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="12dp">
+
+                    <ImageView
+                        android:id="@+id/qrShareImageIcon"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginEnd="6dp"
+                        android:src="@drawable/ix_share" />
+
+                    <TextView
+                        android:id="@+id/qrShareImageText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/body"
+                        android:text="Share"
+                        android:textSize="@dimen/font_13"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Copy Link button -->
+                <LinearLayout
+                    android:id="@+id/qrCopyBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="46dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/bg_show_link_copy_clean_btn"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="12dp">
+
+                    <ImageView
+                        android:id="@+id/qrCopyIcon"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginEnd="6dp"
+                        android:src="@drawable/ic_content_copy_clean_24" />
+
+                    <TextView
+                        android:id="@+id/qrCopyText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/body"
+                        android:text="Copy"
+                        android:textSize="@dimen/font_13"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

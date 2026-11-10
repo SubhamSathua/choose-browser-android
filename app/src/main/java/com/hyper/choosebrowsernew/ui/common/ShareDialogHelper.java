@@ -79,11 +79,17 @@ public class ShareDialogHelper {
     }
 
     public static void showQr(Context context, String url) {
-        show(context, url, true, null);
+        if (context == null || TextUtils.isEmpty(url)) return;
+        Intent intent = new Intent(context, QrCodeViewerActivity.class);
+        intent.putExtra(QrCodeViewerActivity.EXTRA_URL, url);
+        if (!(context instanceof Activity)) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        context.startActivity(intent);
     }
 
     public static void showQr(Context context, String url, Runnable onDismiss) {
-        show(context, url, true, onDismiss);
+        showQr(context, url);
     }
 
     public static void show(Context context, String rawUrl, boolean startInQrMode, Runnable onDismiss) {
@@ -194,7 +200,10 @@ public class ShareDialogHelper {
         closeBtn.setOnClickListener(v -> dialog.dismiss());
 
         // Mode 1: Option clicks
-        actionQrCode.setOnClickListener(v -> showQrView.run());
+        actionQrCode.setOnClickListener(v -> {
+            dialog.dismiss();
+            showQr(context, url);
+        });
 
         actionCopyLink.setOnClickListener(v -> {
             copyToClipboard(context, url);
