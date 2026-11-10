@@ -1,5 +1,11 @@
 [
   {
+    "fileName": "nayuki_qrcodegen.txt",
+    "name": "QR Code Generator",
+    "author": "Project Nayuki",
+    "type": "MIT"
+  },
+  {
     "fileName": "brave_query_filter.txt",
     "name": "Brave Query Filter",
     "author": "Brave Software Inc.",

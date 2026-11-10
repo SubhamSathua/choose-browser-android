@@ -116,12 +116,9 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
             Toast.makeText(requireContext(), "Copied to clipboard", Toast.LENGTH_SHORT).show();
         });
 
-        // Share button
+        // Share button – opens Chrome-style Share Menu with QR Code
         shareBtn.setOnClickListener(v -> {
-            Intent share = new Intent(Intent.ACTION_SEND);
-            share.setType("text/plain");
-            share.putExtra(Intent.EXTRA_TEXT, url);
-            startActivity(Intent.createChooser(share, "Share URL"));
+            com.hyper.choosebrowsernew.ui.common.ShareDialogHelper.show(requireContext(), url);
         });
 
         // Show Link button – opens the Full Link dialog

@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## Chrome-Style Share Menu & QR Code Generator
+- Added Chrome-style Share Menu dialog with on-device pure Java QR code generator.
+- Added live QR code viewer with download, image sharing, clean link, and clipboard copy.
+
 ## Brave Query Filter & 7-Line Clamped Link Box
 - Integrated Brave Query Filter rules under MPL-2.0 and added attribution to Open Source Licenses.
 - Added MaxHeightScrollView capping Show Link to 7 lines based on system font to prevent button overflow.

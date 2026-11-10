@@ -325,10 +325,7 @@ public class PreviewPageActivity extends AppCompatActivity {
         focusShare.setOnClickListener(v -> {
             String target = getShareableUrl();
             if (!target.isEmpty()) {
-                Intent share = new Intent(Intent.ACTION_SEND);
-                share.setType("text/plain");
-                share.putExtra(Intent.EXTRA_TEXT, target);
-                startActivity(Intent.createChooser(share, "Share URL"));
+                com.hyper.choosebrowsernew.ui.common.ShareDialogHelper.show(this, target);
             } else {
                 Toast.makeText(this, "No link to share", Toast.LENGTH_SHORT).show();
             }
@@ -1894,11 +1891,8 @@ public class PreviewPageActivity extends AppCompatActivity {
             disableGridItem(moreShare);
         } else {
             moreShare.setOnClickListener(v -> {
-                Intent share = new Intent(Intent.ACTION_SEND);
-                share.setType("text/plain");
-                share.putExtra(Intent.EXTRA_TEXT, currentUrl);
-                startActivity(Intent.createChooser(share, "Share URL"));
                 dialog.dismiss();
+                com.hyper.choosebrowsernew.ui.common.ShareDialogHelper.show(this, currentUrl);
             });
         }
 
