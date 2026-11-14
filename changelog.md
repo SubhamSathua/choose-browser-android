@@ -1,8 +1,8 @@
 ﻿# Changelog
 
-## Chooser Vector Icon Suite & Dashed Divider Engine
-- Replaced raster PNGs with clean vector drawables matching HTML prototype across all actions and themes.
-- Kept OG gradient PNG in Monochrome while rendering vector open-in-new and software dashed stroke in others.
+## Chooser Responsive Layouts & Vector Icons Sync
+- Synchronized sw320dp, sw280dp, and sw200dp chooser sheets with dynamic IDs and vector drawables.
+- Fixed header title string to 'Open with' and ensured all responsive screens tint correctly.
 
 ## Expanded Custom Color Themes Suite
 - Synchronized chooser header, action icons, and divider colors 1:1 with prototype.

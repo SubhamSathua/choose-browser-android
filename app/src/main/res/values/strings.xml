@@ -98,7 +98,7 @@
 
 
     <!--    Pop-Up Screen-->
-    <string name="open_wt">Open With</string>
+    <string name="open_wt">Open with</string>
     <string name="copyBt">Copy</string>
     <string name="shareBt">Share</string>
     <string name="link">Full Link</string>
