@@ -251,14 +251,13 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
 
         ImageView headerIcon = root.findViewById(R.id.headerIcon);
         if (headerIcon != null) {
+            headerIcon.setImageResource(R.drawable.ix_open_in_new);
             if (isDefault) {
                 // Keep OG icon (gradient PNG) without tint in Monochrome
-                headerIcon.setImageResource(R.drawable.ix_open_in_new);
                 headerIcon.clearColorFilter();
                 ImageViewCompat.setImageTintList(headerIcon, null);
             } else {
-                // All other themes use the clean vector icon matching HTML 2, tinted with titleColor
-                headerIcon.setImageResource(R.drawable.ic_open_in_new_vector);
+                // Same OG icon with tint for color matching theme
                 headerIcon.setColorFilter(titleColor, PorterDuff.Mode.SRC_IN);
             }
         }
@@ -270,6 +269,7 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
             btn.setTextColor(text);
             btn.setCompoundDrawableTintList(ColorStateList.valueOf(text));
             if (btn instanceof MaterialButton) {
+                ((MaterialButton) btn).setIcon(ContextCompat.getDrawable(requireContext(), R.drawable.shield_lock_24px));
                 ((MaterialButton) btn).setIconTint(ColorStateList.valueOf(text));
             }
         }
@@ -279,6 +279,7 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
             copyBtn.setTextColor(dockBtnText);
             copyBtn.setCompoundDrawableTintList(ColorStateList.valueOf(dockBtnIcon));
             if (copyBtn instanceof MaterialButton) {
+                ((MaterialButton) copyBtn).setIcon(ContextCompat.getDrawable(requireContext(), R.drawable.copy));
                 ((MaterialButton) copyBtn).setIconTint(ColorStateList.valueOf(dockBtnIcon));
             }
         }
@@ -296,6 +297,7 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
         // Action button icons
         ImageView previewLinkIcon = root.findViewById(R.id.previewLinkIcon);
         if (previewLinkIcon != null) {
+            previewLinkIcon.setImageResource(R.drawable.link);
             if (isDefault) {
                 previewLinkIcon.clearColorFilter();
                 ImageViewCompat.setImageTintList(previewLinkIcon, null);
@@ -306,6 +308,7 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
 
         ImageView shareIcon = root.findViewById(R.id.shareIcon);
         if (shareIcon != null) {
+            shareIcon.setImageResource(R.drawable.share_ico);
             if (isDefault) {
                 shareIcon.clearColorFilter();
                 ImageViewCompat.setImageTintList(shareIcon, null);
@@ -316,6 +319,7 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
 
         ImageView previewPageIcon = root.findViewById(R.id.previewPageIcon);
         if (previewPageIcon != null) {
+            previewPageIcon.setImageResource(R.drawable.preview_page);
             if (isDefault) {
                 previewPageIcon.clearColorFilter();
                 ImageViewCompat.setImageTintList(previewPageIcon, null);
@@ -327,20 +331,24 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
         // Dashed divider
         View dashedDivider = root.findViewById(R.id.dashedDivider);
         if (dashedDivider != null) {
-            dashedDivider.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-            Drawable background = dashedDivider.getBackground();
-            if (background instanceof GradientDrawable) {
-                GradientDrawable gd = (GradientDrawable) background.mutate();
-                float density = getResources().getDisplayMetrics().density;
-                int strokeWidth = Math.round(2 * density);
-                int dashWidth = Math.round(8 * density);
-                int dashGap = Math.round(4 * density);
-                gd.setStroke(strokeWidth, dividerColor, dashWidth, dashGap);
-                dashedDivider.setBackground(gd);
-            } else if (background != null) {
-                Drawable divBg = DrawableCompat.wrap(background.mutate());
-                DrawableCompat.setTint(divBg, dividerColor);
-                dashedDivider.setBackground(divBg);
+            if (isDefault) {
+                dashedDivider.setBackgroundResource(R.drawable.dashed_line);
+            } else {
+                dashedDivider.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+                Drawable background = dashedDivider.getBackground();
+                if (background instanceof GradientDrawable) {
+                    GradientDrawable gd = (GradientDrawable) background.mutate();
+                    float density = getResources().getDisplayMetrics().density;
+                    int strokeWidth = Math.round(2 * density);
+                    int dashWidth = Math.round(8 * density);
+                    int dashGap = Math.round(4 * density);
+                    gd.setStroke(strokeWidth, dividerColor, dashWidth, dashGap);
+                    dashedDivider.setBackground(gd);
+                } else if (background != null) {
+                    Drawable divBg = DrawableCompat.wrap(background.mutate());
+                    DrawableCompat.setTint(divBg, dividerColor);
+                    dashedDivider.setBackground(divBg);
+                }
             }
         }
     }

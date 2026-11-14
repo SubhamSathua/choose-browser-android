@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## Original Icon PNGs Rollback & Theme Saturation Polish
+- Restored original PNG icons for chooser sheet with zero tint in Monochrome and dynamic tint in custom themes.
+- Extracted official deep saturated colors for Light Theme across Dracula and Catppuccin palettes.
+
 ## Chooser Layout Inflation Fix & Themed Context Wrapper
 - Replaced unresolvable overlay attribute in chooser sheet XML with safe color reference.
 - Cloned LayoutInflater with color theme overlay context in BottomSheetDialogFragment.

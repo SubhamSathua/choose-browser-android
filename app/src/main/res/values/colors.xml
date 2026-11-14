@@ -131,8 +131,8 @@
     <color name="dracula_popup_text">#1f1f1f</color>
     <color name="dracula_popup_title">#a3144d</color>
     <color name="dracula_popup_action1_icon">#644ac9</color>
-    <color name="dracula_popup_action2_icon">#2d7a4c</color>
-    <color name="dracula_popup_action3_icon">#1b7a82</color>
+    <color name="dracula_popup_action2_icon">#14710a</color>
+    <color name="dracula_popup_action3_icon">#036a96</color>
     <color name="dracula_popup_divider">#644ac9</color>
 
     <!-- Cyberpunk Terminal (Matrix Green & Cyan) -->
