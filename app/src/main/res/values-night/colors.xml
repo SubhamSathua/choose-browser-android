@@ -70,10 +70,10 @@
     <color name="amoled_popup_action">#121212</color>
     <color name="amoled_popup_text">#ffffff</color>
     <color name="amoled_popup_title">#00ffc4</color>
-    <color name="amoled_popup_action1_icon">#ffffff</color>
-    <color name="amoled_popup_action2_icon">#ffffff</color>
-    <color name="amoled_popup_action3_icon">#ffffff</color>
-    <color name="amoled_popup_divider">#242424</color>
+    <color name="amoled_popup_action1_icon">#00ffc4</color>
+    <color name="amoled_popup_action2_icon">#00e5ff</color>
+    <color name="amoled_popup_action3_icon">#ff007f</color>
+    <color name="amoled_popup_divider">#00ffc4</color>
 
     <!-- Material (Google Pixel Ocean Blue) -->
     <color name="material_popup_surface">#111318</color>
@@ -84,10 +84,10 @@
     <color name="material_popup_action">#1b1f26</color>
     <color name="material_popup_text">#e2e2e9</color>
     <color name="material_popup_title">#a8c7fa</color>
-    <color name="material_popup_action1_icon">#e2e2e9</color>
-    <color name="material_popup_action2_icon">#e2e2e9</color>
-    <color name="material_popup_action3_icon">#e2e2e9</color>
-    <color name="material_popup_divider">#43474e</color>
+    <color name="material_popup_action1_icon">#a8c7fa</color>
+    <color name="material_popup_action2_icon">#6dd58c</color>
+    <color name="material_popup_action3_icon">#ffb77c</color>
+    <color name="material_popup_divider">#a8c7fa</color>
 
     <!-- Catppuccin (Multi / Rainbow Pastel - Mocha) -->
     <color name="catppuccin_popup_surface">#1e1e2e</color>
@@ -112,10 +112,10 @@
     <color name="catppuccin_red_popup_action">#313244</color>
     <color name="catppuccin_red_popup_text">#cdd6f4</color>
     <color name="catppuccin_red_popup_title">#f38ba8</color>
-    <color name="catppuccin_red_popup_action1_icon">#cdd6f4</color>
-    <color name="catppuccin_red_popup_action2_icon">#cdd6f4</color>
-    <color name="catppuccin_red_popup_action3_icon">#cdd6f4</color>
-    <color name="catppuccin_red_popup_divider">#45475a</color>
+    <color name="catppuccin_red_popup_action1_icon">#f38ba8</color>
+    <color name="catppuccin_red_popup_action2_icon">#eba0ac</color>
+    <color name="catppuccin_red_popup_action3_icon">#fab387</color>
+    <color name="catppuccin_red_popup_divider">#f38ba8</color>
 
     <!-- Dracula (Dracula Classic) -->
     <color name="dracula_popup_surface">#282a36</color>
@@ -126,10 +126,10 @@
     <color name="dracula_popup_action">#44475a</color>
     <color name="dracula_popup_text">#f8f8f2</color>
     <color name="dracula_popup_title">#ff79c6</color>
-    <color name="dracula_popup_action1_icon">#f8f8f2</color>
-    <color name="dracula_popup_action2_icon">#f8f8f2</color>
-    <color name="dracula_popup_action3_icon">#f8f8f2</color>
-    <color name="dracula_popup_divider">#6272a4</color>
+    <color name="dracula_popup_action1_icon">#bd93f9</color>
+    <color name="dracula_popup_action2_icon">#50fa7b</color>
+    <color name="dracula_popup_action3_icon">#8be9fd</color>
+    <color name="dracula_popup_divider">#bd93f9</color>
 
     <!-- Cyberpunk Terminal (Matrix Green & Cyan) -->
     <color name="cyberpunk_terminal_popup_surface">#050811</color>

@@ -88,10 +88,10 @@
     <color name="material_popup_action">#edf2fa</color>
     <color name="material_popup_text">#191c20</color>
     <color name="material_popup_title">#0b57d0</color>
-    <color name="material_popup_action1_icon">#191c20</color>
-    <color name="material_popup_action2_icon">#191c20</color>
-    <color name="material_popup_action3_icon">#191c20</color>
-    <color name="material_popup_divider">#c4c7cf</color>
+    <color name="material_popup_action1_icon">#0b57d0</color>
+    <color name="material_popup_action2_icon">#146c2e</color>
+    <color name="material_popup_action3_icon">#b3261e</color>
+    <color name="material_popup_divider">#0b57d0</color>
 
     <!-- Catppuccin (Multi / Rainbow Pastel - Latte) -->
     <color name="catppuccin_popup_surface">#eff1f5</color>
@@ -116,10 +116,10 @@
     <color name="catppuccin_red_popup_action">#ccd0da</color>
     <color name="catppuccin_red_popup_text">#4c4f69</color>
     <color name="catppuccin_red_popup_title">#d20f39</color>
-    <color name="catppuccin_red_popup_action1_icon">#4c4f69</color>
-    <color name="catppuccin_red_popup_action2_icon">#4c4f69</color>
-    <color name="catppuccin_red_popup_action3_icon">#4c4f69</color>
-    <color name="catppuccin_red_popup_divider">#bcc0cc</color>
+    <color name="catppuccin_red_popup_action1_icon">#d20f39</color>
+    <color name="catppuccin_red_popup_action2_icon">#dd7878</color>
+    <color name="catppuccin_red_popup_action3_icon">#fe640b</color>
+    <color name="catppuccin_red_popup_divider">#d20f39</color>
 
     <!-- Dracula (Alucard Classic) -->
     <color name="dracula_popup_surface">#fffbeb</color>
@@ -130,10 +130,10 @@
     <color name="dracula_popup_action">#cfcfde</color>
     <color name="dracula_popup_text">#1f1f1f</color>
     <color name="dracula_popup_title">#a3144d</color>
-    <color name="dracula_popup_action1_icon">#1f1f1f</color>
-    <color name="dracula_popup_action2_icon">#1f1f1f</color>
-    <color name="dracula_popup_action3_icon">#1f1f1f</color>
-    <color name="dracula_popup_divider">#6c664b</color>
+    <color name="dracula_popup_action1_icon">#644ac9</color>
+    <color name="dracula_popup_action2_icon">#2d7a4c</color>
+    <color name="dracula_popup_action3_icon">#1b7a82</color>
+    <color name="dracula_popup_divider">#644ac9</color>
 
     <!-- Cyberpunk Terminal (Matrix Green & Cyan) -->
     <color name="cyberpunk_terminal_popup_surface">#f0f5fa</color>

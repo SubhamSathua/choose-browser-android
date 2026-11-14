@@ -94,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/PopUpCardDockBg"
-            app:icon="@drawable/shield_lock_24px"
+            app:icon="@drawable/ic_chooser_privacy_shield"
             app:iconTint="@color/text" />
 
 
@@ -145,7 +145,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/PopUpCardDockBtn"
-                    app:icon="@drawable/copy"
+                    app:icon="@drawable/ic_chooser_copy"
                     app:iconTint="@color/PopUpCardDockBtnIcon" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -179,11 +179,11 @@
                             android:gravity="center">
                             <ImageView
                                 android:id="@+id/previewLinkIcon"
-                                android:layout_width="28dp"
-                                android:layout_height="28dp"
-                                android:paddingHorizontal="4dp"
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"
+                                android:paddingHorizontal="2dp"
                                 android:background="@android:color/transparent"
-                                android:src="@drawable/link"/>
+                                android:src="@drawable/ic_chooser_action_link"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -223,11 +223,11 @@
                     android:gravity="center">
                     <ImageView
                         android:id="@+id/shareIcon"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:paddingHorizontal="4dp"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:paddingHorizontal="2dp"
                         android:background="@android:color/transparent"
-                        android:src="@drawable/share_ico"/>
+                        android:src="@drawable/ic_chooser_action_share"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -267,11 +267,11 @@
 
                     <ImageView
                         android:id="@+id/previewPageIcon"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
                         android:background="@android:color/transparent"
-                        android:paddingHorizontal="4dp"
-                        android:src="@drawable/preview_page" />
+                        android:paddingHorizontal="2dp"
+                        android:src="@drawable/ic_chooser_action_preview" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:minWidth="60dp"

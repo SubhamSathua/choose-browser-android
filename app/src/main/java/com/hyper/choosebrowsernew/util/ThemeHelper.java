@@ -93,12 +93,22 @@ public class ThemeHelper {
     public static int resolveThemeColor(Context themedContext, int attrRes, int fallbackColorRes) {
         TypedValue typedValue = new TypedValue();
         if (themedContext.getTheme().resolveAttribute(attrRes, typedValue, true)) {
+            if (typedValue.type >= TypedValue.TYPE_FIRST_COLOR_INT && typedValue.type <= TypedValue.TYPE_LAST_COLOR_INT) {
+                return typedValue.data;
+            }
             if (typedValue.resourceId != 0) {
-                return ContextCompat.getColor(themedContext, typedValue.resourceId);
+                try {
+                    return ContextCompat.getColor(themedContext, typedValue.resourceId);
+                } catch (Exception ignored) {
+                }
             }
             return typedValue.data;
         }
-        return ContextCompat.getColor(themedContext, fallbackColorRes);
+        try {
+            return ContextCompat.getColor(themedContext, fallbackColorRes);
+        } catch (Exception e) {
+            return fallbackColorRes;
+        }
     }
 
     public static boolean isDarkTheme(Context context) {

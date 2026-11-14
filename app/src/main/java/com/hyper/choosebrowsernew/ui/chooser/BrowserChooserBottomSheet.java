@@ -9,7 +9,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.ColorStateList;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -221,11 +223,11 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
         int dockBtnIcon = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupDockButtonIcon, R.color.PopUpCardDockBtnIcon);
         int action = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupAction, R.color.PopUpCard_ActionBtnBg);
         int text = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupText, R.color.text);
-        int titleColor = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupTitle, text);
-        int action1IconColor = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupAction1Icon, text);
-        int action2IconColor = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupAction2Icon, text);
-        int action3IconColor = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupAction3Icon, text);
-        int dividerColor = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupDivider, dock);
+        int titleColor = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupTitle, R.color.text);
+        int action1IconColor = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupAction1Icon, R.color.text);
+        int action2IconColor = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupAction2Icon, R.color.text);
+        int action3IconColor = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupAction3Icon, R.color.text);
+        int dividerColor = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupDivider, R.color.PopUpCardDockBg);
 
         View sheetRoot = root.findViewById(R.id.card);
         if (sheetRoot != null && sheetRoot.getBackground() != null) {
@@ -236,21 +238,26 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
 
         urlTextView.setTextColor(text);
 
-        // Header Title & Icon
         String currentThemeId = ThemeHelper.getSavedColorThemeId(requireContext());
+        boolean isDefault = ThemeHelper.COLOR_THEME_DEFAULT.equals(currentThemeId);
+
+        // Header Title & Icon
         TextView headerTitle = root.findViewById(R.id.headerTitle);
         if (headerTitle != null) {
-            headerTitle.setTextColor(ThemeHelper.COLOR_THEME_DEFAULT.equals(currentThemeId) ? text : titleColor);
+            headerTitle.setTextColor(isDefault ? text : titleColor);
         }
 
         ImageView headerIcon = root.findViewById(R.id.headerIcon);
         if (headerIcon != null) {
-            if (ThemeHelper.COLOR_THEME_DEFAULT.equals(currentThemeId)) {
-                // Keep OG icon (gradient PNG) without tint
+            if (isDefault) {
+                // Keep OG icon (gradient PNG) without tint in Monochrome
+                headerIcon.setImageResource(R.drawable.ix_open_in_new);
+                headerIcon.clearColorFilter();
                 ImageViewCompat.setImageTintList(headerIcon, null);
             } else {
-                // All other themes use the theme's title accent tint
-                ImageViewCompat.setImageTintList(headerIcon, ColorStateList.valueOf(titleColor));
+                // All other themes use the clean vector icon matching HTML 2, tinted with titleColor
+                headerIcon.setImageResource(R.drawable.ic_open_in_new_vector);
+                headerIcon.setColorFilter(titleColor, PorterDuff.Mode.SRC_IN);
             }
         }
 
@@ -287,25 +294,52 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
         // Action button icons
         ImageView previewLinkIcon = root.findViewById(R.id.previewLinkIcon);
         if (previewLinkIcon != null) {
-            ImageViewCompat.setImageTintList(previewLinkIcon, ColorStateList.valueOf(action1IconColor));
+            if (isDefault) {
+                previewLinkIcon.clearColorFilter();
+                ImageViewCompat.setImageTintList(previewLinkIcon, null);
+            } else {
+                previewLinkIcon.setColorFilter(action1IconColor, PorterDuff.Mode.SRC_IN);
+            }
         }
 
         ImageView shareIcon = root.findViewById(R.id.shareIcon);
         if (shareIcon != null) {
-            ImageViewCompat.setImageTintList(shareIcon, ColorStateList.valueOf(action2IconColor));
+            if (isDefault) {
+                shareIcon.clearColorFilter();
+                ImageViewCompat.setImageTintList(shareIcon, null);
+            } else {
+                shareIcon.setColorFilter(action2IconColor, PorterDuff.Mode.SRC_IN);
+            }
         }
 
         ImageView previewPageIcon = root.findViewById(R.id.previewPageIcon);
         if (previewPageIcon != null) {
-            ImageViewCompat.setImageTintList(previewPageIcon, ColorStateList.valueOf(action3IconColor));
+            if (isDefault) {
+                previewPageIcon.clearColorFilter();
+                ImageViewCompat.setImageTintList(previewPageIcon, null);
+            } else {
+                previewPageIcon.setColorFilter(action3IconColor, PorterDuff.Mode.SRC_IN);
+            }
         }
 
         // Dashed divider
         View dashedDivider = root.findViewById(R.id.dashedDivider);
-        if (dashedDivider != null && dashedDivider.getBackground() != null) {
-            Drawable divBg = DrawableCompat.wrap(dashedDivider.getBackground().mutate());
-            DrawableCompat.setTint(divBg, dividerColor);
-            dashedDivider.setBackground(divBg);
+        if (dashedDivider != null) {
+            dashedDivider.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+            Drawable background = dashedDivider.getBackground();
+            if (background instanceof GradientDrawable) {
+                GradientDrawable gd = (GradientDrawable) background.mutate();
+                float density = getResources().getDisplayMetrics().density;
+                int strokeWidth = Math.round(2 * density);
+                int dashWidth = Math.round(8 * density);
+                int dashGap = Math.round(4 * density);
+                gd.setStroke(strokeWidth, dividerColor, dashWidth, dashGap);
+                dashedDivider.setBackground(gd);
+            } else if (background != null) {
+                Drawable divBg = DrawableCompat.wrap(background.mutate());
+                DrawableCompat.setTint(divBg, dividerColor);
+                dashedDivider.setBackground(divBg);
+            }
         }
     }
 

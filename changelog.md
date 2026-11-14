@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## Chooser Vector Icon Suite & Dashed Divider Engine
+- Replaced raster PNGs with clean vector drawables matching HTML prototype across all actions and themes.
+- Kept OG gradient PNG in Monochrome while rendering vector open-in-new and software dashed stroke in others.
+
 ## Expanded Custom Color Themes Suite
 - Synchronized chooser header, action icons, and divider colors 1:1 with prototype.
 - Preserved untinted gradient PNG icon in Monochrome while tinting all other themes.
