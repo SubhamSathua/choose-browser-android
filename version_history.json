@@ -12,5 +12,12 @@
         "bumpType":  "minor",
         "previous":  "4.28.14",
         "timestamp":  "2026-11-08T20:07:29+05:30"
+    },
+    {
+        "versionName":  "4.30.1",
+        "versionCode":  26074001,
+        "bumpType":  "minor",
+        "previous":  "4.29.1",
+        "timestamp":  "2026-11-14T22:50:36+05:30"
     }
 ]

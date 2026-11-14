@@ -166,7 +166,6 @@ if ($UpdateManifest -and (Test-Path $ManifestPath)) {
         if ($manifestJson.stable) {
             $manifestJson.stable.versionCode = $newVersionCode
             $manifestJson.stable.versionName = $newVersionName
-            $manifestJson.stable.version = $newVersionName
             $manifestJson.stable.releaseDate = (Get-Date).ToString("yyyy-MM-dd")
         }
         $updatedManifest = $manifestJson | ConvertTo-Json -Depth 10

@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## Minor Release v4.30.1 & Privacy Policy Modernization
+- Bumped app minor version to 4.30.1 (code 26074001) with synchronized manifest and release notes.
+- Completely rewrote Privacy Policy with dark mode tag styling, zero-data-collection guarantees, and 14 Nov 2026 date.
+
 ## Original Icon PNGs Rollback & Theme Saturation Polish
 - Restored original PNG icons for chooser sheet with zero tint in Monochrome and dynamic tint in custom themes.
 - Extracted official deep saturated colors for Light Theme across Dracula and Catppuccin palettes.

@@ -43,10 +43,12 @@ Choose Browser acts as a lightweight system-wide browser router and link interce
 
 ## # Features
 - **Instant Browser Overlay Picker:** Tap any link to see a lightweight sheet listing all installed web browsers.
-- **Link Sanitization:** Automatically strips unwanted tracking parameters (e.g. `utm_*`, tracking tokens) before opening URLs.
-- **6 Custom Color Themes:** Full light and dark mode support with color themes including Default, Vampire Ink, Electric Dark, Soft Espresso, and Amoled.
+- **Link Sanitization:** Automatically strips unwanted tracking parameters (e.g. `utm_*`, `fbclid`, tracking tokens) using built-in Brave Query Filter rules before opening URLs.
+- **8 Custom Color Themes:** Full light and dark mode support with tailored color palettes: Monochrome, AMOLED, Material, Catppuccin Multi, Catppuccin Red, Dracula, Cyber Terminal, and Cyberpunk 2077.
+- **Offline QR Code Generator & Full-Page Viewer:** Generate and scan QR codes directly from the chooser or Chrome-style sharesheet without network calls.
+- **Show Link Inspector:** Inspect, decode, edit, and sanitize URLs before opening them.
 - **Browser Exclusion:** Easily hide specific browsers from appearing in the chooser popup.
-- **Built-in Web Preview:** Fast preview WebView featuring temporary JavaScript toggles, CSS-injected dark mode, and AdGuard/Filter ad-blocking.
+- **Ephemeral Web Preview:** Private WebView preview featuring ad/tracker blocking, temporary JavaScript toggles, and automatic session wiping on close.
 - **Launcher Shortcuts:** Quick shortcuts to access the Browser List or initiate a Private Search directly from your launcher.
 
 ---
@@ -108,9 +110,11 @@ This project is licensed under the **Apache License 2.0**.
 ---
 
 ## # Privacy Policy
-- **100% Local Processing:** All URL interception, browser querying, and link cleaning happen strictly on your local device.
-- **Zero Cloud Servers:** No URLs, search queries, or browsing histories are uploaded to external servers.
-- **Zero Tracking:** No telemetry, analytics, or background tracking services.
+- **100% Local Processing:** All URL interception, browser querying, link cleaning, and QR code rendering operate strictly offline on your local device.
+- **Zero Cloud Servers & Zero Tracking:** No URLs, search queries, browsing histories, or telemetry are collected or uploaded to external servers.
+- **Sandboxed Ephemeral Preview:** Preview Page wipes all session data, cookies, and cache on close, with built-in ad-blocking and tracking parameter stripping.
+- **Auditable & Open Source:** Full source code is open under Apache 2.0, with complete transparency into permissions and local data handling.
+- **Read Full Policy:** [View in-app or read our Privacy Policy](app/src/main/assets/app_pages/privacy_policy.html) (Updated: 14 November 2026).
 
 ---
 
