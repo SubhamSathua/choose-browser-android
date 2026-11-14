@@ -35,21 +35,40 @@ jobs:
         run: |
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > release.jks
 
-      # 2. Determine Build Variant and Release Type based on Tag Name
-      - name: Determine Build Variant
+      # 2. Determine Build Variant, Release Type, and Release Notes based on Tag Name
+      - name: Determine Build Variant and Release Notes
         id: build_variant
         run: |
           TAG_NAME="${{ github.ref_name }}"
           if [[ "$TAG_NAME" == *"-alpha"* ]] || [[ "$TAG_NAME" == *"-pre"* ]]; then
             echo "BUILD_TASK=assembleAlpha" >> $GITHUB_ENV
+            echo "APK_DIR=app/build/outputs/apk/alpha" >> $GITHUB_ENV
             echo "APK_PATH=app/build/outputs/apk/alpha/*.apk" >> $GITHUB_ENV
             echo "IS_PRERELEASE=true" >> $GITHUB_ENV
             echo "Building Alpha Pre-release variant for tag: $TAG_NAME"
           else
             echo "BUILD_TASK=assembleRelease" >> $GITHUB_ENV
+            echo "APK_DIR=app/build/outputs/apk/release" >> $GITHUB_ENV
             echo "APK_PATH=app/build/outputs/apk/release/*.apk" >> $GITHUB_ENV
             echo "IS_PRERELEASE=false" >> $GITHUB_ENV
             echo "Building Production Release variant for tag: $TAG_NAME"
+          fi
+
+          NOTE_FILE=""
+          TAG_NO_V="${TAG_NAME#v}"
+          for candidate in ".github/releases/${TAG_NAME}.md" ".github/releases/${TAG_NO_V}.md" ".github/release/${TAG_NAME}.md" ".github/release/${TAG_NO_V}.md"; do
+            if [ -f "$candidate" ]; then
+              NOTE_FILE="$candidate"
+              break
+            fi
+          done
+
+          if [ -n "$NOTE_FILE" ]; then
+            echo "RELEASE_NOTES_PATH=$NOTE_FILE" >> $GITHUB_ENV
+            echo "Found matching release note: $NOTE_FILE"
+          else
+            echo "RELEASE_NOTES_PATH=" >> $GITHUB_ENV
+            echo "No custom release note found; fallback to auto-generated"
           fi
 
       # 3. Build Signed APKs via Gradle using Environment Variables
@@ -61,12 +80,23 @@ jobs:
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         run: ./gradlew ${{ env.BUILD_TASK }}
 
+      # 3.5. Generate Cryptographic SHA-256 Checksums for Release Verification
+      - name: Generate Checksums
+        run: |
+          cd ${{ env.APK_DIR }}
+          sha256sum *.apk > SHA256SUMS.txt
+          echo "Generated SHA256SUMS.txt:"
+          cat SHA256SUMS.txt
+
       # 4. Create GitHub Release
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: ${{ env.APK_PATH }}
+          files: |
+            ${{ env.APK_PATH }}
+            ${{ env.APK_DIR }}/SHA256SUMS.txt
+          body_path: ${{ env.RELEASE_NOTES_PATH }}
           prerelease: ${{ env.IS_PRERELEASE == 'true' }}
-          generate_release_notes: true
+          generate_release_notes: ${{ env.RELEASE_NOTES_PATH == '' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
