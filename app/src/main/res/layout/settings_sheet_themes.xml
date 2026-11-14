@@ -110,22 +110,12 @@
                 android:textColor="@color/text" />
 
             <RadioButton
-                android:id="@+id/colorThemeRadioDracula"
+                android:id="@+id/colorThemeRadioMaterial"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/PriBtn_BgCol"
                 android:fontFamily="@font/body"
-                android:text="@string/color_theme_dracula"
-                android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
-                android:textColor="@color/text" />
-
-            <RadioButton
-                android:id="@+id/colorThemeRadioMonokai"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:buttonTint="@color/PriBtn_BgCol"
-                android:fontFamily="@font/body"
-                android:text="@string/color_theme_monokai"
+                android:text="@string/color_theme_material"
                 android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
                 android:textColor="@color/text" />
 
@@ -136,6 +126,46 @@
                 android:buttonTint="@color/PriBtn_BgCol"
                 android:fontFamily="@font/body"
                 android:text="@string/color_theme_catppuccin"
+                android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
+                android:textColor="@color/text" />
+
+            <RadioButton
+                android:id="@+id/colorThemeRadioCatppuccinRed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/PriBtn_BgCol"
+                android:fontFamily="@font/body"
+                android:text="@string/color_theme_catppuccin_red"
+                android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
+                android:textColor="@color/text" />
+
+            <RadioButton
+                android:id="@+id/colorThemeRadioDracula"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/PriBtn_BgCol"
+                android:fontFamily="@font/body"
+                android:text="@string/color_theme_dracula"
+                android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
+                android:textColor="@color/text" />
+
+            <RadioButton
+                android:id="@+id/colorThemeRadioCyberpunkTerminal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/PriBtn_BgCol"
+                android:fontFamily="@font/body"
+                android:text="@string/color_theme_cyberpunk_terminal"
+                android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
+                android:textColor="@color/text" />
+
+            <RadioButton
+                android:id="@+id/colorThemeRadioCyberpunk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/PriBtn_BgCol"
+                android:fontFamily="@font/body"
+                android:text="@string/color_theme_cyberpunk"
                 android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
                 android:textColor="@color/text" />
         </RadioGroup>

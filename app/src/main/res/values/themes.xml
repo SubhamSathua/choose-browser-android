@@ -18,17 +18,19 @@
 
     </style>
 
-    <!-- Core color-theme overlays (light). Values-night auto-overrides referenced colors. -->
+    <!-- Core color-theme overlays. Values-night auto-overrides referenced colors. -->
+    <!-- 1. Monochrome (Default) -->
     <style name="ThemeOverlay.ChooseBrowserNEW.Color.default" parent="">
-        <item name="colorPopupSurface">@color/PopUpCardBg</item>
-        <item name="colorPopupDock">@color/PopUpCardDockBg</item>
-        <item name="colorPopupDockButton">@color/PopUpCardDockBtn</item>
-        <item name="colorPopupDockButtonText">@color/PopUpCardDockText</item>
-        <item name="colorPopupDockButtonIcon">@color/PopUpCardDockBtnIcon</item>
-        <item name="colorPopupAction">@color/PopUpCard_ActionBtnBg</item>
-        <item name="colorPopupText">@color/text</item>
+        <item name="colorPopupSurface">@color/default_popup_surface</item>
+        <item name="colorPopupDock">@color/default_popup_dock</item>
+        <item name="colorPopupDockButton">@color/default_popup_dock_button</item>
+        <item name="colorPopupDockButtonText">@color/default_popup_dock_button_text</item>
+        <item name="colorPopupDockButtonIcon">@color/default_popup_dock_button_icon</item>
+        <item name="colorPopupAction">@color/default_popup_action</item>
+        <item name="colorPopupText">@color/default_popup_text</item>
     </style>
 
+    <!-- 2. AMOLED -->
     <style name="ThemeOverlay.ChooseBrowserNEW.Color.amoled" parent="">
         <item name="colorPopupSurface">@color/amoled_popup_surface</item>
         <item name="colorPopupDock">@color/amoled_popup_dock</item>
@@ -39,6 +41,40 @@
         <item name="colorPopupText">@color/amoled_popup_text</item>
     </style>
 
+    <!-- 3. Material (Google Pixel Ocean Blue) -->
+    <style name="ThemeOverlay.ChooseBrowserNEW.Color.material" parent="">
+        <item name="colorPopupSurface">@color/material_popup_surface</item>
+        <item name="colorPopupDock">@color/material_popup_dock</item>
+        <item name="colorPopupDockButton">@color/material_popup_dock_button</item>
+        <item name="colorPopupDockButtonText">@color/material_popup_dock_button_text</item>
+        <item name="colorPopupDockButtonIcon">@color/material_popup_dock_button_icon</item>
+        <item name="colorPopupAction">@color/material_popup_action</item>
+        <item name="colorPopupText">@color/material_popup_text</item>
+    </style>
+
+    <!-- 4. Catppuccin (Multi / Rainbow Pastel) -->
+    <style name="ThemeOverlay.ChooseBrowserNEW.Color.catppuccin" parent="">
+        <item name="colorPopupSurface">@color/catppuccin_popup_surface</item>
+        <item name="colorPopupDock">@color/catppuccin_popup_dock</item>
+        <item name="colorPopupDockButton">@color/catppuccin_popup_dock_button</item>
+        <item name="colorPopupDockButtonText">@color/catppuccin_popup_dock_button_text</item>
+        <item name="colorPopupDockButtonIcon">@color/catppuccin_popup_dock_button_icon</item>
+        <item name="colorPopupAction">@color/catppuccin_popup_action</item>
+        <item name="colorPopupText">@color/catppuccin_popup_text</item>
+    </style>
+
+    <!-- 5. Catppuccin Red (Latte Ruby Red) -->
+    <style name="ThemeOverlay.ChooseBrowserNEW.Color.catppuccin_red" parent="">
+        <item name="colorPopupSurface">@color/catppuccin_red_popup_surface</item>
+        <item name="colorPopupDock">@color/catppuccin_red_popup_dock</item>
+        <item name="colorPopupDockButton">@color/catppuccin_red_popup_dock_button</item>
+        <item name="colorPopupDockButtonText">@color/catppuccin_red_popup_dock_button_text</item>
+        <item name="colorPopupDockButtonIcon">@color/catppuccin_red_popup_dock_button_icon</item>
+        <item name="colorPopupAction">@color/catppuccin_red_popup_action</item>
+        <item name="colorPopupText">@color/catppuccin_red_popup_text</item>
+    </style>
+
+    <!-- 6. Dracula -->
     <style name="ThemeOverlay.ChooseBrowserNEW.Color.dracula" parent="">
         <item name="colorPopupSurface">@color/dracula_popup_surface</item>
         <item name="colorPopupDock">@color/dracula_popup_dock</item>
@@ -49,25 +85,30 @@
         <item name="colorPopupText">@color/dracula_popup_text</item>
     </style>
 
-    <style name="ThemeOverlay.ChooseBrowserNEW.Color.monokai" parent="">
-        <item name="colorPopupSurface">@color/monokai_popup_surface</item>
-        <item name="colorPopupDock">@color/monokai_popup_dock</item>
-        <item name="colorPopupDockButton">@color/monokai_popup_dock_button</item>
-        <item name="colorPopupDockButtonText">@color/monokai_popup_dock_button_text</item>
-        <item name="colorPopupDockButtonIcon">@color/monokai_popup_dock_button_icon</item>
-        <item name="colorPopupAction">@color/monokai_popup_action</item>
-        <item name="colorPopupText">@color/monokai_popup_text</item>
+    <!-- 7. Cyberpunk Terminal (Matrix Green & Cyan) -->
+    <style name="ThemeOverlay.ChooseBrowserNEW.Color.cyberpunk_terminal" parent="">
+        <item name="colorPopupSurface">@color/cyberpunk_terminal_popup_surface</item>
+        <item name="colorPopupDock">@color/cyberpunk_terminal_popup_dock</item>
+        <item name="colorPopupDockButton">@color/cyberpunk_terminal_popup_dock_button</item>
+        <item name="colorPopupDockButtonText">@color/cyberpunk_terminal_popup_dock_button_text</item>
+        <item name="colorPopupDockButtonIcon">@color/cyberpunk_terminal_popup_dock_button_icon</item>
+        <item name="colorPopupAction">@color/cyberpunk_terminal_popup_action</item>
+        <item name="colorPopupText">@color/cyberpunk_terminal_popup_text</item>
     </style>
 
-    <style name="ThemeOverlay.ChooseBrowserNEW.Color.catppuccin" parent="">
-        <item name="colorPopupSurface">@color/catppuccin_popup_surface</item>
-        <item name="colorPopupDock">@color/catppuccin_popup_dock</item>
-        <item name="colorPopupDockButton">@color/catppuccin_popup_dock_button</item>
-        <item name="colorPopupDockButtonText">@color/catppuccin_popup_dock_button_text</item>
-        <item name="colorPopupDockButtonIcon">@color/catppuccin_popup_dock_button_icon</item>
-        <item name="colorPopupAction">@color/catppuccin_popup_action</item>
-        <item name="colorPopupText">@color/catppuccin_popup_text</item>
+    <!-- 8. Cyberpunk (2077 Arasaka Rose-Red & Yellow) -->
+    <style name="ThemeOverlay.ChooseBrowserNEW.Color.cyberpunk" parent="">
+        <item name="colorPopupSurface">@color/cyberpunk_popup_surface</item>
+        <item name="colorPopupDock">@color/cyberpunk_popup_dock</item>
+        <item name="colorPopupDockButton">@color/cyberpunk_popup_dock_button</item>
+        <item name="colorPopupDockButtonText">@color/cyberpunk_popup_dock_button_text</item>
+        <item name="colorPopupDockButtonIcon">@color/cyberpunk_popup_dock_button_icon</item>
+        <item name="colorPopupAction">@color/cyberpunk_popup_action</item>
+        <item name="colorPopupText">@color/cyberpunk_popup_text</item>
     </style>
+
+    <!-- Legacy / Fallback aliases -->
+    <style name="ThemeOverlay.ChooseBrowserNEW.Color.monokai" parent="ThemeOverlay.ChooseBrowserNEW.Color.default" />
 
     <!-- Preview More bottom sheet: transparent bg so our drawable shows -->
     <style name="PreviewMoreBottomSheet" parent="Theme.MaterialComponents.BottomSheetDialog">

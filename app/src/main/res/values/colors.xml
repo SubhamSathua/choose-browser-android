@@ -51,25 +51,79 @@
     <color name="PopUpCard_ActionBtnSec_Bg">#b2b2b2</color>
 
     <!-- ........ Popup Screen Variants (Light) ........ -->
-    <!-- Amoled -->
+    <!-- Default (Monochrome) -->
+    <color name="default_popup_surface">#ffffff</color>
+    <color name="default_popup_dock">#f1f1f4</color>
+    <color name="default_popup_dock_button">#18181b</color>
+    <color name="default_popup_dock_button_icon">#ffffff</color>
+    <color name="default_popup_dock_button_text">#ffffff</color>
+    <color name="default_popup_action">#f1f1f4</color>
+    <color name="default_popup_text">#18181b</color>
+
+    <!-- Amoled (NeuroNight) -->
     <color name="amoled_popup_surface">#ffffff</color>
-    <color name="amoled_popup_dock">#d9d9d9</color>
-    <color name="amoled_popup_dock_button">#ff0064</color>
-    <color name="amoled_popup_dock_button_icon">#000000</color>
-    <color name="amoled_popup_dock_button_text">#000000</color>
-    <color name="amoled_popup_action">#d9d9d9</color>
+    <color name="amoled_popup_dock">#ededed</color>
+    <color name="amoled_popup_dock_button">#000000</color>
+    <color name="amoled_popup_dock_button_icon">#ffffff</color>
+    <color name="amoled_popup_dock_button_text">#ffffff</color>
+    <color name="amoled_popup_action">#ededed</color>
     <color name="amoled_popup_text">#000000</color>
 
-    <!-- Dracula (Vampire Ink/ Nightshade) -->
-    <color name="dracula_popup_surface">#f6f6f6</color>
-    <color name="dracula_popup_dock">#dcdcdc</color>
-    <color name="dracula_popup_dock_button">#624bca</color>
-    <color name="dracula_popup_dock_button_icon">#f6f6f6</color>
-    <color name="dracula_popup_dock_button_text">#282b36</color>
-    <color name="dracula_popup_action">#dcdcdc</color>
-    <color name="dracula_popup_text">#282b36</color>
+    <!-- Material (Google Pixel Ocean Blue) -->
+    <color name="material_popup_surface">#fdfcff</color>
+    <color name="material_popup_dock">#e8edf5</color>
+    <color name="material_popup_dock_button">#0b57d0</color>
+    <color name="material_popup_dock_button_icon">#ffffff</color>
+    <color name="material_popup_dock_button_text">#ffffff</color>
+    <color name="material_popup_action">#edf2fa</color>
+    <color name="material_popup_text">#191c20</color>
 
-    <!-- Monokai (Electric Dark) -->
+    <!-- Catppuccin (Multi / Rainbow Pastel - Latte) -->
+    <color name="catppuccin_popup_surface">#eff1f5</color>
+    <color name="catppuccin_popup_dock">#ccd0da</color>
+    <color name="catppuccin_popup_dock_button">#fe640b</color>
+    <color name="catppuccin_popup_dock_button_icon">#eff1f5</color>
+    <color name="catppuccin_popup_dock_button_text">#ffffff</color>
+    <color name="catppuccin_popup_action">#ccd0da</color>
+    <color name="catppuccin_popup_text">#4c4f69</color>
+
+    <!-- Catppuccin Red (Latte Ruby Red) -->
+    <color name="catppuccin_red_popup_surface">#eff1f5</color>
+    <color name="catppuccin_red_popup_dock">#ccd0da</color>
+    <color name="catppuccin_red_popup_dock_button">#d20f39</color>
+    <color name="catppuccin_red_popup_dock_button_icon">#eff1f5</color>
+    <color name="catppuccin_red_popup_dock_button_text">#ffffff</color>
+    <color name="catppuccin_red_popup_action">#ccd0da</color>
+    <color name="catppuccin_red_popup_text">#4c4f69</color>
+
+    <!-- Dracula (Alucard Classic) -->
+    <color name="dracula_popup_surface">#fffbeb</color>
+    <color name="dracula_popup_dock">#cfcfde</color>
+    <color name="dracula_popup_dock_button">#644ac9</color>
+    <color name="dracula_popup_dock_button_icon">#fffbeb</color>
+    <color name="dracula_popup_dock_button_text">#fffbeb</color>
+    <color name="dracula_popup_action">#cfcfde</color>
+    <color name="dracula_popup_text">#1f1f1f</color>
+
+    <!-- Cyberpunk Terminal (Matrix Green & Cyan) -->
+    <color name="cyberpunk_terminal_popup_surface">#f0f5fa</color>
+    <color name="cyberpunk_terminal_popup_dock">#dbe7f2</color>
+    <color name="cyberpunk_terminal_popup_dock_button">#00b4d8</color>
+    <color name="cyberpunk_terminal_popup_dock_button_icon">#ffffff</color>
+    <color name="cyberpunk_terminal_popup_dock_button_text">#ffffff</color>
+    <color name="cyberpunk_terminal_popup_action">#dbe7f2</color>
+    <color name="cyberpunk_terminal_popup_text">#091b2c</color>
+
+    <!-- Cyberpunk (2077 Arasaka Rose-Red & Yellow) -->
+    <color name="cyberpunk_popup_surface">#fcfaf0</color>
+    <color name="cyberpunk_popup_dock">#eae5d2</color>
+    <color name="cyberpunk_popup_dock_button">#e60036</color>
+    <color name="cyberpunk_popup_dock_button_icon">#ffffff</color>
+    <color name="cyberpunk_popup_dock_button_text">#ffffff</color>
+    <color name="cyberpunk_popup_action">#eae5d2</color>
+    <color name="cyberpunk_popup_text">#121212</color>
+
+    <!-- Monokai (Electric Dark - Legacy) -->
     <color name="monokai_popup_surface">#faf4f2</color>
     <color name="monokai_popup_dock">#e0dad9</color>
     <color name="monokai_popup_dock_button">#e14775</color>
@@ -77,15 +131,6 @@
     <color name="monokai_popup_dock_button_text">#19181a</color>
     <color name="monokai_popup_action">#e0dad9</color>
     <color name="monokai_popup_text">#19181a</color>
-
-    <!-- Catppuccin (Soft Espresso / Velvet Dusk) -->
-    <color name="catppuccin_popup_surface">#eff1f5</color>
-    <color name="catppuccin_popup_dock">#dce0e8</color>
-    <color name="catppuccin_popup_dock_button">#893bef</color>
-    <color name="catppuccin_popup_dock_button_icon">#eff1f5</color>
-    <color name="catppuccin_popup_dock_button_text">#893bef</color>
-    <color name="catppuccin_popup_action">#dce0e8</color>
-    <color name="catppuccin_popup_text">#2e3440</color>
 
     <color name="solidBtn_BgCol">#000000</color> <!-- Buttons, scroll thumb, radio-->  
     <color name="solidBtn_txtCol">#ffffff</color>

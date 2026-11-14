@@ -261,9 +261,13 @@ public class SettingsActivity extends AppCompatActivity {
         String saved = viewModel.colorThemeId.getValue();
         
         if (ThemeHelper.COLOR_THEME_AMOLED.equals(saved)) radioGroup.check(R.id.colorThemeRadioAmoled);
-        else if (ThemeHelper.COLOR_THEME_DRACULA.equals(saved)) radioGroup.check(R.id.colorThemeRadioDracula);
-        else if (ThemeHelper.COLOR_THEME_MONOKAI.equals(saved)) radioGroup.check(R.id.colorThemeRadioMonokai);
+        else if (ThemeHelper.COLOR_THEME_MATERIAL.equals(saved)) radioGroup.check(R.id.colorThemeRadioMaterial);
         else if (ThemeHelper.COLOR_THEME_CATPPUCCIN.equals(saved)) radioGroup.check(R.id.colorThemeRadioCatppuccin);
+        else if (ThemeHelper.COLOR_THEME_CATPPUCCIN_RED.equals(saved)) radioGroup.check(R.id.colorThemeRadioCatppuccinRed);
+        else if (ThemeHelper.COLOR_THEME_DRACULA.equals(saved)) radioGroup.check(R.id.colorThemeRadioDracula);
+        else if (ThemeHelper.COLOR_THEME_CYBERPUNK_TERMINAL.equals(saved)) radioGroup.check(R.id.colorThemeRadioCyberpunkTerminal);
+        else if (ThemeHelper.COLOR_THEME_CYBERPUNK.equals(saved)) radioGroup.check(R.id.colorThemeRadioCyberpunk);
+        else if (ThemeHelper.COLOR_THEME_MONOKAI.equals(saved)) radioGroup.check(R.id.colorThemeRadioDracula);
         else radioGroup.check(R.id.colorThemeRadioDefault);
 
         sheetView.findViewById(R.id.colorThemesCloseBtn).setOnClickListener(v -> bottomSheet.dismiss());
@@ -271,9 +275,12 @@ public class SettingsActivity extends AppCompatActivity {
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             String themeId = ThemeHelper.COLOR_THEME_DEFAULT;
             if (checkedId == R.id.colorThemeRadioAmoled) themeId = ThemeHelper.COLOR_THEME_AMOLED;
-            else if (checkedId == R.id.colorThemeRadioDracula) themeId = ThemeHelper.COLOR_THEME_DRACULA;
-            else if (checkedId == R.id.colorThemeRadioMonokai) themeId = ThemeHelper.COLOR_THEME_MONOKAI;
+            else if (checkedId == R.id.colorThemeRadioMaterial) themeId = ThemeHelper.COLOR_THEME_MATERIAL;
             else if (checkedId == R.id.colorThemeRadioCatppuccin) themeId = ThemeHelper.COLOR_THEME_CATPPUCCIN;
+            else if (checkedId == R.id.colorThemeRadioCatppuccinRed) themeId = ThemeHelper.COLOR_THEME_CATPPUCCIN_RED;
+            else if (checkedId == R.id.colorThemeRadioDracula) themeId = ThemeHelper.COLOR_THEME_DRACULA;
+            else if (checkedId == R.id.colorThemeRadioCyberpunkTerminal) themeId = ThemeHelper.COLOR_THEME_CYBERPUNK_TERMINAL;
+            else if (checkedId == R.id.colorThemeRadioCyberpunk) themeId = ThemeHelper.COLOR_THEME_CYBERPUNK;
 
             viewModel.setColorThemeId(themeId);
             bottomSheet.dismiss();
@@ -284,9 +291,13 @@ public class SettingsActivity extends AppCompatActivity {
     private void updateColorThemeLabel(TextView label, String themeId) {
         int resId = R.string.color_theme_default;
         if (ThemeHelper.COLOR_THEME_AMOLED.equals(themeId)) resId = R.string.color_theme_amoled;
-        else if (ThemeHelper.COLOR_THEME_DRACULA.equals(themeId)) resId = R.string.color_theme_dracula;
-        else if (ThemeHelper.COLOR_THEME_MONOKAI.equals(themeId)) resId = R.string.color_theme_monokai;
+        else if (ThemeHelper.COLOR_THEME_MATERIAL.equals(themeId)) resId = R.string.color_theme_material;
         else if (ThemeHelper.COLOR_THEME_CATPPUCCIN.equals(themeId)) resId = R.string.color_theme_catppuccin;
+        else if (ThemeHelper.COLOR_THEME_CATPPUCCIN_RED.equals(themeId)) resId = R.string.color_theme_catppuccin_red;
+        else if (ThemeHelper.COLOR_THEME_DRACULA.equals(themeId)) resId = R.string.color_theme_dracula;
+        else if (ThemeHelper.COLOR_THEME_CYBERPUNK_TERMINAL.equals(themeId)) resId = R.string.color_theme_cyberpunk_terminal;
+        else if (ThemeHelper.COLOR_THEME_CYBERPUNK.equals(themeId)) resId = R.string.color_theme_cyberpunk;
+        else if (ThemeHelper.COLOR_THEME_MONOKAI.equals(themeId)) resId = R.string.color_theme_dracula;
         label.setText(resId);
     }
 

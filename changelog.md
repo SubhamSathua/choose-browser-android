@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## Expanded Custom Color Themes Suite
+- Added 8 distinct color themes including Catppuccin Red and Cyberpunk Terminal.
+- Updated theme overlays, token mappings, and settings picker for seamless live switching.
+
 ## Full-Page QR Screen & Theme Lab Prototype
 - Added full-page QR viewer activity with top close button and end-truncated 2-line URL text.
 - Created standalone interactive single-file theme testing prototype in Dev-LAB for chooser sheet.

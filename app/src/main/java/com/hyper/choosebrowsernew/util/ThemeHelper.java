@@ -22,9 +22,13 @@ public class ThemeHelper {
 
     public static final String COLOR_THEME_DEFAULT = "default";
     public static final String COLOR_THEME_AMOLED = "amoled";
-    public static final String COLOR_THEME_DRACULA = "dracula";
-    public static final String COLOR_THEME_MONOKAI = "monokai";
+    public static final String COLOR_THEME_MATERIAL = "material";
     public static final String COLOR_THEME_CATPPUCCIN = "catppuccin";
+    public static final String COLOR_THEME_CATPPUCCIN_RED = "catppuccin_red";
+    public static final String COLOR_THEME_DRACULA = "dracula";
+    public static final String COLOR_THEME_CYBERPUNK_TERMINAL = "cyberpunk_terminal";
+    public static final String COLOR_THEME_CYBERPUNK = "cyberpunk";
+    public static final String COLOR_THEME_MONOKAI = "monokai"; // legacy alias
 
     public static void applySavedTheme(Context context) {
         int mode = getSavedThemeMode(context);
@@ -62,12 +66,20 @@ public class ThemeHelper {
         switch (themeId) {
             case COLOR_THEME_AMOLED:
                 return R.style.ThemeOverlay_ChooseBrowserNEW_Color_amoled;
-            case COLOR_THEME_DRACULA:
-                return R.style.ThemeOverlay_ChooseBrowserNEW_Color_dracula;
-            case COLOR_THEME_MONOKAI:
-                return R.style.ThemeOverlay_ChooseBrowserNEW_Color_monokai;
+            case COLOR_THEME_MATERIAL:
+                return R.style.ThemeOverlay_ChooseBrowserNEW_Color_material;
             case COLOR_THEME_CATPPUCCIN:
                 return R.style.ThemeOverlay_ChooseBrowserNEW_Color_catppuccin;
+            case COLOR_THEME_CATPPUCCIN_RED:
+                return R.style.ThemeOverlay_ChooseBrowserNEW_Color_catppuccin_red;
+            case COLOR_THEME_DRACULA:
+                return R.style.ThemeOverlay_ChooseBrowserNEW_Color_dracula;
+            case COLOR_THEME_CYBERPUNK_TERMINAL:
+                return R.style.ThemeOverlay_ChooseBrowserNEW_Color_cyberpunk_terminal;
+            case COLOR_THEME_CYBERPUNK:
+                return R.style.ThemeOverlay_ChooseBrowserNEW_Color_cyberpunk;
+            case COLOR_THEME_MONOKAI:
+                return R.style.ThemeOverlay_ChooseBrowserNEW_Color_monokai;
             case COLOR_THEME_DEFAULT:
             default:
                 return R.style.ThemeOverlay_ChooseBrowserNEW_Color_default;
@@ -164,9 +176,13 @@ public class ThemeHelper {
         switch (themeId) {
             case COLOR_THEME_DEFAULT:
             case COLOR_THEME_AMOLED:
-            case COLOR_THEME_DRACULA:
-            case COLOR_THEME_MONOKAI:
+            case COLOR_THEME_MATERIAL:
             case COLOR_THEME_CATPPUCCIN:
+            case COLOR_THEME_CATPPUCCIN_RED:
+            case COLOR_THEME_DRACULA:
+            case COLOR_THEME_CYBERPUNK_TERMINAL:
+            case COLOR_THEME_CYBERPUNK:
+            case COLOR_THEME_MONOKAI:
                 return themeId;
             default:
                 return COLOR_THEME_DEFAULT;
