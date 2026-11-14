@@ -1,8 +1,8 @@
 ﻿# Changelog
 
 ## Expanded Custom Color Themes Suite
-- Added 8 distinct color themes including Catppuccin Red and Cyberpunk Terminal.
-- Updated theme overlays, token mappings, and settings picker for seamless live switching.
+- Synchronized chooser header, action icons, and divider colors 1:1 with prototype.
+- Preserved untinted gradient PNG icon in Monochrome while tinting all other themes.
 
 ## Full-Page QR Screen & Theme Lab Prototype
 - Added full-page QR viewer activity with top close button and end-truncated 2-line URL text.

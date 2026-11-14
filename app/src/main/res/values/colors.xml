@@ -59,6 +59,11 @@
     <color name="default_popup_dock_button_text">#ffffff</color>
     <color name="default_popup_action">#f1f1f4</color>
     <color name="default_popup_text">#18181b</color>
+    <color name="default_popup_title">#18181b</color>
+    <color name="default_popup_action1_icon">#18181b</color>
+    <color name="default_popup_action2_icon">#18181b</color>
+    <color name="default_popup_action3_icon">#18181b</color>
+    <color name="default_popup_divider">#e4e4e7</color>
 
     <!-- Amoled (NeuroNight) -->
     <color name="amoled_popup_surface">#ffffff</color>
@@ -68,6 +73,11 @@
     <color name="amoled_popup_dock_button_text">#ffffff</color>
     <color name="amoled_popup_action">#ededed</color>
     <color name="amoled_popup_text">#000000</color>
+    <color name="amoled_popup_title">#000000</color>
+    <color name="amoled_popup_action1_icon">#000000</color>
+    <color name="amoled_popup_action2_icon">#000000</color>
+    <color name="amoled_popup_action3_icon">#000000</color>
+    <color name="amoled_popup_divider">#d1d1d1</color>
 
     <!-- Material (Google Pixel Ocean Blue) -->
     <color name="material_popup_surface">#fdfcff</color>
@@ -77,6 +87,11 @@
     <color name="material_popup_dock_button_text">#ffffff</color>
     <color name="material_popup_action">#edf2fa</color>
     <color name="material_popup_text">#191c20</color>
+    <color name="material_popup_title">#0b57d0</color>
+    <color name="material_popup_action1_icon">#191c20</color>
+    <color name="material_popup_action2_icon">#191c20</color>
+    <color name="material_popup_action3_icon">#191c20</color>
+    <color name="material_popup_divider">#c4c7cf</color>
 
     <!-- Catppuccin (Multi / Rainbow Pastel - Latte) -->
     <color name="catppuccin_popup_surface">#eff1f5</color>
@@ -86,6 +101,11 @@
     <color name="catppuccin_popup_dock_button_text">#ffffff</color>
     <color name="catppuccin_popup_action">#ccd0da</color>
     <color name="catppuccin_popup_text">#4c4f69</color>
+    <color name="catppuccin_popup_title">#8839ef</color>
+    <color name="catppuccin_popup_action1_icon">#40a02b</color>
+    <color name="catppuccin_popup_action2_icon">#209fb5</color>
+    <color name="catppuccin_popup_action3_icon">#ea76cb</color>
+    <color name="catppuccin_popup_divider">#d20f39</color>
 
     <!-- Catppuccin Red (Latte Ruby Red) -->
     <color name="catppuccin_red_popup_surface">#eff1f5</color>
@@ -95,6 +115,11 @@
     <color name="catppuccin_red_popup_dock_button_text">#ffffff</color>
     <color name="catppuccin_red_popup_action">#ccd0da</color>
     <color name="catppuccin_red_popup_text">#4c4f69</color>
+    <color name="catppuccin_red_popup_title">#d20f39</color>
+    <color name="catppuccin_red_popup_action1_icon">#4c4f69</color>
+    <color name="catppuccin_red_popup_action2_icon">#4c4f69</color>
+    <color name="catppuccin_red_popup_action3_icon">#4c4f69</color>
+    <color name="catppuccin_red_popup_divider">#bcc0cc</color>
 
     <!-- Dracula (Alucard Classic) -->
     <color name="dracula_popup_surface">#fffbeb</color>
@@ -104,6 +129,11 @@
     <color name="dracula_popup_dock_button_text">#fffbeb</color>
     <color name="dracula_popup_action">#cfcfde</color>
     <color name="dracula_popup_text">#1f1f1f</color>
+    <color name="dracula_popup_title">#a3144d</color>
+    <color name="dracula_popup_action1_icon">#1f1f1f</color>
+    <color name="dracula_popup_action2_icon">#1f1f1f</color>
+    <color name="dracula_popup_action3_icon">#1f1f1f</color>
+    <color name="dracula_popup_divider">#6c664b</color>
 
     <!-- Cyberpunk Terminal (Matrix Green & Cyan) -->
     <color name="cyberpunk_terminal_popup_surface">#f0f5fa</color>
@@ -113,6 +143,11 @@
     <color name="cyberpunk_terminal_popup_dock_button_text">#ffffff</color>
     <color name="cyberpunk_terminal_popup_action">#dbe7f2</color>
     <color name="cyberpunk_terminal_popup_text">#091b2c</color>
+    <color name="cyberpunk_terminal_popup_title">#d6006e</color>
+    <color name="cyberpunk_terminal_popup_action1_icon">#00b4d8</color>
+    <color name="cyberpunk_terminal_popup_action2_icon">#00aa50</color>
+    <color name="cyberpunk_terminal_popup_action3_icon">#d6006e</color>
+    <color name="cyberpunk_terminal_popup_divider">#00b4d8</color>
 
     <!-- Cyberpunk (2077 Arasaka Rose-Red & Yellow) -->
     <color name="cyberpunk_popup_surface">#fcfaf0</color>
@@ -122,6 +157,11 @@
     <color name="cyberpunk_popup_dock_button_text">#ffffff</color>
     <color name="cyberpunk_popup_action">#eae5d2</color>
     <color name="cyberpunk_popup_text">#121212</color>
+    <color name="cyberpunk_popup_title">#cc9900</color>
+    <color name="cyberpunk_popup_action1_icon">#e60036</color>
+    <color name="cyberpunk_popup_action2_icon">#cc9900</color>
+    <color name="cyberpunk_popup_action3_icon">#0088aa</color>
+    <color name="cyberpunk_popup_divider">#e60036</color>
 
     <!-- Monokai (Electric Dark - Legacy) -->
     <color name="monokai_popup_surface">#faf4f2</color>
@@ -131,6 +171,11 @@
     <color name="monokai_popup_dock_button_text">#19181a</color>
     <color name="monokai_popup_action">#e0dad9</color>
     <color name="monokai_popup_text">#19181a</color>
+    <color name="monokai_popup_title">#e14775</color>
+    <color name="monokai_popup_action1_icon">#19181a</color>
+    <color name="monokai_popup_action2_icon">#19181a</color>
+    <color name="monokai_popup_action3_icon">#19181a</color>
+    <color name="monokai_popup_divider">#e0dad9</color>
 
     <color name="solidBtn_BgCol">#000000</color> <!-- Buttons, scroll thumb, radio-->  
     <color name="solidBtn_txtCol">#ffffff</color>

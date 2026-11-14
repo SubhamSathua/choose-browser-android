@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,9 +30,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.core.widget.ImageViewCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.button.MaterialButton;
 import com.hyper.choosebrowsernew.R;
 import com.hyper.choosebrowsernew.UpdateChecker;
 import com.hyper.choosebrowsernew.data.model.UpdateResult;
@@ -218,6 +221,11 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
         int dockBtnIcon = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupDockButtonIcon, R.color.PopUpCardDockBtnIcon);
         int action = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupAction, R.color.PopUpCard_ActionBtnBg);
         int text = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupText, R.color.text);
+        int titleColor = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupTitle, text);
+        int action1IconColor = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupAction1Icon, text);
+        int action2IconColor = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupAction2Icon, text);
+        int action3IconColor = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupAction3Icon, text);
+        int dividerColor = ThemeHelper.resolveThemeColor(themedContext, R.attr.colorPopupDivider, dock);
 
         View sheetRoot = root.findViewById(R.id.card);
         if (sheetRoot != null && sheetRoot.getBackground() != null) {
@@ -228,18 +236,42 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
 
         urlTextView.setTextColor(text);
 
+        // Header Title & Icon
+        String currentThemeId = ThemeHelper.getSavedColorThemeId(requireContext());
+        TextView headerTitle = root.findViewById(R.id.headerTitle);
+        if (headerTitle != null) {
+            headerTitle.setTextColor(ThemeHelper.COLOR_THEME_DEFAULT.equals(currentThemeId) ? text : titleColor);
+        }
+
+        ImageView headerIcon = root.findViewById(R.id.headerIcon);
+        if (headerIcon != null) {
+            if (ThemeHelper.COLOR_THEME_DEFAULT.equals(currentThemeId)) {
+                // Keep OG icon (gradient PNG) without tint
+                ImageViewCompat.setImageTintList(headerIcon, null);
+            } else {
+                // All other themes use the theme's title accent tint
+                ImageViewCompat.setImageTintList(headerIcon, ColorStateList.valueOf(titleColor));
+            }
+        }
+
         View privacyBtn = root.findViewById(R.id.privacyBtn);
         if (privacyBtn instanceof Button) {
             Button btn = (Button) privacyBtn;
             btn.setBackgroundTintList(ColorStateList.valueOf(dock));
             btn.setTextColor(text);
             btn.setCompoundDrawableTintList(ColorStateList.valueOf(text));
+            if (btn instanceof MaterialButton) {
+                ((MaterialButton) btn).setIconTint(ColorStateList.valueOf(text));
+            }
         }
 
         if (copyBtn != null) {
             copyBtn.setBackgroundTintList(ColorStateList.valueOf(dockBtn));
             copyBtn.setTextColor(dockBtnText);
             copyBtn.setCompoundDrawableTintList(ColorStateList.valueOf(dockBtnIcon));
+            if (copyBtn instanceof MaterialButton) {
+                ((MaterialButton) copyBtn).setIconTint(ColorStateList.valueOf(dockBtnIcon));
+            }
         }
 
         tintCard(root.findViewById(R.id.dockCard), dock);
@@ -251,6 +283,30 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
         tintNestedText(previewLinkBtn, text);
         tintNestedText(shareBtn, text);
         tintNestedText(previewPageBtn, text);
+
+        // Action button icons
+        ImageView previewLinkIcon = root.findViewById(R.id.previewLinkIcon);
+        if (previewLinkIcon != null) {
+            ImageViewCompat.setImageTintList(previewLinkIcon, ColorStateList.valueOf(action1IconColor));
+        }
+
+        ImageView shareIcon = root.findViewById(R.id.shareIcon);
+        if (shareIcon != null) {
+            ImageViewCompat.setImageTintList(shareIcon, ColorStateList.valueOf(action2IconColor));
+        }
+
+        ImageView previewPageIcon = root.findViewById(R.id.previewPageIcon);
+        if (previewPageIcon != null) {
+            ImageViewCompat.setImageTintList(previewPageIcon, ColorStateList.valueOf(action3IconColor));
+        }
+
+        // Dashed divider
+        View dashedDivider = root.findViewById(R.id.dashedDivider);
+        if (dashedDivider != null && dashedDivider.getBackground() != null) {
+            Drawable divBg = DrawableCompat.wrap(dashedDivider.getBackground().mutate());
+            DrawableCompat.setTint(divBg, dividerColor);
+            dashedDivider.setBackground(divBg);
+        }
     }
 
     private void tintCard(CardView card, int color) {

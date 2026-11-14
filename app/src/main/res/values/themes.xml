@@ -28,6 +28,11 @@
         <item name="colorPopupDockButtonIcon">@color/default_popup_dock_button_icon</item>
         <item name="colorPopupAction">@color/default_popup_action</item>
         <item name="colorPopupText">@color/default_popup_text</item>
+        <item name="colorPopupTitle">@color/default_popup_title</item>
+        <item name="colorPopupAction1Icon">@color/default_popup_action1_icon</item>
+        <item name="colorPopupAction2Icon">@color/default_popup_action2_icon</item>
+        <item name="colorPopupAction3Icon">@color/default_popup_action3_icon</item>
+        <item name="colorPopupDivider">@color/default_popup_divider</item>
     </style>
 
     <!-- 2. AMOLED -->
@@ -39,6 +44,11 @@
         <item name="colorPopupDockButtonIcon">@color/amoled_popup_dock_button_icon</item>
         <item name="colorPopupAction">@color/amoled_popup_action</item>
         <item name="colorPopupText">@color/amoled_popup_text</item>
+        <item name="colorPopupTitle">@color/amoled_popup_title</item>
+        <item name="colorPopupAction1Icon">@color/amoled_popup_action1_icon</item>
+        <item name="colorPopupAction2Icon">@color/amoled_popup_action2_icon</item>
+        <item name="colorPopupAction3Icon">@color/amoled_popup_action3_icon</item>
+        <item name="colorPopupDivider">@color/amoled_popup_divider</item>
     </style>
 
     <!-- 3. Material (Google Pixel Ocean Blue) -->
@@ -50,6 +60,11 @@
         <item name="colorPopupDockButtonIcon">@color/material_popup_dock_button_icon</item>
         <item name="colorPopupAction">@color/material_popup_action</item>
         <item name="colorPopupText">@color/material_popup_text</item>
+        <item name="colorPopupTitle">@color/material_popup_title</item>
+        <item name="colorPopupAction1Icon">@color/material_popup_action1_icon</item>
+        <item name="colorPopupAction2Icon">@color/material_popup_action2_icon</item>
+        <item name="colorPopupAction3Icon">@color/material_popup_action3_icon</item>
+        <item name="colorPopupDivider">@color/material_popup_divider</item>
     </style>
 
     <!-- 4. Catppuccin (Multi / Rainbow Pastel) -->
@@ -61,6 +76,11 @@
         <item name="colorPopupDockButtonIcon">@color/catppuccin_popup_dock_button_icon</item>
         <item name="colorPopupAction">@color/catppuccin_popup_action</item>
         <item name="colorPopupText">@color/catppuccin_popup_text</item>
+        <item name="colorPopupTitle">@color/catppuccin_popup_title</item>
+        <item name="colorPopupAction1Icon">@color/catppuccin_popup_action1_icon</item>
+        <item name="colorPopupAction2Icon">@color/catppuccin_popup_action2_icon</item>
+        <item name="colorPopupAction3Icon">@color/catppuccin_popup_action3_icon</item>
+        <item name="colorPopupDivider">@color/catppuccin_popup_divider</item>
     </style>
 
     <!-- 5. Catppuccin Red (Latte Ruby Red) -->
@@ -72,6 +92,11 @@
         <item name="colorPopupDockButtonIcon">@color/catppuccin_red_popup_dock_button_icon</item>
         <item name="colorPopupAction">@color/catppuccin_red_popup_action</item>
         <item name="colorPopupText">@color/catppuccin_red_popup_text</item>
+        <item name="colorPopupTitle">@color/catppuccin_red_popup_title</item>
+        <item name="colorPopupAction1Icon">@color/catppuccin_red_popup_action1_icon</item>
+        <item name="colorPopupAction2Icon">@color/catppuccin_red_popup_action2_icon</item>
+        <item name="colorPopupAction3Icon">@color/catppuccin_red_popup_action3_icon</item>
+        <item name="colorPopupDivider">@color/catppuccin_red_popup_divider</item>
     </style>
 
     <!-- 6. Dracula -->
@@ -83,6 +108,11 @@
         <item name="colorPopupDockButtonIcon">@color/dracula_popup_dock_button_icon</item>
         <item name="colorPopupAction">@color/dracula_popup_action</item>
         <item name="colorPopupText">@color/dracula_popup_text</item>
+        <item name="colorPopupTitle">@color/dracula_popup_title</item>
+        <item name="colorPopupAction1Icon">@color/dracula_popup_action1_icon</item>
+        <item name="colorPopupAction2Icon">@color/dracula_popup_action2_icon</item>
+        <item name="colorPopupAction3Icon">@color/dracula_popup_action3_icon</item>
+        <item name="colorPopupDivider">@color/dracula_popup_divider</item>
     </style>
 
     <!-- 7. Cyberpunk Terminal (Matrix Green & Cyan) -->
@@ -94,6 +124,11 @@
         <item name="colorPopupDockButtonIcon">@color/cyberpunk_terminal_popup_dock_button_icon</item>
         <item name="colorPopupAction">@color/cyberpunk_terminal_popup_action</item>
         <item name="colorPopupText">@color/cyberpunk_terminal_popup_text</item>
+        <item name="colorPopupTitle">@color/cyberpunk_terminal_popup_title</item>
+        <item name="colorPopupAction1Icon">@color/cyberpunk_terminal_popup_action1_icon</item>
+        <item name="colorPopupAction2Icon">@color/cyberpunk_terminal_popup_action2_icon</item>
+        <item name="colorPopupAction3Icon">@color/cyberpunk_terminal_popup_action3_icon</item>
+        <item name="colorPopupDivider">@color/cyberpunk_terminal_popup_divider</item>
     </style>
 
     <!-- 8. Cyberpunk (2077 Arasaka Rose-Red & Yellow) -->
@@ -105,6 +140,11 @@
         <item name="colorPopupDockButtonIcon">@color/cyberpunk_popup_dock_button_icon</item>
         <item name="colorPopupAction">@color/cyberpunk_popup_action</item>
         <item name="colorPopupText">@color/cyberpunk_popup_text</item>
+        <item name="colorPopupTitle">@color/cyberpunk_popup_title</item>
+        <item name="colorPopupAction1Icon">@color/cyberpunk_popup_action1_icon</item>
+        <item name="colorPopupAction2Icon">@color/cyberpunk_popup_action2_icon</item>
+        <item name="colorPopupAction3Icon">@color/cyberpunk_popup_action3_icon</item>
+        <item name="colorPopupDivider">@color/cyberpunk_popup_divider</item>
     </style>
 
     <!-- Legacy / Fallback aliases -->

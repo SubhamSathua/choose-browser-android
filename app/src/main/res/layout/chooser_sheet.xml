@@ -32,6 +32,7 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/headerIcon"
             android:layout_width="35dp"
             android:layout_height="match_parent"
             android:layout_marginRight="4dp"
@@ -42,11 +43,12 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical">
             <TextView
+                android:id="@+id/headerTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/heading"
                 android:text="@string/open_wt"
-                android:textColor="@color/text"
+                android:textColor="?attr/colorPopupTitle"
                 android:textSize="@dimen/branding_title" />
 
         </LinearLayout>
@@ -176,6 +178,7 @@
                             android:paddingVertical="5dp"
                             android:gravity="center">
                             <ImageView
+                                android:id="@+id/previewLinkIcon"
                                 android:layout_width="28dp"
                                 android:layout_height="28dp"
                                 android:paddingHorizontal="4dp"
@@ -219,6 +222,7 @@
                     android:paddingVertical="5dp"
                     android:gravity="center">
                     <ImageView
+                        android:id="@+id/shareIcon"
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:paddingHorizontal="4dp"
@@ -262,12 +266,12 @@
                     android:paddingVertical="5dp">
 
                     <ImageView
+                        android:id="@+id/previewPageIcon"
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:background="@android:color/transparent"
                         android:paddingHorizontal="4dp"
                         android:src="@drawable/preview_page" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:minWidth="60dp"
@@ -284,6 +288,7 @@
         </LinearLayout>
 
         <View
+            android:id="@+id/dashedDivider"
             android:layout_width="match_parent"
             android:layout_height="5dp"
             android:background="@drawable/dashed_line"

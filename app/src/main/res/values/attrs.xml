@@ -7,4 +7,9 @@
     <attr name="colorPopupDockButtonIcon" format="color" />
     <attr name="colorPopupAction" format="color" />
     <attr name="colorPopupText" format="color" />
+    <attr name="colorPopupTitle" format="color" />
+    <attr name="colorPopupAction1Icon" format="color" />
+    <attr name="colorPopupAction2Icon" format="color" />
+    <attr name="colorPopupAction3Icon" format="color" />
+    <attr name="colorPopupDivider" format="color" />
 </resources>
