@@ -1,8 +1,8 @@
 ﻿# Changelog
 
-## Chooser Responsive Layouts & Vector Icons Sync
-- Synchronized sw320dp, sw280dp, and sw200dp chooser sheets with dynamic IDs and vector drawables.
-- Fixed header title string to 'Open with' and ensured all responsive screens tint correctly.
+## Chooser Layout Inflation Fix & Themed Context Wrapper
+- Replaced unresolvable overlay attribute in chooser sheet XML with safe color reference.
+- Cloned LayoutInflater with color theme overlay context in BottomSheetDialogFragment.
 
 ## Expanded Custom Color Themes Suite
 - Synchronized chooser header, action icons, and divider colors 1:1 with prototype.

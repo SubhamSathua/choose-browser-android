@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/heading"
                 android:text="@string/open_wt"
-                android:textColor="?attr/colorPopupTitle"
+                android:textColor="@color/text"
                 android:textSize="@dimen/branding_title" />
 
         </LinearLayout>

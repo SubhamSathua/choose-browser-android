@@ -88,7 +88,9 @@ public class BrowserChooserBottomSheet extends BottomSheetDialogFragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.chooser_sheet, container, false);
+        Context themedContext = ThemeHelper.wrapWithColorThemeOverlay(requireContext());
+        LayoutInflater themedInflater = inflater.cloneInContext(themedContext);
+        View view = themedInflater.inflate(R.layout.chooser_sheet, container, false);
 
         viewModel = new ViewModelProvider(this, new ViewModelFactory(requireContext())).get(BrowserChooserViewModel.class);
 
